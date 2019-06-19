@@ -1,0 +1,7 @@
+<h1>LIMOL</h1>
+{% if user.is_authenticated %}
+    Hi {{ user.username }}
+    <p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+    You are not logged in
+{% endif %}

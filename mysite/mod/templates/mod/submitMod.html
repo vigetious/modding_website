@@ -1,0 +1,108 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    {% block title %}Submit Mod {% endblock %}
+    <meta name="description" content="Template mod page. Change this.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+<!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+<!-- Add your site or application content here -->
+<div class="pagewrap">
+    <a class="logo" href="" title="Title">Title</a> <!-- image later on -->
+    <div class="alignRight">
+        {% if user.is_authenticated %}
+            <a class="login-register-button" href="{% url 'logout' %}?next={% firstof request.path '/' %}">Logout</a>
+        {% else %}
+            <a class="login-register-button" href="{% url 'login' %}?next={% firstof request.path '/' %}">Login</a>
+            <a class="login-register-button" href="" title="register">Register</a>
+        {% endif %}
+    </div>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Mods</button>
+            <div class="dropdownContent">
+                <a href="">Option 1</a>
+                <a href="">Option 2</a>
+                <a href="">Option 3</a>
+            </div>
+        </div>
+        <a href="http://reddit.com/r/ddlcmods">Reddit</a>
+        <form action="">
+            <input type="submit" value="submit">
+            <input type="text" name="search">
+        </form>
+    </div>
+    {% block content %}
+        <!--<form action="/submitMod/" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <label for="modName">Name of mod: </label>
+            <input id="modName" type="text" name="modName"><br>
+            <label for="modDescription">Description of mod:</label>
+            <input id="modDescription" type="text" name="modDescription"><br>
+            <label for="modWebsite">Website: </label>
+            <input id="modWebsite" type="text" name="modWebsite"><br>
+            <label for="modTag">Tags: </label>
+            <input id="modTag" type="text" name="modTag"><br>
+            <label for="modCreditPerms">Credits and permissions: </label>
+            <input id="modCreditPerms" type="text" name="modCreditPerms"><br>
+            <label for="modDonations">Donations: </label>
+            <input id="modDonations" type="text" name="modDonations"><br>
+            <label for="modDiscord">Discord link:</label>
+            <input id="modDiscord" type="text" name="modDiscord"><br>
+        </form>-->
+        <form action="/submitMod/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit">
+        </form>
+        <h1>Submit Mod</h1>
+        <p>Name of mod:</p>
+        <p>Description of mod:</p>
+        <p>Website:</p>
+        <p>Tags:</p>
+        <p>Credits and permissions:</p>
+        <p>Donations:</p>
+        <div class="tooltip">
+            <p>Discord link:</p>
+            <span class="tooltiptext">Make sure you have a permanent discord invite link.</span>
+        </div>
+        <p>Upload mod to this website directly:</p>
+        <p>External ink to mod:</p>
+    {% endblock %}
+</div>
+
+
+<script src="js/vendor/modernizr-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+<script src="js/plugins.js"></script>
+<script src="js/main.js"></script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>
+
