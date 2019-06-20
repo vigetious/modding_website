@@ -50,42 +50,28 @@
         </form>
     </div>
     {% block content %}
-        <!--<form action="/submitMod/" method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <label for="modName">Name of mod: </label>
-            <input id="modName" type="text" name="modName"><br>
-            <label for="modDescription">Description of mod:</label>
-            <input id="modDescription" type="text" name="modDescription"><br>
-            <label for="modWebsite">Website: </label>
-            <input id="modWebsite" type="text" name="modWebsite"><br>
-            <label for="modTag">Tags: </label>
-            <input id="modTag" type="text" name="modTag"><br>
-            <label for="modCreditPerms">Credits and permissions: </label>
-            <input id="modCreditPerms" type="text" name="modCreditPerms"><br>
-            <label for="modDonations">Donations: </label>
-            <input id="modDonations" type="text" name="modDonations"><br>
-            <label for="modDiscord">Discord link:</label>
-            <input id="modDiscord" type="text" name="modDiscord"><br>
-        </form>-->
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Submit">
-        </form>
-        <h1>Submit Mod</h1>
-        <p>Name of mod:</p>
-        <p>Description of mod:</p>
-        <p>Website:</p>
-        <p>Tags:</p>
-        <p>Credits and permissions:</p>
-        <p>Donations:</p>
-        <div class="tooltip">
-            <p>Discord link:</p>
-            <span class="tooltiptext">Make sure you have a permanent discord invite link.</span>
-        </div>
-        <p>Upload mod to this website directly:</p>
-        <p>External ink to mod:</p>
+        {% if post.modAuthor == user %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit">
+            </form>
+            <h1>Submit Mod</h1>
+            <p>Name of mod:</p>
+            <p>Description of mod:</p>
+            <p>Website:</p>
+            <p>Tags:</p>
+            <p>Credits and permissions:</p>
+            <p>Donations:</p>
+            <div class="tooltip">
+                <p>Discord link:</p>
+                <span class="tooltiptext">Make sure you have a permanent discord invite link.</span>
+            </div>
+            <p>Upload mod to this website directly:</p>
+            <p>External ink to mod:</p>
+        {% else %}
+            <p>You must be the mod creator to edit this mod.</p>
+        {% endif %}
     {% endblock %}
 </div>
 

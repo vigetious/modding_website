@@ -1,0 +1,13 @@
+{% block title %}Mod details{% endblock %}
+
+{% block content %}
+    Title of mod: {{ post.modName }}<br>
+    Date of mod: {{ post.modDate }}<br>
+    Status of mod: {{ post.modStatus }}<br>
+    Tags of mod: {{ post.modTag }}<br>
+    Author of mod: {{ post.modAuthor }}<br>
+    ID of mod: {{ post.modID }}<br>
+    {% if post.modAuthor == user %}
+    <a href="{%  url 'mod:modEdit' pk=post.pk %}">Edit</a>
+    {% endif %}
+{% endblock %}
