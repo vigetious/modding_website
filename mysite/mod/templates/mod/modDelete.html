@@ -1,0 +1,15 @@
+{% block title %} Delete your mod {% endblock %}
+
+{% block content %}
+    <h1>Delete your mod</h1>
+    <p>Are you sure you want to delete your mod? This cannot be undone, as the files are wiped from the server permanently.</p>
+    <form method="post">
+        {% csrf_token %}
+    </form>
+    <a onclick="goBack()">Go back</a>
+    <script>
+    function goBack() {
+        window.history.back()
+    }
+    </script>
+{% endblock %}

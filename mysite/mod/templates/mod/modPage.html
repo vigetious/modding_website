@@ -4,9 +4,10 @@
     Title of mod: {{ post.modName }}<br>
     Date of mod: {{ post.modDate }}<br>
     Status of mod: {{ post.modStatus }}<br>
-    Tags of mod: {{ post.modTag }}<br>
+    Tags of mod: {{ post.modTag.names }}<br>
     Author of mod: {{ post.modAuthor }}<br>
     ID of mod: {{ post.modID }}<br>
+    Mod upload slot: <a href="{{ post.modUpload.url }}">Location</a><br>
     {% if post.modAuthor == user %}
     <a href="{%  url 'mod:modEdit' pk=post.pk %}">Edit</a>
     {% endif %}

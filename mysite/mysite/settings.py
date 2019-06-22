@@ -132,6 +132,8 @@ STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+MEDIA_URL = '/files/'
+
 LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"

@@ -1,10 +1,15 @@
 from django.db import models
 from django.forms import ModelForm
+import os
+from django.core.validators import FileExtensionValidator
 
 from taggit.managers import TaggableManager
 
 # Create your models here.
 
+
+def user_directory_path(instance, filename):
+    return 'files/user_{0}/{1}'.format(instance.modAuthor.id, filename)
 
 class Mod(models.Model):
     statusChoices = (
@@ -21,10 +26,12 @@ class Mod(models.Model):
     modName = models.CharField("mod name", max_length=100)
     modDescription = models.CharField("mod description", max_length=10000)
     modWebsite = models.CharField("mod website", max_length=100, blank=True)
-    modTag = models.CharField("mod tags", max_length=1000)
+    modTag = TaggableManager()
     modCreditPerms = models.CharField("mod credits and permissions", max_length=1000, blank=True)
     modDonations = models.CharField("mod donation link", max_length=1000, blank=True)
     modDiscord = models.CharField("mod discord link", max_length=100, blank=True)
+    modUpload = models.FileField(upload_to=user_directory_path, blank=True, validators=[FileExtensionValidator(allowed_extensions=['zip', 'rar'])])
+    modUploadURL = models.CharField("mod upload destination", max_length=1000, blank=True)
 
     def __str__(self):
         return self.modName

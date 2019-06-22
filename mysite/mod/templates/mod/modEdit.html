@@ -56,19 +56,7 @@
                 {{ form.as_p }}
                 <input type="submit" value="Submit">
             </form>
-            <h1>Submit Mod</h1>
-            <p>Name of mod:</p>
-            <p>Description of mod:</p>
-            <p>Website:</p>
-            <p>Tags:</p>
-            <p>Credits and permissions:</p>
-            <p>Donations:</p>
-            <div class="tooltip">
-                <p>Discord link:</p>
-                <span class="tooltiptext">Make sure you have a permanent discord invite link.</span>
-            </div>
-            <p>Upload mod to this website directly:</p>
-            <p>External ink to mod:</p>
+            <a onclick="return confirm('Are you sure? Once you delete the mod, it is gone forever without any way of getting it back.')" href="{% url 'mod:modDelete' pk=post.pk %}">Delete mod</a>
         {% else %}
             <p>You must be the mod creator to edit this mod.</p>
         {% endif %}
