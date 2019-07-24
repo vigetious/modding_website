@@ -7,4 +7,3 @@ def moveMod(modID, modUploadPath, modName):
     os.makedirs('files/{0}'.format(str(modID)))
     shutil.move(modUploadPath, 'files/{0}/{1}'.format(str(modID), modName))
     return 'files/{0}/{1}'.format(str(modID), modName)
-    #os.remove(modUploadPath)

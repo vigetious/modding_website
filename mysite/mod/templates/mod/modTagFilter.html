@@ -1,0 +1,15 @@
+{% block title %}Mod Tag Filter{% endblock %}
+
+{% load taggit_templatetags2_tags %}
+{% get_taglist as tagCount for 'mod.Mod' %}
+
+{% block content %}
+    {% for x in mods %}
+        <li>
+            Mod Name: {{ x.modName }}
+        </li>
+    {% endfor %}
+    {% for x in tagCount %}
+        {{ x }} {{ x.num_times }}
+    {% endfor %}
+{% endblock %}

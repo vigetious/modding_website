@@ -45,6 +45,9 @@
             <input type="text" name="search">
         </form>
     </div>
+    <form action="{% url 'mod:modSearch' %}" method="get">
+        <input name="q" type="text" placeholder="Search">
+    </form>
     <p>Hello world! This is HTML5 Boilerplate.</p>
 </div>
 

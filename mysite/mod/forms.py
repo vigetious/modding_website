@@ -22,4 +22,6 @@ from.models import Mod
 class SubmitForm(forms.ModelForm):
     class Meta:
         model = Mod
-        fields = ('modID', 'modName', 'modStatus', 'modDescription', 'modWebsite', 'modTag', 'modCreditPerms', 'modDonations', 'modDiscord', 'modUpload',)
+        fields = ('modID', 'modName', 'modStatus', 'modDescription', 'modWebsite', 'tags', 'modCreditPerms',
+                  'modDonations', 'modDiscord', 'modUpload', 'modUploadURL', 'modPlayTimeHours', 'modPlayTimeMinutes')
+

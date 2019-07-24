@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'mod.apps.ModConfig',
     'accounts.apps.AccountsConfig',
     'taggit',
+    'django_filters',
+    'taggit_templatetags2',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +152,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 TAGGIT_CASE_INSENSITIVE = True
+
+PINAX_RATINGS_CATEGORY_CHOICES = {
+    "mod.Mod": {
+        "rating": "Rating of the mod."
+    }
+}

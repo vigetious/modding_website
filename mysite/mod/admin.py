@@ -6,11 +6,11 @@ from .models import Mod
 
 class ModAdmin(admin.ModelAdmin):
     list_display = ['modID', 'modAuthor', 'modDate', 'modUpdate', 'modDownloads', 'modStatus', 'modName',
-                    'modDescription', 'modWebsite', 'modTag', 'modCreditPerms', 'modDonations', 'modDiscord',
-                    'modUpload']
+                    'modDescription', 'modWebsite', 'tags', 'modCreditPerms', 'modDonations', 'modDiscord',
+                    'modUpload', 'modUploadURL', 'modPlayTimeHours', 'modPlayTimeMinutes']
 
     def get_queryset(self, request):
-        return super().get_queryset(request).prefetch_related('modTag')
+        return super().get_queryset(request).prefetch_related('tags')
 
     def tag_list(self, obj):
         return u", ".join(o.name for o in obj.tags.all())

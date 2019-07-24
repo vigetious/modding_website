@@ -1,0 +1,25 @@
+{% block title %}Mod search results{% endblock %}
+
+{% load taggit_templatetags2_tags %}
+{% get_taglist as tagCount for 'mod.Mod' %}
+
+{% block content %}
+    <form action="{% url 'mod:modSearch' %}" method="get">
+        <input name="search" type="text" placeholder="Search">
+        {% for x in mods %}
+            <input name="tags" type="checkbox" value="{{ x.modTag }}">{{ x.modTag }}
+        {% endfor %}
+        {% for tag in tagCount %}
+            <input name="tags" type="checkbox" value="{{ tag }}">{{ tag }} ({{ tag.num_times }})
+        {% endfor %}
+        <input type="submit">
+    </form>
+    {% for x in object_list %}
+    <li>
+        <a href="../{{ x.modID }}">{{ x.modName }}</a>
+    </li>
+    {% endfor %}
+    {% for obj in filter.qs %}
+        {{ obj.modName }} - ${{ obj.modAuthor }}<br>
+    {% endfor %}
+{% endblock %}

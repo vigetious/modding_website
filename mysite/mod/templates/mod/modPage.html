@@ -1,13 +1,27 @@
+{% load taggit_templatetags2_tags %}
 {% block title %}Mod details{% endblock %}
 
 {% block content %}
     Title of mod: {{ post.modName }}<br>
     Date of mod: {{ post.modDate }}<br>
     Status of mod: {{ post.modStatus }}<br>
-    Tags of mod: {{ post.modTag.names }}<br>
+    Tags of mod: {% get_tags_for_object post as "tags" %}
+    {% for tag in tags %}
+        {{ tag }}
+    {% endfor %}<br>
     Author of mod: {{ post.modAuthor }}<br>
     ID of mod: {{ post.modID }}<br>
-    Mod upload slot: <a href="{{ post.modUpload.url }}">Location</a><br>
+    {% if post.modUpload.url is None %}
+        Mod upload slot: <a href="{{ post.modUpload.url }}">Location</a><br>
+    {% else %}
+        {% if post.modUploadURL is not None %}
+            Mod upload slot: {{ post.modUploadURL }}<br>
+        {% else %}
+            Mod Upload slot: None <br>
+        {% endif %}
+    {% endif %}
+    Mod Upload URL: {{ post.modUploadURL }}<br>
+    Mod Average PlayTime: {{ post.modPlayTimeHours }}:{{ post.modPlayTimeMinutes }}<br>
     {% if post.modAuthor == user %}
     <a href="{%  url 'mod:modEdit' pk=post.pk %}">Edit</a>
     {% endif %}
