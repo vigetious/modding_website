@@ -1,9 +1,146 @@
 {% load taggit_templatetags2_tags %}
+{% load likes_inclusion_tags %}
+{% load thumbnail %}
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
 {% block title %}Mod details{% endblock %}
+<script>
+    var counter = 0;
+
+    var user = '{{ user }}';
+
+    var modID = {{ post.modID }};
+    var modAuthor = '{{ post.modAuthor }}';
+    var modDate = '{{ post.modDate }}';
+    var modUpdate = '{{ post.modUpdate }}';
+    var modDownloads = '{{ post.modDownloads }}';
+    var modStatus = '{{ post.modStatus }}';
+    var modName = '{{ post.modName }}';
+    var modDescription = '{{ post.modDescription }}';
+    var modWebsite = '{{ post.modWebsite }}';
+    var tags = '{{ post.tags }}';
+    var modCreditPerms = '{{ post.modCreditPerms }}';
+    var modDonations = '{{ post.modDonations }}';
+    var modDiscord = '{{ post.modDiscord }}';
+    var modUpload = '{{ post.modUpload }}';
+    var modUploadURL = '{{ post.modUploadURL }}';
+    var modPlayTimeHours = {{ post.modPlayTimeHours }};
+    var modPlayTimeMinutes = {{ post.modPlayTimeMinutes }};
+
+    var ratingID = {{ rating.ratingID }};
+    var ratingModID = '{{ rating.ratingModID }}';
+    var ratingAuthorID = '{{ rating.ratingAuthorID }}';
+    var ratingValue = {{ rating.ratingValue }};
+</script>
 
 {% block content %}
     Title of mod: {{ post.modName }}<br>
     Date of mod: {{ post.modDate }}<br>
+    {% if post.modBackground.url.length is not 0 %}
+        {% if post.modBackgroundTiledStretch == 'Tiled' %}
+            <style>
+                body {
+                    background-image: url("{{ post.modBackground.url }}");
+                    background-repeat: repeat;
+                }
+            </style>
+        {% elif post.modBackgroundTiledStretch == 'Stretched' %}
+            <style>
+                body {
+                    background-image: url("{{ post.modBackground.url }}");
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                }
+            </style>
+        {% endif %}
+    {% endif %}
+    Mod avatar: <img src="{{ post.modAvatar.url }}"><br>
+    {% if user.is_authenticated %}
+        <fieldset class="rating">
+            <legend>Rating:</legend>
+            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+        </fieldset>
+        <script>
+        if (ratingModID === modName && ratingAuthorID === user) {
+            document.getElementById("star{{ rating.ratingValue }}").checked = true;
+            console.log("Already rated.")
+        }
+        </script>
+    {% endif %}
+
+    <script>
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', afterLoadedRating);
+    } else {
+        afterLoadedRating();
+    }
+
+    function afterLoadedRating() {
+        $('#star5').on('click', star5);
+        $('#star4').on('click', star4);
+        $('#star3').on('click', star3);
+        $('#star2').on('click', star2);
+        $('#star1').on('click', star1);
+
+        function star5() {
+            console.log("Attempting to give this mod a 5/5.");
+            if ('ratingValue' in window) { // if there is already a rating
+                deleteRating();
+                window.setTimeout(function () {rating({{ post.modID }}, 5)}, 100);
+            } else {
+                window.setTimeout(function () {rating({{ post.modID }}, 5)}, 100);
+            }
+        }
+
+        function star4() {
+            console.log("You gave this mod a 4/5.");
+            if (typeof ratingValue !== 'undefined') {
+                deleteRating();
+                window.setTimeout(function () {rating({{ post.modID }}, 4)}, 100);
+            } else {
+                window.setTimeout(function () {rating({{ post.modID }}, 4)}, 100);
+            }
+        }
+
+        function star3() {
+            console.log("You gave this mod a 3/5.");
+            if (typeof ratingValue !== 'undefined') {
+                deleteRating();
+                window.setTimeout(function () {rating({{ post.modID }}, 3)}, 100);
+            } else {
+                window.setTimeout(function () {rating({{ post.modID }}, 3)}, 100);
+            }
+        }
+
+        function star2() {
+            console.log("You gave this mod a 2/5.");
+            if (typeof ratingValue !== 'undefined') {
+                deleteRating();
+                window.setTimeout(function () {rating({{ post.modID }}, 2)}, 100);
+            } else {
+                window.setTimeout(function () {rating({{ post.modID }}, 2)}, 100);
+            }
+        }
+
+        function star1() {
+            console.log("You gave this mod a 1/5.");
+            if (typeof ratingValue !== 'undefined') {
+                deleteRating();
+                window.setTimeout(function () {rating({{ post.modID }}, 1)}, 100);
+            } else {
+                window.setTimeout(function () {rating({{ post.modID }}, 1)}, 100);
+            }
+        }
+    }
+    </script>
+
     Status of mod: {{ post.modStatus }}<br>
     Tags of mod: {% get_tags_for_object post as "tags" %}
     {% for tag in tags %}
@@ -11,7 +148,7 @@
     {% endfor %}<br>
     Author of mod: {{ post.modAuthor }}<br>
     ID of mod: {{ post.modID }}<br>
-    {% if post.modUpload.url is None %}
+    {% if post.modUpload.url is not None %}
         Mod upload slot: <a href="{{ post.modUpload.url }}">Location</a><br>
     {% else %}
         {% if post.modUploadURL is not None %}
@@ -25,4 +162,158 @@
     {% if post.modAuthor == user %}
     <a href="{%  url 'mod:modEdit' pk=post.pk %}">Edit</a>
     {% endif %}
+    <br>
+    <!--<input type="button" id="upvote_review">-->
+    {{ counter }}
+    {% for review in review %}
+        <div id="review{{ review.reviewid }}">
+            <p>Review votes: {{ review.reviewVotes }}</p>
+            <p>Review ID: {{ review.reviewid }}</p>
+            <p>Review by: {{ review.reviewAuthor }}</p>
+            <p>Current user: {{ user }}</p>
+            {% if user.is_authenticated %}
+                <form method="post" id="upvote_review">
+                    {% csrf_token %}
+                    <input type="button" id="upvote_review_{{ review.reviewid }}" class="upvote_review" value="Upvote">
+                    <input type="button" id="downvote_review_{{ review.reviewid }}" class="downvote_review" value="Downvote">
+                </form>
+                {% for vote in vote %}
+                    {% if review.reviewid|stringformat:"i" == vote.voteReviewID|stringformat:"i" and vote.voteAuthor == user|stringformat:"s" and vote.voteValue == 1 %}
+                        <script>
+                        $('#upvote_review_{{ review.reviewid }}').attr({
+                            "id": "upvoted_review_{{ review.reviewid }}",
+                            "class": "upvoted_review",
+                            "value": "Upvoted!"
+                            });
+                        </script>
+                    {% endif %}
+                    {% if review.reviewid|stringformat:"i" == vote.voteReviewID|stringformat:"i" and vote.voteAuthor == user|stringformat:"s" and vote.voteValue == -1 %}
+                        <script>
+                        $('#downvote_review_{{ review.reviewid }}').attr({
+                            "id": "downvoted_review_{{ review.reviewid }}",
+                            "class": "downvoted_review",
+                            "value": "Downvoted!"
+                        });
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            <script>
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', afterLoaded);
+            } else {
+                afterLoaded();
+            }
+
+            function afterLoaded() {
+                $('#upvote_review_{{ review.reviewid }}').on('click', upvoteFirstClick);
+                $('#upvoted_review_{{ review.reviewid }}').on('click', upvoteSecondClick);
+
+                $('#downvote_review_{{ review.reviewid }}').on('click', downvoteFirstClick);
+                $('#downvoted_review_{{ review.reviewid }}').on('click', downvoteSecondClick);
+
+                function upvoteFirstClick() {
+                    event.preventDefault();
+                    console.log('upvoting review ' + {{ review.reviewid }});
+
+                    if (document.getElementById("downvoted_review_{{ review.reviewid }}")) {
+                        remove_vote({{ review.reviewid }}, {{ mod.modID }});
+                        window.setTimeout(function () {upvote_post({{ review.reviewid }}, {{ mod.modID }})}, 100);
+                        $("#downvoted_review_{{ review.reviewid }}").off('click').on('click', downvoteFirstClick);
+                        $("#downvoted_review_{{ review.reviewid }}").attr('class', 'downvote_review');
+                        $("#downvoted_review_{{ review.reviewid }}").attr('value', 'downvote');
+                        $('#downvote_review_{{ review.reviewid }}').attr('id', 'downvote_review_{{ review.reviewid }}');
+                    } else {
+                        upvote_post({{ review.reviewid }}, {{ mod.modID }});
+                    }
+
+                    $(this).off('click').on('click', upvoteSecondClick);
+                    $(this).attr('class', 'upvoted_review');
+                    $(this).attr('value', 'upvoted!');
+                    $(this).attr('id', 'upvoted_review_{{ review.reviewid }}')
+                }
+
+                function upvoteSecondClick() {
+                    event.preventDefault();
+                    console.log('removing upvote from review ' + {{ review.reviewid }});
+
+                    remove_vote({{ review.reviewid }}, {{ mod.modID }});
+
+                    $(this).off('click').on('click', upvoteFirstClick);
+                    $(this).attr('class', 'upvote_review');
+                    $(this).attr('value', 'upvote');
+                    $(this).attr('id', 'upvote_review_{{ review.reviewid }}');
+                }
+
+                function downvoteFirstClick() {
+                    event.preventDefault();
+                    console.log('downvoting review + ' + {{ review.reviewid }});
+                    if (document.getElementById("upvoted_review_{{ review.reviewid }}")) {
+                        remove_vote({{ review.reviewid }}, {{ mod.modID }});
+                        window.setTimeout(function () {downvote_post({{ review.reviewid }}, {{ mod.modID }})}, 100);
+                        $("#upvoted_review_{{ review.reviewid }}").off('click').on('click', upvoteFirstClick);
+                        $("#upvoted_review_{{ review.reviewid }}").attr('class', 'upvote_review');
+                        $("#upvoted_review_{{ review.reviewid }}").attr('value', 'upvote');
+                        $("#upvote_review_{{ review.reviewid }}").attr('id', 'upvote_review_{{ review.reviewid }}');
+                    } else {
+                        downvote_post({{ review.reviewid }}, {{ mod.modID }});
+                    }
+
+                    $(this).off('click').on('click', downvoteSecondClick);
+                    $(this).attr('class', 'downvoted_review');
+                    $(this).attr('value', 'downvoted!');
+                    $(this).attr('id', 'downvoted_review_{{ review.reviewid }}');
+                }
+
+                function downvoteSecondClick() {
+                    event.preventDefault();
+                    console.log('removing downvote from review ' + {{ review.reviewid }});
+
+                    remove_vote({{ review.reviewid }}, {{ mod.modID }});
+
+                    $(this).off('click').on('click', downvoteFirstClick);
+                    $(this).attr('class', 'downvote_review');
+                    $(this).attr('value', 'downvote');
+                }
+                }
+            </script>
+            <br>
+            {{ review.reviewComment }}<br>
+            {{ review.reviewDate }}
+            {{ review.vote_total }}
+            {% if request.user|stringformat:"s" == review.reviewAuthor|stringformat:"s" %}
+                <form method="POST" id="deleteReview">
+                    <input type="button" id="deleteReview{{ review.reviewid }}" class="deleteComment" value="Delete Comment">
+                </form>
+                <script>
+                $('#deleteReview{{ review.reviewid }}').on('click', deleteComment)
+
+                function deleteComment() {
+                    event.preventDefault();
+                    if (confirm('Are you sure you want to delete the review?')) {
+                        console.log("Deleting comment " + {{ review.reviewid }});
+                        deleteComment({{ review.reviewid }});
+                        $("#review{{ review.reviewid }}").remove();
+                    }
+                }
+                </script>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <form method="post" enctype="multipart/form-data" name="voting">
+
+                </form>
+            {% endif %}
+        </div>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+        <form method="post" enctype="multipart/form-data" name="comment">
+            {% csrf_token %}
+            {{ commentForm.as_p }}
+            <input type="submit" value="submit">
+        </form>
+    {% endif %}
 {% endblock %}
+
+<!--JAVASCRIPT-->
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>

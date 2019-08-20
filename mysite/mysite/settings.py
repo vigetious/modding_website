@@ -42,6 +42,11 @@ INSTALLED_APPS = [
     'taggit',
     'django_filters',
     'taggit_templatetags2',
+    'secretballot',
+    'likes',
+    'progressbarupload',
+    'django_cleanup.apps.CleanupConfig',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'secretballot.middleware.SecretBallotIpUseragentMiddleware',
+    'likes.middleware.SecretBallotIpUseragentMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -156,5 +163,23 @@ TAGGIT_CASE_INSENSITIVE = True
 PINAX_RATINGS_CATEGORY_CHOICES = {
     "mod.Mod": {
         "rating": "Rating of the mod."
+    }
+}
+
+FILE_UPLOAD_HANDLERS = (
+    "progressbarupload.uploadhandler.ProgressBarUploadHandler",
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler",
+)
+
+MAX_UPLOAD_SIZE = 859832320
+
+MAX_AVATAR_UPLOAD_SIZE = 10485760
+
+MAX_BACKGROUND_UPLOAD_SIZE = 20971520
+
+THUMBNAIL_ALIASES = {
+    'mod': {
+        'avatar': {'size': {100, 100}, 'crop': 'smart', 'autocrop': True}
     }
 }

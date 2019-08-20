@@ -1,5 +1,8 @@
 <!doctype html>
 <html class="no-js" lang="">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+{% load static %}
+{% load progress_bar %}
 
 <head>
     <meta charset="utf-8">
@@ -10,11 +13,12 @@
     <link rel="manifest" href="site.webmanifest">
     <link rel="apple-touch-icon" href="icon.png">
     <!-- Place favicon.ico in the root directory -->
-    {% load static %}
+
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
     <meta name="theme-color" content="#fafafa">
+    {% progress_bar_media %}
 </head>
 
 <body>
@@ -52,7 +56,13 @@
     {% block content %}
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            {% progress_bar %}
             {{ form.as_p }}
+            <script>
+                document.getElementById('progressBar').removeAttribute('hidden');
+                document.getElementById('progressBar').className = 'progressBar';
+                document.getElementById('progressBar').setAttribute('value', '50');
+            </script>
             <input type="submit" value="Submit">
         </form>
     {% endblock %}
