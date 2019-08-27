@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, HttpResponseForbidden
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
@@ -10,7 +11,8 @@ from django.views.generic.list import ListView
 from django.views.generic import TemplateView
 from django.db.models import F, Q, Count, Sum, Avg
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
-from django.core import serializers
+from django.core import serializers, mail
+from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
 
 import json, pdb
@@ -18,9 +20,10 @@ import json, pdb
 from django_filters.views import FilterView
 from taggit.models import Tag
 
-from .forms import SubmitForm, ReviewForm, VoteForm
-from .models import Mod, ReviewRating, Vote, Rating#, ModFilter
+from .forms import SubmitForm, ReviewForm, VoteForm, NewsForm
+from .models import Mod, ReviewRating, Vote, Rating, News, NewsNotifications #, ModFilter
 from .scripts import moveMod
+from .operations.mail import notificationsSendMail
 
 # Create your views here.
 
@@ -60,17 +63,24 @@ def modPage(request, pk):
             rating = None
     else:
         rating = None
-    #rating = Rating.objects.get(ratingAuthorID=request.user)
+
     questions = ReviewRating.objects.annotate(number_of_votes=Sum('vote'))
-    #yaes = ReviewRating.objects.annotate(x=Count('vote')).annotate(number_of_votes=Sum('x'))
-#    for c in ReviewRating.objects.all():
-#        #x = Vote.objects.filter(voteReviewID=review.reviewid)
-#        for x in Vote.objects.filter(voteReviewID=c.reviewid):
-#            t = ReviewRating.objects.get(reviewid=c.reviewid)
-#            t.reviewVotes = x.objects.annotate()
-    #review = ReviewRating.objects.all()
+
     post.tags = Tag.objects.all()
-    #pdb.set_trace()
+
+    news = News.objects.filter(newsModID=pk)
+
+    if request.user.is_authenticated:
+        try:
+            newsnotifications = NewsNotifications.objects.get(newsNotificationsModID=pk)
+        except ObjectDoesNotExist:
+            newsnotifications = None
+    else:
+        newsnotifications = None
+
+    emails = get_user_model().objects.all()
+
+
     if request.method == 'POST':
         commentForm = ReviewForm(request.POST)
         if commentForm.is_valid():
@@ -82,7 +92,8 @@ def modPage(request, pk):
     else:
         commentForm = ReviewForm()
     return render(request, 'mod/modPage.html', {'post': post, 'commentForm': commentForm, 'review': review,
-                                                'vote': vote, 'questions': questions, 'rating': rating})
+                                                'vote': vote, 'questions': questions, 'rating': rating, 'news': news,
+                                                'newsnotifications': newsnotifications, 'emails': emails})
 
 
 @login_required
@@ -227,9 +238,11 @@ def ratingDelete(request, pk):
 def modEdit(request, pk):
     post = get_object_or_404(Mod, pk=pk)
     if request.method == 'POST':
-        form = SubmitForm(request.POST, instance=post)
+        form = SubmitForm(request.POST, request.FILES, instance=post)
+        #form = SubmitForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
+            #post.modID = pk
             post.modAuthor = request.user
             post.modUpdate = timezone.now()
             post.save()
@@ -242,8 +255,86 @@ def modEdit(request, pk):
 
 def modDelete(request, pk):
     post = get_object_or_404(Mod, pk=pk)
-    post.delete()
-    return redirect('accounts:accountPage')
+    if request.user == post.modAuthor:
+        post.delete()
+        return redirect('accounts:accountPage')
+    else:
+        return HttpResponseForbidden("You can't delete other users mods!")
+
+
+def news(request, pk):
+    if request.method == 'POST':
+        #newsForm = NewsForm(request.POST)
+        #if newsForm.is_valid():
+        news_text = request.POST.get('news_text')
+        news_mod_id = request.POST.get('news_mod_id')
+
+        post = News(newsModID=Mod.objects.get(modID=news_mod_id), newsText=news_text)
+        post.save()
+        responseData = {}
+
+        toEmailList = list()
+        modTitle = Mod.objects.get(modID=news_mod_id).modName
+        recipients = NewsNotifications.objects.filter(newsNotificationsModID=Mod.objects.get(modID=news_mod_id))\
+            .values_list('newsNotificationsUserID', flat=True)
+        for x in recipients:
+            emails = get_user_model().objects.filter(id=x).values('email')
+            toEmailList.append(emails.first()['email'])
+        #for x in emails:
+        #    yaes.append(x)
+
+        if len(toEmailList) == 0:
+            pass
+        else:
+            notificationsSendMail(modTitle, toEmailList, news_text)
+
+        responseData['result'] = "Successfully added news to {0}.".format(news_mod_id)
+
+        return HttpResponse(
+            json.dumps(responseData),
+            content_type='application/json'
+        )
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type='application/json'
+        )
+
+
+def notification(request, pk):
+    if request.method == 'POST':
+        modID = request.POST.get('modID')
+        follow = request.POST.get('follow')
+        responseData = {}
+
+        if follow == 'add':  # adding to notifications
+            post = NewsNotifications(newsNotificationsModID=Mod.objects.get(modID=modID), newsNotificationsUserID=request.user)
+            post.save()
+
+            responseData['result'] = "Successfully following mod {0}.".format(modID)
+
+            return HttpResponse(
+                json.dumps(responseData),
+                content_type='application/json'
+            )
+
+        elif follow == 'remove':  # removing from notifications
+            NewsNotifications.objects.get(newsNotificationsModID=Mod.objects.get(modID=modID),
+                                          newsNotificationsUserID=request.user).delete()
+
+            responseData['result'] = "Successfully removed the notification from mod {0}.".format(modID)
+
+            return HttpResponse(
+                json.dumps(responseData),
+                content_type='application/json'
+            )
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type='application/json'
+        )
+
+
 
 
 def modTagFilter(request):
@@ -280,4 +371,3 @@ class SearchResultsView(ListView):
     def get_tags(self):
         tags = Tag.objects.all()
         return tags
-

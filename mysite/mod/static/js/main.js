@@ -143,3 +143,79 @@ function deleteRating() {
         }
     })
 }
+
+function submitNews(news_text, news_mod_id) {
+    console.log("Submitting news for " + news_mod_id)
+    $.ajax({
+        url: 'news/',
+        type: 'POST',
+        data: {
+            news_text: news_text,
+            news_mod_id: news_mod_id,
+            csrfmiddlewaretoken: csrftoken
+        },
+
+        success: function (json) {
+            console.log(json);
+            console.log('success');
+        },
+
+        error: function (xhr, errmsg, err) {
+            console.log(xhr + ': ' + xhr.responseText)
+        }
+    })
+}
+
+function followYes(modID) {
+    $.ajax({
+        url: 'notifications/',
+        type: 'POST',
+        data: {
+            modID: modID,
+            follow: 'add',
+            csrfmiddlewaretoken: csrftoken
+        },
+
+        success: function (json) {
+            console.log(json);
+            console.log('success');
+            $('#notifications-no').attr({
+                "id": "notifications-yes",
+                "class": "notifications-yes",
+                "value": "Following",
+                "onclick": "followNo(" + modID + ")"
+            });
+        },
+
+        error: function (xhr, errmsg, err) {
+            console.log(xhr + ': ' + xhr.responseText)
+        }
+    })
+}
+
+function followNo(modID) {
+    $.ajax({
+        url: 'notifications/',
+        type: 'POST',
+        data: {
+            modID: modID,
+            follow: 'remove',
+            csrfmiddlewaretoken: csrftoken
+        },
+
+        success: function (json) {
+            console.log(json);
+            console.log('success');
+            $('#notifications-yes').attr({
+                "id": "notifications-no",
+                "class": "notifications-no",
+                "value": "Follow",
+                "onclick": "followYes(" + modID + ")"
+            });
+        },
+
+        error: function (xhr, errmsg, err) {
+            console.log(xhr + ': ' + xhr.responseText)
+        }
+    })
+}

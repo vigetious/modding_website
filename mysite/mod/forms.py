@@ -1,7 +1,7 @@
 from django import forms
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
-from.models import Mod, ReviewRating, Vote, Rating
+from.models import Mod, ReviewRating, Vote, Rating, News
 
 #class SubmitForm(forms.Form):
 #    modName = forms.CharField(label='Mod name', max_length=100)
@@ -45,3 +45,7 @@ class RatingForm(forms.ModelForm):
         fields = ('ratingID', 'ratingModID', 'ratingAuthorID', 'ratingValue')
 
 
+class NewsForm(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = ('newsID', 'newsModID', 'newsText')

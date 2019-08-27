@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'progressbarupload',
     'django_cleanup.apps.CleanupConfig',
     'easy_thumbnails',
+    'avatar',
 ]
 
 MIDDLEWARE = [
@@ -147,6 +148,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+DEFAULT_FROM_EMAIL = "yaes@example.com"
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -183,3 +185,25 @@ THUMBNAIL_ALIASES = {
         'avatar': {'size': {100, 100}, 'crop': 'smart', 'autocrop': True}
     }
 }
+
+AVATAR_AUTO_GENERATE_SIZES = (100,)
+
+AVATAR_EXPOSE_USERNAMES = False
+
+AVATAR_MAX_SIZE = 10240 * 10240
+
+AVATAR_MAX_AVATARS_PER_USER = 3
+
+from PIL import Image
+
+AVATAR_RESIZE_METHOD = Image.NONE
+
+AVATAR_STORAGE_DIR = "files/avatar/"
+
+AVATAR_CLEANUP_DELETED = True
+
+AVATAR_ADD_TEMPLATE = "accounts/addAvatar.html"
+AVATAR_CHANGE_TEMPLATE = "accounts/changeAvatar.html"
+AVATAR_DELETE_TEMPLATE = "accounts/deleteAvatar.html"
+
+AVATAR_GRAVATAR_DEFAULT = "retro"  # change this

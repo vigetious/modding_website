@@ -26,6 +26,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
     path(r'^progressbarupload/', include('progressbarupload.urls')),
+    path('avatar/', include('avatar.urls')),
 ]
 
 if settings.DEBUG:

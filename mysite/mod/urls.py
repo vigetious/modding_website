@@ -23,4 +23,6 @@ urlpatterns = [
     path('<int:pk>/reviewdelete/', views.reviewDelete, name='reviewDelete'),
     path('<int:pk>/rating/', views.rating, name='rating'),
     path('<int:pk>/ratingdelete/', views.ratingDelete, name='ratingDelete'),
+    path('<int:pk>/news/', views.news, name='news'),
+    path('<int:pk>/notifications/', views.notification, name='notification'),
 ]

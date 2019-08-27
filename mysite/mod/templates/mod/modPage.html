@@ -34,11 +34,16 @@
     var ratingModID = '{{ rating.ratingModID }}';
     var ratingAuthorID = '{{ rating.ratingAuthorID }}';
     var ratingValue = {{ rating.ratingValue }};
+
+    var newsNotificationsID = '{{ newsnotifications.newsNotificationsID }}';
+    var newsNotificationsModID = '{{ newsnotifications.newsNotificationsModID }}';
+    var newsNotificationsUserID = '{{ newsnotifications.newsNotificationsUserID }}';
 </script>
 
 {% block content %}
     Title of mod: {{ post.modName }}<br>
     Date of mod: {{ post.modDate }}<br>
+    Average rating: {{ rating.ratingValue }}<br>
     {% if post.modBackground.url.length is not 0 %}
         {% if post.modBackgroundTiledStretch == 'Tiled' %}
             <style>
@@ -57,7 +62,11 @@
             </style>
         {% endif %}
     {% endif %}
-    Mod avatar: <img src="{{ post.modAvatar.url }}"><br>
+    {% if post.modAvatar.url.length is not 0 %}
+        Mod avatar: <img src="{{ post.modAvatar.url }}"><br>
+    {% else %}
+        Mod avatar: None<br>
+    {% endif %}
     {% if user.is_authenticated %}
         <fieldset class="rating">
             <legend>Rating:</legend>
@@ -152,7 +161,7 @@
         Mod upload slot: <a href="{{ post.modUpload.url }}">Location</a><br>
     {% else %}
         {% if post.modUploadURL is not None %}
-            Mod upload slot: {{ post.modUploadURL }}<br>
+            Mod upload slot: <a href="{{ post.modUploadURL }}">Location</a><br>
         {% else %}
             Mod Upload slot: None <br>
         {% endif %}
@@ -160,10 +169,46 @@
     Mod Upload URL: {{ post.modUploadURL }}<br>
     Mod Average PlayTime: {{ post.modPlayTimeHours }}:{{ post.modPlayTimeMinutes }}<br>
     {% if post.modAuthor == user %}
-    <a href="{%  url 'mod:modEdit' pk=post.pk %}">Edit</a>
+        <a href="{%  url 'mod:modEdit' pk=post.pk %}">Edit</a>
+        <form method="post" enctype="multipart/form-data" id="news">
+            <input type="text" id="news_text" placeholder="Enter your news here...">
+            <input type="button" id="news_button" onclick="news()" value="Submit">
+            <p id="news_alert"></p>
+        </form>
+        <script>
+        function news() {
+            if ($("#news_text").val() === '') {
+                document.getElementById('news_alert').innerHTML = "It's empty"
+            } else {
+                event.preventDefault();
+                console.log("Attempting to submit news.");
+                window.setTimeout(function () {submitNews($("#news_text").val(), {{ post.modID }})}, 100);
+            }
+        }
+        </script>
     {% endif %}
-    <br>
-    <!--<input type="button" id="upvote_review">-->
+    Receive e-mail updates about this mod? <input type="button" id="notifications-no" value="Follow" onclick="followYes({{ post.modID }})" class="notifications-no"><br>
+    <script>
+        if (newsNotificationsModID === modName && newsNotificationsUserID === user) {
+            $('#notifications-no').attr({
+                "id": "notifications-yes",
+                "class": "notifications-yes",
+                "value": "Following",
+                "onclick": "followNo({{ post.modID }})"
+            })
+        }
+    </script>
+    {% for user in emails %}
+        {{ user.id }}
+    {% endfor %}
+    <h2>News:</h2>
+    {% for news in news %}
+        <div class="news_div">
+            {{ news.newsID }}<br>
+            {{ news.newsDate }}<br>
+            {{ news.newsText }}
+        </div>
+    {% endfor %}
     {{ counter }}
     {% for review in review %}
         <div id="review{{ review.reviewid }}">

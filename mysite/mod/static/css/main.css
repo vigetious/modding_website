@@ -498,5 +498,11 @@ body {
   left:2px;
 }
 
+.news_div {
+    border: 1px solid black;
+    display: inline-block;
+}
+
+
 
 

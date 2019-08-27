@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load avatar_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +9,8 @@
 {% if user.is_authenticated %}
     <p>Username: {{ user.username }}</p>
     <p>Password: {{ user.email }}</p>
+    <p>Avatar:</p>{% avatar user %}
+    <p>Change avatar: <a href="{% url 'avatar_change' %}">Change</a> <a href="{% url 'avatar_delete' %}">Delete</a></p>
     <p><a href="{% url 'password_change' %}">Change password</a></p>
     <p><a href="{% url 'logout' %}">Logout</a></p>
     <p><a href="{% url 'mod:submit' %}">Submit a mod</a></p>

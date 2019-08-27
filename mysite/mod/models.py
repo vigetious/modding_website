@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.postgres.search import SearchVectorField, SearchVector, SearchQuery, SearchRank
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.postgres.aggregates import StringAgg
+from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
 from django.conf import settings
 
@@ -58,7 +59,6 @@ class Mod(models.Model):
     modCreditPerms = models.CharField("mod credits and permissions", max_length=1000, blank=True)
     modDonations = models.CharField("mod donation link", max_length=1000, blank=True)
     modDiscord = models.CharField("mod discord link", max_length=100, blank=True)
-    #modUpload = FilerFileField(related_name='modUpload', on_delete=models.CASCADE)
     modUpload = models.FileField(upload_to=mod_directory_path, blank=True, null=True,
                                  validators=[FileExtensionValidator(allowed_extensions=['zip', 'rar'])])
     modUploadURL = models.URLField("mod upload destination", max_length=1000, blank=True)
@@ -69,7 +69,7 @@ class Mod(models.Model):
     modBackground = models.ImageField('mod background image', upload_to=mod_image_directory_path, blank=True)
     modBackgroundTiledStretch = models.CharField('mod background tiled or stretch', choices=tiledStretchedChoices,
                                                      default=tiledStretchedChoices[0], max_length=100)
-    modAvatar = ThumbnailerImageField('mod avatar image', upload_to=mod_image_directory_path, blank=True)
+    modAvatar = ThumbnailerImageField('mod avatar image', upload_to=mod_image_directory_path, blank=True, resize_source=dict(size=(100, 100), sharpen=True))
 
 
     objects = ModManager()
@@ -97,6 +97,11 @@ class Mod(models.Model):
         try:
             if self.modBackground.size > settings.MAX_BACKGROUND_UPLOAD_SIZE:
                 raise ValidationError('The background image cannot be larger than 20MB.')
+        except ValueError:
+            pass
+        try:
+            if self.modAvatar.size > settings.MAX_AVATAR_UPLOAD_SIZE:
+                raise ValidationError('The avatar image cannot be larger than 10MB.')
         except ValueError:
             pass
 
@@ -157,3 +162,17 @@ class Rating(models.Model):
         unique_together = ('ratingAuthorID', 'ratingModID')
 
 
+class News(models.Model):
+    newsID = models.AutoField("news ID", primary_key=True)
+    newsModID = models.ForeignKey(Mod, on_delete=models.CASCADE, to_field="modID")
+    newsDate = models.DateTimeField("news publish date", auto_now=True)
+    newsText = models.CharField("news text", max_length=5000)
+
+
+class NewsNotifications(models.Model):
+    newsNotificationsID = models.AutoField("new notifications ID", primary_key=True)
+    newsNotificationsModID = models.ForeignKey(Mod, on_delete=models.CASCADE, to_field="modID")
+    newsNotificationsUserID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, to_field="id")
+
+    class Meta:
+        unique_together = ('newsNotificationsModID', 'newsNotificationsUserID')
