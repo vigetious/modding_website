@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 {% load avatar_tags %}
+{% load thumbnail %}
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,8 +12,32 @@
 {% if user.is_authenticated %}
     <p>Username: {{ user.username }}</p>
     <p>Password: {{ user.email }}</p>
-    <p>Avatar:</p>{% avatar user %}
-    <p>Change avatar: <a href="{% url 'avatar_change' %}">Change</a> <a href="{% url 'avatar_delete' %}">Delete</a></p>
+    <p>Total comments: {{ user.totalComments }}</p>
+    <p>Total mods: {{ user.totalMods }}</p>
+    {% for mods in mods %}
+        {{ mods.modName }}
+    {% endfor %}
+    <p>Bio: </p><p contenteditable="false" id="bio">{{ user.description }}</p>
+    <input type="button" id="editBio" value="Edit Bio">
+    <input type="button" id="cancelEditBio" hidden value="Cancel">
+    <script>
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', afterLoaded);
+        } else {
+            afterLoaded();
+        }
+
+        function afterLoaded() {
+            $('#editBio').on('click', editBio); // bio stuff
+        }
+    </script>
+    <p>Edit avatar: <a href="{% url 'accounts:avatar' %}">Click</a> </p>
+    {% if avatar == None %}
+        Avatar: <img src="/files/files/avatar/default.png">
+    {% else %}
+        <p>Avatar: </p><img src="{{ avatar.avatarImage.url }}">
+    {% endif %}
+    <!--<p>Change avatar: <a href="{% url 'avatar_change' %}">Change</a> <a href="{% url 'avatar_delete' %}">Delete</a></p>-->
     <p><a href="{% url 'password_change' %}">Change password</a></p>
     <p><a href="{% url 'logout' %}">Logout</a></p>
     <p><a href="{% url 'mod:submit' %}">Submit a mod</a></p>
@@ -21,3 +48,6 @@
 
 </body>
 </html>
+
+<!--JAVASCRIPT-->
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>

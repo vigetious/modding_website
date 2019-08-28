@@ -1,0 +1,9 @@
+{% block title %}<h1>Change your avatar</h1>{% endblock %}
+{% block content %}
+    <form method="post" enctype="multipart/form-data" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+    <button onclick="history.back()">Back</button>
+{% endblock %}

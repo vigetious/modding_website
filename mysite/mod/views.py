@@ -25,6 +25,8 @@ from .models import Mod, ReviewRating, Vote, Rating, News, NewsNotifications #, 
 from .scripts import moveMod
 from .operations.mail import notificationsSendMail
 
+from accounts.models import User
+
 # Create your views here.
 
 
@@ -44,6 +46,9 @@ def submit(request):
             post.save()
             post.save()
             form.save_m2m()
+            user = User.objects.get(id=request.user.id)
+            user.totalMods = user.totalMods + 1
+            user.save()
             return redirect('mod:modPage', pk=post.pk)
     else:
         form = SubmitForm()
@@ -54,8 +59,7 @@ def submit(request):
 def modPage(request, pk):
     post = get_object_or_404(Mod, pk=pk)
     review = ReviewRating.objects.filter(reviewModID=post.modID)
-    vote = Vote.objects.all()  # you dont need to get all; only one value so use mod id to get field
-    # use reviewrating.reviewModID if you have to
+    vote = Vote.objects.all()
     if request.user.is_authenticated:
         try:
             rating = Rating.objects.get(ratingAuthorID=request.user)
@@ -80,7 +84,6 @@ def modPage(request, pk):
 
     emails = get_user_model().objects.all()
 
-
     if request.method == 'POST':
         commentForm = ReviewForm(request.POST)
         if commentForm.is_valid():
@@ -88,6 +91,9 @@ def modPage(request, pk):
             postReview.reviewModID = Mod.objects.get(modID=post.modID)
             postReview.reviewAuthor = request.user
             postReview.save()
+            user = User.objects.get(id=request.user.id)
+            user.totalComments = user.totalComments + 1
+            user.save()
             return redirect('mod:modPage', pk=post.pk)
     else:
         commentForm = ReviewForm()
@@ -176,6 +182,9 @@ def reviewDelete(request, pk):
         ReviewRating.objects.get(reviewid__exact=request_getdata).delete()
         response_data = {}
         response_data['result'] = "Successfully deleted review " + request_getdata
+        user = User.objects.get(id=request.user.id)
+        user.totalComments = user.totalComments - 1
+        user.save()
 
         return HttpResponse(
             json.dumps(response_data),
@@ -257,6 +266,9 @@ def modDelete(request, pk):
     post = get_object_or_404(Mod, pk=pk)
     if request.user == post.modAuthor:
         post.delete()
+        user = User.objects.get(id=request.user.id)
+        user.totalMods = user.totalMods - 1
+        user.save()
         return redirect('accounts:accountPage')
     else:
         return HttpResponseForbidden("You can't delete other users mods!")

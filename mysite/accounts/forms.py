@@ -4,7 +4,7 @@ from django.contrib.auth.forms import password_validation
 from django.contrib.auth.forms import UsernameField
 from django.contrib.auth import get_user_model
 
-from .models import User
+from .models import User, Avatar
 from easy_thumbnails.fields import ThumbnailerImageField
 
 
@@ -22,13 +22,19 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ('username', 'email')
 
 
-class edit(forms.ModelForm):
+class EditForm(forms.ModelForm):
     email = forms.EmailField()
     description = forms.CharField(max_length=1000)
 
     class Meta:
         model = User
         fields = ['email', 'description']
+
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ('avatarID', 'avatarImage')
 
 
 #class SignUp(forms.ModelForm):
