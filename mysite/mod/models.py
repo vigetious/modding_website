@@ -47,7 +47,7 @@ class Mod(models.Model):
         ('Stretched', 'Stretched'),
     )
     modID = models.AutoField("mod id", primary_key=True, unique=True)
-    modAuthor = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
+    modAuthor = models.ForeignKey('accounts.User', on_delete=models.CASCADE, to_field='id')
     modDate = models.DateTimeField("mod publish date", null=True)
     modUpdate = models.DateTimeField("mod most recent update date")
     modDownloads = models.IntegerField('', null=True, blank=True)
@@ -115,7 +115,8 @@ class Mod(models.Model):
 class ReviewRating(models.Model):
     reviewid = models.AutoField("review id", primary_key=True)
     reviewModID = models.ForeignKey(Mod, on_delete=models.CASCADE, related_name="reviewModID", to_field="modID")
-    reviewAuthor = models.CharField("review author name", max_length=100)
+    #reviewAuthor = models.CharField("review author name", max_length=100)
+    reviewAuthorID = models.ForeignKey('accounts.User', on_delete=models.CASCADE, to_field='id')
     reviewDate = models.DateTimeField("review date", auto_now_add=True)
     reviewComment = models.CharField("review comment", max_length=10000, blank=True)
     reviewVotes = models.IntegerField("total votes for comment", default=0)

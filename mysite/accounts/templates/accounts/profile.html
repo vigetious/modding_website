@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Your Profile</title>
 </head>
 <body>
 {% if user.is_authenticated %}
@@ -14,6 +14,7 @@
     <p>Password: {{ user.email }}</p>
     <p>Total comments: {{ user.totalComments }}</p>
     <p>Total mods: {{ user.totalMods }}</p>
+    <p>Mods list: </p>
     {% for mods in mods %}
         {{ mods.modName }}
     {% endfor %}

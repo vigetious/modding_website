@@ -20,7 +20,7 @@ class ModAdmin(admin.ModelAdmin):
 
 
 class ReviewRatingAdmin(admin.ModelAdmin):
-    list_display = ['reviewid', 'reviewModID', 'reviewAuthor', 'reviewDate', 'reviewComment', 'vote_total',
+    list_display = ['reviewid', 'reviewModID', 'reviewAuthorID', 'reviewDate', 'reviewComment', 'vote_total',
                     'reviewVotes']
 
 class VoteAdmin(admin.ModelAdmin):

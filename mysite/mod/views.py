@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, HttpResponseForbidden
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -48,6 +48,8 @@ def submit(request):
             form.save_m2m()
             user = User.objects.get(id=request.user.id)
             user.totalMods = user.totalMods + 1
+            group = Group.objects.get(name="Mod Creators")
+            group.user_set.add(request.user)
             user.save()
             return redirect('mod:modPage', pk=post.pk)
     else:
@@ -89,7 +91,8 @@ def modPage(request, pk):
         if commentForm.is_valid():
             postReview = commentForm.save(commit=False)
             postReview.reviewModID = Mod.objects.get(modID=post.modID)
-            postReview.reviewAuthor = request.user
+            #postReview.reviewAuthor = request.user
+            postReview.reviewAuthorID = request.user
             postReview.save()
             user = User.objects.get(id=request.user.id)
             user.totalComments = user.totalComments + 1
@@ -114,6 +117,11 @@ def reviewUpVote(request, pk):
         allVotes = Vote.objects.filter(voteReviewID__exact=request_getdata).count()
         reviewrating.reviewVotes = allVotes
         reviewrating.save()
+        group = Group.objects.get(name="Well respected")
+        if allVotes >= 10:
+            group.user_set.add(reviewrating.reviewAuthorID)#User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+        else:
+            group.user_set.remove(reviewrating.reviewAuthorID)#User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
         response_data['result'] = "Successfully upvoted review " + request_getdata
 
         return HttpResponse(
@@ -138,6 +146,11 @@ def reviewRemoveVote(request, pk):
         allVotes = Vote.objects.filter(voteReviewID__exact=request_getdata).count()
         reviewrating.reviewVotes = allVotes
         reviewrating.save()
+        group = Group.objects.get(name="Well respected")
+        if allVotes >= 10:
+            group.user_set.add(reviewrating.reviewAuthorID)#User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+        else:
+            group.user_set.remove(reviewrating.reviewAuthorID)#User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
         response_data['result'] = "Successfully removed vote from review " + request_getdata
 
         return HttpResponse(
@@ -163,6 +176,11 @@ def reviewDownVote(request, pk):
         #allVotes = Vote.objects.aggregate(totalVoted=Sum(votesAgg))
         reviewrating.reviewVotes = votesAgg
         reviewrating.save()
+        group = Group.objects.get(name="Well respected")
+        if votesAgg >= 10:
+            group.user_set.add(reviewrating.reviewAuthorID)#User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+        else:
+            group.user_set.remove(reviewrating.reviewAuthorID)#User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
         response_data['result'] = "Successfully downvoted review " + request_getdata
 
         return HttpResponse(
@@ -269,6 +287,8 @@ def modDelete(request, pk):
         user = User.objects.get(id=request.user.id)
         user.totalMods = user.totalMods - 1
         user.save()
+        group = Group.objects.get(name="Mod Creators")
+        group.user_set.remove(request.user)
         return redirect('accounts:accountPage')
     else:
         return HttpResponseForbidden("You can't delete other users mods!")

@@ -214,7 +214,7 @@
         <div id="review{{ review.reviewid }}">
             <p>Review votes: {{ review.reviewVotes }}</p>
             <p>Review ID: {{ review.reviewid }}</p>
-            <p>Review by: {{ review.reviewAuthor }}</p>
+            <p>Review by: {{ review.reviewAuthorID }}</p>
             <p>Current user: {{ user }}</p>
             {% if user.is_authenticated %}
                 <form method="post" id="upvote_review">
