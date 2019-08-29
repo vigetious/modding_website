@@ -15,7 +15,7 @@ from django.core import serializers, mail
 from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
 
-import json, pdb
+import json, pdb, math
 
 from django_filters.views import FilterView
 from taggit.models import Tag
@@ -226,7 +226,7 @@ def rating(request, pk):
         post.save()
 
         averageRating = Rating.objects.filter(ratingModID=request_modID).aggregate(Avg(('ratingValue')))['ratingValue__avg']  # getting average rating for the mod we are using
-        modID.modRating = averageRating
+        modID.modRating = format(averageRating, ".1f")
         modID.save()  # updating mod average rating
 
         response_data['result'] = "Successfully rated mod {0} with a {1}/5.".format(request_modID, request_value)

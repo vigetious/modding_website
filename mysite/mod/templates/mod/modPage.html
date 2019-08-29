@@ -43,7 +43,7 @@
 {% block content %}
     Title of mod: {{ post.modName }}<br>
     Date of mod: {{ post.modDate }}<br>
-    Average rating: {{ rating.ratingValue }}<br>
+    Average rating: {{ post.modRating }}<br>
     {% if post.modBackground.url.length is not 0 %}
         {% if post.modBackgroundTiledStretch == 'Tiled' %}
             <style>
@@ -212,7 +212,7 @@
     {{ counter }}
     {% for review in review %}
         <div id="review{{ review.reviewid }}">
-            <p>Review votes: {{ review.reviewVotes }}</p>
+            <p>Review votes: </p><p id="reviewVotes{{ review.reviewid }}">{{ review.reviewVotes }}</p>
             <p>Review ID: {{ review.reviewid }}</p>
             <p>Review by: {{ review.reviewAuthorID }}</p>
             <p>Current user: {{ user }}</p>
@@ -268,8 +268,11 @@
                         $("#downvoted_review_{{ review.reviewid }}").attr('class', 'downvote_review');
                         $("#downvoted_review_{{ review.reviewid }}").attr('value', 'downvote');
                         $('#downvote_review_{{ review.reviewid }}').attr('id', 'downvote_review_{{ review.reviewid }}');
+                        document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) + 1;
                     } else {
                         upvote_post({{ review.reviewid }}, {{ mod.modID }});
+                        console.log('yaes');
+                        document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) + 1;
                     }
 
                     $(this).off('click').on('click', upvoteSecondClick);
@@ -283,6 +286,7 @@
                     console.log('removing upvote from review ' + {{ review.reviewid }});
 
                     remove_vote({{ review.reviewid }}, {{ mod.modID }});
+                    document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) - 1;
 
                     $(this).off('click').on('click', upvoteFirstClick);
                     $(this).attr('class', 'upvote_review');
@@ -300,8 +304,10 @@
                         $("#upvoted_review_{{ review.reviewid }}").attr('class', 'upvote_review');
                         $("#upvoted_review_{{ review.reviewid }}").attr('value', 'upvote');
                         $("#upvote_review_{{ review.reviewid }}").attr('id', 'upvote_review_{{ review.reviewid }}');
+                        document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) - 1;
                     } else {
                         downvote_post({{ review.reviewid }}, {{ mod.modID }});
+                        document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) - 1;
                     }
 
                     $(this).off('click').on('click', downvoteSecondClick);
@@ -315,6 +321,7 @@
                     console.log('removing downvote from review ' + {{ review.reviewid }});
 
                     remove_vote({{ review.reviewid }}, {{ mod.modID }});
+                    document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) + 1;
 
                     $(this).off('click').on('click', downvoteFirstClick);
                     $(this).attr('class', 'downvote_review');

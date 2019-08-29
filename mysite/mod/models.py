@@ -31,10 +31,10 @@ class ModManager(models.Manager):
                  SearchVector('modDescription', weight='C')
         return self.get_queryset().annotate(document=vector)
 
-
     def clean(self):
         if self.avatar.size > settings.MAX_AVATAR_UPLOAD_SIZE:
             raise ValidationError('Your avatar image must not be larger than 10MB.')
+
 
 class Mod(models.Model):
     statusChoices = (
@@ -65,7 +65,7 @@ class Mod(models.Model):
     modPlayTimeHours = models.IntegerField('mod average playtime hours', blank=True, null=True, default=0)
     modPlayTimeMinutes = models.IntegerField('mod average playtime minutes', blank=True, null=True, default=0)
     modSearch = SearchVectorField(null=True)
-    modRating = models.IntegerField('mod average rating', blank=True, null=True, default=0)
+    modRating = models.FloatField('mod average rating', blank=True, null=True, default=0)
     modBackground = models.ImageField('mod background image', upload_to=mod_image_directory_path, blank=True)
     modBackgroundTiledStretch = models.CharField('mod background tiled or stretch', choices=tiledStretchedChoices,
                                                      default=tiledStretchedChoices[0], max_length=100)
@@ -115,7 +115,6 @@ class Mod(models.Model):
 class ReviewRating(models.Model):
     reviewid = models.AutoField("review id", primary_key=True)
     reviewModID = models.ForeignKey(Mod, on_delete=models.CASCADE, related_name="reviewModID", to_field="modID")
-    #reviewAuthor = models.CharField("review author name", max_length=100)
     reviewAuthorID = models.ForeignKey('accounts.User', on_delete=models.CASCADE, to_field='id')
     reviewDate = models.DateTimeField("review date", auto_now_add=True)
     reviewComment = models.CharField("review comment", max_length=10000, blank=True)
