@@ -46,6 +46,7 @@ def submit(request):
             post.save()
             post.save()
             form.save_m2m()
+            post.tags.add("All")
             user = User.objects.get(id=request.user.id)
             user.totalMods = user.totalMods + 1
             group = Group.objects.get(name="Mod Creators")
@@ -289,7 +290,7 @@ def modDelete(request, pk):
         user.save()
         group = Group.objects.get(name="Mod Creators")
         group.user_set.remove(request.user)
-        return redirect('accounts:accountPage')
+        return redirect('accounts:profile')
     else:
         return HttpResponseForbidden("You can't delete other users mods!")
 
@@ -382,20 +383,24 @@ class SearchResultsView(ListView):
 
     def get_queryset(self):
         searchQuery = self.request.GET.get('search')
-        tagFilter = self.request.GET.get('tags')
-        #tagFilter = "sad"
+        tagFilter = self.request.GET.getlist('tags')
+        ay = len(tagFilter)
         if tagFilter is None and searchQuery is not None:
             object_list = Mod.objects.filter(
                 Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
             )
         elif searchQuery is None and tagFilter is not None:
             object_list = Mod.objects.filter(
-                tags__name__in=[tagFilter]
+                tags__name__in=tagFilter
             )
         elif searchQuery is not None and tagFilter is not None:
             object_list = Mod.objects.filter(
-                Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery), tags__name__in=[tagFilter]
-            )
+                Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+            ).filter(tags__name__in=tagFilter)\
+                .annotate(num_tags=Count('tags'))\
+                .filter(num_tags=len(tagFilter))#.filter(tags__name__in=[tagFilter[0]]).filter(tags__name__in=[tagFilter[1]]).distinct()
+            #for x in tagFilter:
+            #    object_list.filter(tags__name__in=[x])
         else:
             return HttpResponse("Please enter something in the search parameter")
         return object_list
