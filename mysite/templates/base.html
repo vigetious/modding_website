@@ -1,0 +1,86 @@
+<!doctype html>
+<html class="no-js" lang="">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Template mod page. Change this.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <meta name="theme-color" content="#fafafa">
+</head>
+
+<body background="{% static 'img/tilebgBlue.png' %}">
+<!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+<!-- Add your site or application content here -->
+<div class="pagewrap">
+    <div class="topMenu">
+        <a class="logo" href="" title="Title">Title</a> <!-- image later on -->
+        <div class="topNav">
+            <a class="login" href="{% url 'login' %}">Login</a>
+            <a class="register" href="{% url 'accounts:signup' %}" title="register">Register</a>
+        </div>
+        <div class="topMiddleNav">
+            <a href="">Donate</a>
+            <a href="">GitHub</a>
+        </div>
+    </div>
+
+    <ul class="navbar">
+        <li><a href="{% url 'home' %}"><img src="{% static 'img/HomeSmall.png' %}" alt="Home"></a></li>
+        <li><a href="http://reddit.com/r/ddlcmods"><img src="{% static 'img/Mods RedditSmall.png' %}" alt="Mod Reddit"></a></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn"><img src="{% static 'img/ModsSmall.png' %}" alt="Mods"></a>
+            <div class="dropdown-content">
+                <a href="#">Search for mods</a>
+                <a href="#">Highest rated mods</a>
+                <a href="#">Highest rated mods this month</a>
+                <a href="#">Highest rated mods this week</a>
+                <a href="#">Released this month</a>
+                <a href="#">Released this week</a>
+            </div>
+        </li>
+        <li><a href=""><img src="{% static 'img/SupportSmall.png' %}" alt="Support"></a></li>
+        <form action="{% url 'mod:modSearch' %}" method="get">
+            <input class="searchButton" type="submit" value="Search">
+            <input class="search" name="q" type="text" placeholder="Search">
+        </form>
+    </ul>
+
+    <div class="mainContent">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div class="bottomContent">
+        <ul class="bottomNavbar">
+            <li><a href="">Donate</a></li>
+            <li><a href="">DMCA and Copyright</a> </li>
+        </ul>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="{% static 'js/vendor/modernizr-3.7.1.min.js' %}"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+<script type="text/javascript" src="{% static 'js/plugins.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+</script>
+</body>
+
+</html>

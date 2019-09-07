@@ -94,14 +94,37 @@ function deleteComment(reviewid) {
     })
 }
 
-function rating(modID, value) {
-    console.log("Rating this mod a " + value + "/5.");
+function rating(modID) {
+    var radios = document.getElementsByName("rating");
+    var radioValue;
+
+    if (document.getElementById("rating").hidden) {
+        radioValue = "N/A"
+    } else {
+        for (var i = 0, len=radios.length; i<len; i++) {
+            if (radios[i].checked) {
+                radioValue = radios[i].value;
+            }
+        }
+    }
+
+    var choice = document.getElementById("choice");
+    var selectedChoice = choice.options[choice.selectedIndex].value;
+
+    ratingSubmit(modID, radioValue, selectedChoice);
+    document.getElementById("ratingSubmit").value = "Update";
+}
+
+function ratingSubmit(modID, radioValue, selectedChoice) {
+    console.log("Rating this mod a " + radioValue + "/5.");
+
     $.ajax({
         url: 'rating/',
         type: 'POST',
         data: {
             modID: modID,
-            value: value,
+            radioValue: radioValue,
+            selectedChoice: selectedChoice,
             csrfmiddlewaretoken: csrftoken
         },
 

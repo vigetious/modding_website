@@ -11,6 +11,7 @@ from .forms import CustomUserCreationForm, EditForm, AvatarForm#, SignUp
 from .models import Avatar, User
 
 from mod.models import Mod
+from mod.models import Rating
 
 import json, pdb
 
@@ -108,6 +109,11 @@ def bio(request):
             json.dumps({"nothing to see": "this isn't happening"}),
             content_type="application/json"
         )
+
+@login_required
+def played(request):
+    post = Rating.objects.filter(ratingAuthorID=request.user.id)
+    return render(request, 'accounts/played.html', {'post': post})
 
 
 

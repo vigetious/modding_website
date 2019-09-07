@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'easy_thumbnails',
     'avatar',
+    'pages.apps.PagesConfig',
 ]
 
 MIDDLEWARE = [

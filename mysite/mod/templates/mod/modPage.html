@@ -30,10 +30,11 @@
     var modPlayTimeHours = {{ post.modPlayTimeHours }};
     var modPlayTimeMinutes = {{ post.modPlayTimeMinutes }};
 
-    var ratingID = {{ rating.ratingID }};
+    var ratingID = '{{ rating.ratingID }}';
     var ratingModID = '{{ rating.ratingModID }}';
     var ratingAuthorID = '{{ rating.ratingAuthorID }}';
-    var ratingValue = {{ rating.ratingValue }};
+    var ratingChoice = '{{ rating.ratingChoice }}';
+    var ratingValue = '{{ rating.ratingValue }}';
 
     var newsNotificationsID = '{{ newsnotifications.newsNotificationsID }}';
     var newsNotificationsModID = '{{ newsnotifications.newsNotificationsModID }}';
@@ -68,7 +69,12 @@
         Mod avatar: None<br>
     {% endif %}
     {% if user.is_authenticated %}
-        <fieldset class="rating">
+        <div style="display: inline-block; float: left">
+        <select name="choice" id="choice">
+            <option id="played" value="Played" onclick="revealRating()">Played</option>
+            <option id="want-to-play" value="Want to play" onclick="hideRating()">Want to play</option>
+        </select>
+        <fieldset id="rating" class="rating">
             <legend>Rating:</legend>
             <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
             <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
@@ -76,12 +82,42 @@
             <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
             <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
         </fieldset>
+        <input type="button" id="ratingSubmit" value="Submit">
         <script>
-        if (ratingModID === modName && ratingAuthorID === user) {
-            document.getElementById("star{{ rating.ratingValue }}").checked = true;
-            console.log("Already rated.")
-        }
+            if ('{{ rating.ratingModID|stringformat:"i" }}' === '{{ post.modID|stringformat:"i" }}' && '{{ rating.ratingAuthorID }}' === '{{ user }}') {
+                if (document.getElementById("rating").hasAttribute("hidden")) {
+                    document.getElementById("star{{ rating.ratingValue }}").checked = true;
+                }
+                if (ratingValue != 'None') {
+                    console.log('Already rated this mod with ' + {{ rating.ratingValue }});
+                    document.getElementById("star{{ rating.ratingValue }}").checked = true;
+                }
+                document.getElementById("choice").value = "{{ rating.ratingChoice }}";
+                document.getElementById("ratingSubmit").value = "Update";
+                console.log("Already rated.")
+            }
+
+            if (document.getElementById("played").selected === true) {
+                console.log("PLAYED");
+                $('#rating').removeAttr('hidden')
+            }
+
+            if (document.getElementById("want-to-play").selected === true) {
+                console.log("WANT TO PLAY");
+                $('#rating').attr('hidden', true)
+            }
+
+            function revealRating() {
+                $('#rating').removeAttr('hidden')
+            }
+
+            function hideRating() {
+                $('#rating').attr('hidden', true)
+            }
+
+            $('#ratingSubmit').on('click', function () {rating({{ post.modID }})});
         </script>
+        </div>
     {% endif %}
 
     <script>
@@ -92,12 +128,16 @@
     }
 
     function afterLoadedRating() {
-        $('#star5').on('click', star5);
-        $('#star4').on('click', star4);
-        $('#star3').on('click', star3);
-        $('#star2').on('click', star2);
-        $('#star1').on('click', star1);
+        //$('#star5').on('click', star5);
+        //$('#star4').on('click', star4);
+        //$('#star3').on('click', star3);
+        //$('#star2').on('click', star2);
+        //$('#star1').on('click', star1);
 
+        //---------------------------------------------------------
+        // YOU CAN GET RID OF ALL OF THIS IF WE ARE GOOD AT THE END
+        //---------------------------------------------------------
+        /*
         function star5() {
             console.log("Attempting to give this mod a 5/5.");
             if ('ratingValue' in window) { // if there is already a rating
@@ -146,7 +186,7 @@
             } else {
                 window.setTimeout(function () {rating({{ post.modID }}, 1)}, 100);
             }
-        }
+        }*/
     }
     </script>
 

@@ -43,6 +43,10 @@ def submit(request):
             post.modAuthor = request.user
             post.modDate = timezone.now()
             post.modUpdate = timezone.now()
+            if post.modAvatar:
+                pass
+            else:
+                post.modAvatar = 'files/avatar/default.jpg'
             post.save()
             post.save()
             form.save_m2m()
@@ -65,7 +69,7 @@ def modPage(request, pk):
     vote = Vote.objects.all()
     if request.user.is_authenticated:
         try:
-            rating = Rating.objects.get(ratingAuthorID=request.user)
+            rating = Rating.objects.get(ratingAuthorID=request.user, ratingModID=post.modID)
         except ObjectDoesNotExist:
             rating = None
     else:
@@ -219,18 +223,31 @@ def reviewDelete(request, pk):
 def rating(request, pk):
     if request.method == "POST":
         request_modID = request.POST.get('modID')
-        request_value = request.POST.get('value')
+        request_radioValue = request.POST.get('radioValue')
+        request_selectedChoice = request.POST.get('selectedChoice')
+
+
 
         modID = Mod.objects.get(modID__exact=request_modID)
+
+        try:
+            Rating.objects.get(ratingModID=modID, ratingAuthorID=request.user).delete()
+        except ObjectDoesNotExist:
+            pass
+
         response_data = {}
-        post = Rating(ratingModID=modID, ratingAuthorID=request.user, ratingValue=request_value)
+        if request_radioValue == "N/A":
+            post = Rating(ratingModID=modID, ratingAuthorID=request.user, ratingChoice=request_selectedChoice)
+        else:
+            post = Rating(ratingModID=modID, ratingAuthorID=request.user, ratingChoice=request_selectedChoice,
+                      ratingValue=request_radioValue)
         post.save()
 
         averageRating = Rating.objects.filter(ratingModID=request_modID).aggregate(Avg(('ratingValue')))['ratingValue__avg']  # getting average rating for the mod we are using
         modID.modRating = format(averageRating, ".1f")
         modID.save()  # updating mod average rating
 
-        response_data['result'] = "Successfully rated mod {0} with a {1}/5.".format(request_modID, request_value)
+        response_data['result'] = "Successfully rated mod {0} with a {1}/5.".format(request_modID, request_radioValue)
         response_data['data'] = serializers.serialize('json', Rating.objects.filter(ratingID=post.ratingID))
 
         return HttpResponse(
@@ -273,6 +290,10 @@ def modEdit(request, pk):
             #post.modID = pk
             post.modAuthor = request.user
             post.modUpdate = timezone.now()
+            if post.modAvatar:
+                pass
+            else:
+                post.modAvatar = 'files/avatar/default.jpg'
             post.save()
             form.save_m2m()
             return redirect('mod:modPage', pk=post.pk)
@@ -396,11 +417,7 @@ class SearchResultsView(ListView):
         elif searchQuery is not None and tagFilter is not None:
             object_list = Mod.objects.filter(
                 Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-            ).filter(tags__name__in=tagFilter)\
-                .annotate(num_tags=Count('tags'))\
-                .filter(num_tags=len(tagFilter))#.filter(tags__name__in=[tagFilter[0]]).filter(tags__name__in=[tagFilter[1]]).distinct()
-            #for x in tagFilter:
-            #    object_list.filter(tags__name__in=[x])
+            ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter))
         else:
             return HttpResponse("Please enter something in the search parameter")
         return object_list

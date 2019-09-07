@@ -69,7 +69,8 @@ class Mod(models.Model):
     modBackground = models.ImageField('mod background image', upload_to=mod_image_directory_path, blank=True)
     modBackgroundTiledStretch = models.CharField('mod background tiled or stretch', choices=tiledStretchedChoices,
                                                      default=tiledStretchedChoices[0], max_length=100)
-    modAvatar = ThumbnailerImageField('mod avatar image', upload_to=mod_image_directory_path, blank=True, resize_source=dict(size=(100, 100), sharpen=True))
+    modAvatar = ThumbnailerImageField('mod avatar image', upload_to=mod_image_directory_path, blank=True,
+                                      resize_source=dict(size=(100, 100), sharpen=True))
 
 
     objects = ModManager()
@@ -85,6 +86,7 @@ class Mod(models.Model):
         indexes = [
             GinIndex(fields=['modSearch'])
         ]
+        get_latest_by = "modDate"
 
     def clean(self):
         if self.modPlayTimeMinutes >= 59:
@@ -110,6 +112,9 @@ class Mod(models.Model):
 
     def __int__(self):
         return self.modID
+
+    def get_latest_by(self):
+        return self.modDate
 
 
 class ReviewRating(models.Model):
@@ -153,10 +158,28 @@ class Vote(models.Model):
 
 
 class Rating(models.Model):
+    statusChoices = (
+        ('Played', 'Played'),
+        ('Want to play', 'Want to play'),
+    )
     ratingID = models.AutoField("rating ID", primary_key=True)
     ratingModID = models.ForeignKey(Mod, on_delete=models.CASCADE, to_field="modID")
     ratingAuthorID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, to_field="id")
-    ratingValue = models.PositiveSmallIntegerField("rating value", default=0)
+    ratingChoice = models.CharField('rating choice', choices=statusChoices,
+                                    default=statusChoices[0], max_length=100)
+    ratingValue = models.PositiveSmallIntegerField("rating value", null=True)
+
+    def getAvatar(self):
+        if Mod.objects.get(modID=self.ratingModID).modAvatar.url != None:
+            return Mod.objects.get(modID=self.ratingModID).modAvatar.url
+        else:
+            return 'files/'
+
+    def getStatus(self):
+        return Mod.objects.get(modID=self.ratingModID).modStatus
+
+    ratingAvatar = property(getAvatar)
+    ratingStatus = property(getStatus)
 
     class Meta:
         unique_together = ('ratingAuthorID', 'ratingModID')

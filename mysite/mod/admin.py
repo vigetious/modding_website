@@ -27,7 +27,7 @@ class VoteAdmin(admin.ModelAdmin):
     list_display = ['voteID', 'voteReviewID', 'voteAuthor', 'voteValue']
 
 class RatingAdmin(admin.ModelAdmin):
-    list_display = ['ratingID', 'ratingModID', 'ratingAuthorID', 'ratingValue']
+    list_display = ['ratingID', 'ratingModID', 'ratingAuthorID', 'ratingChoice', 'ratingValue']
 
 class NewsAdmin(admin.ModelAdmin):
     list_display = ['newsID', 'newsModID', 'newsDate', 'newsText']

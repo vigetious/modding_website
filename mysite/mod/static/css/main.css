@@ -97,21 +97,27 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+@font-face {
+  font-family: 'riffic_freebold';
+  src: url("../fonts/riffic/RifficFree-Bold.ttf");
+}
+
 
 p {
-  color: red;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
   text-align: center;
-  background-color: #5b80b2;
+  background-color: black;
 }
 
 .pagewrap {
   text-align: left;
   max-width: 960px;
   margin: auto;
-  background-color: #003366;
+  background-color: #bde1ff;
 }
 
 .logo {
@@ -127,19 +133,55 @@ body {
   float: right;
 }
 
+.mainContent {
+  padding: 20px 20px;
+}
+
+.bottomContent {
+
+}
+
+.bottomNavbar {
+  overflow: hidden;
+  background-color: #e6f4ff;
+  padding: 6px 5px;
+}
+
+.bottomNavbar li a {
+  color: black;
+  text-align: left;
+  float: right;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 6px 5px;
+}
+
 .navbar {
   overflow: hidden;
-  background-color: #333;
+  background-color: #e6f4ff;
+}
+
+.navbar form {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topMenu {
+  overflow: hidden;
 }
 
 .navbar a {
-  float: left;
-  font-size: 16px;
-  color: white;
+  font-size: 24px;
+  font-family: 'riffic_freebold', Arial, sans-serif;
   text-align: center;
-  padding: 14px 16px;
+  padding: 8.5px 0px;
   text-decoration: none;
+  color: white;
+  border: 0px solid #bde1ff;
+  border-right-width: 2px;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #5599bb;
 }
+
+
 
 .navbar input {
   float: right;
@@ -147,57 +189,132 @@ body {
   font-size: 16px;
   border: none;
   outline: none;
-  padding: 14px 16px;
-  background-color: white;
+  background-color: #e6f4ff;
   font-family: inherit;
   margin: 0;
+  border: 0px solid #bde1ff;
+  border-left-width: 2px;
 }
 
-.dropdown {
-  float: left;
+.search {
+  padding: 16px 30px;
+}
+
+.searchButton {
+  padding: 16px 14px;
+}
+
+.search:focus {
+  background-color: #eef8ff;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
+  background-color: #333;
 }
 
-.dropdown .dropbtn {
-  font-size: 16px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
+.navbar li {
+  float: left;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
+.navbar img {
+  width: 75%;
+  height: 75%;
 }
 
-.dropdownContent {
+li a, .dropbtn {
+  display: inline-block;
+  color: #e6f4ff;
+  text-align: center;
+  text-decoration: none;
+}
+
+.navbar li a:hover, .dropdown:hover .dropbtn {
+  background-color: #bde1ff;
+}
+
+.navbar li.dropdown {
+  display: inline-block;
+}
+
+.dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
+  background-color: #bde1ff;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
 
-.dropdownContent a {
-  float: none;
-  color: black;
+.dropdown-content a {
+  color: white;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
   text-align: left;
 }
 
-.dropdownContent a:hover {
-  background-color: #ddd;
+.login {
+  color: black;
+  padding: 6px 5px;
+  text-decoration: none;
+  display: block;
+  text-align: right;
+  background-color: #e6f4ff;
+  float: right;
+  border: 0px solid #bde1ff;
+  border-left-width: 1px;
+  border-radius: 3px;
 }
 
-.dropdown:hover .dropdownContent {
+.topNav {
+  background-color: #bde1ff;
+  float: right;
+  padding: 5px 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topMiddleNav {
+  background-color: #bde1ff;
+  float: right;
+  padding: 5px 5em;
+}
+
+.topMiddleNav a {
+  color: black;
+  text-align: left;
+  float: right;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 6px 5px;
+  text-decoration: none;
+}
+
+.register {
+  color: black;
+  padding: 6px 5px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  background-color: #e6f4ff;
+  float: right;
+  border: 0px solid #bde1ff;
+  border-right-width: 1px;
+  border-radius: 3px;
+}
+
+.dropdown-content a:hover {
+  background-color: #e6f4ff;
+  border-right-color: #e6f4ff;
+}
+
+.dropdown:hover .dropdown-content {
   display: block;
 }
+
+
 
 /* Tooltip container */
 .tooltip {

@@ -7,11 +7,8 @@ from .views import SearchResultsView
 app_name = 'mod'
 
 urlpatterns = [
-    path('', views.index, name='index'),
     path('submit/', views.submit, name='submit'),
     path('<int:pk>/', views.modPage, name='modPage'),
-#    path('upvote_review/', views.reviewUpvote, name='upvote_review'),
-#    path('downvote_review/', views.reviewDownvote, name='downvote_review'),
     path('<int:pk>/edit', views.modEdit, name='modEdit'),
     path('<int:pk>/delete', views.modDelete, name='modDelete'),
     path('search/', SearchResultsView.as_view(), name='modSearch'),

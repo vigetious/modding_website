@@ -54,6 +54,7 @@
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
+                <p>Don't forget to tell your followers that you have updated your mod by adding news!</p>
                 <input type="submit" value="Submit">
             </form>
             <a onclick="return confirm('Are you sure? Once you delete the mod, it is gone forever without any way of getting it back.')" href="{% url 'mod:modDelete' pk=post.pk %}">Delete mod</a>
