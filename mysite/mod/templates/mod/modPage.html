@@ -89,7 +89,7 @@
                     document.getElementById("star{{ rating.ratingValue }}").checked = true;
                 }
                 if (ratingValue != 'None') {
-                    console.log('Already rated this mod with ' + {{ rating.ratingValue }});
+                    console.log('Already rated this mod with ' + '{{ rating.ratingValue }}');
                     document.getElementById("star{{ rating.ratingValue }}").checked = true;
                 }
                 document.getElementById("choice").value = "{{ rating.ratingChoice }}";

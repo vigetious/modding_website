@@ -1,5 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    {{ newMods }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/pages.css' %}">
+    <title>Home</title>
+    <p>News:</p>
+    <div class="adminNews">
+    {% for news in adminNews %}
+        {{ news.adminNewsUserID }}
+        {{ news.adminNewsText }}<br>
+    {% endfor %}
+    </div>
+    <p>New mods:</p>
+    {% for mod in newMods %}
+        {{ mod.modName }}
+        {{ mod.modDate }}<br>
+    {% endfor %}
+    <p>Highest rated mods:</p>
+    {% for mod in newMods|dictsortreversed:"modRating" %}
+        {{ mod.modName }}
+        {{ mod.modRating }}<br>
+    {% endfor %}
+    <p>Most reviewed mods:</p>
+    {% for mod in newMods|dictsortreversed:"modReviewCount" %}
+        {{ mod.modName }}
+        {{ mod.modReviewCount }}<br>
+    {% endfor %}
+    <iframe src="https://discordapp.com/widget?id=105625183250812928&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
 {% endblock %}

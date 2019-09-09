@@ -12,6 +12,7 @@
 {% if user.is_authenticated %}
     <p>Username: {{ user.username }}</p>
     <p>Password: {{ user.email }}</p>
+    <a href="{% url 'accounts:played' %}">Played list</a>
     <p>Total comments: {{ user.totalComments }}</p>
     <p>Total mods: {{ user.totalMods }}</p>
     <p>Mods list: </p>

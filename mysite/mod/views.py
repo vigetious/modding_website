@@ -261,7 +261,7 @@ def rating(request, pk):
         )
 
 
-def ratingDelete(request, pk):
+def ratingDelete(request):
     if request.method == 'POST':
         ratingID = request.POST.get('ratingID')
 

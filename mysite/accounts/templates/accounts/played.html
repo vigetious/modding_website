@@ -1,21 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-    <title>Played</title>
+    <title>My Played</title>
     <table>
+    <p>Share this list with your friends: </p>
     <tr>
         <th>Avatar</th>
         <th>Mod name</th>
         <th>Your rating</th>
         <th>Played status</th>
         <th>Mod status</th>
+        <th>Delete rating</th>
     </tr>
     {% for x in post %}
-        <tr>
+        <tr id="rating{{ x.ratingID }}">
             <td><img src="{{ x.ratingAvatar }}"></td>
             <td><a href="../../mod/{{ x.ratingModID|stringformat:'i' }}">{{ x.ratingModID }}</a></td>
             <td>{{ x.ratingValue }}</td>
             <td>{{ x.ratingChoice }}</td>
             <td>{{ x.ratingStatus }}</td>
+            {% if user == x.ratingAuthorID %}
+                <td><input type="button" id="rating{{ x.ratingID }}Delete" value="Delete" onclick="deleteRatingButton({{ x.ratingID }})"></td>
+            {% else %}
+                ye
+            {% endif %} <!-- you dont really need this do you since its going to be unique anyway -->
         </tr>
     {% endfor %}
     </table>

@@ -26,8 +26,13 @@
     <div class="topMenu">
         <a class="logo" href="" title="Title">Title</a> <!-- image later on -->
         <div class="topNav">
-            <a class="login" href="{% url 'login' %}">Login</a>
-            <a class="register" href="{% url 'accounts:signup' %}" title="register">Register</a>
+            {% if user.is_authenticated %}
+                Welcome, {{ user }} <!-- SORT THIS OUT -->
+                <a class="login" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a class="login" href="{% url 'login' %}">Login</a>
+                <a class="register" href="{% url 'accounts:signup' %}" title="register">Register</a>
+            {% endif %}
         </div>
         <div class="topMiddleNav">
             <a href="">Donate</a>

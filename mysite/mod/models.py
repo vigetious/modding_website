@@ -50,7 +50,6 @@ class Mod(models.Model):
     modAuthor = models.ForeignKey('accounts.User', on_delete=models.CASCADE, to_field='id')
     modDate = models.DateTimeField("mod publish date", null=True)
     modUpdate = models.DateTimeField("mod most recent update date")
-    modDownloads = models.IntegerField('', null=True, blank=True)
     modStatus = models.CharField(choices=statusChoices, default=statusChoices[0], max_length=100)
     modName = models.CharField("mod name", max_length=100)
     modDescription = models.CharField("mod description", max_length=10000)
@@ -81,6 +80,11 @@ class Mod(models.Model):
             instance = self._meta.default_manager.with_documents().get(pk=self.pk)
             instance.modSearch = instance.document
             instance.save(update_fields=['modSearch'])
+
+    def getReviewCount(self):
+        return ReviewRating.objects.filter(reviewModID=self.modID).count()
+
+    modReviewCount = property(getReviewCount)
 
     class Meta:
         indexes = [

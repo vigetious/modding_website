@@ -145,14 +145,21 @@ function ratingSubmit(modID, radioValue, selectedChoice) {
     })
 }
 
-function deleteRating() {
-    console.log("Deleting rating for " + modID);
-    console.log('Deleting rating ' + window.ratingID);
+function deleteRatingButton(ratingID) {
+    $('#rating' + ratingID + 'Delete').off('click');
+    deleteRating(ratingID);
+    $('#rating' + ratingID).remove()
+}
+
+
+
+function deleteRating(ratingID) {
+    console.log('Deleting rating ' + ratingID);
     $.ajax({
         url: 'ratingdelete/',
         type: 'POST',
         data: {
-            ratingID: window.ratingID,
+            ratingID: ratingID,
             csrfmiddlewaretoken: csrftoken
         },
 

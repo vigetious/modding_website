@@ -116,6 +116,11 @@ def played(request):
     return render(request, 'accounts/played.html', {'post': post})
 
 
+def userPlayed(request, pk):
+    post = Rating.objects.filter(ratingAuthorID=pk)
+    return render(request, 'accounts/userPlayed.html', {'post': post})
+
+
 
 #class SignUp(generic.CreateView):
 #    form_class = SignUp
