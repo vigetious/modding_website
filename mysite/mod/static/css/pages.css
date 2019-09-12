@@ -1,4 +1,134 @@
+.top {
+    display: inline-block;
+    width: 100%;
+}
+
+.top iframe {
+    float: right;
+}
+
 .adminNews {
-    overflow: scroll;
-    height: 100px;
+    overflow-y: scroll;
+    height: 500px;
+    width: 60%;
+    float: left;
+}
+
+.homeMods {
+    padding-top: 10px;
+}
+
+.discord {
+    float: right;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+
+.navbar {
+    overflow-y: hidden;
+}
+
+.tab a {
+    float: left;
+    border: none;
+    outline: none;
+    padding: 14px 16px;
+}
+
+.tab button:hover {
+
+}
+
+.tab button:active {
+
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border-top: none;
+}
+
+.tabContentValue {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center;
+}
+
+.tabContentValue li {
+    display: inline-block;
+    width: 200px;
+    height: 400px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #a4d5ff;
+}
+
+.tabContentValue p {
+    text-align: center;
+    overflow: hidden;
+    color: #38434c;
+    margin: 0;
+}
+
+.tabContentValue a {
+
+}
+
+.modAvatar {
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+}
+
+.modAvatar img {
+    vertical-align: middle;
+}
+
+.modData {
+    height: 10%;
+    white-space: nowrap;
+    padding: 5px 5px;
+    background-color: #8acaff;
+    box-shadow: 0 10px 10px 0 #8acaff;
+}
+
+.modData p {
+    color: #38434c;
+    margin: 0;
+}
+
+.modData a {
+    color: #38434c;
+}
+
+.modData-name {
+    font-size: 20px;
+}
+
+.modData-date {
+    font-size: 12px;
+}
+
+.modDescription {
+    font-size: 13px;
+    height: 40%;
+    border-top: 1px black;
+    padding: 5px 5px;
+}
+
+.modDescription p {
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

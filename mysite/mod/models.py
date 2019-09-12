@@ -52,7 +52,9 @@ class Mod(models.Model):
     modUpdate = models.DateTimeField("mod most recent update date")
     modStatus = models.CharField(choices=statusChoices, default=statusChoices[0], max_length=100)
     modName = models.CharField("mod name", max_length=100)
-    modDescription = models.CharField("mod description", max_length=10000)
+    modDescription = models.CharField("mod description", max_length=10000,
+                                      help_text="We advise adding a small description at the start, so that users see"
+                                                " a small description when searching for your mod. More advice.")
     modWebsite = models.CharField("mod website", max_length=100, blank=True)
     tags = TaggableManager()
     modCreditPerms = models.CharField("mod credits and permissions", max_length=1000, blank=True)
@@ -67,9 +69,12 @@ class Mod(models.Model):
     modRating = models.FloatField('mod average rating', blank=True, null=True, default=0)
     modBackground = models.ImageField('mod background image', upload_to=mod_image_directory_path, blank=True)
     modBackgroundTiledStretch = models.CharField('mod background tiled or stretch', choices=tiledStretchedChoices,
-                                                     default=tiledStretchedChoices[0], max_length=100)
+                                                     default=tiledStretchedChoices[0], max_length=100,
+                                                 help_text="What is tiled and/or stretched?")
     modAvatar = ThumbnailerImageField('mod avatar image', upload_to=mod_image_directory_path, blank=True,
-                                      resize_source=dict(size=(100, 100), sharpen=True))
+                                      resize_source=dict(size=(200, 200), sharpen=True, upscale=True),
+                                      help_text="Recommended size is 200x200. Make sure the background is transparent,"
+                                                " as well.")
 
 
     objects = ModManager()

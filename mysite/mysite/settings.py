@@ -183,11 +183,11 @@ MAX_BACKGROUND_UPLOAD_SIZE = 20971520
 
 THUMBNAIL_ALIASES = {
     'mod': {
-        'avatar': {'size': {100, 100}, 'crop': 'smart', 'autocrop': True}
+        'avatar': {'size': {200, 200}, 'crop': 'smart', 'autocrop': True}
     }
 }
 
-AVATAR_AUTO_GENERATE_SIZES = (100,)
+AVATAR_AUTO_GENERATE_SIZES = (200,)
 
 AVATAR_EXPOSE_USERNAMES = False
 
