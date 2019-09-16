@@ -24,7 +24,8 @@ class SubmitForm(forms.ModelForm):
         model = Mod
         fields = ('modID', 'modName', 'modStatus', 'modDescription', 'modWebsite', 'tags', 'modCreditPerms',
                   'modDonations', 'modDiscord', 'modUpload', 'modUploadURL', 'modPlayTimeHours', 'modPlayTimeMinutes',
-                  'modBackground', 'modBackgroundTiledStretch', 'modAvatar')
+                  'modPreviewVideo', 'modPreviewImage1', 'modPreviewImage2', 'modPreviewImage3', 'modPreviewImage4',
+                  'modPreviewImage5', 'modBackground', 'modBackgroundTiledStretch', 'modAvatar')
 
 
 class ReviewForm(forms.ModelForm):

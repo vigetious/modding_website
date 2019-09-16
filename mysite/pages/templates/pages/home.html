@@ -11,8 +11,15 @@
     <div class="adminNews">
     <ul class="news">
     {% for news in adminNews %}
-        <li>{{ news.adminNewsUserID }}
-            {{ news.adminNewsText }}<br></li>
+        <li>
+            <div class="newsUserBar">
+                <p class="newsUser">{{ news.adminNewsUserID}}</p>
+                <p class="newsDate">{{ news.adminNewsDate }}</p>
+            </div>
+            <div class="newsContent">
+                {{ news.adminNewsText|safe }}
+            </div>
+        </li>
     {% endfor %}
     </ul>
     </div>

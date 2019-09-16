@@ -24,10 +24,10 @@
 <!-- Add your site or application content here -->
 <div class="pagewrap">
     <div class="topMenu">
-        <a class="logo" href="" title="Title">Title</a> <!-- image later on -->
+        <a class="logo" href="{% url 'home' %}" title="Title"><img src="{% static 'img/Title.png' %}" alt="Title"></a> <!-- image later on -->
         <div class="topNav">
             {% if user.is_authenticated %}
-                Welcome, {{ user }} <!-- SORT THIS OUT -->
+                <p>Welcome, {{ user }}</p>
                 <a class="login" href="{% url 'logout' %}">Logout</a>
             {% else %}
                 <a class="login" href="{% url 'login' %}">Login</a>

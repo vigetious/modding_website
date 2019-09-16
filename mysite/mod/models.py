@@ -13,6 +13,7 @@ from django.conf import settings
 from taggit.managers import TaggableManager
 import django_filters
 from easy_thumbnails.fields import ThumbnailerImageField
+from embed_video.fields import EmbedVideoField
 
 # Create your models here.
 
@@ -22,6 +23,9 @@ def mod_directory_path(instance, filename):
 
 def mod_image_directory_path(instance, filename):
     return 'files/user_{0}/mods/{1}/images/{2}'.format(instance.modAuthor.id, instance.modID, filename)
+
+def mod_preview_image_directory_path(instance, filename):
+    return 'files/user_{0}/mods/{1}/images/previews/{2}'.format(instance.modAuthor.id, instance.modID, filename)
 
 
 class ModManager(models.Manager):
@@ -67,6 +71,12 @@ class Mod(models.Model):
     modPlayTimeMinutes = models.IntegerField('mod average playtime minutes', blank=True, null=True, default=0)
     modSearch = SearchVectorField(null=True)
     modRating = models.FloatField('mod average rating', blank=True, null=True, default=0)
+    modPreviewVideo = EmbedVideoField()
+    modPreviewImage1 = models.ImageField('mod preview image 1', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage2 = models.ImageField('mod preview image 2', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage3 = models.ImageField('mod preview image 3', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage4 = models.ImageField('mod preview image 4', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage5 = models.ImageField('mod preview image 5', upload_to=mod_preview_image_directory_path, blank=True)
     modBackground = models.ImageField('mod background image', upload_to=mod_image_directory_path, blank=True)
     modBackgroundTiledStretch = models.CharField('mod background tiled or stretch', choices=tiledStretchedChoices,
                                                      default=tiledStretchedChoices[0], max_length=100,

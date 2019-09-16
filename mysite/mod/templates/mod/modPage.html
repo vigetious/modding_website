@@ -1,12 +1,13 @@
+
+{% extends 'base.html' %}
 {% load taggit_templatetags2_tags %}
 {% load likes_inclusion_tags %}
 {% load thumbnail %}
+{% load embed_video_tags %}
 {% load static %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
-<link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-{% block title %}Mod details{% endblock %}
+
 <script>
     var counter = 0;
 
@@ -42,6 +43,60 @@
 </script>
 
 {% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/modPage.css' %}">
+    <title>{{ post.modName }}</title>
+    <div class="modName">
+        <p>{{ post.modName }}</p>
+    </div>
+
+    <div class="screenshotVideo">
+        <div class="screenshotVideoContent">
+            {% if post.modPreviewVideo is not 0 %}
+                <div class="mySlides">{% video post.modPreviewVideo '620x350' %}</div>
+            {% endif %}
+            {% if post.modPreviewImage1.url.length is not 0 %}
+                <img class="mySlides" src={{ post.modPreviewImage1.url }} alt="Preview Image 1" style="display:none">
+            {% endif %}
+            {% if post.modPreviewImage2.url.length is not 0 %}
+                <img class="mySlides" src={{ post.modPreviewImage2.url }} alt="Preview Image 2" style="display:none">
+            {% endif %}
+            {% if post.modPreviewImage3.url.length is not 0 %}
+                <img class="mySlides" src={{ post.modPreviewImage3.url }} alt="Preview Image 3" style="display:none">
+            {% endif %}
+            {% if post.modPreviewImage4.url.length is not 0 %}
+                <img class="mySlides" src={{ post.modPreviewImage4.url }} alt="Preview Image 4" style="display:none">
+            {% endif %}
+            {% if post.modPreviewImage5.url.length is not 0 %}
+                <img class="mySlides" src={{ post.modPreviewImage5.url }} alt="Preview Image 5" style="display:none">
+            {% endif %}
+        </div>
+        <div class="screenshotVideoBar">
+            <ul>
+                {% if post.modPreviewVideo is not 0 %}
+                    {% video post.modPreviewVideo as modPreviewVideo %}
+                        <li><img src={{ modPreviewVideo.thumbnail }} onclick="currentDiv(1)"></li>
+                    {% endvideo %}
+                {% endif %}
+                {% if post.modPreviewImage1.url.length is not 0 %}
+                    <li><img src={{ post.modPreviewImage1.url }} onclick="currentDiv(2)"></li>
+                {% endif %}
+                {% if post.modPreviewImage2.url.length is not 0 %}
+                    <li><img src={{ post.modPreviewImage2.url }} onclick="currentDiv(3)"></li>
+                {% endif %}
+                {% if post.modPreviewImage3.url.length is not 0 %}
+                    <li><img src={{ post.modPreviewImage3.url }} onclick="currentDiv(4)"></li>
+                {% endif %}
+                {% if post.modPreviewImage4.url.length is not 0 %}
+                    <li><img src={{ post.modPreviewImage4.url }} onclick="currentDiv(5)"></li>
+                {% endif %}
+                {% if post.modPreviewImage5.url.length is not 0 %}
+                    <li><img src={{ post.modPreviewImage5.url }} onclick="currentDiv(6)"></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+    <img src={{ post.modAvatar.url }} alt="ye">
+    <h1>----------- IGNORE BELOW THIS LINE ------------</h1>
     Title of mod: {{ post.modName }}<br>
     Date of mod: {{ post.modDate }}<br>
     Average rating: {{ post.modRating }}<br>

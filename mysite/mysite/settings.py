@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'easy_thumbnails',
     'avatar',
     'pages.apps.PagesConfig',
+    'embed_video',
 ]
 
 MIDDLEWARE = [
