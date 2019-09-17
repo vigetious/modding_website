@@ -2,6 +2,7 @@
     width: 70%;
     height: 450px;
     background-color: #8acaff;
+    float: left;
 }
 
 .screenshotVideoContent {
@@ -39,4 +40,158 @@
 .screenshotVideoContent img {
     max-width: 100%;
     max-height: 100%;
+}
+
+.rightModData {
+    width: 30%;
+    height: 450px;
+    display: inline-block;
+    background-color: #8acaff;
+}
+
+.rightModDataAvatar {
+    padding: 10px 10px;
+    height: 40%;
+}
+
+.rightModDataAvatar img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+}
+
+.rightModDataText li {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5px;
+}
+
+.rightModDataText p {
+    font-size: 12px;
+    display: inline;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.tags {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rightModDataDescription {
+    height: 27%;
+    margin: 0;
+}
+
+.rightModDataDescription p {
+    margin: 0;
+    font-size: 12px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.modDownload {
+    width: 99%;
+    height: 50px;
+    background-color: #8acaff;
+    padding-bottom: 10px;
+    line-height: 55px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.modDownloadRight {
+    float: right;
+    vertical-align: middle;
+}
+
+.modMainContent {
+    width: 70%;
+    min-height: 400px;
+    background-color: red;
+    float: left;
+}
+
+.modSideContent {
+    width: 30%;
+    min-height: 400px;
+    max-height: 800px;
+    background-color: blue;
+    display: inline-block;
+    overflow: auto;
+}
+
+.modRating {
+    display: inline-block;
+    padding-left: 5px;
+    border: 2px solid black;
+}
+
+.modRating p {
+    margin: 0;
+}
+
+.modReview {
+    width: 100%;
+    display: inline-block;
+    background-color: purple;
+}
+
+.rating {
+    float:left;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #00b3ff;
+    text-shadow:1px 1px #00b3ff, 2px 2px #006b99, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #008fcc;
+    text-shadow:1px 1px #008fcc, 2px 2px #006b99, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #008fcc;
+    text-shadow:1px 1px #008fcc, 2px 2px #006b99, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
 }

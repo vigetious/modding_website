@@ -57,8 +57,12 @@ class Mod(models.Model):
     modStatus = models.CharField(choices=statusChoices, default=statusChoices[0], max_length=100)
     modName = models.CharField("mod name", max_length=100)
     modDescription = models.CharField("mod description", max_length=10000,
-                                      help_text="We advise adding a small description at the start, so that users see"
-                                                " a small description when searching for your mod. More advice.")
+                                      help_text="You can format the description using HTML tags. For example, you can "
+                                                "use <h1>Header</h1> to create larger text, usually used for headers. "
+                                                "Click here to find out some of the other useful tags.")
+    modShortDescription = models.CharField("mod short description", max_length=250,
+                                           help_text="This should be short version of the above. Please keep it down to"
+                                                     " a few short sentences.", blank=True)
     modWebsite = models.CharField("mod website", max_length=100, blank=True)
     tags = TaggableManager()
     modCreditPerms = models.CharField("mod credits and permissions", max_length=1000, blank=True)
@@ -66,7 +70,7 @@ class Mod(models.Model):
     modDiscord = models.CharField("mod discord link", max_length=100, blank=True)
     modUpload = models.FileField(upload_to=mod_directory_path, blank=True, null=True,
                                  validators=[FileExtensionValidator(allowed_extensions=['zip', 'rar'])])
-    modUploadURL = models.URLField("mod upload destination", max_length=1000, blank=True)
+    modUploadURL = models.URLField("mod upload destination", max_length=1000)
     modPlayTimeHours = models.IntegerField('mod average playtime hours', blank=True, null=True, default=0)
     modPlayTimeMinutes = models.IntegerField('mod average playtime minutes', blank=True, null=True, default=0)
     modSearch = SearchVectorField(null=True)
@@ -123,6 +127,11 @@ class Mod(models.Model):
         try:
             if self.modAvatar.size > settings.MAX_AVATAR_UPLOAD_SIZE:
                 raise ValidationError('The avatar image cannot be larger than 10MB.')
+        except ValueError:
+            pass
+        try:
+            if len(self.modShortDescription) > 250:
+                raise ValidationError('The short description must be less than 250 letters.')
         except ValueError:
             pass
 
