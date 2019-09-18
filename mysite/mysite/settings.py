@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -209,3 +210,5 @@ AVATAR_CHANGE_TEMPLATE = "accounts/changeAvatar.html"
 AVATAR_DELETE_TEMPLATE = "accounts/deleteAvatar.html"
 
 AVATAR_GRAVATAR_DEFAULT = "retro"  # change this
+
+django_heroku.settings(locals())
