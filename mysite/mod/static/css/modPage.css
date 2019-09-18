@@ -1,3 +1,20 @@
+.modName {
+    width: 100%;
+}
+
+.modName h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    margin: 0;
+}
+
+.modName p {
+    display: inline-block;
+    text-align: right;
+    float: right;
+    margin: 0;
+}
+
 .screenshotVideo {
     width: 70%;
     height: 450px;
@@ -81,6 +98,14 @@
     text-overflow: ellipsis;
 }
 
+.tags a {
+    color: #313f4c;
+}
+
+.rightModDataText p a {
+    color: #313f4c;
+}
+
 .rightModDataDescription {
     height: 27%;
     margin: 0;
@@ -94,13 +119,14 @@
 }
 
 .modDownload {
-    width: 99%;
+    width: 100%;
     height: 50px;
     background-color: #8acaff;
-    padding-bottom: 10px;
-    line-height: 55px;
-    padding-left: 5px;
-    padding-right: 5px;
+    line-height: 50px;
+}
+
+.modDownload img {
+    vertical-align: middle;
 }
 
 .modDownloadRight {
@@ -111,33 +137,243 @@
 .modMainContent {
     width: 70%;
     min-height: 400px;
-    background-color: red;
+    background-color: #a4d5ff;
     float: left;
+    margin-top: 10px;
+}
+
+.modMainContent p {
+    margin-left: 5px;
+}
+
+.modMainContent span {
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 5px;
+}
+
+.modMainContent a {
+    color: #313f4c;
 }
 
 .modSideContent {
-    width: 30%;
+    width: 29%;
     min-height: 400px;
     max-height: 800px;
-    background-color: blue;
+    background-color: #add9ff;
     display: inline-block;
-    overflow: auto;
+    margin-top: 10px;
+    margin-left: 1%;
 }
 
 .modRating {
     display: inline-block;
     padding-left: 5px;
-    border: 2px solid black;
 }
 
 .modRating p {
+    font-size: 12px;
+    margin: 0 0 0 5px;
+}
+
+.modNotifications input {
+    margin-left: 5px;
+}
+
+.modNotifications p {
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.modNews p {
+    margin-left: 5px;
+}
+
+.news_div {
+    overflow: auto;
+    height: 495px;
+}
+
+.newsHeader {
+    display: inline-block;
+    background-color: #8acaff;
+    width: 100%;
     margin: 0;
+    padding: 5px 0px;
+}
+
+.newsHeader p {
+    margin: 0 0 0 5px;
+    vertical-align: top;
+    font-size: 12px;
+}
+
+.newsText p {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    font-size: 12px;
 }
 
 .modReview {
+    width: 70%;
+    display: inline-block;
+    background-color: #bde1ff;
+    margin-top: 10px;
+}
+
+.modReviewData {
+    width: 100%;
+    min-height: 200px;
+    background-color: #a4d5ff;
+}
+
+.modReviewCoreData {
+    background-color: #8acaff;
+    width: 20%;
+    height: 200px;
+    display: inline-block;
+}
+
+.modReviewCoreData p {
+    margin: 0;
+    float: right;
+}
+
+.modReviewCoreData input {
+    float: right;
+}
+
+.modReviewCommentHeader {
+    width: 79%;
+    height: 200px;
+    overflow: auto;
+    background-color: #8acaff;
+    float: right;
+    display: inline-block;
+    border-left: 2px solid transparent;
+}
+
+.modReviewHeader {
+    width: 80%;
+    height: 200px;
+    background-color: #8acaff;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    float: right;
+}
+
+.modReviewComment {
+    width: 100%;
+    height: 175px;
+    background-color: #a4d5ff;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    float: right;
+    overflow: auto;
+}
+
+.modReviewHeader p {
+    margin: 0;
+}
+
+.voteForm {
+    width: 35px;
+    height: 120px;
+    display: inline-block;
+    float: right;
+}
+
+.voteForm input {
+    background-color: #7cb5e5;
+    border: none;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+}
+
+.voteForm p {
+    text-align: right;
+}
+
+.upvoteReview {
+
+}
+
+.upvoted_review {
+    background-color: #993300;
+}
+
+.downvoteReview {
+
+}
+
+.downvoted_review {
+    background-color: #003366;
+}
+
+.deleteCommentBox {
     width: 100%;
     display: inline-block;
-    background-color: purple;
+}
+
+.deleteComment {
+    background-color: #7cb5e5;
+    border: none;
+    float: right;
+}
+
+.submitReview {
+    width: 100%;
+    height: 20%;
+    background-color: #a4d5ff;
+}
+
+.submitReview p {
+    display: inline;
+    margin-left: 15px;
+}
+
+.rulesSpan {
+    height: auto;
+    width: 75%;
+    font-size: 10px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline;
+    margin-left: 15px;
+}
+
+.submitReviewCommentForm textarea {
+    outline: none;
+    background-color: #e6f4ff;
+    font-family: inherit;
+    margin: 5px auto;
+    width: 90%;
+    height: 200px;
+    border: 2px solid #bde1ff;
+    padding: 8px 15px;
+    display: block;
+}
+
+.submitReviewCommentForm textarea:focus {
+    background-color: #eef8ff;
+}
+
+.reviewSubmit {
+    display: inline-block;
+    width: 100%;
+}
+
+.reviewSubmitButton {
+    float: right;
+    margin-right: 15px;
+}
+
+.newsForm input {
+    display: none;
+    margin-left: 5px;
 }
 
 .rating {

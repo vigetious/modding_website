@@ -188,7 +188,6 @@ body {
   float: right;
   overflow: hidden;
   font-size: 16px;
-  border: none;
   outline: none;
   background-color: #e6f4ff;
   font-family: inherit;
@@ -538,40 +537,11 @@ li a, .dropbtn {
   }
 }
 
-.upvote_review {
-    background-color: #4f4f4f;
-}
-
-.upvoted_review {
-    background-color: #993300;
-}
-
-.downvote_review {
-    background-color: #4f4f4f;
-}
-
-.downvoted_review {
-    background-color: #003366;
-}
-
-.deleteComment {
-  background-color: red;
-}
 
 .progressBar {
   background-color: pink;
   color: #5E5694;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
-}
-
-
-
-
-
-
-.news_div {
-    border: 1px solid black;
-    display: inline-block;
 }
 
 

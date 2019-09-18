@@ -43,13 +43,14 @@
 </script>
 
 {% block content %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/modPage.css' %}">
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <title>{{ post.modName }}</title>
     <div class="modName">
-        <p>{{ post.modName }}</p>
+        <h1>{{ post.modName }}</h1>
         {% if post.modAuthor == user %}
-        <a href="{%  url 'mod:modEdit' pk=post.pk %}">Edit</a>
+            <p><a href="{%  url 'mod:modEdit' pk=post.pk %}">Edit</a></p>
         {% endif %}
     </div>
 
@@ -143,16 +144,16 @@
     <div class="modMainContent">
         <p>Description:</p>
         <p>{{ post.modDescription|safe }}</p>
-        <p>All tags:</p>
-        <p>    Tags of mod: {% get_tags_for_object post as "tags" %}
+        <p>Tags of mod:</p>
+        {% get_tags_for_object post as "tags" %}
             {% for tag in tags %}
-                <a href="{% url 'mod:modSearch' %}?tags={{ tag }}">{{ tag }}</a>
-            {% endfor %}</p>
+                <span><a href="{% url 'mod:modSearch' %}?tags={{ tag }}">{{ tag }}</a></span>
+            {% endfor %}
     </div>
     <div class="modSideContent">
         <div class="modRating">
             {% if user.is_authenticated %}
-                <p>Add to played list:</p>
+                <p id="rate">Add to played list:</p>
                 <div>
                     <fieldset id="rating" class="rating">
                         <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
@@ -204,9 +205,16 @@
             {% endif %}
         </div>
     <div>
-        Receive e-mail updates about this mod? <input type="button" id="notifications-no" value="Follow" onclick="followYes({{ post.modID }})" class="notifications-no"><br>
+    <div class="modNotifications">
+        <p>Receive e-mail updates about this mod?</p>
+        {% if user.is_authenticated == False %}
+            <input type="button" value="Follow" onclick="notLoggedIn()" class="notifications-no"><br>
+        {% endif %}
+        {% if user.is_authenticated %}
+            <input type="button" id="notifications-no" value="Follow" onclick="followYes({{ post.modID }})" class="notifications-no"><br>
+        {% endif %}
         <script>
-            if (newsNotificationsModID === modName && newsNotificationsUserID === user) {
+            if ({{ newsnotifications.newsNotificationsModID|stringformat:'i' }} === {{ post.modID }} && '{{ newsnotifications.newsNotificationsUserID }}' === '{{ user }}') {
                 $('#notifications-no').attr({
                     "id": "notifications-yes",
                     "class": "notifications-yes",
@@ -216,13 +224,17 @@
             }
         </script>
     </div>
+    </div>
     <div>
         {% if post.modAuthor == user %}
-            <form method="post" enctype="multipart/form-data" id="news">
-                <input type="text" id="news_text" placeholder="Enter your news here...">
-                <input type="button" id="news_button" onclick="news()" value="Submit">
-                <p id="news_alert"></p>
-            </form>
+            <input  style="margin-left: 5px" type="button" id="showNews" onclick="showNews()" value="Create news">
+            <div class="newsForm" id="newsForm">
+                <form method="post" enctype="multipart/form-data" id="news">
+                    <input type="text" id="news_text" placeholder="Enter your news here...">
+                    <input type="button" id="news_button" onclick="news()" value="Submit">
+                    <p id="news_alert"></p>
+                </form>
+            </div>
             <script>
                 function news() {
                     if ($("#news_text").val() === '') {
@@ -235,36 +247,76 @@
                 }
             </script>
         {% endif %}
-        <h2>News:</h2>
-        {% for news in news %}
+        <div class="modNews">
+            <p>News:</p>
             <div class="news_div">
-                {{ news.newsID }}<br>
-                {{ news.newsDate }}<br>
-                {{ news.newsText }}
+            {% for news in news %}
+                    <div class="newsHeader">
+                        <p>{{ news.newsID }} | {{ news.newsDate }}</p>
+                    </div>
+                    <div class="newsText"><p>{{ news.newsText }}</p></div>
+            {% endfor %}
             </div>
-        {% endfor %}
+        </div>
     </div>
     </div>
     <div class="modReview">
         {% for review in review %}
             <div id="review{{ review.reviewid }}">
-                <p>Review votes: </p><p id="reviewVotes{{ review.reviewid }}">{{ review.reviewVotes }}</p>
-                <p>Review ID: {{ review.reviewid }}</p>
-                <p>Review by: {{ review.reviewAuthorID }}</p>
-                <p>Current user: {{ user }}</p>
+                <div class="modReviewData">
+                    <div class="modReviewCoreData">
+                        <p>{{ review.reviewAuthorID }}</p><br>
+                        {% if user.is_authenticated %}
+                            <form method="post" id="upvote_review" class="voteForm">
+                                {% csrf_token %}
+                                <input type="button" id="upvote_review_{{ review.reviewid }}" class="upvoteReview" value="+"><br>
+                                <p id="reviewVotes{{ review.reviewid }}">{{ review.reviewVotes }}</p><br>
+                                <input type="button" id="downvote_review_{{ review.reviewid }}" class="downvoteReview" value="-"><br>
+                            </form>
+                        {% endif %}
+                        {% if user.is_authenticated == False %}
+                            <form class="voteForm">
+                                <input type="button" onclick="notLoggedIn()" class="upvoteReview" value="+"><br>
+                                <p id="reviewVotes{{ review.reviewid }}">{{ review.reviewVotes }}</p><br>
+                                <input type="button" onclick="notLoggedIn()" class="downvoteReview" value="-"><br>
+                            </form>
+                        {% endif %}
+                            {% if user == review.reviewAuthorID %}
+                                <div class="deleteCommentBox">
+                                <form method="POST" id="deleteReview">
+                                    <input type="button" id="deleteReview{{ review.reviewid }}" class="deleteComment" value="Delete">
+                                </form>
+                                </div>
+                                <script>
+                                    $('#deleteReview{{ review.reviewid }}').on('click', deleteComment)
+
+                                    function deleteComment() {
+                                        event.preventDefault();
+                                        if (confirm('Are you sure you want to delete the review?')) {
+                                            console.log("Deleting comment " + {{ review.reviewid }});
+                                            deleteComment({{ review.reviewid }});
+                                            $("#review{{ review.reviewid }}").remove();
+                                        }
+                                    }
+                                </script>
+                            {% endif %}
+                    </div>
+                    <div class="modReviewHeader">
+                        <p>{{ review.reviewid }} | {{ review.reviewDate }}</p>
+                        <div class="modReviewComment">
+                            <p>{{ review.reviewComment }}</p>
+                        </div>
+                    </div>
+
+                </div>
                 {% if user.is_authenticated %}
-                    <form method="post" id="upvote_review">
-                        {% csrf_token %}
-                        <input type="button" id="upvote_review_{{ review.reviewid }}" class="upvote_review" value="Upvote">
-                        <input type="button" id="downvote_review_{{ review.reviewid }}" class="downvote_review" value="Downvote">
-                    </form>
                     {% for vote in vote %}
                         {% if review.reviewid|stringformat:"i" == vote.voteReviewID|stringformat:"i" and vote.voteAuthor == user|stringformat:"s" and vote.voteValue == 1 %}
                             <script>
                                 $('#upvote_review_{{ review.reviewid }}').attr({
                                     "id": "upvoted_review_{{ review.reviewid }}",
                                     "class": "upvoted_review",
-                                    "value": "Upvoted!"
+                                    "value": "+"
                                 });
                             </script>
                         {% endif %}
@@ -273,7 +325,7 @@
                                 $('#downvote_review_{{ review.reviewid }}').attr({
                                     "id": "downvoted_review_{{ review.reviewid }}",
                                     "class": "downvoted_review",
-                                    "value": "Downvoted!"
+                                    "value": "-"
                                 });
                             </script>
                         {% endif %}
@@ -313,7 +365,7 @@
 
                             $(this).off('click').on('click', upvoteSecondClick);
                             $(this).attr('class', 'upvoted_review');
-                            $(this).attr('value', 'upvoted!');
+                            $(this).attr('value', '+');
                             $(this).attr('id', 'upvoted_review_{{ review.reviewid }}')
                         }
 
@@ -326,7 +378,7 @@
 
                             $(this).off('click').on('click', upvoteFirstClick);
                             $(this).attr('class', 'upvote_review');
-                            $(this).attr('value', 'upvote');
+                            $(this).attr('value', '+');
                             $(this).attr('id', 'upvote_review_{{ review.reviewid }}');
                         }
 
@@ -348,7 +400,7 @@
 
                             $(this).off('click').on('click', downvoteSecondClick);
                             $(this).attr('class', 'downvoted_review');
-                            $(this).attr('value', 'downvoted!');
+                            $(this).attr('value', '-');
                             $(this).attr('id', 'downvoted_review_{{ review.reviewid }}');
                         }
 
@@ -361,48 +413,37 @@
 
                             $(this).off('click').on('click', downvoteFirstClick);
                             $(this).attr('class', 'downvote_review');
-                            $(this).attr('value', 'downvote');
+                            $(this).attr('value', '-');
                         }
                     }
                 </script>
                 <br>
-                {{ review.reviewComment }}<br>
-                {{ review.reviewDate }}
-                {{ review.vote_total }}
-                {% if request.user|stringformat:"s" == review.reviewAuthor|stringformat:"s" %}
-                    <form method="POST" id="deleteReview">
-                        <input type="button" id="deleteReview{{ review.reviewid }}" class="deleteComment" value="Delete Comment">
-                    </form>
-                    <script>
-                        $('#deleteReview{{ review.reviewid }}').on('click', deleteComment)
 
-                        function deleteComment() {
-                            event.preventDefault();
-                            if (confirm('Are you sure you want to delete the review?')) {
-                                console.log("Deleting comment " + {{ review.reviewid }});
-                                deleteComment({{ review.reviewid }});
-                                $("#review{{ review.reviewid }}").remove();
-                            }
-                        }
-                    </script>
-                {% endif %}
                 {% if user.is_authenticated %}
                     <form method="post" enctype="multipart/form-data" name="voting">
-
                     </form>
                 {% endif %}
             </div>
         {% endfor %}
-
-        {% if user.is_authenticated %}
-            <form method="post" enctype="multipart/form-data" name="comment">
-                {% csrf_token %}
-                {{ commentForm.as_p }}
-                <input type="submit" value="submit">
-            </form>
-        {% endif %}
+        <div class="submitReview">
+            {% if user.is_authenticated %}
+                <form method="post" enctype="multipart/form-data" name="comment">
+                    {% csrf_token %}
+                    <p>Would you like to review this mod?</p>
+                   <span class="rulesSpan">Click here to view the rules</span>
+                    <!--<p>Please:</p>
+                    <p>1. Don't be too harsh, constructive criticism is usually welcomed by mod developers but being needlessly critical towards a mod can be seen as being rude.</p>
+                    <p>2. Advertising your own content of the mod is allowed (YouTube video, twitch stream), but please also add a quick review, not just a link to your content.</p>-->
+                    <div class="submitReviewCommentForm">{{ commentForm.reviewComment|safe }}</div>
+                    <div class="reviewSubmit"><p>Don't forget to also <a href="#rate">rate</a> the mod!</p><input class="reviewSubmitButton" type="submit" value="submit"></div>
+                </form>
+            {% endif %}
+        </div>
     </div>
-    <h1>----------- IGNORE BELOW THIS LINE ------------</h1>
+
+
+
+
     {% if post.modBackground.url.length is not 0 %}
         {% if post.modBackgroundTiledStretch == 'Tiled' %}
             <style>

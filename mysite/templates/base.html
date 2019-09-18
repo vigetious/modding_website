@@ -27,7 +27,7 @@
         <a class="logo" href="{% url 'home' %}" title="Title"><img src="{% static 'img/Title.png' %}" alt="Title"></a> <!-- image later on -->
         <div class="topNav">
             {% if user.is_authenticated %}
-                <p>Welcome, {{ user }}</p>
+                <p>Welcome, <a href="{% url 'accounts:profile' %}">{{ user }}</a></p>
                 <a class="login" href="{% url 'logout' %}">Logout</a>
             {% else %}
                 <a class="login" href="{% url 'login' %}">Login</a>

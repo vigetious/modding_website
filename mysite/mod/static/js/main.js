@@ -334,3 +334,14 @@ function showDivs(n) {
     }
     x[slideIndex-1].style.display = "block";
 }
+
+function notLoggedIn() {
+    window.alert("You must be logged in to do this!")
+}
+
+// MOD PAGE SPECIFIC
+
+function showNews() {
+    $('#newsForm').show(500);
+    $('#showNews').remove();
+}

@@ -29,6 +29,8 @@ class SubmitForm(forms.ModelForm):
 
 
 class ReviewForm(forms.ModelForm):
+    reviewComment = forms.CharField(widget=forms.Textarea)
+
     class Meta:
         model = ReviewRating
         fields = ('reviewid', 'reviewComment')

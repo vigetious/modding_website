@@ -66,7 +66,7 @@ def submit(request):
 def modPage(request, pk):
     post = get_object_or_404(Mod, pk=pk)
     review = ReviewRating.objects.filter(reviewModID=post.modID)
-    vote = Vote.objects.all()
+    vote = Vote.objects.all() # dont need to pass all
     if request.user.is_authenticated:
         try:
             rating = Rating.objects.get(ratingAuthorID=request.user, ratingModID=post.modID)
@@ -89,7 +89,7 @@ def modPage(request, pk):
     else:
         newsnotifications = None
 
-    emails = get_user_model().objects.all()
+    emails = get_user_model().objects.all() # czech it
 
     if request.method == 'POST':
         commentForm = ReviewForm(request.POST)
