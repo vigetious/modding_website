@@ -109,6 +109,7 @@
 .rightModDataDescription {
     height: 27%;
     margin: 0;
+    overflow: auto;
 }
 
 .rightModDataDescription p {
@@ -348,7 +349,7 @@
 .submitReviewCommentForm textarea {
     outline: none;
     background-color: #e6f4ff;
-    font-family: inherit;
+    font-family: Arial, Helvetica, sans-serif;
     margin: 5px auto;
     width: 90%;
     height: 200px;

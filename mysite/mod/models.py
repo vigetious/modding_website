@@ -10,7 +10,8 @@ from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from taggit.managers import TaggableManager
+#from taggit.managers import TaggableManager
+from taggit_selectize.managers import TaggableManager
 import django_filters
 from easy_thumbnails.fields import ThumbnailerImageField
 from embed_video.fields import EmbedVideoField

@@ -8,4 +8,5 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path(r'^taggit/', include('taggit_selectize.urls')),
 ]

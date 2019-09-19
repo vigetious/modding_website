@@ -21,11 +21,12 @@ from django_filters.views import FilterView
 from taggit.models import Tag
 
 from .forms import SubmitForm, ReviewForm, VoteForm, NewsForm
-from .models import Mod, ReviewRating, Vote, Rating, News, NewsNotifications #, ModFilter
+from .models import Mod, ReviewRating, Vote, Rating, News, NewsNotifications  # , ModFilter
 from .scripts import moveMod
 from .operations.mail import notificationsSendMail
 
 from accounts.models import User
+
 
 # Create your views here.
 
@@ -66,7 +67,7 @@ def submit(request):
 def modPage(request, pk):
     post = get_object_or_404(Mod, pk=pk)
     review = ReviewRating.objects.filter(reviewModID=post.modID)
-    vote = Vote.objects.all() # dont need to pass all
+    vote = Vote.objects.all()  # dont need to pass all
     if request.user.is_authenticated:
         try:
             rating = Rating.objects.get(ratingAuthorID=request.user, ratingModID=post.modID)
@@ -89,14 +90,14 @@ def modPage(request, pk):
     else:
         newsnotifications = None
 
-    emails = get_user_model().objects.all() # czech it
+    emails = get_user_model().objects.all()  # czech it
 
     if request.method == 'POST':
         commentForm = ReviewForm(request.POST)
         if commentForm.is_valid():
             postReview = commentForm.save(commit=False)
             postReview.reviewModID = Mod.objects.get(modID=post.modID)
-            #postReview.reviewAuthor = request.user
+            # postReview.reviewAuthor = request.user
             postReview.reviewAuthorID = request.user
             postReview.save()
             user = User.objects.get(id=request.user.id)
@@ -124,9 +125,11 @@ def reviewUpVote(request, pk):
         reviewrating.save()
         group = Group.objects.get(name="Well respected")
         if allVotes >= 10:
-            group.user_set.add(reviewrating.reviewAuthorID)#User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+            group.user_set.add(
+                reviewrating.reviewAuthorID)  # User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
         else:
-            group.user_set.remove(reviewrating.reviewAuthorID)#User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+            group.user_set.remove(
+                reviewrating.reviewAuthorID)  # User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
         response_data['result'] = "Successfully upvoted review " + request_getdata
 
         return HttpResponse(
@@ -153,9 +156,11 @@ def reviewRemoveVote(request, pk):
         reviewrating.save()
         group = Group.objects.get(name="Well respected")
         if allVotes >= 10:
-            group.user_set.add(reviewrating.reviewAuthorID)#User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+            group.user_set.add(
+                reviewrating.reviewAuthorID)  # User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
         else:
-            group.user_set.remove(reviewrating.reviewAuthorID)#User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+            group.user_set.remove(
+                reviewrating.reviewAuthorID)  # User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
         response_data['result'] = "Successfully removed vote from review " + request_getdata
 
         return HttpResponse(
@@ -168,6 +173,7 @@ def reviewRemoveVote(request, pk):
             content_type="application/json"
         )
 
+
 @login_required
 def reviewDownVote(request, pk):
     if request.method == 'POST':
@@ -177,15 +183,18 @@ def reviewDownVote(request, pk):
         post = Vote(voteReviewID=voteReviewID, voteAuthor=request.user, voteValue=-1)
         post.save()
         reviewrating = ReviewRating.objects.get(reviewid=voteReviewID)
-        votesAgg = Vote.objects.filter(voteReviewID__exact=request_getdata).aggregate(totalVoted=Sum('voteValue'))['totalVoted']
-        #allVotes = Vote.objects.aggregate(totalVoted=Sum(votesAgg))
+        votesAgg = Vote.objects.filter(voteReviewID__exact=request_getdata).aggregate(totalVoted=Sum('voteValue'))[
+            'totalVoted']
+        # allVotes = Vote.objects.aggregate(totalVoted=Sum(votesAgg))
         reviewrating.reviewVotes = votesAgg
         reviewrating.save()
         group = Group.objects.get(name="Well respected")
         if votesAgg >= 10:
-            group.user_set.add(reviewrating.reviewAuthorID)#User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+            group.user_set.add(
+                reviewrating.reviewAuthorID)  # User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
         else:
-            group.user_set.remove(reviewrating.reviewAuthorID)#User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+            group.user_set.remove(
+                reviewrating.reviewAuthorID)  # User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
         response_data['result'] = "Successfully downvoted review " + request_getdata
 
         return HttpResponse(
@@ -197,6 +206,7 @@ def reviewDownVote(request, pk):
             json.dumps({"nothing to see": "this isn't happening"}),
             content_type="application/json"
         )
+
 
 @login_required
 def reviewDelete(request, pk):
@@ -226,8 +236,6 @@ def rating(request, pk):
         request_radioValue = request.POST.get('radioValue')
         request_selectedChoice = request.POST.get('selectedChoice')
 
-
-
         modID = Mod.objects.get(modID__exact=request_modID)
 
         try:
@@ -240,10 +248,11 @@ def rating(request, pk):
             post = Rating(ratingModID=modID, ratingAuthorID=request.user, ratingChoice=request_selectedChoice)
         else:
             post = Rating(ratingModID=modID, ratingAuthorID=request.user, ratingChoice=request_selectedChoice,
-                      ratingValue=request_radioValue)
+                          ratingValue=request_radioValue)
         post.save()
 
-        averageRating = Rating.objects.filter(ratingModID=request_modID).aggregate(Avg(('ratingValue')))['ratingValue__avg']  # getting average rating for the mod we are using
+        averageRating = Rating.objects.filter(ratingModID=request_modID).aggregate(Avg(('ratingValue')))[
+            'ratingValue__avg']  # getting average rating for the mod we are using
         modID.modRating = format(averageRating, ".1f")
         modID.save()  # updating mod average rating
 
@@ -284,10 +293,10 @@ def modEdit(request, pk):
     post = get_object_or_404(Mod, pk=pk)
     if request.method == 'POST':
         form = SubmitForm(request.POST, request.FILES, instance=post)
-        #form = SubmitForm(request.POST, request.FILES)
+        # form = SubmitForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            #post.modID = pk
+            # post.modID = pk
             post.modAuthor = request.user
             post.modUpdate = timezone.now()
             if post.modAvatar:
@@ -318,8 +327,8 @@ def modDelete(request, pk):
 
 def news(request, pk):
     if request.method == 'POST':
-        #newsForm = NewsForm(request.POST)
-        #if newsForm.is_valid():
+        # newsForm = NewsForm(request.POST)
+        # if newsForm.is_valid():
         news_text = request.POST.get('news_text')
         news_mod_id = request.POST.get('news_mod_id')
 
@@ -329,12 +338,12 @@ def news(request, pk):
 
         toEmailList = list()
         modTitle = Mod.objects.get(modID=news_mod_id).modName
-        recipients = NewsNotifications.objects.filter(newsNotificationsModID=Mod.objects.get(modID=news_mod_id))\
+        recipients = NewsNotifications.objects.filter(newsNotificationsModID=Mod.objects.get(modID=news_mod_id)) \
             .values_list('newsNotificationsUserID', flat=True)
         for x in recipients:
             emails = get_user_model().objects.filter(id=x).values('email')
             toEmailList.append(emails.first()['email'])
-        #for x in emails:
+        # for x in emails:
         #    yaes.append(x)
 
         if len(toEmailList) == 0:
@@ -362,7 +371,8 @@ def notification(request, pk):
         responseData = {}
 
         if follow == 'add':  # adding to notifications
-            post = NewsNotifications(newsNotificationsModID=Mod.objects.get(modID=modID), newsNotificationsUserID=request.user)
+            post = NewsNotifications(newsNotificationsModID=Mod.objects.get(modID=modID),
+                                     newsNotificationsUserID=request.user)
             post.save()
 
             responseData['result'] = "Successfully following mod {0}.".format(modID)
@@ -389,8 +399,6 @@ def notification(request, pk):
         )
 
 
-
-
 def modTagFilter(request):
     mods = Mod.objects.filter(tags__name__in=["depressing", "sad"]).distinct()
     tags = Tag.objects.all()
@@ -405,19 +413,108 @@ class SearchResultsView(ListView):
     def get_queryset(self):
         searchQuery = self.request.GET.get('search')
         tagFilter = self.request.GET.getlist('tags')
-        ay = len(tagFilter)
-        if tagFilter is None and searchQuery is not None:
-            object_list = Mod.objects.filter(
-                Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-            )
-        elif searchQuery is None and tagFilter is not None:
-            object_list = Mod.objects.filter(
-                tags__name__in=tagFilter
-            )
-        elif searchQuery is not None and tagFilter is not None:
-            object_list = Mod.objects.filter(
-                Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-            ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter))
+        sortBy = self.request.GET.get('sortBy')
+
+        if len(tagFilter) == 0:
+            print("tagfilter")
+
+        if searchQuery is "" or None:
+            print("Searchquery")
+
+        if (searchQuery is "" or None) and (len(tagFilter) == 0):
+            if sortBy == 'newest':
+                object_list = Mod.objects.all().order_by('-modDate')
+            if sortBy == 'rated':
+                object_list = Mod.objects.all().order_by('-modRating')
+            if sortBy == 'reviewed':
+                object_list = sorted(Mod.objects.all(), key=lambda x: x.modReviewCount, reverse=True)
+            if sortBy == 'oldest':
+                object_list = Mod.objects.all().order_by('modDate')
+            if sortBy == 'updated':
+                object_list = Mod.objects.all().order_by('-modUpdate')
+            print("yayayaa")
+
+        elif (tagFilter is "" or len(tagFilter) == 0) and (searchQuery is not "" or None):
+            print(3)
+            if sortBy == 'newest':
+                object_list = Mod.objects.filter(
+                    Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modDate')
+            elif sortBy == 'rated':
+                object_list = Mod.objects.filter(
+                    Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modRating')
+            elif sortBy == 'reviewed':
+                object_list = sorted(Mod.objects.filter(
+                    Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)), key=lambda x: x.modReviewCount, reverse=True)
+            elif sortBy == 'oldest':
+                object_list = Mod.objects.filter(
+                    Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('modDate')
+            elif sortBy == 'updated':
+                object_list = Mod.objects.filter(
+                    Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modUpdate')
+            else:
+                object_list = Mod.objects.filter(
+                    Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter))
+
+        elif (searchQuery is "" or None) and (tagFilter is not "" or len(tagFilter) == 0):
+            print(2)
+            if sortBy == 'newest':
+                object_list = Mod.objects.filter(
+                    tags__name__in=tagFilter
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modDate')
+            elif sortBy == 'rated':
+                object_list = Mod.objects.filter(
+                    tags__name__in=tagFilter
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modRating')
+            elif sortBy == 'reviewed':
+                object_list = sorted(Mod.objects.filter(
+                    tags__name__in=tagFilter
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)), key=lambda x: x.modReviewCount, reverse=True)
+            elif sortBy == 'oldest':
+                object_list = Mod.objects.filter(
+                    tags__name__in=tagFilter
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('modDate')
+            elif sortBy == 'updated':
+                object_list = Mod.objects.filter(
+                    tags__name__in=tagFilter
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modUpdate')
+            else:
+                object_list = Mod.objects.filter(
+                    tags__name__in=tagFilter
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter))
+
+        elif (searchQuery is not "" or None) and (tagFilter is not "" or len(tagFilter) == 0):
+            print(1)
+            if sortBy == 'newest':
+                object_list = Mod.objects.filter(
+                    Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modDate')
+            elif sortBy == 'rated':
+                object_list = Mod.objects.filter(
+                    Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modRating')
+            elif sortBy == 'reviewed':
+                object_list = sorted(Mod.objects.filter(
+                    Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)), key=lambda x: x.modReviewCount, reverse=True)
+            elif sortBy == 'oldest':
+                object_list = Mod.objects.filter(
+                    Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('modDate')
+            elif sortBy == 'updated':
+                object_list = Mod.objects.filter(
+                    Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modUpdate')
+            else:
+                object_list = Mod.objects.filter(
+                    Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter))
+
         else:
             return HttpResponse("Please enter something in the search parameter")
         return object_list

@@ -1,15 +1,19 @@
-<!DOCTYPE html>
+{% extends 'base.html' %}
 {% load avatar_tags %}
 {% load thumbnail %}
 {% load static %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% block content %}
     <title>Your Profile</title>
-</head>
-<body>
 {% if user.is_authenticated %}
+    <div class="userLeftSideBar"></div>
+
+
+
+
+
+
+
     <p>Username: {{ user.username }}</p>
     <p>Password: {{ user.email }}</p>
     <a href="{% url 'accounts:played' %}">Played list</a>
@@ -47,9 +51,7 @@
     <p>You are not logged in.</p>
     <p><a href="{% url 'login' %}">Login</a></p>
 {% endif %}
-
-</body>
-</html>
+{% endblock %}
 
 <!--JAVASCRIPT-->
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>

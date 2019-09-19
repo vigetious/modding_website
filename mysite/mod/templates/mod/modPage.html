@@ -172,7 +172,7 @@
                             if (document.getElementById("rating").hasAttribute("hidden")) {
                                 document.getElementById("star{{ rating.ratingValue }}").checked = true;
                             }
-                            if (ratingValue != 'None') {
+                            if ('{{ rating.ratingValue }}' != 'None') {
                                 console.log('Already rated this mod with ' + '{{ rating.ratingValue }}');
                                 document.getElementById("star{{ rating.ratingValue }}").checked = true;
                             }
@@ -214,7 +214,7 @@
             <input type="button" id="notifications-no" value="Follow" onclick="followYes({{ post.modID }})" class="notifications-no"><br>
         {% endif %}
         <script>
-            if ({{ newsnotifications.newsNotificationsModID|stringformat:'i' }} === {{ post.modID }} && '{{ newsnotifications.newsNotificationsUserID }}' === '{{ user }}') {
+            if ('{{ newsnotifications.newsNotificationsModID|stringformat:'i' }}' === '{{ post.modID }}' && '{{ newsnotifications.newsNotificationsUserID }}' === '{{ user }}') {
                 $('#notifications-no').attr({
                     "id": "notifications-yes",
                     "class": "notifications-yes",
@@ -230,7 +230,7 @@
             <input  style="margin-left: 5px" type="button" id="showNews" onclick="showNews()" value="Create news">
             <div class="newsForm" id="newsForm">
                 <form method="post" enctype="multipart/form-data" id="news">
-                    <input type="text" id="news_text" placeholder="Enter your news here...">
+                    <input type="text" id="news_text" placeholder="Enter your news here..." autocomplete="off">
                     <input type="button" id="news_button" onclick="news()" value="Submit">
                     <p id="news_alert"></p>
                 </form>

@@ -47,7 +47,7 @@
                 <p class="modData-date" title="Date and Rating">{{ mod.modDate|date:"d M Y" }} | {{ mod.modRating }}</p>
             </div>
             <div class="modDescription">
-                <p title="Description">{{ mod.modDescription|truncatewords:50 }}</p>
+                <p title="Description">{{ mod.modShortDescription|truncatewords:50 }}</p>
             </div>
             </li>
         {% endfor %}
