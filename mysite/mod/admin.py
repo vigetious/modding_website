@@ -6,8 +6,8 @@ from .models import Mod, ReviewRating, Vote, Rating, News, NewsNotifications
 
 class ModAdmin(admin.ModelAdmin):
     list_display = ['modID', 'modAuthor', 'modDate', 'modUpdate', 'modStatus', 'modName',
-                    'modDescription', 'modWebsite', 'tags', 'modCreditPerms', 'modDonations', 'modDiscord',
-                    'modUpload', 'modUploadURL', 'modPlayTimeHours', 'modPlayTimeMinutes', 'modReviewCount']#, 'modRating']
+                    'modDescription', 'tags', 'modUpload', 'modUploadURL', 'modPlayTimeHours',
+                    'modPlayTimeMinutes', 'modReviewCount']
 
     change_form_template = 'progressbarupload/change_form.html'
     add_form_template = 'progressbarupload/change_form.html'

@@ -1,0 +1,185 @@
+.editErrorList {
+    border: 2px solid red;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    background: rgba(255, 0, 0, 0.2);
+}
+
+.editErrorList p {
+    margin-left: 5px;
+}
+
+.editErrorList li {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 5px;
+}
+
+p .helptext {
+    visibility: hidden;
+    width: 400px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    position: absolute;
+    z-index: 1;
+}
+
+p:hover .helptext {
+    visibility: visible;
+}
+
+.progressBar {
+    background-color: #a4d5ff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+.row {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.rowLeft {
+    width: 30%;
+    display: inline-block;
+    height: 100%;
+    text-align: left;
+    vertical-align: top;
+}
+
+.rowLeft p {
+    margin: 0;
+    display: inline-block;
+}
+
+.rowLeft label {
+
+}
+
+.rowRight {
+    width: 69%;
+    display: inline-block;
+    height: 100%;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.rowPlayTime p {
+    margin: 0;
+}
+
+.rowRight input {
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #a4d5ff;
+    border-radius: 5px;
+    border: 2px solid #a4d5ff;
+}
+
+.rowRight select {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.selectize-input {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #a4d5ff;
+    border-radius: 5px;
+    border: 2px solid #a4d5ff;
+}
+
+.selectize-dropdown {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #a4d5ff;
+    border-radius: 5px;
+    border: 2px solid #a4d5ff;
+}
+
+.selectize-dropdown .active {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #8acaff;
+    border-radius: 5px;
+    border: 2px solid #8acaff;
+}
+
+.rowRight textarea {
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #a4d5ff;
+    border-radius: 5px;
+    border: 2px solid #a4d5ff;
+}
+
+.rowPlayTime input {
+    width: 10%;
+    background-color: #a4d5ff;
+    border-radius: 5px;
+    border: 2px solid #a4d5ff;
+}
+
+.previewImage input {
+    width: 99%;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #a4d5ff;
+}
+
+.modPreviewImageInput {
+    margin-bottom: 10px;
+}
+
+.previewImage img {
+    width: 25%;
+    height: 25%;
+    display: block;
+    margin: auto;
+}
+
+.previewImage p {
+    display: inline-block;
+    margin: 0 0 0 5px;
+}
+
+.previewImage {
+    display: inline-block;
+    width: 100%;
+    background-color: #a4d5ff;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 2px solid #a4d5ff;
+    padding-right: 2px;
+}
+
+.uploadBottom {
+    width: 100%;
+}
+
+.uploadBottom p {
+    text-align: center;
+}
+
+.uploadBottom p input {
+    font-size: 20px;
+}
+
+#hiddenNextImage {
+    display: none;
+}
+
+#hiddenNextImage2 {
+    display: none;
+}
+
+#hiddenNextImage3 {
+    display: none;
+}
+
+#hiddenNextImage4 {
+    display: none;
+}
+
+#hiddenNextImage5 {
+    display: none;
+}

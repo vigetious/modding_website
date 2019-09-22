@@ -50,7 +50,7 @@
     <div class="modName">
         <h1>{{ post.modName }}</h1>
         {% if post.modAuthor == user %}
-            <p><a href="{%  url 'mod:modEdit' pk=post.pk %}">Edit</a></p>
+            <p><a href="{% url 'mod:modEdit' pk=post.pk %}"><input type="button" value="Edit Mod"></a></p>
         {% endif %}
     </div>
 
@@ -211,7 +211,7 @@
             <input type="button" value="Follow" onclick="notLoggedIn()" class="notifications-no"><br>
         {% endif %}
         {% if user.is_authenticated %}
-            <input type="button" id="notifications-no" value="Follow" onclick="followYes({{ post.modID }})" class="notifications-no"><br>
+            <input style="margin: 4px 0px 10px 5px;" type="button" id="notifications-no" value="Follow" onclick="followYes({{ post.modID }})" class="notifications-no"><br>
         {% endif %}
         <script>
             if ('{{ newsnotifications.newsNotificationsModID|stringformat:'i' }}' === '{{ post.modID }}' && '{{ newsnotifications.newsNotificationsUserID }}' === '{{ user }}') {
@@ -227,11 +227,11 @@
     </div>
     <div>
         {% if post.modAuthor == user %}
-            <input  style="margin-left: 5px" type="button" id="showNews" onclick="showNews()" value="Create news">
+            <input style="margin-left: 5px" type="button" id="showNews" onclick="showNews()" value="Create news">
             <div class="newsForm" id="newsForm">
                 <form method="post" enctype="multipart/form-data" id="news">
                     <input type="text" id="news_text" placeholder="Enter your news here..." autocomplete="off">
-                    <input type="button" id="news_button" onclick="news()" value="Submit">
+                    <input  style="margin: 4px 0px" type="button" id="news_button" onclick="news()" value="Submit">
                     <p id="news_alert"></p>
                 </form>
             </div>
@@ -284,7 +284,7 @@
                             {% if user == review.reviewAuthorID %}
                                 <div class="deleteCommentBox">
                                 <form method="POST" id="deleteReview">
-                                    <input type="button" id="deleteReview{{ review.reviewid }}" class="deleteComment" value="Delete">
+                                    <input type="button" style="background-color: #7cb5e5;" id="deleteReview{{ review.reviewid }}" class="deleteComment" value="Delete">
                                 </form>
                                 </div>
                                 <script>

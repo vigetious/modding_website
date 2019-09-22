@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'progressbarupload',
     'django_cleanup.apps.CleanupConfig',
     'easy_thumbnails',
-    'avatar',
+#    'avatar',
     'pages.apps.PagesConfig',
     'embed_video',
     'taggit_selectize',
@@ -190,27 +190,27 @@ THUMBNAIL_ALIASES = {
     }
 }
 
-AVATAR_AUTO_GENERATE_SIZES = (200,)
+#AVATAR_AUTO_GENERATE_SIZES = (200,)
 
-AVATAR_EXPOSE_USERNAMES = False
+#AVATAR_EXPOSE_USERNAMES = False
 
-AVATAR_MAX_SIZE = 10240 * 10240
+#AVATAR_MAX_SIZE = 10240 * 10240
 
-AVATAR_MAX_AVATARS_PER_USER = 3
+#AVATAR_MAX_AVATARS_PER_USER = 3
 
-from PIL import Image
+#from PIL import Image
 
-AVATAR_RESIZE_METHOD = Image.NONE
+#AVATAR_RESIZE_METHOD = Image.NONE
 
-AVATAR_STORAGE_DIR = "files/avatar/"
+#AVATAR_STORAGE_DIR = "files/avatar/"
 
-AVATAR_CLEANUP_DELETED = True
+#AVATAR_CLEANUP_DELETED = True
 
-AVATAR_ADD_TEMPLATE = "accounts/addAvatar.html"
-AVATAR_CHANGE_TEMPLATE = "accounts/changeAvatar.html"
-AVATAR_DELETE_TEMPLATE = "accounts/deleteAvatar.html"
+#AVATAR_ADD_TEMPLATE = "accounts/addAvatar.html"
+#AVATAR_CHANGE_TEMPLATE = "accounts/changeAvatar.html"
+#AVATAR_DELETE_TEMPLATE = "accounts/deleteAvatar.html"
 
-AVATAR_GRAVATAR_DEFAULT = "retro"  # change this
+#AVATAR_GRAVATAR_DEFAULT = "retro"  # change this
 
 django_heroku.settings(locals())
 

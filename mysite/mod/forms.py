@@ -1,7 +1,8 @@
 from django import forms
-from django.core.validators import URLValidator
+from django.core.validators import URLValidator, MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 from.models import Mod, ReviewRating, Vote, Rating, News
+from embed_video.fields import EmbedVideoFormField
 
 #class SubmitForm(forms.Form):
 #    modName = forms.CharField(label='Mod name', max_length=100)
@@ -20,12 +21,21 @@ from.models import Mod, ReviewRating, Vote, Rating, News
 
 
 class SubmitForm(forms.ModelForm):
+    modDescription = forms.CharField(widget=forms.Textarea, max_length=10000)
+    modShortDescription = forms.CharField(widget=forms.Textarea, max_length=250)
+
+    modUploadURL = forms.URLField(max_length=200, widget=forms.TextInput)
+
+    #modPreviewVideo = EmbedVideoFormField(help_text="Only YouTube and Vimeo links are currently supported.")
+
     class Meta:
         model = Mod
-        fields = ('modID', 'modName', 'modStatus', 'modDescription', 'modShortDescription', 'modWebsite', 'tags',
-                  'modCreditPerms', 'modDonations', 'modDiscord', 'modUpload', 'modUploadURL', 'modPlayTimeHours',
-                  'modPlayTimeMinutes', 'modPreviewVideo', 'modPreviewImage1', 'modPreviewImage2', 'modPreviewImage3',
-                  'modPreviewImage4', 'modPreviewImage5', 'modBackground', 'modBackgroundTiledStretch', 'modAvatar')
+        fields = ('modID', 'modName', 'modStatus', 'modDescription', 'modShortDescription', 'tags',
+                  'modUploadURL', 'modPlayTimeHours', 'modPlayTimeMinutes', 'modPreviewVideo', 'modPreviewImage1',
+                  'modPreviewImage2', 'modPreviewImage3', 'modPreviewImage4', 'modPreviewImage5', 'modBackground',
+                  'modBackgroundTiledStretch', 'modAvatar')
+
+
 
 
 class ReviewForm(forms.ModelForm):

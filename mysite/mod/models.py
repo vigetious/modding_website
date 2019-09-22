@@ -1,7 +1,7 @@
 from django.db import models
 from django.forms import ModelForm
 import os
-from django.core.validators import FileExtensionValidator
+from django.core.validators import FileExtensionValidator, MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 from django.contrib.postgres.search import SearchVectorField, SearchVector, SearchQuery, SearchRank
 from django.contrib.postgres.indexes import GinIndex
@@ -56,37 +56,34 @@ class Mod(models.Model):
     modDate = models.DateTimeField("mod publish date", null=True)
     modUpdate = models.DateTimeField("mod most recent update date")
     modStatus = models.CharField(choices=statusChoices, default=statusChoices[0], max_length=100)
-    modName = models.CharField("mod name", max_length=100)
-    modDescription = models.CharField("mod description", max_length=10000,
-                                      help_text="You can format the description using HTML tags. For example, you can "
-                                                "use <h1>Header</h1> to create larger text, usually used for headers. "
-                                                "Click here to find out some of the other useful tags.")
-    modShortDescription = models.CharField("mod short description", max_length=250,
+    modName = models.CharField("Mod Name", max_length=100)
+    modDescription = models.CharField("Mod Description", max_length=10000,
+                                      help_text="You can format the description using HTML tags, such as h1, b, and lists.")
+    modShortDescription = models.CharField("Mod Short Description", max_length=250,
                                            help_text="This should be short version of the above. Please keep it down to"
                                                      " a few short sentences.", blank=True)
-    modWebsite = models.CharField("mod website", max_length=100, blank=True)
+    modWebsite = models.CharField("Mod Website", max_length=100, blank=True)
     tags = TaggableManager()
-    modCreditPerms = models.CharField("mod credits and permissions", max_length=1000, blank=True)
-    modDonations = models.CharField("mod donation link", max_length=1000, blank=True)
-    modDiscord = models.CharField("mod discord link", max_length=100, blank=True)
     modUpload = models.FileField(upload_to=mod_directory_path, blank=True, null=True,
                                  validators=[FileExtensionValidator(allowed_extensions=['zip', 'rar'])])
-    modUploadURL = models.URLField("mod upload destination", max_length=1000)
-    modPlayTimeHours = models.IntegerField('mod average playtime hours', blank=True, null=True, default=0)
-    modPlayTimeMinutes = models.IntegerField('mod average playtime minutes', blank=True, null=True, default=0)
+    modUploadURL = models.URLField("Mod Upload Destination", max_length=1000)
+    modPlayTimeHours = models.IntegerField('Average Play Time Hours', blank=True, null=True, default=0,
+                                           validators=[MinValueValidator(0)])
+    modPlayTimeMinutes = models.IntegerField('Average Play Time Minutes', blank=True, null=True, default=0,
+                                             validators=[MaxValueValidator(59), MinValueValidator(0)])
     modSearch = SearchVectorField(null=True)
     modRating = models.FloatField('mod average rating', blank=True, null=True, default=0)
-    modPreviewVideo = EmbedVideoField()
-    modPreviewImage1 = models.ImageField('mod preview image 1', upload_to=mod_preview_image_directory_path, blank=True)
-    modPreviewImage2 = models.ImageField('mod preview image 2', upload_to=mod_preview_image_directory_path, blank=True)
-    modPreviewImage3 = models.ImageField('mod preview image 3', upload_to=mod_preview_image_directory_path, blank=True)
-    modPreviewImage4 = models.ImageField('mod preview image 4', upload_to=mod_preview_image_directory_path, blank=True)
-    modPreviewImage5 = models.ImageField('mod preview image 5', upload_to=mod_preview_image_directory_path, blank=True)
-    modBackground = models.ImageField('mod background image', upload_to=mod_image_directory_path, blank=True)
+    modPreviewVideo = EmbedVideoField('Trailer Video', help_text="Only YouTube and Vimeo links are currently supported.", blank=True)
+    modPreviewImage1 = models.ImageField('1st Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage2 = models.ImageField('2nd Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage3 = models.ImageField('3rd Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage4 = models.ImageField('4th Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage5 = models.ImageField('5th Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modBackground = models.ImageField('Background Image', upload_to=mod_image_directory_path, blank=True)
     modBackgroundTiledStretch = models.CharField('mod background tiled or stretch', choices=tiledStretchedChoices,
                                                      default=tiledStretchedChoices[0], max_length=100,
-                                                 help_text="What is tiled and/or stretched?")
-    modAvatar = ThumbnailerImageField('mod avatar image', upload_to=mod_image_directory_path, blank=True,
+                                                 help_text="What is tiled and/or stretched?", blank=True)
+    modAvatar = ThumbnailerImageField('Avatar Image', upload_to=mod_image_directory_path, blank=True,
                                       resize_source=dict(size=(200, 200), sharpen=True, upscale=True),
                                       help_text="Recommended size is 200x200. Make sure the background is transparent,"
                                                 " as well.")
@@ -113,8 +110,18 @@ class Mod(models.Model):
         get_latest_by = "modDate"
 
     def clean(self):
-        if self.modPlayTimeMinutes >= 59:
+        if self.modPlayTimeMinutes > 59:
             raise ValidationError('Minutes must be lower than 60.')
+        try:
+            if self.modPlayTimeMinutes < 0:
+                raise ValidationError('Minutes cannot be lower than 0.')
+        except ValueError:
+            pass
+        try:
+            if self.modPlayTimeHours < 0:
+                raise ValidationError('Hours cannot be lower than 0.')
+        except ValueError:
+            pass
         try:
             if self.modUpload.size > settings.MAX_UPLOAD_SIZE:
                 raise ValidationError('You cannot upload files larger than 1GB.')
@@ -133,6 +140,11 @@ class Mod(models.Model):
         try:
             if len(self.modShortDescription) > 250:
                 raise ValidationError('The short description must be less than 250 letters.')
+        except ValueError:
+            pass
+        try:
+            if self.tags == '':
+                raise ValidationError('You must have at least one tag.')
         except ValueError:
             pass
 
@@ -197,6 +209,7 @@ class Rating(models.Model):
     ratingChoice = models.CharField('rating choice', choices=statusChoices,
                                     default=statusChoices[0], max_length=100)
     ratingValue = models.PositiveSmallIntegerField("rating value", null=True)
+    ratingNote = models.CharField('rating note', max_length=1000, default="")
 
     def getAvatar(self):
         if Mod.objects.get(modID=self.ratingModID).modAvatar.url != None:

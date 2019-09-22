@@ -250,13 +250,6 @@ function followNo(modID) {
     })
 }
 
-function editBio() {
-    console.log('Editing bio.');
-    originalContent = document.getElementById('bio').innerHTML;
-    document.getElementById('bio').contentEditable = "true";
-    $('#editBio').off('click', editBio).on('click', finishEditBio).attr('value', 'Finish editing');
-    $('#cancelEditBio').on('click', cancelEdit).removeAttr('hidden')
-}
 
 function finishEditBio() {
     console.log('Finished editing, saving...');
@@ -273,26 +266,6 @@ function cancelEdit() {
     $('#bio').attr('contentEditable', 'false');
     $('#editBio').off('click', finishEditBio).on('click', editBio).attr('value', 'Edit Bio');
     $('#cancelEditBio').off('click', cancelEdit).prop('hidden', true);
-}
-
-function editBioAjax(message) {
-    $.ajax({
-        url: 'bio',
-        type: 'POST',
-        data: {
-            message: message,
-            csrfmiddlewaretoken: csrftoken
-        },
-
-        success: function (json) {
-            console.log(json);
-            console.log('success');
-        },
-
-        error: function (xhr, errmsg, err) {
-            console.log(xhr + ': ' + xhr.responseText)
-        }
-    })
 }
 
 function openMod(evt, mod) {
@@ -339,9 +312,102 @@ function notLoggedIn() {
     window.alert("You must be logged in to do this!")
 }
 
+function showUpload() {
+    document.getElementById('uploadProgressP').removeAttribute('hidden');
+    document.getElementById('progressBar').removeAttribute('hidden');
+}
+
 // MOD PAGE SPECIFIC
 
 function showNews() {
     $('#newsForm').show(500);
     $('#showNews').remove();
 }
+
+// PROFILE SPECIFIC
+
+function showEdit() {
+    $('#userLeftSideBarEdit').show(500);
+    $('#showEdit').remove();
+}
+
+function editBio() {
+    console.log('Editing bio.');
+    originalContent = document.getElementById('bio').innerHTML;
+    document.getElementById('bio').contentEditable = "true";
+    $('#editBio').off('click', editBio).on('click', finishEditBio).attr('value', 'Finish editing');
+    $('#cancelEditBio').on('click', cancelEdit).removeAttr('hidden')
+}
+
+function editBioAjax(message) {
+    console.log(message);
+    $.ajax({
+        url: 'bio',
+        type: 'POST',
+        data: {
+            message: message,
+            csrfmiddlewaretoken: csrftoken
+        },
+
+        success: function (json) {
+            console.log(json);
+            console.log('success');
+        },
+
+        error: function (xhr, errmsg, err) {
+            console.log(xhr + ': ' + xhr.responseText)
+        }
+    })
+}
+
+function editNoteAjax(note, ratingID) {
+    $.ajax({
+        url: 'note',
+        type: 'POST',
+        data: {
+            note: note,
+            ratingID: ratingID,
+            csrfmiddlewaretoken: csrftoken
+        },
+
+        success: function (json) {
+            console.log(json);
+            console.log('success');
+        },
+
+        error: function (xhr, errmsg, err) {
+            console.log(xhr + ': ' + xhr.responseText)
+        }
+    })
+}
+
+// SUBMIT SPECIFIC
+function showNext(id, remove) {
+    $('#hiddenNextImage' + id).show(200);
+    $('#showNextButton' + remove).remove();
+}
+
+function previewMouseOver(id) {
+    document.getElementById('previewImage' + id).setAttribute('style', 'width: 100%; height: 100%');
+}
+
+function previewMouseLeave(id) {
+    document.getElementById('previewImage' + id).setAttribute('style', 'width:25%; height:25%');
+}
+
+$(document).ready(function () {
+    $('#myForm').validate( {
+        rules: {
+            modName: {
+                required: true
+            },
+            modUploadURL: {
+                required: true,
+                url: true
+            },
+            modPlayTimeMinutes: {
+                range: [0, 59]
+            }
+        }
+    })
+});

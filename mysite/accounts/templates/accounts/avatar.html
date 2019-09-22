@@ -1,9 +1,12 @@
-{% block title %}<h1>Change your avatar</h1>{% endblock %}
+{% extends 'base.html' %}
 {% block content %}
+    <title>Change your avatar</title>
+    <h1>Change your avatar</h1>
     <form method="post" enctype="multipart/form-data" action="">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Submit">
+        <p>If you want to return your avatar to the default image, leave the above slot free and click submit.</p>
+        <input class="avatarSubmit" type="submit" value="Submit">
     </form>
-    <button onclick="history.back()">Back</button>
+    <p><a onclick="history.back()"><input type="button" value="Back"></a></p>
 {% endblock %}

@@ -6,33 +6,24 @@
 
 
 {% block content %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
-    <title>Your Profile</title>
+    <title>{{ user.username }}'s Profile</title>
     {% if user.is_authenticated %}
         <div class="userLeftSideBar">
             <div class="userLeftSideBarAvatar">
                 <img src={{ avatar.avatarImage.url }}>
             </div>
             <div class="userLeftSideBarData">
-                <p><a href="{% url 'accounts:avatar' %}"><input type="button" value="Edit avatar"></a></p>
                 <p>Username: {{ user.username }}</p>
-                <p>Email: {{ user.email }}</p>
                 <p>Total comments: {{ user.totalComments }}</p>
                 <p>Total mods: {{ user.totalMods }}</p>
-                <p><input type="button" id="showEdit" onclick="showEdit()" value="Edit account"></p>
-                <div id="userLeftSideBarEdit" class="userLeftSideBarEdit">
-                    <p><a href="{% url 'password_change' %}">Change password</a></p>
-                    <p>Please contact an admin to change anything else.</p>
-                </div>
-            <p>This is your private, editable profile. <a href="../{{ user.username }}/profile">Here</a> is your public page.</p>
             </div>
         </div>
         <div class="userRightSideContent">
             <div class="userRightSideContentBio">
-                <textarea id="bio">{{ user.description }}</textarea>
-                <input type="button" id="finishEditBio" value="Update bio" onclick="editBioAjax($('textarea#bio').val())">
+                <p style="text-align: left; margin: 5px 5px" id="bio">{{ user.description }}</p>
             </div>
             <div class="userRightSideContentCreatedMods">
                 <div class="userTitle"><p>Created mods</p></div>
@@ -57,21 +48,6 @@
                     </table>
                 </div>
             </div>
-            <!--<div class="userRightSideContentReviews">
-                <div class="userTitle"><p>Reviews</p></div>
-                <table>
-                    <tr>
-                        <th><p>Date</p></th>
-                        <th><p>Comment</p></th>
-                    </tr>
-                    {% for review in reviews %}
-                        <tr>
-                            <td><p>{{ review.reviewDate }}</p></td>
-                            <td><p>{{ review.reviewComment }}</p></td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>-->
         </div>
         <div class="userPlayed">
             <table>
@@ -82,7 +58,6 @@
                     <th><p>Played status</p></th>
                     <th><p>Mod status</p></th>
                     <th><p>Mod note</p></th>
-                    <th><p>Delete rating</p></th>
                 </tr>
                 {% for x in played %}
                     <tr id="rating{{ x.ratingID }}">
@@ -91,10 +66,7 @@
                         <td><p>{{ x.ratingValue }}</p></td>
                         <td><p>{{ x.ratingChoice }}</p></td>
                         <td><p>{{ x.ratingStatus }}</p></td>
-                        <td><textarea placeholder="Click out of the box to update this" id="editNote{{ x.ratingID }}" onfocusout="editNoteAjax($('#editNote{{ x.ratingID }}').val(), {{ x.ratingID }})">{{ x.ratingNote }}</textarea></td>
-                        {% if user == x.ratingAuthorID %}
-                            <td><p><input type="button" id="rating{{ x.ratingID }}Delete" value="Delete" onclick="deleteRatingButton({{ x.ratingID }})"></p></td>
-                        {% endif %} <!-- you dont really need this do you since its going to be unique anyway -->
+                        <td><p>{{ x.ratingNote }}</p></td>
                     </tr>
                 {% endfor %}
             </table>

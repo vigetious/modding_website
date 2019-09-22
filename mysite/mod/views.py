@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.contrib.postgres.search import SearchVector
 from django.views.generic.list import ListView
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 from django.db.models import F, Q, Count, Sum, Avg
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.core import serializers, mail
@@ -47,7 +47,7 @@ def submit(request):
             if post.modAvatar:
                 pass
             else:
-                post.modAvatar = 'files/avatar/default.jpg'
+                post.modAvatar = 'files/avatar/icon.png'
             post.save()
             post.save()
             form.save_m2m()
@@ -60,7 +60,6 @@ def submit(request):
             return redirect('mod:modPage', pk=post.pk)
     else:
         form = SubmitForm()
-
     return render(request, 'mod/submitMod.html', {'form': form})
 
 
@@ -290,6 +289,7 @@ def ratingDelete(request):
 
 
 def modEdit(request, pk):
+    args = {}
     post = get_object_or_404(Mod, pk=pk)
     if request.method == 'POST':
         form = SubmitForm(request.POST, request.FILES, instance=post)
@@ -305,10 +305,14 @@ def modEdit(request, pk):
                 post.modAvatar = 'files/avatar/default.jpg'
             post.save()
             form.save_m2m()
+            print("Form is valid, taking you to the updated mod page")
             return redirect('mod:modPage', pk=post.pk)
     else:
         form = SubmitForm(instance=post)
-    return render(request, 'mod/modEdit.html', {'form': form, 'post': post})
+        args['form'] = form
+        form.errors.as_data()
+    print("No POST, probably loading page for first time")
+    return render(request, 'mod/modEdit.html', {'form': form, 'post': post}, args)
 
 
 def modDelete(request, pk):
