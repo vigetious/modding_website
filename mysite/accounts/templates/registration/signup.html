@@ -1,10 +1,60 @@
-{% block title %} Sign up {% endblock %}
+{% extends 'base.html' %}
+{% load static %}
 
 {%  block content %}
-    <h2>Sign up</h2>
+    <link rel="stylesheet" href="{% static 'css/modSubmitEdit.css' %}">
+    <title>Sign Up</title>
+    <h1>Sign Up</h1>
+    <div class="signup">
+        {% if form.errors %}
+            <div class="editErrorList">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p>{{ field.label }} : {{ field.errors }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <!--<strong>{{ error|escape }}</strong>-->
+                </div>
+            {% endfor %}
+        {% endif %}
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Sign up</button>
+        <div class="row">
+            <div class="rowLeft">
+                <p>Username: </p>
+            </div>
+            <div class="rowRight">
+                {{ form.username }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowLeft">
+                <p>Email: </p>
+            </div>
+            <div class="rowRight">
+                {{ form.email }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowLeft">
+                <p>Password: </p>
+            </div>
+            <div class="rowRight">
+                {{ form.password1 }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowLeft">
+                <p>Verify password: </p>
+            </div>
+            <div class="rowRight">
+                {{ form.password2 }}
+            </div>
+        </div>
+        <input type="submit" value="Sign Up">
     </form>
+    </div>
 {% endblock %}

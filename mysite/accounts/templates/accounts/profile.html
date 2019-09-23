@@ -23,7 +23,7 @@
                 <p>Total mods: {{ user.totalMods }}</p>
                 <p><input type="button" id="showEdit" onclick="showEdit()" value="Edit account"></p>
                 <div id="userLeftSideBarEdit" class="userLeftSideBarEdit">
-                    <p><a href="{% url 'password_change' %}">Change password</a></p>
+                    <p><a href="{% url 'accounts:change_password' %}">Change password</a></p>
                     <p>Please contact an admin to change anything else.</p>
                 </div>
             <p>This is your private, editable profile. <a href="../{{ user.username }}/profile">Here</a> is your public page.</p>

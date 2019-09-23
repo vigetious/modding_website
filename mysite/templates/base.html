@@ -7,6 +7,7 @@
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
 <script type="text/javascript" src="{% static 'js/plugins.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 
 <head>
     <meta charset="utf-8">
@@ -52,15 +53,16 @@
         <li class="dropdown">
             <a href="javascript:void(0)" class="dropbtn"><img src="{% static 'img/ModsSmall.png' %}" alt="Mods"></a>
             <div class="dropdown-content">
-                <a href="#">Search for mods</a>
-                <a href="#">Highest rated mods</a>
-                <a href="#">Highest rated mods this month</a>
-                <a href="#">Highest rated mods this week</a>
-                <a href="#">Released this month</a>
-                <a href="#">Released this week</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags=All">Search for mods</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated">Highest rated mods</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated&dateBy=31">Highest rated mods this month</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated&dateBy=7">Highest rated mods this week</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&dateBy=31">Released this month</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&dateBy=7">Released this week</a>
+                <a href="{% url 'mod:submit' %}">Submit Mod</a>
             </div>
         </li>
-        <li><a href=""><img src="{% static 'img/SupportSmall.png' %}" alt="Support"></a></li>
+        <li><a href="{% url 'supportHome' %}"><img src="{% static 'img/SupportSmall.png' %}" alt="Support"></a></li>
         <form action="{% url 'mod:modSearch' %}" method="get">
             <input class="searchButton" type="submit" value="Search">
             <input class="search" name="q" type="text" placeholder="Search">
@@ -74,7 +76,8 @@
 
     <div class="bottomContent">
         <ul class="bottomNavbar">
-            <li><a href="">Donate</a></li>
+            <li><a href="{% url 'contactUs' %}">Contact Us</a></li>
+            <li><a href="{% url 'rules' %}">Rules</a></li>
             <li><a href="">DMCA and Copyright</a> </li>
         </ul>
     </div>

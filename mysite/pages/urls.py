@@ -8,5 +8,11 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('support/', views.supportHome, name='supportHome'),
+    path('support/submittingmods/', views.submittingMods, name='submittingMods'),
+    path('support/otherusers/', views.otherUsersMods, name='otherUsersMods'),
+    path('support/myaccount/', views.myAccount, name='myAccountSupport'),
+    path('support/contactus/', views.contactUs, name='contactUs'),
+    path('support/rules/', views.rules, name='rules'),
     path(r'^taggit/', include('taggit_selectize.urls')),
 ]

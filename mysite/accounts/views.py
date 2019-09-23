@@ -1,11 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, PasswordResetForm
 from django.views import generic
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 from django.urls import reverse_lazy
 #from django.contrib.auth.models import User
 from django.views.generic.edit import CreateView
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.views import PasswordResetView
 
 from .forms import CustomUserCreationForm, EditForm, AvatarForm#, SignUp
 from .models import Avatar, User
@@ -29,7 +32,8 @@ def profile(request):
     try:
         userAvatar = Avatar.objects.get(avatarUserID=request.user)
     except ObjectDoesNotExist:
-        userAvatar = None
+        #userAvatar = None
+        userAvatar = Avatar.objects.create(avatarUserID=request.user, avatarImage='files/avatar/icon.png')
 
     try:
         mods = Mod.objects.filter(modAuthor=request.user.id)
@@ -48,6 +52,28 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
 
+
+class PasswordResetView(PasswordResetView):
+    form_class = PasswordResetForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/password_reset_form.html'
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('accounts:profile')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'registration/changePassword.html', {
+        'form': form
+    })
 
 def userProfile(request, pk):
     post = get_object_or_404(User, pk=User.objects.get(username=pk).id)
@@ -90,8 +116,11 @@ def avatar(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.avatarUserID = request.user
-            if Avatar.objects.get(avatarUserID=request.user) is not None:
-                Avatar.objects.get(avatarUserID=request.user).delete()
+            try:
+                if Avatar.objects.get(avatarUserID=request.user):
+                    Avatar.objects.get(avatarUserID=request.user).delete()
+            except:
+                pass
             if post.avatarImage:
                 pass
             else:

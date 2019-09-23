@@ -137,6 +137,11 @@ p a {
   text-decoration: none;
 }
 
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
 body {
   text-align: center;
   background-color: black;
@@ -255,7 +260,6 @@ ul {
 
 li a, .dropbtn {
   display: inline-block;
-  color: #e6f4ff;
   text-align: center;
   text-decoration: none;
 }
@@ -357,7 +361,6 @@ li a, .dropbtn {
   font-family: Arial, Helvetica, sans-serif;
   padding: 4px 4px;
 }
-
 
 
 /* Tooltip container */

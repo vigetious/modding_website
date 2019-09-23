@@ -23,7 +23,7 @@
                 </div>
             {% endfor %}
         {% endif %}
-
+        <p>If you need help, please read the <a href="{% url 'submittingMods' %}#editmod">edit guide</a>.</p>
         <form id="myForm" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">

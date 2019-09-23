@@ -45,7 +45,6 @@ class Mod(models.Model):
     statusChoices = (
         ('Full release', 'Full release'),
         ('Demo', 'Demo'),
-        ('Concept', 'Concept'),
     )
     tiledStretchedChoices = (
         ('Tiled', 'Tiled'),
@@ -82,7 +81,7 @@ class Mod(models.Model):
     modBackground = models.ImageField('Background Image', upload_to=mod_image_directory_path, blank=True)
     modBackgroundTiledStretch = models.CharField('mod background tiled or stretch', choices=tiledStretchedChoices,
                                                      default=tiledStretchedChoices[0], max_length=100,
-                                                 help_text="What is tiled and/or stretched?", blank=True)
+                                                 help_text="What is tiled and/or stretched?")
     modAvatar = ThumbnailerImageField('Avatar Image', upload_to=mod_image_directory_path, blank=True,
                                       resize_source=dict(size=(200, 200), sharpen=True, upscale=True),
                                       help_text="Recommended size is 200x200. Make sure the background is transparent,"

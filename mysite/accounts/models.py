@@ -21,7 +21,6 @@ class User(AbstractUser):
     totalComments = models.IntegerField('total comments', default=0)
     totalMods = models.IntegerField('total mods', default=0)
 
-
     REQUIRED_FIELDS = ('username', 'password')
 
     USERNAME_FIELD = 'email'
@@ -32,7 +31,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
-
 
 
 class Avatar(models.Model):

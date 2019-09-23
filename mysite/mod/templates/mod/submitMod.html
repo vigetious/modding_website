@@ -22,7 +22,7 @@
                     </div>
                 {% endfor %}
             {% endif %}
-
+            <p>If you need help, please read the <a href="{% url 'submittingMods' %}">submit guide</a>.</p>
             <form id="myForm" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
@@ -98,25 +98,25 @@
                             <div class="previewImage">
 
                                 <input class="modPreviewImageInput" id="id_modPreviewImage1" type="file" name="modPreviewImage1" accept="image/*">
-                                <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton1" onclick="showNext(2, 1)" value="Upload/change more preview images">
+                                <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton1" onclick="showNext(2, 1)" value="Upload more preview images">
                             </div>
                             <div id="hiddenNextImage2">
                                 <div class="previewImage">
                                     <input class="modPreviewImageInput" id="id_modPreviewImage2" type="file" name="modPreviewImage2" accept="image/*">
 
-                                    <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton2" onclick="showNext(3, 2)" value="Upload/change more preview images">
+                                    <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton2" onclick="showNext(3, 2)" value="Upload more preview images">
                                 </div>
                                 <div id="hiddenNextImage3">
                                     <div class="previewImage">
 
                                         <input class="modPreviewImageInput" id="id_modPreviewImage3" type="file" name="modPreviewImage3" accept="image/*">
-                                        <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton3" onclick="showNext(4, 3)" value="Upload/change more preview images">
+                                        <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton3" onclick="showNext(4, 3)" value="Upload more preview images">
                                     </div>
                                     <div id="hiddenNextImage4">
                                         <div class="previewImage">
 
                                             <input class="modPreviewImageInput" id="id_modPreviewImage4" type="file" name="modPreviewImage4" accept="image/*">
-                                            <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton4" onclick="showNext(5, 4)" value="Upload/change more preview images">
+                                            <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton4" onclick="showNext(5, 4)" value="Upload more preview images">
                                         </div>
                                         <div id="hiddenNextImage5">
                                             <div class="previewImage">

@@ -15,8 +15,8 @@
         <form action="{% url 'mod:modSearch' %}" method="get">
             <div class="searchSideContentCategory"><h3>Search:</h3></div>
             <div class="searchSideContentSearch">
-                <label> <!-- ???????????? -->
-                    <input class="modSearchInput" name="search" type="text" placeholder="Search">
+                <label>
+                    <input class="modSearchInput" name="q" type="text" placeholder="Search">
                 </label>
                 <p>Sort:</p>
                 <label>
@@ -28,6 +28,13 @@
                         <option value="updated">Last updated</option>
                     </select>
                 </label>
+                <label>
+                    <select name="dateBy">
+                        <option value=1>Today</option>
+                        <option value=7>Week</option>
+                        <option value=31>Month</option>
+                        <option value=365>Year</option>
+                    </select>
                 <input type="submit" value="Search/Update">
             </div>
             <div class="searchSideContentCategory">
