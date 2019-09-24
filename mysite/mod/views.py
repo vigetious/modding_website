@@ -56,6 +56,7 @@ def submit(request):
             user.totalMods = user.totalMods + 1
             group = Group.objects.get(name="Mod Creators")
             group.user_set.add(request.user)
+            post.modApproved = False
             user.save()
             return redirect('mod:modPage', pk=post.pk)
     else:
@@ -65,6 +66,10 @@ def submit(request):
 
 def modPage(request, pk):
     post = get_object_or_404(Mod, pk=pk)
+    if not post.modApproved:
+        return render(request, 'mod/modPage.html', {'post': post})
+    else:
+        pass
     review = ReviewRating.objects.filter(reviewModID=post.modID)
     vote = Vote.objects.all()  # dont need to pass all
     if request.user.is_authenticated:
@@ -302,7 +307,8 @@ def modEdit(request, pk):
             if post.modAvatar:
                 pass
             else:
-                post.modAvatar = 'files/avatar/default.jpg'
+                post.modAvatar = 'files/avatar/icon.png'
+            post.modApproved = False
             post.save()
             form.save_m2m()
             print("Form is valid, taking you to the updated mod page")
@@ -419,7 +425,6 @@ class SearchResultsView(ListView):
         tagFilter = self.request.GET.getlist('tags')
         sortBy = self.request.GET.get('sortBy')
         dateBy = self.request.GET.get('dateBy')
-
         dateBy = int(dateBy)
 
         datetime.datetime.now(tz=timezone.utc)
@@ -532,8 +537,6 @@ class SearchResultsView(ListView):
 
         else:
             return HttpResponse("Please enter something in the search parameter")
-        object_list.values_list()
-        print(object_list.values_list())
         return object_list
 
     def get_tags(self):

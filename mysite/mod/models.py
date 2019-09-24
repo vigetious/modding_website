@@ -16,17 +16,27 @@ import django_filters
 from easy_thumbnails.fields import ThumbnailerImageField
 from embed_video.fields import EmbedVideoField
 
+import random, string
+
 # Create your models here.
 
 
+def randomStringDigits():
+    """Generate a random string of letters and digits """
+    lettersAndDigits = string.ascii_letters + string.digits
+    return ''.join(random.choice(lettersAndDigits) for i in range(50))
+
+
 def mod_directory_path(instance, filename):
-    return 'files/user_{0}/mods/{1}/{2}'.format(instance.modAuthor.id, instance.modID, filename)
+    return 'files/user_{0}/mods/{1}/{2}'.format(instance.modAuthor.id, instance.modID, randomStringDigits())
+
 
 def mod_image_directory_path(instance, filename):
-    return 'files/user_{0}/mods/{1}/images/{2}'.format(instance.modAuthor.id, instance.modID, filename)
+    return 'files/user_{0}/mods/{1}/images/{2}'.format(instance.modAuthor.id, instance.modID, randomStringDigits())
+
 
 def mod_preview_image_directory_path(instance, filename):
-    return 'files/user_{0}/mods/{1}/images/previews/{2}'.format(instance.modAuthor.id, instance.modID, filename)
+    return 'files/user_{0}/mods/{1}/images/previews/{2}'.format(instance.modAuthor.id, instance.modID, randomStringDigits())
 
 
 class ModManager(models.Manager):
@@ -86,6 +96,7 @@ class Mod(models.Model):
                                       resize_source=dict(size=(200, 200), sharpen=True, upscale=True),
                                       help_text="Recommended size is 200x200. Make sure the background is transparent,"
                                                 " as well.")
+    modApproved = models.BooleanField('mod moderation approval')
 
 
     objects = ModManager()
@@ -164,6 +175,7 @@ class ReviewRating(models.Model):
     reviewDate = models.DateTimeField("review date", auto_now_add=True)
     reviewComment = models.CharField("review comment", max_length=10000, blank=True)
     reviewVotes = models.IntegerField("total votes for comment", default=0)
+    reviewApproved = models.BooleanField('review moderation approval')
 
     def __int__(self):
         return self.reviewid

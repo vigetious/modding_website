@@ -4,9 +4,13 @@
 
 {% block content %}
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/pages.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'pages/css/pages.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <title>Home</title>
     <div class="top">
+    <p>Welcome to Doki Doki Mod Club!</p>
+    <p>You can find all sorts of mods here for the popular game Doki Doki Literature Club, and you can even submit your own!</p>
+    <p>Get started by checking out the most popular mods below, or by searching for a mod.</p>
     <p>News:</p>
     <div class="adminNews">
     <ul class="news">
@@ -33,12 +37,52 @@
     </ul>
     <script>
         openMod(event, 'new');
-        console.log(2)
     </script>
     <div id="new" class="tabcontent">
     <ul class="tabContentValue">
         {% for mod in newMods %}
+            {% if mod.modApproved %}
+                <li>
+                <div class="modAvatar">
+                    <a href="/mod/{{ mod.modID }}"><img src="{{ mod.modAvatar.url }}" alt="Mod Avatar"></a>
+                </div>
+                <div class="modData">
+                    <p class="modData-name" title="Name" style="margin: 0"><a href="/mod/{{ mod.modID }}">{{ mod.modName|truncatechars:17 }}</a></p>
+                    <p class="modData-date" title="Date and Rating">{{ mod.modDate|date:"d M Y" }} | {{ mod.modRating }}</p>
+                </div>
+                <div class="modDescription">
+                    <p title="Description">{{ mod.modShortDescription|truncatewords:50 }}</p>
+                </div>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    </div>
+    <div id="rated" class="tabcontent">
+    <ul class="tabContentValue">
+    {% for mod in newMods|dictsortreversed:"modRating" %}
+        {% if mod.modApproved %}
             <li>
+                <div class="modAvatar">
+                    <a href="/mod/{{ mod.modID }}"><img src="{{ mod.modAvatar.url }}" alt="Mod Avatar"></a>
+                </div>
+                <div class="modData">
+                    <p class="modData-name" title="Name" style="margin: 0"><a href="/mod/{{ mod.modID }}">{{ mod.modName|truncatechars:17 }}</a></p>
+                    <p class="modData-date" title="Date and Rating">{{ mod.modDate|date:"d M Y" }} | {{ mod.modRating }}</p>
+                </div>
+                <div class="modDescription">
+                    <p title="Description">{{ mod.modShortDescription|truncatewords:50 }}</p>
+                </div>
+            </li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    </div>
+    <div id="reviewed" class="tabcontent">
+    <ul class="tabContentValue">
+    {% for mod in newMods|dictsortreversed:"modReviewCount" %}
+        {% if mod.modApproved %}
+        <li>
             <div class="modAvatar">
                 <a href="/mod/{{ mod.modID }}"><img src="{{ mod.modAvatar.url }}" alt="Mod Avatar"></a>
             </div>
@@ -49,43 +93,8 @@
             <div class="modDescription">
                 <p title="Description">{{ mod.modShortDescription|truncatewords:50 }}</p>
             </div>
-            </li>
-        {% endfor %}
-    </ul>
-    </div>
-    <div id="rated" class="tabcontent">
-    <ul class="tabContentValue">
-    {% for mod in newMods|dictsortreversed:"modRating" %}
-        <li>
-            <div class="modAvatar">
-                <a href="/mod/{{ mod.modID }}"><img src="{{ mod.modAvatar.url }}" alt="Mod Avatar"></a>
-            </div>
-            <div class="modData">
-                <p class="modData-name" title="Name" style="margin: 0"><a href="/mod/{{ mod.modID }}">{{ mod.modName|truncatechars:17 }}</a></p>
-                <p class="modData-date" title="Date and Rating">{{ mod.modDate|date:"d M Y" }} | {{ mod.modRating }}</p>
-            </div>
-            <div class="modDescription">
-                <p title="Description">{{ mod.modDescription|truncatewords:50 }}</p>
-            </div>
         </li>
-    {% endfor %}
-    </ul>
-    </div>
-    <div id="reviewed" class="tabcontent">
-    <ul class="tabContentValue">
-    {% for mod in newMods|dictsortreversed:"modReviewCount" %}
-        <li>
-            <div class="modAvatar">
-                <a href="/mod/{{ mod.modID }}"><img src="{{ mod.modAvatar.url }}" alt="Mod Avatar"></a>
-            </div>
-            <div class="modData">
-                <p class="modData-name" title="Name" style="margin: 0"><a href="/mod/{{ mod.modID }}">{{ mod.modName|truncatechars:17 }}</a></p>
-                <p class="modData-date" title="Date and Rating">{{ mod.modDate|date:"d M Y" }} | {{ mod.modRating }}</p>
-            </div>
-            <div class="modDescription">
-                <p title="Description">{{ mod.modDescription|truncatewords:50 }}</p>
-            </div>
-        </li>
+        {% endif %}
     {% endfor %}
     </ul>
     </div>

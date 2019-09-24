@@ -5,7 +5,7 @@
 {% block content %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/profile.css' %}">
     <title>Your Profile</title>
     {% if user.is_authenticated %}
         <div class="userLeftSideBar">
@@ -43,6 +43,7 @@
                             <th><p>Release date</p></th>
                         </tr>
                         {% for mods in mods %}
+                            {% if mods.modApproved %}
                             <tr>
                                 <td><img src={{ mods.modAvatar.url }}></td>
                                 <td><p>{{ mods.modName }}</p></td>
@@ -50,6 +51,7 @@
                                 <td><p>{{ mods.modStatus }}</p></td>
                                 <td><p>{{ mods.modDate }}</p></td>
                             </tr>
+                            {% endif %}
                         {% endfor %}
                     </table>
                 </div>

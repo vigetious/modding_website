@@ -7,7 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/modSearch.css' %}">
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/pages.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'pages/css/pages.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 
     <title>Mod search</title>
@@ -37,6 +37,7 @@
                         <option value=31>Month</option>
                         <option value=365>Year</option>
                     </select>
+                </label>
                 <input type="submit" value="Search/Update">
             </div>
             <div class="searchSideContentCategory">
@@ -77,18 +78,20 @@
     <div class="searchMainContent">
     <ul class="tabContentValue">
         {% for x in object_list %}
-            <li>
-                <div class="modAvatar">
-                    <a href="/mod/{{ x.modID }}"><img src="{{ x.modAvatar.url }}" alt="Mod Avatar"></a>
-                </div>
-                <div class="modData">
-                    <p class="modData-name" title="Name" style="margin: 0"><a href="/mod/{{ x.modID }}">{{ x.modName|truncatechars:17 }}</a></p>
-                    <p class="modData-date" title="Date and Rating">{{ x.modDate|date:"d M Y" }} | {{ x.modRating }}</p>
-                </div>
-                <div class="modDescription">
-                    <p title="Description">{{ x.modShortDescription|truncatewords:50 }}</p>
-                </div>
-            </li>
+            {% if x.modApproved %}
+                <li>
+                    <div class="modAvatar">
+                        <a href="/mod/{{ x.modID }}"><img src="{{ x.modAvatar.url }}" alt="Mod Avatar"></a>
+                    </div>
+                    <div class="modData">
+                        <p class="modData-name" title="Name" style="margin: 0"><a href="/mod/{{ x.modID }}">{{ x.modName|truncatechars:17 }}</a></p>
+                        <p class="modData-date" title="Date and Rating">{{ x.modDate|date:"d M Y" }} | {{ x.modRating }}</p>
+                    </div>
+                    <div class="modDescription">
+                        <p title="Description">{{ x.modShortDescription|truncatewords:50 }}</p>
+                    </div>
+                </li>
+            {% endif %}
         {% endfor %}
     </ul>
     </div>

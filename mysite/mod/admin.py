@@ -7,7 +7,7 @@ from .models import Mod, ReviewRating, Vote, Rating, News, NewsNotifications
 class ModAdmin(admin.ModelAdmin):
     list_display = ['modID', 'modAuthor', 'modDate', 'modUpdate', 'modStatus', 'modName',
                     'modDescription', 'tags', 'modUpload', 'modUploadURL', 'modPlayTimeHours',
-                    'modPlayTimeMinutes', 'modReviewCount']
+                    'modPlayTimeMinutes', 'modReviewCount', 'modApproved']
 
     change_form_template = 'progressbarupload/change_form.html'
     add_form_template = 'progressbarupload/change_form.html'
@@ -21,7 +21,7 @@ class ModAdmin(admin.ModelAdmin):
 
 class ReviewRatingAdmin(admin.ModelAdmin):
     list_display = ['reviewid', 'reviewModID', 'reviewAuthorID', 'reviewDate', 'reviewComment', 'vote_total',
-                    'reviewVotes']
+                    'reviewVotes', 'reviewApproved']
 
 class VoteAdmin(admin.ModelAdmin):
     list_display = ['voteID', 'voteReviewID', 'voteAuthor', 'voteValue']

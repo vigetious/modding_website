@@ -19,3 +19,5 @@ urlpatterns = [
     path(r'^taggit/', include('taggit_selectize.urls')),
     path(r'^verified-email-field/', include('verified_email_field.urls')),
 ]
+
+

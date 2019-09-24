@@ -24,6 +24,7 @@
             {% endfor %}
         {% endif %}
         <p>If you need help, please read the <a href="{% url 'submittingMods' %}#editmod" target="_blank">edit guide</a>.</p>
+        <p><b>Your mod will need to be approved manually by moderators, after you edit your mod. This could take some time.</b></p>
         <form id="myForm" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
@@ -204,7 +205,8 @@
                 <p id="uploadProgressP" hidden>Upload progress:</p>
                 {% progress_bar %}
                 <p>Don't forget to tell your followers that you have updated your mod by adding news!</p><br>
-                <p><input type="submit" value="Submit"></p>
+                <p><input onclick="return confirm('Are you sure you want to edit your mod? It will need to be verified by the moderators again, meaning your mod will be unavailable for an uncertain amount of time.')" type="submit" value="Submit"></p>
+                <a href="{% url 'mod:modPage' pk=post.pk %}"><p>Cancel edit</p></a>
                 <a onclick="return confirm('Are you sure? Once you delete the mod, it is gone forever without any way of getting it back.')" href="{% url 'mod:modDelete' pk=post.pk %}"><p>Delete mod</p></a>
             </div>
         </form>

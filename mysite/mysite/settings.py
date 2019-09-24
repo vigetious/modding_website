@@ -27,7 +27,7 @@ SECRET_KEY = '#57rx=7$#ze0ljqf&h=6sspa!ifki9c9mozb47et265u(fbpd^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -191,28 +191,6 @@ THUMBNAIL_ALIASES = {
     }
 }
 
-#AVATAR_AUTO_GENERATE_SIZES = (200,)
-
-#AVATAR_EXPOSE_USERNAMES = False
-
-#AVATAR_MAX_SIZE = 10240 * 10240
-
-#AVATAR_MAX_AVATARS_PER_USER = 3
-
-#from PIL import Image
-
-#AVATAR_RESIZE_METHOD = Image.NONE
-
-#AVATAR_STORAGE_DIR = "files/avatar/"
-
-#AVATAR_CLEANUP_DELETED = True
-
-#AVATAR_ADD_TEMPLATE = "accounts/addAvatar.html"
-#AVATAR_CHANGE_TEMPLATE = "accounts/changeAvatar.html"
-#AVATAR_DELETE_TEMPLATE = "accounts/deleteAvatar.html"
-
-#AVATAR_GRAVATAR_DEFAULT = "retro"  # change this
-
 django_heroku.settings(locals())
 
 
@@ -242,3 +220,5 @@ TAGGIT_SELECTIZE = {
 
 EMAIL_CONFIRMATION_PERIOD_DAYS = 7
 SIMPLE_EMAIL_CONFIRMATION_PERIOD = timedelta(days=EMAIL_CONFIRMATION_PERIOD_DAYS)
+
+SECURE_SSL_REDIRECT = False  #developemnt change to False

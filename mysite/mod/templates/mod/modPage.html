@@ -8,41 +8,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
-<script>
-    var counter = 0;
 
-    var user = '{{ user }}';
-
-    var modID = {{ post.modID }};
-    var modAuthor = '{{ post.modAuthor }}';
-    var modDate = '{{ post.modDate }}';
-    var modUpdate = '{{ post.modUpdate }}';
-    var modDownloads = '{{ post.modDownloads }}';
-    var modStatus = '{{ post.modStatus }}';
-    var modName = '{{ post.modName }}';
-    var modDescription = '{{ post.modDescription }}';
-    var modWebsite = '{{ post.modWebsite }}';
-    var tags = '{{ post.tags }}';
-    var modCreditPerms = '{{ post.modCreditPerms }}';
-    var modDonations = '{{ post.modDonations }}';
-    var modDiscord = '{{ post.modDiscord }}';
-    var modUpload = '{{ post.modUpload }}';
-    var modUploadURL = '{{ post.modUploadURL }}';
-    var modPlayTimeHours = {{ post.modPlayTimeHours }};
-    var modPlayTimeMinutes = {{ post.modPlayTimeMinutes }};
-
-    var ratingID = '{{ rating.ratingID }}';
-    var ratingModID = '{{ rating.ratingModID }}';
-    var ratingAuthorID = '{{ rating.ratingAuthorID }}';
-    var ratingChoice = '{{ rating.ratingChoice }}';
-    var ratingValue = '{{ rating.ratingValue }}';
-
-    var newsNotificationsID = '{{ newsnotifications.newsNotificationsID }}';
-    var newsNotificationsModID = '{{ newsnotifications.newsNotificationsModID }}';
-    var newsNotificationsUserID = '{{ newsnotifications.newsNotificationsUserID }}';
-</script>
 
 {% block content %}
+    {% if post.modApproved == True %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/modPage.css' %}">
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
@@ -142,7 +111,6 @@
     </div>
 
     <div class="modMainContent">
-        <p>Description:</p>
         <p>{{ post.modDescription|safe }}</p>
         <p>All tags for this mod:</p>
         {% get_tags_for_object post as "tags" %}
@@ -266,7 +234,7 @@
             <div id="review{{ review.reviewid }}">
                 <div class="modReviewData">
                     <div class="modReviewCoreData">
-                        <p>{{ review.reviewAuthorID }}</p><br>
+                        <p><a href="{% url 'accounts:userProfile' review.reviewAuthorID %}">{{ review.reviewAuthorID }}</a></p><br>
                         {% if user.is_authenticated %}
                             <form method="post" id="upvote_review" class="voteForm">
                                 {% csrf_token %}
@@ -305,7 +273,12 @@
                     <div class="modReviewHeader">
                         <p>{{ review.reviewid }} | {{ review.reviewDate }}</p>
                         <div class="modReviewComment">
-                            <p>{{ review.reviewComment }}</p>
+                            {% if review.reviewApproved == True %}
+                                <p>{{ review.reviewComment }}</p>
+                            {% elif review.reviewApproved == False %}
+                                <p>This review is awaiting verification from moderators.</p>
+                                <p>If you have written the review and it has not been approved within 7 days, please <a href="{% url 'contactUs' %}">contact us.</a></p>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -429,11 +402,8 @@
                 <form method="post" enctype="multipart/form-data" name="comment">
                     {% csrf_token %}
                     <p>Would you like to review this mod?</p>
-                   <span class="rulesSpan">Click here to view the rules</span>
-                    <!--<p>Please:</p>
-                    <p>1. Don't be too harsh, constructive criticism is usually welcomed by mod developers but being needlessly critical towards a mod can be seen as being rude.</p>
-                    <p>2. Advertising your own content of the mod is allowed (YouTube video, twitch stream), but please also add a quick review, not just a link to your content.</p>-->
-                    <div class="submitReviewCommentForm">{{ commentForm.reviewComment|safe }}</div>
+                   <span class="rulesSpan">Click <a href="{% url 'rules' %}">here</a> to view the rules</span>
+                    <div class="submitReviewCommentForm">{{ commentForm.reviewComment }}</div>
                     <div class="reviewSubmit"><p>Don't forget to also <a href="#rate">rate</a> the mod!</p><input class="reviewSubmitButton" type="submit" value="submit"></div>
                 </form>
             {% endif %}
@@ -461,8 +431,11 @@
             </style>
         {% endif %}
     {% endif %}
-
-    {{ counter }}
+    {% else %}
+        <title>Awaiting moderation approval</title>
+        <p>This mod has not yet been approved. Please wait for a moderator to approve the mod first.</p>
+        <p>If you have been waiting for longer than 7 days, please <a href="{% url 'contactUs' %}">contact us.</a></p>
+    {% endif %}
 
 {% endblock %}
 

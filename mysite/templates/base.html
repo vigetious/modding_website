@@ -11,10 +11,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="Template mod page. Change this.">
+    <meta name="description" content="Base page">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="manifest" href="site.webmanifest">
+    <link rel="icon" href="{% static 'pages/favicon.ico' %}">
     <link rel="apple-touch-icon" href="icon.png">
     <!-- Place favicon.ico in the root directory -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
@@ -75,7 +76,7 @@
     <div class="bottomContent">
         <ul class="bottomNavbar">
             <li><a href="{% url 'contactUs' %}">Contact Us</a></li>
-            <li><a href="{% url 'rules' %}">Rules</a></li>
+            <li><a href="{% url 'rules' %}">Rules and TOS</a></li>
             <li><a href="{% url 'copyright' %}">Copyright claims</a> </li>
         </ul>
     </div>
