@@ -22,10 +22,6 @@ import json, pdb
 
 # Create your views here.
 
-@login_required
-def account(request):
-    return render(request, 'accounts/accountPage.html')
-
 
 @login_required
 def profile(request):

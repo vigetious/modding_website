@@ -6,10 +6,11 @@ from django.contrib.auth import get_user_model
 
 from .models import User, Avatar
 from easy_thumbnails.fields import ThumbnailerImageField
+from verified_email_field.forms import VerifiedEmailField
 
 
 class CustomUserCreationForm(UserCreationForm):
-
+    email = VerifiedEmailField(label='email', required=True)
     class Meta(UserCreationForm):
         model = User
         fields = ('username', 'email')

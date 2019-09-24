@@ -25,6 +25,14 @@
     display: none;
 }
 
+.supportListDropDown a {
+    text-decoration: underline;
+}
+
+.submittingModsList a {
+    text-decoration: underline;
+}
+
 .supportDiscord {
     display: inline-block;
     width: 39%;

@@ -127,7 +127,7 @@
                 <p>Tags:</p><p class="tags">
                 {% get_tags_for_object post as "tags" %}
                 {% for tag in tags %}
-                    <a href="{% url 'mod:modSearch' %}?tags={{ tag }}">{{ tag }}</a>
+                    <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags={{ tag }}&dateBy=0">{{ tag }}</a>
                 {% endfor %}</p>
             </li>
         </ul>
@@ -144,10 +144,10 @@
     <div class="modMainContent">
         <p>Description:</p>
         <p>{{ post.modDescription|safe }}</p>
-        <p>Tags of mod:</p>
+        <p>All tags for this mod:</p>
         {% get_tags_for_object post as "tags" %}
             {% for tag in tags %}
-                <span><a href="{% url 'mod:modSearch' %}?tags={{ tag }}">{{ tag }}</a></span>
+                <span><a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags={{ tag }}&dateBy=0">{{ tag }}</a></span>
             {% endfor %}
     </div>
     <div class="modSideContent">
@@ -243,6 +243,7 @@
                         event.preventDefault();
                         console.log("Attempting to submit news.");
                         window.setTimeout(function () {submitNews($("#news_text").val(), {{ post.modID }})}, 100);
+                        alert('News submitted.')
                     }
                 }
             </script>
@@ -294,7 +295,7 @@
                                         event.preventDefault();
                                         if (confirm('Are you sure you want to delete the review?')) {
                                             console.log("Deleting comment " + {{ review.reviewid }});
-                                            deleteComment({{ review.reviewid }});
+                                            deleteCommentAjax({{ review.reviewid }});
                                             $("#review{{ review.reviewid }}").remove();
                                         }
                                     }
@@ -354,7 +355,6 @@
                                 window.setTimeout(function () {upvote_post({{ review.reviewid }}, {{ mod.modID }})}, 100);
                                 $("#downvoted_review_{{ review.reviewid }}").off('click').on('click', downvoteFirstClick);
                                 $("#downvoted_review_{{ review.reviewid }}").attr('class', 'downvote_review');
-                                $("#downvoted_review_{{ review.reviewid }}").attr('value', 'downvote');
                                 $('#downvote_review_{{ review.reviewid }}').attr('id', 'downvote_review_{{ review.reviewid }}');
                                 document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) + 1;
                             } else {
@@ -390,7 +390,6 @@
                                 window.setTimeout(function () {downvote_post({{ review.reviewid }}, {{ mod.modID }})}, 100);
                                 $("#upvoted_review_{{ review.reviewid }}").off('click').on('click', upvoteFirstClick);
                                 $("#upvoted_review_{{ review.reviewid }}").attr('class', 'upvote_review');
-                                $("#upvoted_review_{{ review.reviewid }}").attr('value', 'upvote');
                                 $("#upvote_review_{{ review.reviewid }}").attr('id', 'upvote_review_{{ review.reviewid }}');
                                 document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) - 1;
                             } else {

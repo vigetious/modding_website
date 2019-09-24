@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import django_heroku
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -48,10 +49,10 @@ INSTALLED_APPS = [
     'progressbarupload',
     'django_cleanup.apps.CleanupConfig',
     'easy_thumbnails',
-#    'avatar',
     'pages.apps.PagesConfig',
     'embed_video',
     'taggit_selectize',
+    'verified_email_field',
 ]
 
 MIDDLEWARE = [
@@ -238,3 +239,6 @@ TAGGIT_SELECTIZE = {
     'DRAG_DROP': False,
     'DELIMITER': ','
 }
+
+EMAIL_CONFIRMATION_PERIOD_DAYS = 7
+SIMPLE_EMAIL_CONFIRMATION_PERIOD = timedelta(days=EMAIL_CONFIRMATION_PERIOD_DAYS)

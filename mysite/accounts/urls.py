@@ -6,7 +6,6 @@ from mod.views import ratingDelete
 app_name = 'accounts'
 
 urlpatterns = [
-#    path('account/', views.account, name='accountPage'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile/', views.profile, name='profile'),
     path('<str:pk>/profile', views.userProfile, name='userProfile'),

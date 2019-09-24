@@ -25,6 +25,8 @@
 .screenshotVideoContent {
     height: 350px;
     padding: 10px 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .screenshotVideoBar {
@@ -47,6 +49,11 @@
     display: inline;
     padding: 10px 10px;
     list-style-type: none;
+}
+
+.mySlides {
+    display:block;
+    margin:auto;
 }
 
 .screenshotVideoBar img {

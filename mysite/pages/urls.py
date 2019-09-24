@@ -14,5 +14,8 @@ urlpatterns = [
     path('support/myaccount/', views.myAccount, name='myAccountSupport'),
     path('support/contactus/', views.contactUs, name='contactUs'),
     path('support/rules/', views.rules, name='rules'),
+    path('support/copyright', views.copyright, name='copyright'),
+    path('support/copyright', views.copyright, name='copyright'),
     path(r'^taggit/', include('taggit_selectize.urls')),
+    path(r'^verified-email-field/', include('verified_email_field.urls')),
 ]

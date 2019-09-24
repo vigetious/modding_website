@@ -73,7 +73,7 @@ function downvote_post(reviewid, modID) {
     })
 }
 
-function deleteComment(reviewid) {
+function deleteCommentAjax(reviewid) {
     console.log("Deleteing review " + reviewid);
     $.ajax({
         url: 'reviewdelete/',

@@ -353,7 +353,7 @@ def news(request, pk):
         if len(toEmailList) == 0:
             pass
         else:
-            notificationsSendMail(modTitle, toEmailList, news_text)
+            notificationsSendMail(modTitle, toEmailList, news_text, news_mod_id)
 
         responseData['result'] = "Successfully added news to {0}.".format(news_mod_id)
 
@@ -420,100 +420,120 @@ class SearchResultsView(ListView):
         sortBy = self.request.GET.get('sortBy')
         dateBy = self.request.GET.get('dateBy')
 
+        dateBy = int(dateBy)
+
+        datetime.datetime.now(tz=timezone.utc)
         today = datetime.date.today()
+        today = timezone.now()
+
+        if int(dateBy) == 0:
+            dateBy = 99999  # I am ashamed of this code, but it's the easiest solution
+            # STOP JUDGING ME, MY BRAIN IS BAD
 
         if (searchQuery is "" or None) and (len(tagFilter) == 0):
+            print(1)
             if sortBy == 'newest':
-                object_list = Mod.objects.all().order_by('-modDate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                object_list = Mod.objects.all().order_by('-modDate').filter(modDate__gte=today - datetime.timedelta(days=dateBy))
             if sortBy == 'rated':
-                object_list = Mod.objects.all().order_by('-modRating').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                object_list = Mod.objects.all().order_by('-modRating').filter(modDate__gte=today - datetime.timedelta(days=dateBy))
             if sortBy == 'reviewed':
-                object_list = sorted(Mod.objects.all().filter(modDate__gte=today - datetime.timedelta(days=int(dateBy))), key=lambda x: x.modReviewCount, reverse=True)
+                object_list = sorted(Mod.objects.all().filter(modDate__gte=today - datetime.timedelta(days=dateBy)), key=lambda x: x.modReviewCount, reverse=True)
             if sortBy == 'oldest':
-                object_list = Mod.objects.all().order_by('modDate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                object_list = Mod.objects.all().order_by('modDate').filter(modDate__gte=today - datetime.timedelta(days=dateBy))
             if sortBy == 'updated':
-                object_list = Mod.objects.all().order_by('-modUpdate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                object_list = Mod.objects.all().order_by('-modUpdate').filter(modDate__gte=today - datetime.timedelta(days=dateBy))
 
         elif (tagFilter is "" or len(tagFilter) == 0) and (searchQuery is not "" or None):
+            print(2)
             if sortBy == 'newest':
                 object_list = Mod.objects.filter(
                     Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-                ).order_by('-modDate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))  # i removed the .filter.annotate fix present in others, incase it all goes wrong
+                ).order_by('-modDate').filter(modDate__gte=today - datetime.timedelta(days=dateBy)).order_by('-modDate')  # i removed the .filter.annotate fix present in others, incase it all goes wrong
             elif sortBy == 'rated':
                 object_list = Mod.objects.filter(
                     Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-                ).order_by('-modRating').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                ).order_by('-modRating').filter(modDate__gte=today - datetime.timedelta(days=dateBy)).order_by('-modDate')
             elif sortBy == 'reviewed':
                 object_list = sorted(Mod.objects.filter(
                     Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-                ).filter(modDate__gte=today - datetime.timedelta(days=int(dateBy))), key=lambda x: x.modReviewCount, reverse=True)
+                ).filter(modDate__gte=today - datetime.timedelta(days=dateBy)).order_by('-modDate'), key=lambda x: x.modReviewCount, reverse=True)
             elif sortBy == 'oldest':
                 object_list = Mod.objects.filter(
                     Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-                ).order_by('modDate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                ).order_by('modDate').filter(modDate__gte=today - datetime.timedelta(days=dateBy)).order_by('-modDate')
             elif sortBy == 'updated':
                 object_list = Mod.objects.filter(
                     Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-                ).order_by('-modUpdate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                ).order_by('-modUpdate').filter(modDate__gte=today - datetime.timedelta(days=dateBy)).order_by('-modDate')
             else:
                 object_list = Mod.objects.filter(
                     Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-                ).filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                ).filter(modDate__gte=today - datetime.timedelta(days=dateBy)).order_by('-modDate')
 
         elif (searchQuery is "" or None) and (tagFilter is not "" or len(tagFilter) == 0):
+            print(3)
             if sortBy == 'newest':
-                object_list = Mod.objects.filter(
-                    tags__name__in=tagFilter
-                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modDate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                object_list = Mod.objects.all().filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modDate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                #object_list = Mod.objects.filter(
+                #    tags__name__in=tagFilter
+                #).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modDate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
             elif sortBy == 'rated':
-                object_list = Mod.objects.filter(
-                    tags__name__in=tagFilter
-                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modRating').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                object_list = Mod.objects.all().filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modRating').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                #object_list = Mod.objects.filter(
+                #    tags__name__in=tagFilter
+                #).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modRating').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
             elif sortBy == 'reviewed':
-                object_list = sorted(Mod.objects.filter(
-                    tags__name__in=tagFilter
-                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).filter(modDate__gte=today - datetime.timedelta(days=int(dateBy))), key=lambda x: x.modReviewCount, reverse=True)
+                object_list = sorted(Mod.objects.all().filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).filter(modDate__gte=today - datetime.timedelta(days=int(dateBy))), key=lambda x: x.modReviewCount, reverse=True)
+                #object_list = sorted(Mod.objects.filter(
+                #    tags__name__in=tagFilter
+                #).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).filter(modDate__gte=today - datetime.timedelta(days=int(dateBy))), key=lambda x: x.modReviewCount, reverse=True)
             elif sortBy == 'oldest':
-                object_list = Mod.objects.filter(
-                    tags__name__in=tagFilter
-                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('modDate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                object_list = Mod.objects.all().filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('modDate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                #object_list = Mod.objects.filter(
+                #    tags__name__in=tagFilter
+                #).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('modDate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
             elif sortBy == 'updated':
-                object_list = Mod.objects.filter(
-                    tags__name__in=tagFilter
-                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modUpdate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                object_list = Mod.objects.all().filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modUpdate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                #object_list = Mod.objects.filter(
+                #    tags__name__in=tagFilter
+                #).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modUpdate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
             else:
-                object_list = Mod.objects.filter(
-                    tags__name__in=tagFilter
-                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                object_list = Mod.objects.all().filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                #object_list = Mod.objects.filter(
+                #    tags__name__in=tagFilter
+                #).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
 
         elif (searchQuery is not "" or None) and (tagFilter is not "" or len(tagFilter) == 0):
+            print(4)
             if sortBy == 'newest':
                 object_list = Mod.objects.filter(
                     Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modDate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modDate').filter(modDate__gte=today - datetime.timedelta(days=dateBy))
             elif sortBy == 'rated':
                 object_list = Mod.objects.filter(
                     Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modRating').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modRating').filter(modDate__gte=today - datetime.timedelta(days=dateBy))
             elif sortBy == 'reviewed':
                 object_list = sorted(Mod.objects.filter(
                     Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).filter(modDate__gte=today - datetime.timedelta(days=int(dateBy))), key=lambda x: x.modReviewCount, reverse=True)
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).filter(modDate__gte=today - datetime.timedelta(days=dateBy)), key=lambda x: x.modReviewCount, reverse=True)
             elif sortBy == 'oldest':
                 object_list = Mod.objects.filter(
                     Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('modDate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('modDate').filter(modDate__gte=today - datetime.timedelta(days=dateBy))
             elif sortBy == 'updated':
                 object_list = Mod.objects.filter(
                     Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modUpdate').filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).order_by('-modUpdate').filter(modDate__gte=today - datetime.timedelta(days=dateBy))
             else:
                 object_list = Mod.objects.filter(
                     Q(modName__contains=searchQuery) | Q(modDescription__contains=searchQuery)
-                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).filter(modDate__gte=today - datetime.timedelta(days=int(dateBy)))
+                ).filter(tags__name__in=tagFilter).annotate(num_tags=Count('tags')).filter(num_tags=len(tagFilter)).filter(modDate__gte=today - datetime.timedelta(days=dateBy))
 
         else:
             return HttpResponse("Please enter something in the search parameter")
+        object_list.values_list()
+        print(object_list.values_list())
         return object_list
 
     def get_tags(self):

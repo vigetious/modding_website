@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/modSearch.css' %}">
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/pages.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 
     <title>Mod search</title>
 
@@ -30,6 +31,7 @@
                 </label>
                 <label>
                     <select name="dateBy">
+                        <option value="0">Forever</option>
                         <option value=1>Today</option>
                         <option value=7>Week</option>
                         <option value=31>Month</option>

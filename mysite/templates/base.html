@@ -42,8 +42,6 @@
             {% endif %}
         </div>
         <div class="topMiddleNav">
-            <a href="">Donate</a>
-            <a href="">GitHub</a>
         </div>
     </div>
 
@@ -51,10 +49,10 @@
         <li><a href="{% url 'home' %}"><img src="{% static 'img/HomeSmall.png' %}" alt="Home"></a></li>
         <li><a href="http://reddit.com/r/ddlcmods"><img src="{% static 'img/Mods RedditSmall.png' %}" alt="Mod Reddit"></a></li>
         <li class="dropdown">
-            <a href="javascript:void(0)" class="dropbtn"><img src="{% static 'img/ModsSmall.png' %}" alt="Mods"></a>
+            <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags=All&dateBy=0" class="dropbtn"><img src="{% static 'img/ModsSmall.png' %}" alt="Mods"></a>
             <div class="dropdown-content">
-                <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags=All">Search for mods</a>
-                <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated">Highest rated mods</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags=All&dateBy=0">Search for mods</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated&dateBy=0">Highest rated mods</a>
                 <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated&dateBy=31">Highest rated mods this month</a>
                 <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated&dateBy=7">Highest rated mods this week</a>
                 <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&dateBy=31">Released this month</a>
@@ -78,7 +76,7 @@
         <ul class="bottomNavbar">
             <li><a href="{% url 'contactUs' %}">Contact Us</a></li>
             <li><a href="{% url 'rules' %}">Rules</a></li>
-            <li><a href="">DMCA and Copyright</a> </li>
+            <li><a href="{% url 'copyright' %}">Copyright claims</a> </li>
         </ul>
     </div>
 </div>
