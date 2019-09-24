@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import django_heroku
 from datetime import timedelta
+from .secret import access_key_id, secret_access_key, bucket_name, django_secret_key
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#57rx=7$#ze0ljqf&h=6sspa!ifki9c9mozb47et265u(fbpd^'
+SECRET_KEY = django_secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
     'embed_video',
     'taggit_selectize',
     'verified_email_field',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -222,3 +224,14 @@ EMAIL_CONFIRMATION_PERIOD_DAYS = 7
 SIMPLE_EMAIL_CONFIRMATION_PERIOD = timedelta(days=EMAIL_CONFIRMATION_PERIOD_DAYS)
 
 SECURE_SSL_REDIRECT = False  #developemnt change to False
+
+AWS_ACCESS_KEY_ID = access_key_id
+AWS_SECRET_ACCESS_KEY = secret_access_key
+AWS_STORAGE_BUCKET_NAME = bucket_name
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
