@@ -256,9 +256,9 @@ django_heroku.settings(locals())
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ###############################
-AWS_ACCESS_KEY_ID = access_key_id
-AWS_SECRET_ACCESS_KEY = secret_access_key
-AWS_STORAGE_BUCKET_NAME = bucket_name
+AWS_ACCESS_KEY_ID = 'AKIARHRBXQJOSG6TN37J'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'ddlc-modding-static'
 AWS_S3_CUSTOM_DOMAIN = '%.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
