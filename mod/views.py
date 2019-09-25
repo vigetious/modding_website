@@ -14,6 +14,7 @@ from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.core import serializers, mail
 from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 import json, pdb, math, datetime
 
@@ -47,7 +48,7 @@ def submit(request):
             if post.modAvatar:
                 pass
             else:
-                post.modAvatar = 'files/avatar/icon.png'
+                post.modAvatar = static('img/icon.png')
             post.save()
             post.save()
             form.save_m2m()
