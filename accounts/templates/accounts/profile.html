@@ -10,7 +10,11 @@
     {% if user.is_authenticated %}
         <div class="userLeftSideBar">
             <div class="userLeftSideBarAvatar">
-                <img src={{ avatar.avatarImage.url }}>
+                {% if avatar.avatarImage %}
+                    <img src={{ avatar.avatarImage.url }}>
+                {% else %}
+                    <img src="{% static 'img/icon.png %}" alt="Avatar Image">
+                {% endif %}
             </div>
             <div class="userLeftSideBarData">
                 <p><a href="{% url 'accounts:avatar' %}"><input type="button" value="Edit avatar"></a></p>

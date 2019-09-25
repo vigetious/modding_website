@@ -118,10 +118,6 @@ def avatar(request):
                     Avatar.objects.get(avatarUserID=request.user).delete()
             except:
                 pass
-            if post.avatarImage:
-                pass
-            else:
-                post.avatarImage = static('img/icon.png')
             post.save()
             return redirect('accounts:profile')
     else:
