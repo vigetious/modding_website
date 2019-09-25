@@ -272,3 +272,5 @@ STATICFILES_DIRS = [
 
 STATIC_URL = 'https://{0}/{1}/'.format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
