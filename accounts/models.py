@@ -51,6 +51,7 @@ class Avatar(models.Model):
     avatarTime = models.DateTimeField(auto_now=True)
     avatarImage = ThumbnailerImageField('avatar image', upload_to=avatar_path, blank=True, resize_source=dict(size=(200, 200), sharpen=True, upscale=True))
     avatarApproved = models.BooleanField('avatar moderation approval', default=False)
+    avatarIP = models.CharField('mod user ip address', max_length=100)
 
 
     def __str__(self):

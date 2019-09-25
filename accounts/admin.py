@@ -20,7 +20,7 @@ class CustomUserAdmin(UserAdmin):
 
 
 class AvatarAdmin(admin.ModelAdmin):
-    list_display = ['avatarID', 'avatarUserID', 'avatarTime', 'avatarImage', 'avatarApproved']
+    list_display = ['avatarID', 'avatarUserID', 'avatarTime', 'avatarImage', 'avatarApproved', 'avatarIP']
 
 
 admin.site.register(User, CustomUserAdmin)

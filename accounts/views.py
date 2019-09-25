@@ -24,6 +24,16 @@ import json, pdb
 # Create your views here.
 
 
+def visitor_ip_address(request):
+
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 @login_required
 def profile(request):
     try:
@@ -113,6 +123,7 @@ def avatar(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.avatarUserID = request.user
+            post.avatarIP = visitor_ip_address(request)
             try:
                 if Avatar.objects.get(avatarUserID=request.user):
                     Avatar.objects.get(avatarUserID=request.user).delete()
