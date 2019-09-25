@@ -235,7 +235,7 @@ SECURE_SSL_REDIRECT = True  #developemnt change to False
 #}
 #AWS_LOCATION = 'static'
 
-#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -259,3 +259,4 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get("S3_BUCKET_NAME", "")
 AWS_QUERYSTRING_AUTH = False
 AWS_S3_CUSTOM_DOMAIN = os.environ.get("AWS_S3_CUSTOM_DOMAIN", "")
 MEDIA_ROOT = os.environ.get("MEDIA_URL", "")
+STATIC_URL = os.environ.get("STATIC_URL", "")
