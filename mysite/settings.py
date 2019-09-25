@@ -31,7 +31,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['modding-website.herokuapp.com']
+ALLOWED_HOSTS = ['modding-website.herokuapp.com',
+                 'https://www.dokidokimodclub.com/',
+                 'dokidokimodclub.com']
 
 
 # Application definition
