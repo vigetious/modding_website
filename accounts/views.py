@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.views import PasswordResetView
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 from .forms import CustomUserCreationForm, EditForm, AvatarForm#, SignUp
 from .models import Avatar, User
@@ -29,7 +30,7 @@ def profile(request):
         userAvatar = Avatar.objects.get(avatarUserID=request.user)
     except ObjectDoesNotExist:
         #userAvatar = None
-        userAvatar = Avatar.objects.create(avatarUserID=request.user, avatarImage='files/avatar/icon.png')
+        userAvatar = Avatar.objects.create(avatarUserID=request.user, avatarImage=static('img/icon.png'))
 
     try:
         mods = Mod.objects.filter(modAuthor=request.user.id)
