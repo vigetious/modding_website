@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-from .secret import access_key_id, secret_access_key, bucket_name, django_secret_key
+from .secret import access_key_id, secret_access_key, bucket_name, django_secret_key, captcha_site_key, captcha_secret_key
 SECRET_KEY = django_secret_key
 
 
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'taggit_selectize',
     'verified_email_field',
     'storages',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -279,3 +280,11 @@ if not DEBUG:
     DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
 else:
     STATIC_URL = '/static/'
+
+RECAPTCHA_PUBLIC_KEY = captcha_site_key
+RECAPTCHA_PRIVATE_KEY = captcha_secret_key
+
+RECAPTCHA_REQUIRED_SCORE = 0.85
+
+if DEBUG:
+    SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']

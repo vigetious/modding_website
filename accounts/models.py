@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 
 from easy_thumbnails.fields import ThumbnailerImageField
 from verified_email_field.forms import VerifiedEmailField
+from captcha.fields import ReCaptchaField
 
 import string, random
 
@@ -27,6 +28,7 @@ def avatar_path(instance, filename):
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     #email = VerifiedEmailField('email', fieldsetup_id='email')
+    captcha = ReCaptchaField()
     description = models.CharField(max_length=1000, null=True)
     totalComments = models.IntegerField('total comments', default=0)
     totalMods = models.IntegerField('total mods', default=0)
