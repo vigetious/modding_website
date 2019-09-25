@@ -75,7 +75,7 @@ class Mod(models.Model):
     tags = TaggableManager()
     modUpload = models.FileField(upload_to=mod_directory_path, blank=True, null=True,
                                  validators=[FileExtensionValidator(allowed_extensions=['zip', 'rar'])])
-    modUploadURL = models.URLField("Mod Upload Destination", max_length=1000)
+    modUploadURL = models.URLField("Mod Upload Destination", max_length=1000, help_text="Only Google Drive and MEGA are currently supported.")
     modPlayTimeHours = models.IntegerField('Average Play Time Hours', blank=True, null=True, default=0,
                                            validators=[MinValueValidator(0)])
     modPlayTimeMinutes = models.IntegerField('Average Play Time Minutes', blank=True, null=True, default=0,
