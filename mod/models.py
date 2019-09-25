@@ -97,6 +97,7 @@ class Mod(models.Model):
                                       help_text="Recommended size is 200x200. Make sure the background is transparent,"
                                                 " as well.")
     modApproved = models.BooleanField('mod moderation approval')
+    modIP = models.CharField('mod user ip address', max_length=100)
 
 
     objects = ModManager()

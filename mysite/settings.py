@@ -29,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['modding-website.herokuapp.com',
                  'https://www.dokidokimodclub.com/',
@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'taggit_templatetags2',
     'secretballot',
     'likes',
-    'progressbarupload',
+#    'progressbarupload',
     'django_cleanup.apps.CleanupConfig',
     'easy_thumbnails',
     'pages.apps.PagesConfig',
@@ -181,11 +181,11 @@ PINAX_RATINGS_CATEGORY_CHOICES = {
     }
 }
 
-FILE_UPLOAD_HANDLERS = (
-    "progressbarupload.uploadhandler.ProgressBarUploadHandler",
-    "django.core.files.uploadhandler.MemoryFileUploadHandler",
-    "django.core.files.uploadhandler.TemporaryFileUploadHandler",
-)
+#FILE_UPLOAD_HANDLERS = (
+#    "progressbarupload.uploadhandler.ProgressBarUploadHandler",
+#    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+#    "django.core.files.uploadhandler.TemporaryFileUploadHandler",
+#)
 
 MAX_UPLOAD_SIZE = 859832320
 

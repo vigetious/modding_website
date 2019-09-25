@@ -31,6 +31,15 @@ from accounts.models import User
 
 # Create your views here.
 
+def visitor_ip_address(request):
+
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 def index(request):
     return render(request, 'mod/index.html')
@@ -49,6 +58,8 @@ def submit(request):
                 pass
             else:
                 post.modAvatar = static('img/icon.png')
+            post.modApproved = False
+            post.modIP = visitor_ip_address(request)
             post.save()
             post.save()
             form.save_m2m()
@@ -57,7 +68,6 @@ def submit(request):
             user.totalMods = user.totalMods + 1
             group = Group.objects.get(name="Mod Creators")
             group.user_set.add(request.user)
-            post.modApproved = False
             user.save()
             return redirect('mod:modPage', pk=post.pk)
     else:
@@ -81,7 +91,7 @@ def modPage(request, pk):
     else:
         rating = None
 
-    questions = ReviewRating.objects.annotate(number_of_votes=Sum('vote'))
+    questions = ReviewRating.objects.annotate(number_of_votes=Sum('reviewVotes'))
 
     post.tags = Tag.objects.all()
 
@@ -285,6 +295,7 @@ def modEdit(request, pk):
             else:
                 post.modAvatar = 'files/avatar/icon.png'
             post.modApproved = False
+            post.modIP = visitor_ip_address(request)
             post.save()
             form.save_m2m()
             print("Form is valid, taking you to the updated mod page")

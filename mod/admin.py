@@ -7,10 +7,10 @@ from .models import Mod, ReviewRating, Rating, News, NewsNotifications
 class ModAdmin(admin.ModelAdmin):
     list_display = ['modID', 'modAuthor', 'modDate', 'modUpdate', 'modStatus', 'modName',
                     'modDescription', 'tags', 'modUpload', 'modUploadURL', 'modPlayTimeHours',
-                    'modPlayTimeMinutes', 'modReviewCount', 'modApproved']
+                    'modPlayTimeMinutes', 'modReviewCount', 'modApproved', 'modIP']
 
-    change_form_template = 'progressbarupload/change_form.html'
-    add_form_template = 'progressbarupload/change_form.html'
+    #change_form_template = 'progressbarupload/change_form.html'
+    #add_form_template = 'progressbarupload/change_form.html'
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related('tags')
