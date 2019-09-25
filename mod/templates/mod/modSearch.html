@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load taggit_templatetags2_tags %}
+    {% load static %}
+    {% get_taglist as tagCount for 'mod.Mod' %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/modSearch.css' %}">
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'pages/css/pages.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
+    <title>Mod search</title>
+
+    <div class="searchSideContent">
+        <form action="{% url 'mod:modSearch' %}" method="get">
+            <div class="searchSideContentCategory"><h3>Search:</h3></div>
+            <div class="searchSideContentSearch">
+                <label>
+                    <input class="modSearchInput" name="q" type="text" placeholder="Search">
+                </label>
+                <p>Sort:</p>
+                <label>
+                    <select name="sortBy">
+                        <option value="newest">Newest</option>
+                        <option value="rated">Highest rated</option>
+                        <option value="reviewed">Most reviewed</option>
+                        <option value="oldest">Oldest</option>
+                        <option value="updated">Last updated</option>
+                    </select>
+                </label>
+                <label>
+                    <select name="dateBy">
+                        <option value="0">Forever</option>
+                        <option value=1>Today</option>
+                        <option value=7>Week</option>
+                        <option value=31>Month</option>
+                        <option value=365>Year</option>
+                    </select>
+                </label>
+                <input type="submit" value="Search/Update">
+            </div>
+            <div class="searchSideContentCategory">
+                <h3>Girls:</h3>
+            </div>
+                <div id="girls"></div>
+            <div class="searchSideContentCategory">
+                <h3>Mood:</h3>
+            </div>
+                <div id="mood"></div>
+            <div class="searchSideContentCategory">
+                <h3>Others:</h3>
+            </div>
+                <div id="others"></div>
+
+            {% for x in mods %}
+                <input name="tags" type="checkbox" value="{{ x.modTag }}">{{ x.modTag }}
+            {% endfor %}
+            {% for tag in tagCount %}
+                <script>
+                    girls = ['natsuki', 'yuri', 'monika', 'sayori', 'all girls'];
+                    mood = ['happy', 'sad', 'love'];
+                    state = ['aftermath', 'extension', 'new story'];
+                    if (girls.includes('{{ tag }}'.toLowerCase())) {
+                        $("#girls").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
+                    } else if (mood.includes('{{ tag }}'.toLowerCase())) {
+                        $("#mood").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
+                    } else if (mood.includes('{{ tag }}'.toLowerCase())) {
+                        $("#state").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
+                    } else {
+                        $("#others").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
+                    }
+                </script>
+            {% endfor %}
+
+        </form>
+    </div>
+    <div class="searchMainContent">
+    <ul class="tabContentValue">
+        {% for x in object_list %}
+            {% if x.modApproved %}
+                <li>
+                    <div class="modAvatar">
+                        <a href="/mod/{{ x.modID }}"><img src="{{ x.modAvatar.url }}" alt="Mod Avatar"></a>
+                    </div>
+                    <div class="modData">
+                        <p class="modData-name" title="Name" style="margin: 0"><a href="/mod/{{ x.modID }}">{{ x.modName|truncatechars:17 }}</a></p>
+                        <p class="modData-date" title="Date and Rating">{{ x.modDate|date:"d M Y" }} | {{ x.modRating }}</p>
+                    </div>
+                    <div class="modDescription">
+                        <p title="Description">{{ x.modShortDescription|truncatewords:50 }}</p>
+                    </div>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'pages/css/supportHome.css' %}">
+    <script type="text/javascript" src="{% static 'pages/js/support.js' %}"></script>
+    <title>Support</title>
+    <div class="supportContent">
+        <h1>Support</h1>
+        <p>What do you need help with?</p>
+        <ul>
+            <li class="supportList">
+                <p onclick="showSupportListDropDown('submittingModsDropDown')">Submitting/Editing Mods</p>
+                <div id="submittingModsDropDown" class="supportListDropDown">
+                    <p><a href="{% url 'submittingMods' %}">How to submit a mod</a></p>
+                    <p><a href="{% url 'submittingMods' %}#editmod">How to edit a mod</a></p>
+                    <p><a href="{% url 'submittingMods' %}#commonerrors">Common errors</a></p>
+                </div>
+            </li>
+            <li class="supportList">
+                <p onclick="showSupportListDropDown('otherUsersModsDropDown')">Other Users and their Mods</p>
+                <div id="otherUsersModsDropDown" class="supportListDropDown">
+                    <p><a href="{% url 'otherUsersMods' %}">Reporting misconduct</a></p>
+                    <p><a href="{% url 'otherUsersMods' %}#reviews">Reporting reviews</a></p>
+                </div>
+            </li>
+            <li class="supportList">
+                <p onclick="showSupportListDropDown('myAccountDropDown')">My Account</p>
+                <div id="myAccountDropDown" class="supportListDropDown">
+                    <p><a href="{% url 'myAccountSupport' %}">Deleting account</a></p>
+                    <p><a href="{% url 'myAccountSupport' %}#edit">Editing account</a></p>
+                </div>
+            </li>
+            <li class="supportList">
+                <p onclick="showSupportListDropDown('helpingDropDown')">Helping me!</p>
+                <div id="helpingDropDown" class="supportListDropDown">
+                    <p>If you have any suggestions for the website, please go onto our discord and throw your idea into the chat. All help is much appreciated, and any really big ideas that I believe are worth it will be rewarded.</p>
+                </div>
+            </li>
+            <li class="supportList">
+                <p onclick="showSupportListDropDown('bugDropDown')">I found a bug!</p>
+                <div id="bugDropDown" class="supportListDropDown">
+                    <p>This is my first website, so there are sure to be some bugs found around this website. Please <a href="">contact me on discord</a> with extensive details about the bug. Thank you!</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="supportDiscord">
+        <p>Need support immediately? Contact us through Discord: </p>
+        <iframe src="https://discordapp.com/widget?id=625672295435862047&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+    </div>
+{% endblock %}

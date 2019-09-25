@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load static %}
+
+
+
+
+{% block content %}
+
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/profile.css' %}">
+    <title>{{ user.username }}'s Profile</title>
+    {% if user.is_authenticated %}
+        <div class="userLeftSideBar">
+            <div class="userLeftSideBarAvatar">
+                <img src={{ avatar.avatarImage.url }}>
+            </div>
+            <div class="userLeftSideBarData">
+                <p>Username: {{ user.username }}</p>
+                <p>Total comments: {{ user.totalComments }}</p>
+                <p>Total mods: {{ user.totalMods }}</p>
+            </div>
+        </div>
+        <div class="userRightSideContent">
+            <div class="userRightSideContentBio">
+                <p style="text-align: left; margin: 5px 5px" id="bio">{{ user.description }}</p>
+            </div>
+            <div class="userRightSideContentCreatedMods">
+                <div class="userTitle"><p>Created mods</p></div>
+                <div class="createdModsTable">
+                    <table>
+                        <tr>
+                            <th><p>Avatar</p></th>
+                            <th><p>Mod name</p></th>
+                            <th><p>Average rating</p></th>
+                            <th><p>Status</p></th>
+                            <th><p>Release date</p></th>
+                        </tr>
+                        {% for mods in mods %}
+                            <tr>
+                                <td><img src={{ mods.modAvatar.url }}></td>
+                                <td><p>{{ mods.modName }}</p></td>
+                                <td><p>{{ mods.modRating }}</p></td>
+                                <td><p>{{ mods.modStatus }}</p></td>
+                                <td><p>{{ mods.modDate }}</p></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="userPlayed">
+            <table>
+                <tr>
+                    <th><p>Avatar</p></th>
+                    <th><p>Mod name</p></th>
+                    <th><p>Your rating</p></th>
+                    <th><p>Played status</p></th>
+                    <th><p>Mod status</p></th>
+                    <th><p>Mod note</p></th>
+                </tr>
+                {% for x in played %}
+                    <tr id="rating{{ x.ratingID }}">
+                        <td><a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src="{{ x.ratingAvatar }}"></a></td>
+                        <td><p><a href="../../mod/{{ x.ratingModID|stringformat:'i' }}">{{ x.ratingModID }}</a></p></td>
+                        <td><p>{{ x.ratingValue }}</p></td>
+                        <td><p>{{ x.ratingChoice }}</p></td>
+                        <td><p>{{ x.ratingStatus }}</p></td>
+                        <td><p>{{ x.ratingNote }}</p></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% else %}
+        <p>You are not logged in.</p>
+        <p><a href="{% url 'login' %}">Login</a></p>
+    {% endif %}
+{% endblock %}
+
+<!--JAVASCRIPT-->

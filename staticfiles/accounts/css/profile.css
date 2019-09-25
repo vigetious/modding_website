@@ -1,0 +1,176 @@
+.userLeftSideBar {
+    display: inline-block;
+    width: 30%;
+    min-height: 600px;
+    background-color: #a4d5ff;
+}
+
+.userLeftSideBar p {
+    margin: 0 0 0 5px;
+}
+
+
+.userLeftSideBarAvatar {
+    width: 256px;
+    height: 200px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.userLeftSideBarAvatar img {
+    display: block;
+    margin: auto;
+}
+
+.userLeftSideBarEdit {
+    display: none;
+}
+
+.userRightSideContent {
+    width: 69%;
+    height: 600px;
+    display: inline-block;
+    vertical-align: top;
+    background-color: #a4d5ff;
+}
+
+.userRightSideContentBio {
+    width: 98%;
+    vertical-align: top;
+    height: 48%;
+    background-color: #8acaff;
+    margin: 1%;
+    display: inline-block;
+    text-align: right;
+}
+
+.userRightSideContentBio input {
+    margin-left: 5px;
+    background-color: #7cb5e5;
+}
+
+.userRightSideContentBio textarea {
+    width: 98%;
+    height: 90%;
+    display: block;
+    margin: auto;
+    resize: none;
+}
+
+.userRightSideContentCreatedMods {
+    width: 98%;
+    height: 50%;
+
+    display: inline-block;
+    margin-left: 1%;
+    vertical-align: top;
+}
+
+.userRightSideContentCreatedMods p {
+    margin: 0;
+}
+
+.userRightSideContentReviews {
+    width: 48%;
+    height: 49%;
+    margin-left: 1%;
+    display: inline-block;
+}
+
+.userRightSideContentReviews p {
+    margin: 0;
+}
+
+.userRightSideContentReviews table {
+    width: 100%;
+    height: 100px;
+    table-layout: fixed;
+}
+
+.userRightSideContentReviews td {
+    max-height: 10px;
+    overflow: auto;
+}
+
+.createdModsTable {
+    overflow: auto;
+    height: 90%;
+}
+
+.userTitle p {
+    background-color: #8acaff;
+    width: 100%;
+    margin: 0;
+}
+
+.userRightSideContentCreatedMods table {
+    width: 100%;
+    height: 100px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.userRightSideContentCreatedMods tr {
+    overflow: auto;
+}
+
+.userRightSideContentCreatedMods img {
+    width: 50px;
+}
+
+.userRightSideContentCreatedMods th {
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid black;
+    background-color: #8acaff;
+}
+
+.userRightSideContentCreatedMods td {
+    text-align: center;
+    font-size: 12px;
+    border-bottom: 1px solid black;
+}
+
+.userPlayed {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    margin-top: 10px;
+}
+
+.userPlayed table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.userPlayed th {
+    background-color: #8acaff;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.userPlayed tr {
+    background-color: #add9ff;
+    text-align: center;
+}
+
+.userPlayed tr:nth-child(even) {
+    background-color: #b6ddff;
+}
+
+.userPlayed td {
+    border-bottom: 1px solid black;
+}
+
+.userPlayed td textarea {
+    width: 10em;
+}
+
+.userPlayed p {
+    margin: 0;
+}
+
+.userPlayed img {
+    width: 100px;
+}

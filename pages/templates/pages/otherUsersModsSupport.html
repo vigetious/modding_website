@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <script type="text/javascript" src="{% static 'pages/js/support.js' %}"></script>
+    <title>Other Users and their Mods | Support</title>
+    <h1>Reporting misconduct</h1>
+    <p>If you would like to report others users and/or their mods, as you have found something that is against the <a href="">rules</a> of the website, you can <a href="{% url 'contactUs' %}">contact us</a>. If you believe it to be an emergency, please contact the admin through private discord chat.</p>
+    <h1><a name="reviews"></a>Reporting reviews</h1>
+    <p>If you have found a review that does not respect the <a href="{% url 'rules' %}">rules</a>, please <a href="{% url 'contactUs' %}">contact us</a> and we will fix the problem.</p>
+{% endblock %}

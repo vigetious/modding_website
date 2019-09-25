@@ -1,0 +1,33 @@
+Content-Type: multipart/alternative;
+ boundary="===============7421036867809279276=="
+MIME-Version: 1.0
+Subject: Verification code
+From: root@localhost
+To: vigetious@gmail.com
+Date: Mon, 23 Sep 2019 20:49:15 -0000
+Message-ID: <156927175508.24811.4621198395722605675@new-host-4>
+X-Mailer: Django Verified Email Field
+ (https://github.com/misli/django-verified-email-field)
+
+--===============7421036867809279276==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+Hello,
+
+You have requested email verification. Your verification code is: 622149
+Please note, that the code is only valid before: Sept. 23, 2019, 8:54 p.m.
+
+--===============7421036867809279276==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+
+<p>Hello,<br/>
+You have requested email verification. Your verification code is: <strong>622149</strong><br/>
+Please note, that the code is only valid before: <strong>Sept. 23, 2019, 8:54 p.m.</strong></p>
+
+--===============7421036867809279276==--
+
+-------------------------------------------------------------------------------

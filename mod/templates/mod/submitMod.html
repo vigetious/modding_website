@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load progress_bar %}
+{% block content %}
+    <div class="pagewrap">
+        <title>Submit Mod</title>
+        <link rel="stylesheet" href="{% static 'css/selectize.django.css' %}">
+        <link rel="stylesheet" href="{% static 'css/modSubmitEdit.css' %}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/selectize.js' %}"></script>
+            {% if form.errors %}
+                <div class="editErrorList">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p>{{ field.label }} : {{ field.errors }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <!--<strong>{{ error|escape }}</strong>-->
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <p>If you need help, please read the <a href="{% url 'submittingMods' %}" target="_blank">submit guide</a>.</p>
+            <p><b>Your mod will need to be approved manually by moderators. This could take some time.</b></p>
+            <form id="myForm" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="rowLeft">
+                        <p>Mod Name: </p>
+                    </div>
+                    <div class="rowRight">
+                        {{ form.modName }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="rowLeft">
+                        <p>Mod Status: </p>
+                    </div>
+                    <div class="rowRight">
+                        {{ form.modStatus }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="rowLeft">
+                        <p>Mod Description: </p>
+                    </div>
+                    <div class="rowRight">
+                        {{ form.modDescription }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="rowLeft">
+                        <p>Mod Short Description: </p>
+                    </div>
+                    <div class="rowRight">
+                        {{ form.modShortDescription }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="rowLeft">
+                        <p>Tags: </p>
+                    </div>
+                    <div class="rowRight">
+                        {{ form.tags }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="rowLeft">
+                        <p>Mod Upload URL: </p>
+                    </div>
+                    <div class="rowRight">
+                        {{ form.modUploadURL }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="rowLeft">
+                        <p>Average Play Time: </p>
+                    </div>
+                    <div class="rowRight">
+                        <div class="rowPlayTime"><p>{{ form.modPlayTimeHours }}h {{ form.modPlayTimeMinutes }}m</p></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="rowLeft">
+                        <p>Trailer Video: </p><label title="{{ form.modPreviewVideo.help_text }}" for="{{ form.modPreviewVideo.1 }}"> ! </label>
+                    </div>
+                    <div class="rowRight">
+                        {{ form.modPreviewVideo }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="rowLeft">
+                        <p>Preview Images: </p>
+                    </div>
+                    <div class="rowRight">
+                        <div class="rowPreviewImages">
+                            <div class="previewImage">
+
+                                <input class="modPreviewImageInput" id="id_modPreviewImage1" type="file" name="modPreviewImage1" accept="image/*">
+                                <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton1" onclick="showNext(2, 1)" value="Upload more preview images">
+                            </div>
+                            <div id="hiddenNextImage2">
+                                <div class="previewImage">
+                                    <input class="modPreviewImageInput" id="id_modPreviewImage2" type="file" name="modPreviewImage2" accept="image/*">
+
+                                    <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton2" onclick="showNext(3, 2)" value="Upload more preview images">
+                                </div>
+                                <div id="hiddenNextImage3">
+                                    <div class="previewImage">
+
+                                        <input class="modPreviewImageInput" id="id_modPreviewImage3" type="file" name="modPreviewImage3" accept="image/*">
+                                        <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton3" onclick="showNext(4, 3)" value="Upload more preview images">
+                                    </div>
+                                    <div id="hiddenNextImage4">
+                                        <div class="previewImage">
+
+                                            <input class="modPreviewImageInput" id="id_modPreviewImage4" type="file" name="modPreviewImage4" accept="image/*">
+                                            <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton4" onclick="showNext(5, 4)" value="Upload more preview images">
+                                        </div>
+                                        <div id="hiddenNextImage5">
+                                            <div class="previewImage">
+
+                                                <input class="modPreviewImageInput" id="id_modPreviewImage5" type="file" name="modPreviewImage5" accept="image/*">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            if ($('#id_modPreviewImage1').get(0).files.length > 0) {
+                                console.log("yaes")
+                            }
+                            function check() {
+                                if ($('#id_modPreviewImage1').get(0).files.length > 0) {
+                                    console.log("yaes")
+                                }
+                            }
+                        </script>
+                    </div>
+                </div>
+                <div>
+                    <div class="rowLeft">
+                        <p>Background Image: </p>
+                    </div>
+                    <div class="rowRight">
+                        <div class="previewImage">
+
+                            <input class="modPreviewImageInput" id="id_modBackground" type="file" name="modBackground" accept="image/*">
+                            {{ form.modBackgroundTiledStretch }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="rowLeft">
+                        <p>Avatar Image: </p>
+                    </div>
+                    <div class="rowRight">
+                        <div class="previewImage">
+
+                            <input class="modPreviewImageInput" id="id_modAvatar" type="file" name="modAvatar" accept="image/*">
+                        </div>
+                    </div>
+                </div>
+                <div class="uploadBottom">
+                    <p id="uploadProgressP" hidden>Upload progress:</p>
+                    {% progress_bar %}
+                    <p><input type="submit" value="Submit"></p>
+                </div>
+            </form>
+    </div>
+{% endblock %}
+

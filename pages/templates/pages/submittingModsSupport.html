@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'pages/css/supportHome.css' %}">
+    <script type="text/javascript" src="{% static 'pages/js/support.js' %}"></script>
+    <title>Submitting Mods | Support</title>
+    <h1>Submitting Mods</h1>
+    <p>You can follow this basic guide to submit your mod to the website.</p>
+    <div>
+        <ol class="submittingModsList">
+            <li><p>You first want to navigate to the submit page, which can be found <a href="{% url 'mod:submit' %}">here</a> or by hover over the 'Mods' button in the navigation bar above, and clicking 'Submit Mod'.</p></li>
+            <li><p>You then want to start populating the fields. The first field that you find will be the 'Mod Name' field, which is where you want to type the name of your mod.</p></li>
+            <li><p>The next field is the 'Mod Status' field, which is the current development status of your mod. If you are still working on the mod and you are submitting a demo, select the 'Demo' option. If the mod is fully developed and users can start playing the full mod immediately, select the 'Full release' option.</p></li>
+            <li><p>The next field is the 'Mod Description' field, which is where you will want to put a description of the mod. Make sure the description is well thought out, as most users will decide whether they want to play the mod based off of what they read in the description. <br>You can also add any extra data you want to add here, such as a link to your private Discord server, website or any other data you want to share with potential players. <b>There is a 10,000 letter count limit</b> so be careful about how much you want to add to the description.</p></li>
+            <li><p>The field after that is the 'Mod Short Description' field, which is basically a much shortened version of the description above. This description needs to be short because it will be used in the sidebar on the mod page, and will be shown to the users when they search for mods. Therefore it should be quick and short, but informative.<b>There is a 250 letter count limit</b> on this field, so you really need to be careful with how much you type.</p></li>
+            <li><p>The next field is the 'Tags' field, which is a very important field, as it will greatly help users find your mod. This field works similarly to other tag fields you find on other websites, where you can start typing and suggestions will show as you type. To separate each tag, simply leave a comma after each tag. Spaces will be included in the tag. For example, if you typed 'happy, great soundtrack, yuri' your tags would become 'Happy' and 'Great soundtrack' and 'Yuri'. Some basic tags include:</p>
+            <table>
+                <tr>
+                    <th>Tag</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>All girls</td>
+                    <td>Your mod features all girls, equally</td>
+                </tr>
+                <tr>
+                    <td>'Monika', 'Natsuki', 'Sayori', 'Yuri', 'MC'</td>
+                    <td>Your mod is about Monika, Natsuki, Sayori, Yuri, or MC</td>
+                </tr>
+                <tr>
+                    <td>'Sad', 'Depressing', 'Happy'</td>
+                    <td>The general feel of your mod</td>
+                </tr>
+                <tr>
+                    <td>'Happy ending', 'Sad ending'</td>
+                    <td>How the end of your story ends. <b>This could very easily spoil the ending of your mod</b></td>
+                </tr>
+                <tr>
+                    <td>'New story', 'Extended story'</td>
+                    <td>Is your mod a whole new story, or is it extending on from the events in the base game?</td>
+                </tr>
+                <tr>
+                    <td>'Sequel'</td>
+                    <td>A continuation of another mod</td>
+                </tr>
+            </table>
+            <p>You can add any assortment of tags you want to your mod, the above is only a few examples that I could think of over 5 minutes. I would suggest looking at the list of tags on left-side bar on the <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags=All&dateBy=0">search page</a> for some tags that will already fit your mod. There is <b>no limit</b> to the amount of tags you can add to the mod, so really try to add as many as you can. Also, use the tag suggestion when you can. Users will be able to find your mod much easier.</p></li>
+            <li><p>The next field is the 'Mod Upload URL' which is where you need to input the link to your mod that is either hosted on Google Drive or MEGA. Other hosting websites will work, but users will not be able to use the Mod Manager to download and play their mods.</p>
+            <div class="supportList"><p onclick="showSupportListDropDown('howToUploadToCloud')">How To Upload To Cloud</p>
+            <div id="howToUploadToCloud" class="supportListDropDown">
+                <p>I <b>highly</b> advise using Google Drive or MEGA. To upload to Google Drive, head to <a href="https://drive.google.com">Google Drive</a> and either sign in or create an account. Once your are on the Google Drive homepage, you need to zip your mod. Zipping compresses a folder down into one file, making it much easier to manage. To do this on Windows, simply right-click the folder and click 'Send to' and then click 'Compressed (zipped) folder'. If you are on Linux, you should already know how to zip a folder, since you are using Linux :) . Unfortunately I don't have any experience with Mac, so you will have to look up how to zip a folder yourself, it shouldn't be hard. This shouldn't take long to complete if you have a modern computer. Once it is finished, open up Google Drive again and drag and drop the zip file onto Google Drive. If nothing happens, or your browser asks you to download the zip that you just tried to upload, cancel the dialog and right click on the Google Drive page and click 'Upload files' and click on the zip file you created. Once the file has finished uploading, which the progress of can usually be seen in the bottom right corner, right click on the file in Google Drive and click 'Get shareable link'. In the bottom left corner of the screen a notification should appear stating that the link has been copied to your clipboard. Verify that you have the link by opening a new tab and pasting it in the address bar. If the link takes you to your zip folder on Google Drive, you have successfully uploaded your mod to Google Drive. Go back to the submit page and paste your link into the field.</p>
+                <p>Uploading to MEGA is just as easy, simply go to <a href="https://mega.nz">MEGA.nz</a> and create and account or login. You should now be greeted by a page with all of your uploaded files. Zip the folder like I described above, and again drag and drop the file onto the page and wait for it to upload. You can also right-click and click 'Upload files' to select a file if dragging and dropping does not work. Once you have uploaded it, right-click on the file and click 'Get link'. Make sure the 'Link with key' option is selected, and copy the long link below the options or click the 'Copy' button. Paste the link into the mod upload field, and you are done.</p>
+            </div>
+            </div>
+            </li>
+            <li><p>The next field is 'Average Play Time', which is an average measurement of the play time of the mod. This does not have be to an exact measurement, just an estimate by you of how long the mod would take to complete in one sitting. If you have no idea how long your mod is, most mods are about 3-4 hours long so a safe guess is something around that number.</p></li>
+            <li><p>The next field is the 'Trailer Video' field, which is where you can put a link to a trailer for your mod if you have one. Currently, only YouTube and Vimeo links are supported. YouTube is probably the easiest to use, since many different links are supported. To get a link to your mod trailer video from YouTube, simply right-click the video and click 'Copy video URL' and paste the link in the field box. <b>Make sure your YouTube video is either unlisted or public</b>, otherwise users will not be able to see the video. The trailer will always be the first thing people see when they go to your mod page, so make sure it is inviting with a good thumbnail.</p></li>
+            <li><p>The fields after that are the 'Preview Images' fields, which let you upload different images of the mod to your mod page. You can upload up to five images, each will be shown in a gallery-style showing on your mod page with the trailer video. These can be images of any kind, but I would advise screenshots of the game being played so the user can see what they are about to play.</p></li>
+            <li><p>The next field is the 'Background Image' field which will let you upload a custom background for your mod page. This will replace the blue dots that you can see on either side of this page, with the image that you uploaded. You should be careful with which image you choose, as many images will look strange. I would suggest choosing a background image that can be repeated in a row. <br>The other option in this field is either 'Tiled' or 'Stretched', which decides how the website will format the background that you have uploaded. Stretched means it will be stretched across the users screen, usually good for large backgrounds. Tiled means it will be kept at the same size, but repeated over the screen. This is usually a good choice if you have a repeating background. Tiled with a repeating background is usually a safer option as it will look better on screens with different sizes. <b>Most of the time it will look better if you don't upload a background at all,</b> this option is really only mean for users who really want a background for their mod.</p></li>
+            <li><p>The final field that you will see is the 'Avatar Image' field which lets you upload a avatar for your mod, or profile picture. You don't have to upload an avatar, but it will definitely help your mod stand out when users search for a mod. <b>The avatar will be automatically scaled to 200x200</b>, whichever is the higher number, so take that into account when designing an avatar. You also want to make sure the background is transparent; a white background does not look very nice. Unless you want it to have a white background, of course.</p></li>
+            <li><p>You should now be prepared to submit your mod. Once you submit it, moderators will have to approve your mod. While the mod is being approved, nobody (including yourself) will be able to see it. We aim to approve mods within a week, if it has gone over that time you can ask in the discord server the progress of your approval.</p></li>
+        </ol>
+        <h1><a name="editmod"></a>How to edit a mod</h1>
+        <ul>
+            <li><p>If you have found that you want to edit a mod once you have submitted it, you do not have to create a whole new mod. You can simply just edit the one in place, replacing any part of the mod. This is especially useful for users that have submitted a demo, as they will need to edit their mod quite a lot.</p></li>
+            <li><p>To edit your mod, simply navigate to your mods page, and click the 'Edit' button on the right side of the page. This button is only visible to you, other users cannot edit your mod, even if you want them to. This is for security reasons.</p></li>
+            <li><p>You will be greeted by a page that looks very similar to the submit page, but instead of having empty fields you should see that all of the fields are populated with the mod data. You can now change any part of this, like you were going to submit the mod again, and then submit it when you are finished. You will be sent back to your mod page where you will see the updated mod page.</p></li>
+        </ul>
+        <h1><a name="commonerrors"></a>Common Errors</h1>
+        <p>Most of the errors that you make can be rectified easily, without the help from the admins or moderators. If you do find that there is something wrong with your mod and you cannot fix it, simply <a href="{% url 'contactUs' %}">contact us</a> and we will be able to help you.</p>
+        <ul>
+            <li><p><b>My avatar look strange:</b> Don't forget that the avatar image will be scaled down or up to meet the 200x200 size. This means that if you have an avatar image that is 100x50, the avatar will be change to be 200x100 size. This will upscale the image, so the quality will suffer. You should try to make your avatar as close to 200x200 as possible. If in doubt, make it larger than what it has to be.</p></li>
+            <li><p><b>My background also looks strange:</b> This is probably because of the tiling or stretching that is being done to the image. This method is still being worked on for the website, and will hopefully be fixed soon, however it is not a priority. Simply put, if you can get the background to work, great. If you cannot, the default blue dots background should suit most mods.</p></li>
+            <li><p><b>I keep getting an 'Unrecognised URL' error when trying to submit my trailer video:</b> Make sure that you are linking to a public or unlisted YouTube or Vimeo video, other services do not work at the moment. If you are using YouTube, the link should contain either 'youtu.be' or 'youtube'. Other links will not work. Also, make sure that the video is not in a playlist, this may cause this error. The guide for adding a trailer video can be found above.</p></li>
+            <li><p><b>It won't let me type any more letters in the 'Description' or 'Short Description' fields:</b> This means that you have hit the character limit. The 'Description' field is limited to 10,000 characters, and the 'Short Description' field is limited 250 characters. This is to make sure that the short description really is a very short description, and so that they description field does not get ridiculously large. Unfortunately, you will have to reduce the size of these fields.</p></li>
+            <li><p><b>I am click on 'Upload more preview images' but nothing is happening:</b> Please make sure that you have JavaScript enabled on this website. Unfortunately I have to use it to get most of the advanced functions of the website.</p></li>
+        </ul>
+        <p>If you come across any other errors that you cannot figure out how to fix, please <a href="{% url 'contactUs' %}">contact us</a> with any relevant information and we will attempt to fix the problem as soon as possible.</p>
+    </div>
+{% endblock %}

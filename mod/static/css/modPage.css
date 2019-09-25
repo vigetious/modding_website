@@ -1,0 +1,441 @@
+.modName {
+    width: 100%;
+}
+
+.modName h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline-block;
+    margin: 0;
+}
+
+.modName p {
+    display: inline-block;
+    text-align: right;
+    float: right;
+    margin: 0;
+}
+
+.screenshotVideo {
+    width: 70%;
+    height: 450px;
+    background-color: #8acaff;
+    float: left;
+}
+
+.screenshotVideoContent {
+    height: 350px;
+    padding: 10px 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.screenshotVideoBar {
+    height: 74px;
+    padding: 3px 3px;
+}
+
+.screenshotVideoBar ul {
+    height: 70px;
+    text-align: center;
+    overflow: auto;
+    list-style: none;
+    margin: auto;
+    white-space: nowrap;
+}
+
+.screenshotVideoBar li {
+    width: 15%;
+    height: 100%;
+    display: inline;
+    padding: 10px 10px;
+    list-style-type: none;
+}
+
+.mySlides {
+    display:block;
+    margin:auto;
+}
+
+.screenshotVideoBar img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.screenshotVideoContent img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.rightModData {
+    width: 30%;
+    height: 450px;
+    display: inline-block;
+    background-color: #8acaff;
+}
+
+.rightModDataAvatar {
+    padding: 10px 10px;
+    height: 40%;
+}
+
+.rightModDataAvatar img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin: auto;
+}
+
+.rightModDataText li {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5px;
+}
+
+.rightModDataText p {
+    font-size: 12px;
+    display: inline;
+    margin: 0;
+    padding-bottom: 5px;
+}
+
+.tags {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tags a {
+    color: #313f4c;
+}
+
+.rightModDataText p a {
+    color: #313f4c;
+}
+
+.rightModDataDescription {
+    height: 27%;
+    margin: 0;
+    overflow: auto;
+}
+
+.rightModDataDescription p {
+    margin: 0;
+    font-size: 12px;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.modDownload {
+    width: 100%;
+    height: 50px;
+    background-color: #8acaff;
+    line-height: 50px;
+}
+
+.modDownload img {
+    vertical-align: middle;
+}
+
+.modDownloadRight {
+    float: right;
+    vertical-align: middle;
+}
+
+.modMainContent {
+    width: 70%;
+    min-height: 400px;
+    background-color: #a4d5ff;
+    float: left;
+    margin-top: 10px;
+}
+
+.modMainContent p {
+    margin-left: 5px;
+}
+
+.modMainContent span {
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 5px;
+}
+
+.modMainContent a {
+    color: #313f4c;
+}
+
+.modSideContent {
+    width: 29%;
+    min-height: 400px;
+    max-height: 800px;
+    background-color: #add9ff;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 1%;
+}
+
+.modRating {
+    display: inline-block;
+    padding-left: 5px;
+}
+
+.modRating p {
+    font-size: 12px;
+    margin: 0 0 0 5px;
+}
+
+.modNotifications input {
+    margin-left: 5px;
+}
+
+.modNotifications p {
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.modNews p {
+    margin-left: 5px;
+}
+
+.news_div {
+    overflow: auto;
+    height: 495px;
+}
+
+.newsHeader {
+    display: inline-block;
+    background-color: #8acaff;
+    width: 100%;
+    margin: 0;
+    padding: 5px 0px;
+}
+
+.newsHeader p {
+    margin: 0 0 0 5px;
+    vertical-align: top;
+    font-size: 12px;
+}
+
+.newsText p {
+    display: inline-block;
+    margin: 0 0 0 5px;
+    font-size: 12px;
+}
+
+.modReview {
+    width: 70%;
+    display: inline-block;
+    background-color: #bde1ff;
+    margin-top: 10px;
+}
+
+.modReviewData {
+    width: 100%;
+    min-height: 200px;
+    background-color: #a4d5ff;
+}
+
+.modReviewCoreData {
+    background-color: #8acaff;
+    width: 20%;
+    height: 200px;
+    display: inline-block;
+}
+
+.modReviewCoreData p {
+    margin: 0;
+    float: right;
+}
+
+.modReviewCoreData input {
+    float: right;
+}
+
+.modReviewCommentHeader {
+    width: 79%;
+    height: 200px;
+    overflow: auto;
+    background-color: #8acaff;
+    float: right;
+    display: inline-block;
+    border-left: 2px solid transparent;
+}
+
+.modReviewHeader {
+    width: 80%;
+    height: 200px;
+    background-color: #8acaff;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    float: right;
+}
+
+.modReviewComment {
+    width: 100%;
+    height: 175px;
+    background-color: #a4d5ff;
+    display: inline-block;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    float: right;
+    overflow: auto;
+}
+
+.modReviewHeader p {
+    margin: 0;
+}
+
+.voteForm {
+    width: 35px;
+    height: 120px;
+    display: inline-block;
+    float: right;
+}
+
+.voteForm input {
+    background-color: #7cb5e5;
+    border: none;
+    width: 35px;
+    height: 35px;
+    text-align: center;
+}
+
+.voteForm p {
+    text-align: right;
+}
+
+.upvoteReview {
+
+}
+
+.upvoted_review {
+    background-color: #993300;
+}
+
+.downvoteReview {
+
+}
+
+.downvoted_review {
+    background-color: #003366;
+}
+
+.deleteCommentBox {
+    width: 100%;
+    display: inline-block;
+}
+
+.deleteComment {
+    background-color: #7cb5e5;
+    border: none;
+    float: right;
+}
+
+.submitReview {
+    width: 100%;
+    height: 20%;
+    background-color: #a4d5ff;
+}
+
+.submitReview p {
+    display: inline;
+    margin-left: 15px;
+}
+
+.rulesSpan {
+    height: auto;
+    width: 75%;
+    font-size: 10px;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline;
+    margin-left: 15px;
+}
+
+.submitReviewCommentForm textarea {
+    outline: none;
+    background-color: #e6f4ff;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 5px auto;
+    width: 90%;
+    height: 200px;
+    border: 2px solid #bde1ff;
+    padding: 8px 15px;
+    display: block;
+}
+
+.submitReviewCommentForm textarea:focus {
+    background-color: #eef8ff;
+}
+
+.reviewSubmit {
+    display: inline-block;
+    width: 100%;
+}
+
+.reviewSubmitButton {
+    float: right;
+    margin-right: 15px;
+}
+
+.newsForm {
+    display: none;
+    margin-left: 5px;
+}
+
+.rating {
+    float:left;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #00b3ff;
+    text-shadow:1px 1px #00b3ff, 2px 2px #006b99, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #008fcc;
+    text-shadow:1px 1px #008fcc, 2px 2px #006b99, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+    color: #008fcc;
+    text-shadow:1px 1px #008fcc, 2px 2px #006b99, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
+}

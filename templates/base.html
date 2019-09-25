@@ -1,0 +1,95 @@
+<!doctype html>
+<html class="no-js" lang="">
+{% load static %}
+
+<script type="text/javascript" src="{% static 'js/vendor/modernizr-3.7.1.min.js' %}"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
+<script type="text/javascript" src="{% static 'js/plugins.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Base page">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="icon" href="{% static 'pages/favicon.ico' %}">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <meta name="theme-color" content="#fafafa">
+</head>
+
+<body background="{% static 'img/tilebgBlue.png' %}">
+<!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+<!-- Add your site or application content here -->
+<div class="pagewrap">
+    <div class="topMenu">
+        <a class="logo" href="{% url 'home' %}" title="Title"><img src="{% static 'img/Title.png' %}" alt="Title"></a> <!-- image later on -->
+        <div class="topNav">
+            {% if user.is_authenticated %}
+                <p>Welcome, <a href="{% url 'accounts:profile' %}">{{ user }}</a></p>
+                <a class="login" href="{% url 'logout' %}?next={{ request.path }}">Logout</a>
+            {% else %}
+                <a class="login" href="{% url 'login' %}?next={{ request.path }}">Login</a>
+                <a class="register" href="{% url 'accounts:signup' %}" title="register">Register</a>
+            {% endif %}
+        </div>
+        <div class="topMiddleNav">
+        </div>
+    </div>
+
+    <ul class="navbar">
+        <li><a href="{% url 'home' %}"><img src="{% static 'img/HomeSmall.png' %}" alt="Home"></a></li>
+        <li><a href="http://reddit.com/r/ddlcmods"><img src="{% static 'img/Mods RedditSmall.png' %}" alt="Mod Reddit"></a></li>
+        <li class="dropdown">
+            <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags=All&dateBy=0" class="dropbtn"><img src="{% static 'img/ModsSmall.png' %}" alt="Mods"></a>
+            <div class="dropdown-content">
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags=All&dateBy=0">Search for mods</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated&dateBy=0">Highest rated mods</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated&dateBy=31">Highest rated mods this month</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated&dateBy=7">Highest rated mods this week</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&dateBy=31">Released this month</a>
+                <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&dateBy=7">Released this week</a>
+                <a href="{% url 'mod:submit' %}">Submit Mod</a>
+            </div>
+        </li>
+        <li><a href="{% url 'supportHome' %}"><img src="{% static 'img/SupportSmall.png' %}" alt="Support"></a></li>
+        <form action="{% url 'mod:modSearch' %}" method="get">
+            <input class="searchButton" type="submit" value="Search">
+            <input class="search" name="q" type="text" placeholder="Search">
+        </form>
+    </ul>
+
+    <div class="mainContent">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <div class="bottomContent">
+        <ul class="bottomNavbar">
+            <li><a href="{% url 'contactUs' %}">Contact Us</a></li>
+            <li><a href="{% url 'rules' %}">Rules and TOS</a></li>
+            <li><a href="{% url 'copyright' %}">Copyright claims</a> </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+</script>
+</body>
+
+</html>

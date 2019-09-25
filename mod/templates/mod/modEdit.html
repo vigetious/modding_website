@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load progress_bar %}
+{% block content %}
+<div class="pagewrap">
+    <title>Edit {{ post.modName }}</title>
+    <link rel="stylesheet" href="{% static 'css/selectize.django.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modSubmitEdit.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/selectize.js' %}"></script>
+    {% if post.modAuthor == user %}
+        {% if form.errors %}
+            <div class="editErrorList">
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <p>{{ field.label }} : {{ field.errors }}</p>
+                {% endfor %}
+            {% endfor %}
+            </div>
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <!--<strong>{{ error|escape }}</strong>-->
+                </div>
+            {% endfor %}
+        {% endif %}
+        <p>If you need help, please read the <a href="{% url 'submittingMods' %}#editmod" target="_blank">edit guide</a>.</p>
+        <p><b>Your mod will need to be approved manually by moderators, after you edit your mod. This could take some time.</b></p>
+        <form id="myForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="rowLeft">
+                    <p>Mod Name: </p>
+                </div>
+                <div class="rowRight">
+                    {{ form.modName }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLeft">
+                    <p>Mod Status: </p>
+                </div>
+                <div class="rowRight">
+                    {{ form.modStatus }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLeft">
+                    <p>Mod Description: </p>
+                </div>
+                <div class="rowRight">
+                    {{ form.modDescription }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLeft">
+                    <p>Mod Short Description: </p>
+                </div>
+                <div class="rowRight">
+                    {{ form.modShortDescription }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLeft">
+                    <p>Tags: </p>
+                </div>
+                <div class="rowRight">
+                    {{ form.tags }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLeft">
+                    <p>Mod Upload URL: </p>
+                </div>
+                <div class="rowRight">
+                    {{ form.modUploadURL }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLeft">
+                    <p>Average Play Time: </p>
+                </div>
+                <div class="rowRight">
+                    <div class="rowPlayTime"><p>{{ form.modPlayTimeHours }}h {{ form.modPlayTimeMinutes }}m</p></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLeft">
+                    <p>Trailer Video: </p><label title="{{ form.modPreviewVideo.help_text }}" for="{{ form.modPreviewVideo.1 }}"> ! </label>
+                </div>
+                <div class="rowRight">
+                    {{ form.modPreviewVideo }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLeft">
+                    <p>Preview Images: </p>
+                </div>
+                <div class="rowRight">
+                    <div class="rowPreviewImages">
+                        <div class="previewImage">
+                        {% if post.modPreviewImage1 %}
+                            <div class="hidden">{{ form.modPreviewImage1 }}</div>
+                            <img id="previewImage1" onmouseover="previewMouseOver(1)" onmouseleave="previewMouseLeave(1)" src={{ post.modPreviewImage1.url }} alt="Preview Image 1">
+                            <p>Remove image:</p>
+                            <input style="width: 20px; display: inline; margin-bottom: 10px" class="modPreviewImageCheckbox" id="modPreviewImage1-clear_id" type="checkbox" name="modPreviewImage1-clear">
+                        {% endif %}
+                        <input class="modPreviewImageInput" id="id_modPreviewImage1" type="file" name="modPreviewImage1" accept="image/*">
+                        <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton1" onclick="showNext(2, 1)" value="Upload/change more preview images">
+                        </div>
+                            <div id="hiddenNextImage2">
+                                <div class="previewImage">
+                                    {% if post.modPreviewImage2 %}
+                                        <div class="hidden">{{ form.modPreviewImage2 }}</div>
+                                        <img id="previewImage2" onmouseover="previewMouseOver(2)" onmouseleave="previewMouseLeave(2)"src={{ post.modPreviewImage2.url }} alt="Preview Image 2">
+                                        <p>Remove image:</p>
+                                        <input style="width: 20px; display: inline; margin-bottom: 10px" class="modPreviewImageCheckbox" id="modPreviewImage2-clear_id" type="checkbox" name="modPreviewImage2-clear">
+                                    {% endif %}
+                                    <input class="modPreviewImageInput" id="id_modPreviewImage2" type="file" name="modPreviewImage2" accept="image/*">
+
+                                    <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton2" onclick="showNext(3, 2)" value="Upload/change more preview images">
+                                </div>
+                                <div id="hiddenNextImage3">
+                                    <div class="previewImage">
+                                        {% if post.modPreviewImage3 %}
+                                            <div class="hidden">{{ form.modPreviewImage3 }}</div>
+                                            <img id="previewImage3" onmouseover="previewMouseOver(3)" onmouseleave="previewMouseLeave(3)"src={{ post.modPreviewImage3.url }} alt="Preview Image 3">
+                                            <p>Remove image:</p>
+                                            <input style="width: 20px; display: inline; margin-bottom: 10px" class="modPreviewImageCheckbox" id="modPreviewImage3-clear_id" type="checkbox" name="modPreviewImage3-clear">
+                                        {% endif %}
+                                        <input class="modPreviewImageInput" id="id_modPreviewImage3" type="file" name="modPreviewImage3" accept="image/*">
+                                        <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton3" onclick="showNext(4, 3)" value="Upload/change more preview images">
+                                    </div>
+                                        <div id="hiddenNextImage4">
+                                            <div class="previewImage">
+                                                {% if post.modPreviewImage4 %}
+                                                    <div class="hidden">{{ form.modPreviewImage4 }}</div>
+                                                    <img id="previewImage4" onmouseover="previewMouseOver(4)" onmouseleave="previewMouseLeave(4)"src={{ post.modPreviewImage4.url }} alt="Preview Image 4">
+                                                    <p>Remove image:</p>
+                                                    <input style="width: 20px; display: inline; margin-bottom: 10px" class="modPreviewImageCheckbox" id="modPreviewImage4-clear_id" type="checkbox" name="modPreviewImage4-clear">
+                                                {% endif %}
+                                                <input class="modPreviewImageInput" id="id_modPreviewImage4" type="file" name="modPreviewImage4" accept="image/*">
+                                                <input style="background-color: #8acaff; width: 100%" type="button" id="showNextButton4" onclick="showNext(5, 4)" value="Upload/change more preview images">
+                                            </div>
+                                            <div id="hiddenNextImage5">
+                                                <div class="previewImage">
+                                                    {% if post.modPreviewImage5 %}
+                                                        <div class="hidden">{{ form.modPreviewImage5 }}</div>
+                                                        <img id="previewImage5" onmouseover="previewMouseOver(5)" onmouseleave="previewMouseLeave(5)"src={{ post.modPreviewImage5.url }} alt="Preview Image 5">
+                                                        <p>Remove image:</p>
+                                                        <input style="width: 20px; display: inline; margin-bottom: 10px" class="modPreviewImageCheckbox" id="modPreviewImage5-clear_id" type="checkbox" name="modPreviewImage5-clear">
+                                                    {% endif %}
+                                                    <input class="modPreviewImageInput" id="id_modPreviewImage5" type="file" name="modPreviewImage5" accept="image/*">
+                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        if ($('#id_modPreviewImage1').get(0).files.length > 0) {
+                            console.log("yaes")
+                        }
+                        function check() {
+                            if ($('#id_modPreviewImage1').get(0).files.length > 0) {
+                                console.log("yaes")
+                            }
+                        }
+                    </script>
+                </div>
+            </div>
+            <div>
+                <div class="rowLeft">
+                    <p>Background Image: </p>
+                </div>
+                <div class="rowRight">
+                    <div class="previewImage">
+                        {% if post.modBackground %}
+                            <div class="hidden">{{ form.modBackground }}</div>
+                            <img id="previewImage6" onmouseover="previewMouseOver(6)" onmouseleave="previewMouseLeave(6)"src={{ post.modBackground.url }} alt="Avatar image">
+                            <p>Remove image:</p>
+                            <input style="width: 20px; display: inline; margin-bottom: 10px" class="modPreviewImageCheckbox" id="modBackground-clear_id" type="checkbox" name="modBackground-clear">
+                        {% endif %}
+                        <input class="modPreviewImageInput" id="id_modBackground" type="file" name="modBackground" accept="image/*">
+                        {{ form.modBackgroundTiledStretch }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="rowLeft">
+                    <p>Avatar Image: </p>
+                </div>
+                <div class="rowRight">
+                    <div class="previewImage">
+                        {% if post.modAvatar %}
+                            <div class="hidden">{{ form.modAvatar }}</div>
+                            <img src={{ post.modAvatar.url }} alt="Avatar image">
+                            <p>Remove image:</p>
+                            <input style="width: 20px; display: inline; margin-bottom: 10px" class="modPreviewImageCheckbox" id="modAvatar-clear_id" type="checkbox" name="modAvatar-clear">
+                        {% endif %}
+                        <input class="modPreviewImageInput" id="id_modAvatar" type="file" name="modAvatar" accept="image/*">
+                    </div>
+                </div>
+            </div>
+            <div class="uploadBottom">
+                <p id="uploadProgressP" hidden>Upload progress:</p>
+                {% progress_bar %}
+                <p>Don't forget to tell your followers that you have updated your mod by adding news!</p><br>
+                <p><input onclick="return confirm('Are you sure you want to edit your mod? It will need to be verified by the moderators again, meaning your mod will be unavailable for an uncertain amount of time.')" type="submit" value="Submit"></p>
+                <a href="{% url 'mod:modPage' pk=post.pk %}"><p>Cancel edit</p></a>
+                <a onclick="return confirm('Are you sure? Once you delete the mod, it is gone forever without any way of getting it back.')" href="{% url 'mod:modDelete' pk=post.pk %}"><p>Delete mod</p></a>
+            </div>
+        </form>
+    {% else %}
+        <p>You must be the mod creator to edit this mod.</p>
+    {% endif %}
+</div>
+{% endblock %}
