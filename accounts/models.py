@@ -20,7 +20,8 @@ def randomStringDigits():
 
 
 def avatar_path(instance, filename):
-    return 'files/user_{0}/avatar/{1}'.format(instance.avatarUserID.id, randomStringDigits())
+    ext = filename.split(".")[-1]
+    return 'files/user_{0}/avatar/{1}.{2}'.format(instance.avatarUserID.id, randomStringDigits(), ext)
 
 
 class User(AbstractUser):
