@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'taggit_templatetags2',
     'secretballot',
     'likes',
-    #'progressbarupload',
+    'progressbarupload',
     'django_cleanup.apps.CleanupConfig',
     'easy_thumbnails',
     'pages.apps.PagesConfig',
