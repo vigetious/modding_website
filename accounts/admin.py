@@ -19,8 +19,23 @@ class CustomUserAdmin(UserAdmin):
     list_display = ['email', 'username', 'description', 'totalComments', 'totalMods']
 
 
+def mark_as_safe(modeladmin, request, queryset):
+    queryset.update(avatarApproved=True)
+
+
+mark_as_safe.short_description = "Mark has approved"
+
+
+def mark_as_unsafe(modeladmin, request, queryset):
+    queryset.update(avatarApproved=False)
+
+
+mark_as_unsafe.short_description = "Mark has non-approved"
+
+
 class AvatarAdmin(admin.ModelAdmin):
     list_display = ['avatarID', 'avatarUserID', 'avatarTime', 'avatarImage', 'avatarApproved', 'avatarIP']
+    actions = [mark_as_safe, mark_as_unsafe]
 
 
 admin.site.register(User, CustomUserAdmin)

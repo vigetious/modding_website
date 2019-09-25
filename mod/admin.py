@@ -4,10 +4,25 @@ from .models import Mod, ReviewRating, Rating, News, NewsNotifications
 
 # Register your models here.
 
+def mark_as_safe(modeladmin, request, queryset):
+    queryset.update(modApproved=True)
+
+
+mark_as_safe.short_description = "Mark has approved"
+
+
+def mark_as_unsafe(modeladmin, request, queryset):
+    queryset.update(modApproved=False)
+
+
+mark_as_unsafe.short_description = "Mark has non-approved"
+
+
 class ModAdmin(admin.ModelAdmin):
     list_display = ['modID', 'modAuthor', 'modDate', 'modUpdate', 'modStatus', 'modName',
                     'modDescription', 'tags', 'modUpload', 'modUploadURL', 'modPlayTimeHours',
                     'modPlayTimeMinutes', 'modReviewCount', 'modApproved', 'modIP']
+    actions = [mark_as_safe, mark_as_unsafe]
 
     #change_form_template = 'progressbarupload/change_form.html'
     #add_form_template = 'progressbarupload/change_form.html'
