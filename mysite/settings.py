@@ -252,13 +252,10 @@ X_FRAME_OPTIONS = 'DENY'
 django_heroku.settings(locals())
 
 #LOGGING_CONFIG = None
-
-AWS_ACCESS_KEY_ID = access_key_id
-AWS_SECRET_ACCESS_KEY = secret_access_key
-AWS_STORAGE_BUCKET_NAME = 'ddlc-modding-static'
-
-
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
-STATIC_URL = 'http://s3.amazonaws.com/%s' % AWS_STORAGE_BUCKET_NAME + '/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "")
+AWS_STORAGE_BUCKET_NAME = os.environ.get("S3_BUCKET_NAME", "")
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_CUSTOM_DOMAIN = os.environ.get("AWS_S3_CUSTOM_DOMAIN", "")
+MEDIA_ROOT = os.environ.get("MEDIA_URL", "")
