@@ -1,7 +1,7 @@
 from django import forms
 from django.core.validators import URLValidator, MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
-from.models import Mod, ReviewRating, Vote, Rating, News
+from.models import Mod, ReviewRating, Rating, News
 from embed_video.fields import EmbedVideoFormField
 
 #class SubmitForm(forms.Form):
@@ -46,10 +46,7 @@ class ReviewForm(forms.ModelForm):
         fields = ('reviewid', 'reviewComment')
 
 
-class VoteForm(forms.ModelForm):
-    class Meta:
-        model = Vote
-        fields = ('voteID', 'voteReviewID', 'voteAuthor', 'voteValue')
+
 
 
 class RatingForm(forms.ModelForm):

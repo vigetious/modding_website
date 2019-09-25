@@ -187,26 +187,7 @@ class ReviewRating(models.Model):
         return str(self.reviewid)
 
 
-class Vote(models.Model):
-    voteID = models.AutoField("vote ID", primary_key=True)
-    voteReviewID = models.ForeignKey(ReviewRating, on_delete=models.CASCADE, to_field="reviewid")
-    voteAuthor = models.CharField("vote author name", max_length=100)
-    voteValue = models.SmallIntegerField("vote value", default=0)
 
-    class Meta:
-        unique_together = ('voteAuthor', 'voteReviewID')
-
-    def __unicode__(self):
-        return self.voteID
-
-    def __str__(self):
-        return str(self.voteID)
-
-    def __int__(self):
-        return self.voteID
-
-    def totalVotes(self, id):
-        yaes = Vote.objects.get(VoteReviewID=id)
 
 
 class Rating(models.Model):

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Mod, ReviewRating, Vote, Rating, News, NewsNotifications
+from .models import Mod, ReviewRating, Rating, News, NewsNotifications
 
 # Register your models here.
 
@@ -23,8 +23,7 @@ class ReviewRatingAdmin(admin.ModelAdmin):
     list_display = ['reviewid', 'reviewModID', 'reviewAuthorID', 'reviewDate', 'reviewComment', 'vote_total',
                     'reviewVotes', 'reviewApproved']
 
-class VoteAdmin(admin.ModelAdmin):
-    list_display = ['voteID', 'voteReviewID', 'voteAuthor', 'voteValue']
+
 
 class RatingAdmin(admin.ModelAdmin):
     list_display = ['ratingID', 'ratingModID', 'ratingAuthorID', 'ratingChoice', 'ratingValue']
@@ -38,7 +37,7 @@ class NewsNotificationsAdmin(admin.ModelAdmin):
 
 admin.site.register(Mod, ModAdmin)
 admin.site.register(ReviewRating, ReviewRatingAdmin)
-admin.site.register(Vote, VoteAdmin)
+
 admin.site.register(Rating, RatingAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(NewsNotifications, NewsNotificationsAdmin)
