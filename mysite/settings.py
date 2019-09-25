@@ -29,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['modding-website.herokuapp.com']
 
@@ -146,7 +146,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATIC_URL = '/static/'
+
 
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'static'),
@@ -224,7 +224,7 @@ TAGGIT_SELECTIZE = {
 EMAIL_CONFIRMATION_PERIOD_DAYS = 7
 SIMPLE_EMAIL_CONFIRMATION_PERIOD = timedelta(days=EMAIL_CONFIRMATION_PERIOD_DAYS)
 
-SECURE_SSL_REDIRECT = True  #developemnt change to False
+
 
 #AWS_ACCESS_KEY_ID = access_key_id
 #AWS_SECRET_ACCESS_KEY = secret_access_key
@@ -239,15 +239,17 @@ SECURE_SSL_REDIRECT = True  #developemnt change to False
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-SECURE_HSTS_SECONDS = 3600
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD=True
+if not DEBUG:
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD=True
 
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-X_FRAME_OPTIONS = 'DENY'
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_SSL_REDIRECT = True  #developemnt change to False
 
 django_heroku.settings(locals())
 
@@ -256,21 +258,24 @@ django_heroku.settings(locals())
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ###############################
-AWS_DEFAULT_ACL = None
-AWS_ACCESS_KEY_ID = 'AKIARHRBXQJOSQWKKZFM'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'ddlc-modding-static'
-AWS_S3_CUSTOM_DOMAIN = '{0}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400',
-}
-AWS_LOCATION = 'static'
+if not DEBUG:
+    AWS_DEFAULT_ACL = None
+    AWS_ACCESS_KEY_ID = 'AKIARHRBXQJOSQWKKZFM'
+    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_STORAGE_BUCKET_NAME = 'ddlc-modding-static'
+    AWS_S3_CUSTOM_DOMAIN = '{0}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
+    AWS_LOCATION = 'static'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
 
-STATIC_URL = 'https://{0}/{1}/'.format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATIC_URL = 'https://{0}/{1}/'.format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
+    DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
+else:
+    STATIC_URL = '/static/'

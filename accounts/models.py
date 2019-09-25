@@ -9,11 +9,18 @@ from django.core.exceptions import ValidationError
 from easy_thumbnails.fields import ThumbnailerImageField
 from verified_email_field.forms import VerifiedEmailField
 
+import string, random
+
 # Create your models here.
+
+def randomStringDigits():
+    """Generate a random string of letters and digits """
+    lettersAndDigits = string.ascii_letters + string.digits
+    return ''.join(random.choice(lettersAndDigits) for i in range(50))
 
 
 def avatar_path(instance, filename):
-    return 'files/user_{0}/avatar/{1}'.format(instance.avatarUserID.id, filename)
+    return 'files/user_{0}/avatar/{1}'.format(instance.avatarUserID.id, randomStringDigits())
 
 
 class User(AbstractUser):
@@ -40,6 +47,8 @@ class Avatar(models.Model):
     avatarUserID = models.ForeignKey('accounts.User', on_delete=models.CASCADE, related_name="avatarUser", to_field="id", unique=True)
     avatarTime = models.DateTimeField(auto_now=True)
     avatarImage = ThumbnailerImageField('avatar image', upload_to=avatar_path, blank=True, resize_source=dict(size=(200, 200), sharpen=True, upscale=True))
+    avatarApproved = models.BooleanField('avatar moderation approval', default=False)
+
 
     def __str__(self):
         return str(self.avatarUserID)
