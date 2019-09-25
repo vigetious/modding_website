@@ -260,7 +260,7 @@ AWS_DEFAULT_ACL = None
 AWS_ACCESS_KEY_ID = 'AKIARHRBXQJOSQWKKZFM'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'ddlc-modding-static'
-AWS_S3_CUSTOM_DOMAIN = '%.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_CUSTOM_DOMAIN = '{0}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
@@ -270,5 +270,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATIC_URL = 'https://{0}/{1}/'.format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
