@@ -121,7 +121,7 @@ def avatar(request):
             if post.avatarImage:
                 pass
             else:
-                post.avatarImage = 'files/avatar/icon.png'
+                post.avatarImage = static('img/icon.png')
             post.save()
             return redirect('accounts:profile')
     else:
