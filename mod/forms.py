@@ -24,7 +24,7 @@ class SubmitForm(forms.ModelForm):
     modDescription = forms.CharField(widget=forms.Textarea, max_length=10000)
     modShortDescription = forms.CharField(widget=forms.Textarea, max_length=250)
 
-    modUploadURL = forms.URLField(max_length=200, widget=forms.TextInput)
+    modUploadURL = forms.URLField(max_length=200, widget=forms.TextInput, help_text="Only Google Drive and MEGA are currently supported.")
 
     #modPreviewVideo = EmbedVideoFormField(help_text="Only YouTube and Vimeo links are currently supported.")
 
