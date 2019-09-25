@@ -31,7 +31,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['modding-website.herokuapp.com']
+ALLOWED_HOSTS = ['tranquil-savannah-79167.herokuapp.com']
 
 
 # Application definition
@@ -260,3 +260,5 @@ AWS_QUERYSTRING_AUTH = False
 AWS_S3_CUSTOM_DOMAIN = os.environ.get("AWS_S3_CUSTOM_DOMAIN", "")
 MEDIA_ROOT = os.environ.get("MEDIA_URL", "")
 STATIC_URL = os.environ.get("STATIC_URL", "")
+
+AWS_DEFAULT_ACL = None
