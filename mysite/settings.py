@@ -259,7 +259,7 @@ DEBUG_PROPAGATE_EXCEPTIONS = True
 AWS_ACCESS_KEY_ID = access_key_id
 AWS_SECRET_ACCESS_KEY = secret_access_key
 AWS_STORAGE_BUCKET_NAME = bucket_name
-AWS_S3_CUSTOM_DOMAIN = '%.s3.us-east-2.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_CUSTOM_DOMAIN = '%.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
