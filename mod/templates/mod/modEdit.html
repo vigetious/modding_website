@@ -202,8 +202,7 @@
                 </div>
             </div>
             <div class="uploadBottom">
-                <p id="uploadProgressP" hidden>Upload progress:</p>
-                {% progress_bar %}
+                <p id="uploadProgressP" hidden>Uploading...</p>
                 <p>Don't forget to tell your followers that you have updated your mod by adding news!</p><br>
                 <p><input onclick="return confirm('Are you sure you want to edit your mod? It will need to be verified by the moderators again, meaning your mod will be unavailable for an uncertain amount of time.')" type="submit" value="Submit"></p>
                 <a href="{% url 'mod:modPage' pk=post.pk %}"><p>Cancel edit</p></a>
