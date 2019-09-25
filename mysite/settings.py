@@ -252,3 +252,5 @@ X_FRAME_OPTIONS = 'DENY'
 django_heroku.settings(locals())
 
 #LOGGING_CONFIG = None
+
+DEBUG_PROPAGATE_EXCEPTIONS = True
