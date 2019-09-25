@@ -256,6 +256,7 @@ django_heroku.settings(locals())
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ###############################
+AWS_DEFAULT_ACL = None
 AWS_ACCESS_KEY_ID = 'AKIARHRBXQJOSQWKKZFM'
 AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'ddlc-modding-static'
