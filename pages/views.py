@@ -44,4 +44,7 @@ def rules(request):
 def copyright(request):
     return render(request, 'pages/DMCA.html')
 
+def privacypolicy(request):
+    return render(request, 'pages/privacypolicy.html')
+
 # Create your views here.
