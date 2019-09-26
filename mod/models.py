@@ -252,8 +252,6 @@ class Rating(models.Model):
     def getAvatar(self):
         if Mod.objects.get(modID=self.ratingModID).modAvatar:
             return Mod.objects.get(modID=self.ratingModID).modAvatar.url
-        else:
-            return static('img/icon.png')
 
     def getStatus(self):
         return Mod.objects.get(modID=self.ratingModID).modStatus
