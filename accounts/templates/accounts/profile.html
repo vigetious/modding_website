@@ -98,7 +98,12 @@
                 </tr>
                 {% for x in played %}
                     <tr id="rating{{ x.ratingID }}">
-                        <td><a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src="{{ x.ratingAvatar }}"></a></td>
+                        <td>
+                            {% if x.modAvatar %}
+                                <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src="{{ x.ratingAvatar }}"></a>
+                            {% else %}
+                                <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
+                            {% endif %}></td>
                         <td><p><a href="../../mod/{{ x.ratingModID|stringformat:'i' }}">{{ x.ratingModID }}</a></p></td>
                         <td><p>{{ x.ratingValue }}</p></td>
                         <td><p>{{ x.ratingChoice }}</p></td>
