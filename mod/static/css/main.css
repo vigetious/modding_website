@@ -97,6 +97,11 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+@font-face {
+  font-family: 'riffic_freebold';
+  src: url("https://ddlc-modding-static.s3.us-east-2.amazonaws.com/static/fonts/riffic/RifficFree-Bold.ttf");
+}
+
 
 p {
   color: black;
