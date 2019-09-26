@@ -96,7 +96,7 @@ class Mod(models.Model):
                                       resize_source=dict(size=(200, 200), sharpen=True, upscale=True),
                                       help_text="Recommended size is 200x200. Make sure the background is transparent,"
                                                 " as well.")
-    modApproved = models.BooleanField('mod moderation approval')
+    modApproved = models.BooleanField('mod moderation approval', default=False)
     modIP = models.CharField('mod user ip address', max_length=100)
 
 
@@ -176,7 +176,7 @@ class ReviewRating(models.Model):
     reviewDate = models.DateTimeField("review date", auto_now_add=True)
     reviewComment = models.CharField("review comment", max_length=10000, blank=True)
     reviewVotes = models.IntegerField("total votes for comment", default=0)
-    reviewApproved = models.BooleanField('review moderation approval')
+    reviewApproved = models.BooleanField('review moderation approval', default=False)
 
     def __int__(self):
         return self.reviewid
@@ -187,7 +187,26 @@ class ReviewRating(models.Model):
     def __str__(self):
         return str(self.reviewid)
 
+class Vote(models.Model):
+    voteID = models.AutoField("vote ID", primary_key=True)
+    voteReviewID = models.ForeignKey(ReviewRating, on_delete=models.CASCADE, to_field="reviewid")
+    voteAuthor = models.CharField("vote author name", max_length=100)
+    voteValue = models.SmallIntegerField("vote value", default=0)
 
+    class Meta:
+        unique_together = ('voteAuthor', 'voteReviewID')
+
+    def __unicode__(self):
+        return self.voteID
+
+    def __str__(self):
+        return str(self.voteID)
+
+    def __int__(self):
+        return self.voteID
+
+    def totalVotes(self, id):
+        yaes = Vote.objects.get(VoteReviewID=id)
 
 
 
@@ -225,6 +244,7 @@ class News(models.Model):
     newsModID = models.ForeignKey(Mod, on_delete=models.CASCADE, to_field="modID")
     newsDate = models.DateTimeField("news publish date", auto_now=True)
     newsText = models.CharField("news text", max_length=5000)
+    newsIP = models.CharField("news user ip", max_length=100)
 
 
 class NewsNotifications(models.Model):

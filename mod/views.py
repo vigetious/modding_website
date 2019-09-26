@@ -22,7 +22,7 @@ from django_filters.views import FilterView
 from taggit.models import Tag
 
 from .forms import SubmitForm, ReviewForm, NewsForm
-from .models import Mod, ReviewRating, Rating, News, NewsNotifications  # , ModFilter
+from .models import Mod, ReviewRating, Rating, News, NewsNotifications, Vote  # , ModFilter
 from .scripts import moveMod
 from .operations.mail import notificationsSendMail
 
@@ -114,6 +114,7 @@ def modPage(request, pk):
             postReview.reviewModID = Mod.objects.get(modID=post.modID)
             # postReview.reviewAuthor = request.user
             postReview.reviewAuthorID = request.user
+            postReview.reviewApproved = False
             postReview.save()
             user = User.objects.get(id=request.user.id)
             user.totalComments = user.totalComments + 1
@@ -132,14 +133,19 @@ def reviewUpVote(request, pk):
         request_getdata = request.POST.get('id')
         voteReviewID = ReviewRating.objects.get(reviewid__exact=request_getdata)
         response_data = {}
-
-
+        post = Vote(voteReviewID=voteReviewID, voteAuthor=request.user, voteValue=1)
+        post.save()
         reviewrating = ReviewRating.objects.get(reviewid=voteReviewID)
-
-
+        allVotes = Vote.objects.filter(voteReviewID__exact=request_getdata).count()
+        reviewrating.reviewVotes = allVotes
         reviewrating.save()
         group = Group.objects.get(name="Well respected")
-
+        if allVotes >= 10:
+            group.user_set.add(
+                reviewrating.reviewAuthorID)  # User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+        else:
+            group.user_set.remove(
+                reviewrating.reviewAuthorID)  # User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
         response_data['result'] = "Successfully upvoted review " + request_getdata
 
         return HttpResponse(
@@ -160,8 +166,18 @@ def reviewRemoveVote(request, pk):
         request_getdata = request.POST.get('id')
         voteReviewID = ReviewRating.objects.get(reviewid__exact=request_getdata)
         reviewrating = ReviewRating.objects.get(reviewid=voteReviewID)
-
-
+        Vote.objects.get(voteReviewID__exact=voteReviewID, voteAuthor=request.user).delete()
+        allVotes = Vote.objects.filter(voteReviewID__exact=request_getdata).count()
+        reviewrating.reviewVotes = allVotes
+        reviewrating.save()
+        group = Group.objects.get(name="Well respected")
+        if allVotes >= 10:
+            group.user_set.add(
+                reviewrating.reviewAuthorID)  # User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+        else:
+            group.user_set.remove(
+                reviewrating.reviewAuthorID)  # User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+        response_data['result'] = "Successfully removed vote from review " + request_getdata
 
         return HttpResponse(
             json.dumps(response_data),
@@ -180,12 +196,22 @@ def reviewDownVote(request, pk):
         request_getdata = request.POST.get('id')
         voteReviewID = ReviewRating.objects.get(reviewid__exact=request_getdata)
         response_data = {}
-
-
+        post = Vote(voteReviewID=voteReviewID, voteAuthor=request.user, voteValue=-1)
+        post.save()
         reviewrating = ReviewRating.objects.get(reviewid=voteReviewID)
-
+        votesAgg = Vote.objects.filter(voteReviewID__exact=request_getdata).aggregate(totalVoted=Sum('voteValue'))[
+            'totalVoted']
         # allVotes = Vote.objects.aggregate(totalVoted=Sum(votesAgg))
-
+        reviewrating.reviewVotes = votesAgg
+        reviewrating.save()
+        group = Group.objects.get(name="Well respected")
+        if votesAgg >= 10:
+            group.user_set.add(
+                reviewrating.reviewAuthorID)  # User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+        else:
+            group.user_set.remove(
+                reviewrating.reviewAuthorID)  # User.objects.get(id=reviewrating.reviewAuthorID))#User.objects.get(username=reviewrating.reviewAuthor).id))
+        response_data['result'] = "Successfully downvoted review " + request_getdata
 
         return HttpResponse(
             json.dumps(response_data),
@@ -329,7 +355,7 @@ def news(request, pk):
         news_text = request.POST.get('news_text')
         news_mod_id = request.POST.get('news_mod_id')
 
-        post = News(newsModID=Mod.objects.get(modID=news_mod_id), newsText=news_text)
+        post = News(newsModID=Mod.objects.get(modID=news_mod_id), newsText=news_text, newsIP=visitor_ip_address(request))
         post.save()
         responseData = {}
 

@@ -13,6 +13,7 @@
 {% block content %}
     {% if post.modApproved == True %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/modPage.css' %}">
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <title>{{ post.modName }}</title>
@@ -230,31 +231,31 @@
     </div>
     </div>
     <div class="modReview">
-        {% for review in review %}
-            <div id="review{{ review.reviewid }}">
-                <div class="modReviewData">
-                    <div class="modReviewCoreData">
-                        <p><a href="{% url 'accounts:userProfile' review.reviewAuthorID %}">{{ review.reviewAuthorID }}</a></p><br>
-                        {% if user.is_authenticated %}
-                            <form method="post" id="upvote_review" class="voteForm">
-                                {% csrf_token %}
-                                <input type="button" id="upvote_review_{{ review.reviewid }}" class="upvoteReview" value="+"><br>
-                                <p id="reviewVotes{{ review.reviewid }}">{{ review.reviewVotes }}</p><br>
-                                <input type="button" id="downvote_review_{{ review.reviewid }}" class="downvoteReview" value="-"><br>
-                            </form>
-                        {% endif %}
-                        {% if user.is_authenticated == False %}
-                            <form class="voteForm">
-                                <input type="button" onclick="notLoggedIn()" class="upvoteReview" value="+"><br>
-                                <p id="reviewVotes{{ review.reviewid }}">{{ review.reviewVotes }}</p><br>
-                                <input type="button" onclick="notLoggedIn()" class="downvoteReview" value="-"><br>
-                            </form>
-                        {% endif %}
+            {% for review in review %}
+                <div id="review{{ review.reviewid }}">
+                    <div class="modReviewData">
+                        <div class="modReviewCoreData">
+                            <p><a href="{% url 'accounts:userProfile' review.reviewAuthorID %}">{{ review.reviewAuthorID }}</a></p><br>
+                            {% if user.is_authenticated %}
+                                <form method="post" id="upvote_review" class="voteForm">
+                                    {% csrf_token %}
+                                    <input type="button" id="upvote_review_{{ review.reviewid }}" class="upvoteReview" value="+"><br>
+                                    <p id="reviewVotes{{ review.reviewid }}">{{ review.reviewVotes }}</p><br>
+                                    <input type="button" id="downvote_review_{{ review.reviewid }}" class="downvoteReview" value="-"><br>
+                                </form>
+                            {% endif %}
+                            {% if user.is_authenticated == False %}
+                                <form class="voteForm">
+                                    <input type="button" onclick="notLoggedIn()" class="upvoteReview" value="+"><br>
+                                    <p id="reviewVotes{{ review.reviewid }}">{{ review.reviewVotes }}</p><br>
+                                    <input type="button" onclick="notLoggedIn()" class="downvoteReview" value="-"><br>
+                                </form>
+                            {% endif %}
                             {% if user == review.reviewAuthorID %}
                                 <div class="deleteCommentBox">
-                                <form method="POST" id="deleteReview">
-                                    <input type="button" style="background-color: #7cb5e5;" id="deleteReview{{ review.reviewid }}" class="deleteComment" value="Delete">
-                                </form>
+                                    <form method="POST" id="deleteReview">
+                                        <input type="button" style="background-color: #7cb5e5;" id="deleteReview{{ review.reviewid }}" class="deleteComment" value="Delete">
+                                    </form>
                                 </div>
                                 <script>
                                     $('#deleteReview{{ review.reviewid }}').on('click', deleteComment)
@@ -269,146 +270,146 @@
                                     }
                                 </script>
                             {% endif %}
-                    </div>
-                    <div class="modReviewHeader">
-                        <p>{{ review.reviewid }} | {{ review.reviewDate }}</p>
-                        <div class="modReviewComment">
-                            {% if review.reviewApproved == True %}
-                                <p>{{ review.reviewComment }}</p>
-                            {% elif review.reviewApproved == False %}
-                                <p>This review is awaiting verification from moderators.</p>
-                                <p>If you have written the review and it has not been approved within 7 days, please <a href="{% url 'contactUs' %}">contact us.</a></p>
-                            {% endif %}
                         </div>
+                        <div class="modReviewHeader">
+                            <p>{{ review.reviewid }} | {{ review.reviewDate }}</p>
+                            <div class="modReviewComment">
+                                {% if review.reviewApproved == True %}
+                                    <p>{{ review.reviewComment }}</p>
+                                {% elif review.reviewApproved == False %}
+                                    <p>This review is awaiting verification from moderators.</p>
+                                    <p>If you have written the review and it has not been approved within 7 days, please <a href="{% url 'contactUs' %}">contact us.</a></p>
+                                {% endif %}
+                            </div>
+                        </div>
+
                     </div>
+                    {% if user.is_authenticated %}
+                        {% for vote in vote %}
+                            {% if review.reviewid|stringformat:"i" == vote.voteReviewID|stringformat:"i" and vote.voteAuthor == user|stringformat:"s" and vote.voteValue == 1 %}
+                                <script>
+                                    $('#upvote_review_{{ review.reviewid }}').attr({
+                                        "id": "upvoted_review_{{ review.reviewid }}",
+                                        "class": "upvoted_review",
+                                        "value": "+"
+                                    });
+                                </script>
+                            {% endif %}
+                            {% if review.reviewid|stringformat:"i" == vote.voteReviewID|stringformat:"i" and vote.voteAuthor == user|stringformat:"s" and vote.voteValue == -1 %}
+                                <script>
+                                    $('#downvote_review_{{ review.reviewid }}').attr({
+                                        "id": "downvoted_review_{{ review.reviewid }}",
+                                        "class": "downvoted_review",
+                                        "value": "-"
+                                    });
+                                </script>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    <script>
+                        if (document.readyState === 'loading') {
+                            document.addEventListener('DOMContentLoaded', afterLoaded);
+                        } else {
+                            afterLoaded();
+                        }
 
+                        function afterLoaded() {
+                            $('#upvote_review_{{ review.reviewid }}').on('click', upvoteFirstClick);
+                            $('#upvoted_review_{{ review.reviewid }}').on('click', upvoteSecondClick);
+
+                            $('#downvote_review_{{ review.reviewid }}').on('click', downvoteFirstClick);
+                            $('#downvoted_review_{{ review.reviewid }}').on('click', downvoteSecondClick);
+
+                            function upvoteFirstClick() {
+                                event.preventDefault();
+                                console.log('upvoting review ' + {{ review.reviewid }});
+
+                                if (document.getElementById("downvoted_review_{{ review.reviewid }}")) {
+                                    remove_vote({{ review.reviewid }}, {{ mod.modID }});
+                                    window.setTimeout(function () {upvote_post({{ review.reviewid }}, {{ mod.modID }})}, 100);
+                                    $("#downvoted_review_{{ review.reviewid }}").off('click').on('click', downvoteFirstClick);
+                                    $("#downvoted_review_{{ review.reviewid }}").attr('class', 'downvote_review');
+                                    $('#downvote_review_{{ review.reviewid }}').attr('id', 'downvote_review_{{ review.reviewid }}');
+                                    document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) + 1;
+                                } else {
+                                    upvote_post({{ review.reviewid }}, {{ mod.modID }});
+                                    console.log('yaes');
+                                    document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) + 1;
+                                }
+
+                                $(this).off('click').on('click', upvoteSecondClick);
+                                $(this).attr('class', 'upvoted_review');
+                                $(this).attr('value', '+');
+                                $(this).attr('id', 'upvoted_review_{{ review.reviewid }}')
+                            }
+
+                            function upvoteSecondClick() {
+                                event.preventDefault();
+                                console.log('removing upvote from review ' + {{ review.reviewid }});
+
+                                remove_vote({{ review.reviewid }}, {{ mod.modID }});
+                                document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) - 1;
+
+                                $(this).off('click').on('click', upvoteFirstClick);
+                                $(this).attr('class', 'upvote_review');
+                                $(this).attr('value', '+');
+                                $(this).attr('id', 'upvote_review_{{ review.reviewid }}');
+                            }
+
+                            function downvoteFirstClick() {
+                                event.preventDefault();
+                                console.log('downvoting review + ' + {{ review.reviewid }});
+                                if (document.getElementById("upvoted_review_{{ review.reviewid }}")) {
+                                    remove_vote({{ review.reviewid }}, {{ mod.modID }});
+                                    window.setTimeout(function () {downvote_post({{ review.reviewid }}, {{ mod.modID }})}, 100);
+                                    $("#upvoted_review_{{ review.reviewid }}").off('click').on('click', upvoteFirstClick);
+                                    $("#upvoted_review_{{ review.reviewid }}").attr('class', 'upvote_review');
+                                    $("#upvote_review_{{ review.reviewid }}").attr('id', 'upvote_review_{{ review.reviewid }}');
+                                    document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) - 1;
+                                } else {
+                                    downvote_post({{ review.reviewid }}, {{ mod.modID }});
+                                    document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) - 1;
+                                }
+
+                                $(this).off('click').on('click', downvoteSecondClick);
+                                $(this).attr('class', 'downvoted_review');
+                                $(this).attr('value', '-');
+                                $(this).attr('id', 'downvoted_review_{{ review.reviewid }}');
+                            }
+
+                            function downvoteSecondClick() {
+                                event.preventDefault();
+                                console.log('removing downvote from review ' + {{ review.reviewid }});
+
+                                remove_vote({{ review.reviewid }}, {{ mod.modID }});
+                                document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) + 1;
+
+                                $(this).off('click').on('click', downvoteFirstClick);
+                                $(this).attr('class', 'downvote_review');
+                                $(this).attr('value', '-');
+                            }
+                        }
+                    </script>
+                    <br>
+
+                    {% if user.is_authenticated %}
+                        <form method="post" enctype="multipart/form-data" name="voting">
+                        </form>
+                    {% endif %}
                 </div>
+            {% endfor %}
+            <div class="submitReview">
                 {% if user.is_authenticated %}
-                    {% for vote in vote %}
-                        {% if review.reviewid|stringformat:"i" == vote.voteReviewID|stringformat:"i" and vote.voteAuthor == user|stringformat:"s" and vote.voteValue == 1 %}
-                            <script>
-                                $('#upvote_review_{{ review.reviewid }}').attr({
-                                    "id": "upvoted_review_{{ review.reviewid }}",
-                                    "class": "upvoted_review",
-                                    "value": "+"
-                                });
-                            </script>
-                        {% endif %}
-                        {% if review.reviewid|stringformat:"i" == vote.voteReviewID|stringformat:"i" and vote.voteAuthor == user|stringformat:"s" and vote.voteValue == -1 %}
-                            <script>
-                                $('#downvote_review_{{ review.reviewid }}').attr({
-                                    "id": "downvoted_review_{{ review.reviewid }}",
-                                    "class": "downvoted_review",
-                                    "value": "-"
-                                });
-                            </script>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-                <script>
-                    if (document.readyState === 'loading') {
-                        document.addEventListener('DOMContentLoaded', afterLoaded);
-                    } else {
-                        afterLoaded();
-                    }
-
-                    function afterLoaded() {
-                        $('#upvote_review_{{ review.reviewid }}').on('click', upvoteFirstClick);
-                        $('#upvoted_review_{{ review.reviewid }}').on('click', upvoteSecondClick);
-
-                        $('#downvote_review_{{ review.reviewid }}').on('click', downvoteFirstClick);
-                        $('#downvoted_review_{{ review.reviewid }}').on('click', downvoteSecondClick);
-
-                        function upvoteFirstClick() {
-                            event.preventDefault();
-                            console.log('upvoting review ' + {{ review.reviewid }});
-
-                            if (document.getElementById("downvoted_review_{{ review.reviewid }}")) {
-                                remove_vote({{ review.reviewid }}, {{ mod.modID }});
-                                window.setTimeout(function () {upvote_post({{ review.reviewid }}, {{ mod.modID }})}, 100);
-                                $("#downvoted_review_{{ review.reviewid }}").off('click').on('click', downvoteFirstClick);
-                                $("#downvoted_review_{{ review.reviewid }}").attr('class', 'downvote_review');
-                                $('#downvote_review_{{ review.reviewid }}').attr('id', 'downvote_review_{{ review.reviewid }}');
-                                document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) + 1;
-                            } else {
-                                upvote_post({{ review.reviewid }}, {{ mod.modID }});
-                                console.log('yaes');
-                                document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) + 1;
-                            }
-
-                            $(this).off('click').on('click', upvoteSecondClick);
-                            $(this).attr('class', 'upvoted_review');
-                            $(this).attr('value', '+');
-                            $(this).attr('id', 'upvoted_review_{{ review.reviewid }}')
-                        }
-
-                        function upvoteSecondClick() {
-                            event.preventDefault();
-                            console.log('removing upvote from review ' + {{ review.reviewid }});
-
-                            remove_vote({{ review.reviewid }}, {{ mod.modID }});
-                            document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) - 1;
-
-                            $(this).off('click').on('click', upvoteFirstClick);
-                            $(this).attr('class', 'upvote_review');
-                            $(this).attr('value', '+');
-                            $(this).attr('id', 'upvote_review_{{ review.reviewid }}');
-                        }
-
-                        function downvoteFirstClick() {
-                            event.preventDefault();
-                            console.log('downvoting review + ' + {{ review.reviewid }});
-                            if (document.getElementById("upvoted_review_{{ review.reviewid }}")) {
-                                remove_vote({{ review.reviewid }}, {{ mod.modID }});
-                                window.setTimeout(function () {downvote_post({{ review.reviewid }}, {{ mod.modID }})}, 100);
-                                $("#upvoted_review_{{ review.reviewid }}").off('click').on('click', upvoteFirstClick);
-                                $("#upvoted_review_{{ review.reviewid }}").attr('class', 'upvote_review');
-                                $("#upvote_review_{{ review.reviewid }}").attr('id', 'upvote_review_{{ review.reviewid }}');
-                                document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) - 1;
-                            } else {
-                                downvote_post({{ review.reviewid }}, {{ mod.modID }});
-                                document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) - 1;
-                            }
-
-                            $(this).off('click').on('click', downvoteSecondClick);
-                            $(this).attr('class', 'downvoted_review');
-                            $(this).attr('value', '-');
-                            $(this).attr('id', 'downvoted_review_{{ review.reviewid }}');
-                        }
-
-                        function downvoteSecondClick() {
-                            event.preventDefault();
-                            console.log('removing downvote from review ' + {{ review.reviewid }});
-
-                            remove_vote({{ review.reviewid }}, {{ mod.modID }});
-                            document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML = parseInt(document.getElementById('reviewVotes{{ review.reviewid }}').innerHTML) + 1;
-
-                            $(this).off('click').on('click', downvoteFirstClick);
-                            $(this).attr('class', 'downvote_review');
-                            $(this).attr('value', '-');
-                        }
-                    }
-                </script>
-                <br>
-
-                {% if user.is_authenticated %}
-                    <form method="post" enctype="multipart/form-data" name="voting">
+                    <form method="post" enctype="multipart/form-data" name="comment">
+                        {% csrf_token %}
+                        <p>Would you like to review this mod?</p>
+                        <span class="rulesSpan">Click <a href="{% url 'rules' %}">here</a> to view the rules</span>
+                        <div class="submitReviewCommentForm">{{ commentForm.reviewComment }}</div>
+                        <div class="reviewSubmit"><p>Don't forget to also <a href="#rate">rate</a> the mod!</p><input class="reviewSubmitButton" type="submit" value="submit"></div>
                     </form>
                 {% endif %}
             </div>
-        {% endfor %}
-        <div class="submitReview">
-            {% if user.is_authenticated %}
-                <form method="post" enctype="multipart/form-data" name="comment">
-                    {% csrf_token %}
-                    <p>Would you like to review this mod?</p>
-                   <span class="rulesSpan">Click <a href="{% url 'rules' %}">here</a> to view the rules</span>
-                    <div class="submitReviewCommentForm">{{ commentForm.reviewComment }}</div>
-                    <div class="reviewSubmit"><p>Don't forget to also <a href="#rate">rate</a> the mod!</p><input class="reviewSubmitButton" type="submit" value="submit"></div>
-                </form>
-            {% endif %}
         </div>
-    </div>
 
 
 

@@ -5,6 +5,7 @@
     <form method="post" enctype="multipart/form-data" action="">
         {% csrf_token %}
         {{ form.as_p }}
+        <p>Check out the <a href="{% url "rules" %}">rules</a> before submitting your avatar.</p>
         <p>If you want to return your avatar to the default image, leave the above slot free and click submit.</p>
         <input class="avatarSubmit" type="submit" value="Submit">
     </form>
