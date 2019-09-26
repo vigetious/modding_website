@@ -81,7 +81,11 @@
             {% if x.modApproved %}
                 <li>
                     <div class="modAvatar">
-                        <a href="/mod/{{ x.modID }}"><img src="{{ x.modAvatar.url }}" alt="Mod Avatar"></a>
+                        {% if x.modAvatar %}
+                            <a href="/mod/{{ x.modID }}"><img src={{ x.modAvatar.url }} alt="Avatar Image"></a>
+                        {% else %}
+                            <a href="/mod/{{ x.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
+                        {% endif %}
                     </div>
                     <div class="modData">
                         <p class="modData-name" title="Name" style="margin: 0"><a href="/mod/{{ x.modID }}">{{ x.modName|truncatechars:17 }}</a></p>

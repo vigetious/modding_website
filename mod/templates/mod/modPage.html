@@ -72,7 +72,11 @@
     </div>
     <div class="rightModData">
         <div class="rightModDataAvatar">
-            <img src={{ post.modAvatar.url }} alt="ye">
+            {% if post.modAvatar %}
+                <img src={{ post.modAvatar.url }} alt="Avatar Image">
+            {% else %}
+                <img src="{% static 'img/icon.png' %}" alt="Avatar Image">
+            {% endif %}
         </div>
         <div class="rightModDataDescription">
             <p>{{ post.modShortDescription }}</p>

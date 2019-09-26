@@ -52,7 +52,13 @@
                         {% for mods in mods %}
                             {% if mods.modApproved %}
                             <tr>
-                                <td><img src={{ mods.modAvatar.url }}></td>
+                                <td>
+                                    {% if mods.modAvatar %}
+                                        <img src={{ mods.modAvatar.url }} alt="Avatar Image">
+                                    {% else %}
+                                        <img src="{% static 'img/icon.png' %}" alt="Avatar Image">
+                                    {% endif %}
+                                </td>
                                 <td><p>{{ mods.modName }}</p></td>
                                 <td><p>{{ mods.modRating }}</p></td>
                                 <td><p>{{ mods.modStatus }}</p></td>

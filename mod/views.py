@@ -316,10 +316,6 @@ def modEdit(request, pk):
             # post.modID = pk
             post.modAuthor = request.user
             post.modUpdate = timezone.now()
-            if post.modAvatar:
-                pass
-            else:
-                post.modAvatar = static('img/icon.png')
             post.modApproved = False
             post.modIP = visitor_ip_address(request)
             post.save()
