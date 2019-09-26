@@ -45,9 +45,9 @@
                 <li>
                 <div class="modAvatar">
                     {% if mod.modAvatar %}
-                        <a href="/mod/{{ x.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
+                        <a href="/mod/{{ mod.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
                     {% else %}
-                        <a href="/mod/{{ x.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
+                        <a href="/mod/{{ mod.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
                     {% endif %}
                 </div>
                 <div class="modData">
@@ -69,9 +69,9 @@
             <li>
                 <div class="modAvatar">
                     {% if mod.modAvatar %}
-                        <a href="/mod/{{ x.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
+                        <a href="/mod/{{ mod.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
                     {% else %}
-                        <a href="/mod/{{ x.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
+                        <a href="/mod/{{ mod.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
                     {% endif %}
                 </div>
                 <div class="modData">
@@ -93,9 +93,9 @@
         <li>
             <div class="modAvatar">
                 {% if mod.modAvatar %}
-                    <a href="/mod/{{ x.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
+                    <a href="/mod/{{ mod.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
                 {% else %}
-                    <a href="/mod/{{ x.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
+                    <a href="/mod/{{ mod.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
                 {% endif %}
             </div>
             <div class="modData">
