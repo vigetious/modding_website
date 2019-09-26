@@ -82,7 +82,7 @@ def modPage(request, pk):
     else:
         pass
     review = ReviewRating.objects.filter(reviewModID=post.modID)
-
+    vote = Vote.objects.all()
     if request.user.is_authenticated:
         try:
             rating = Rating.objects.get(ratingAuthorID=request.user, ratingModID=post.modID)
@@ -124,7 +124,7 @@ def modPage(request, pk):
         commentForm = ReviewForm()
     return render(request, 'mod/modPage.html', {'post': post, 'commentForm': commentForm, 'review': review,
                                                  'questions': questions, 'rating': rating, 'news': news,
-                                                'newsnotifications': newsnotifications, 'emails': emails})
+                                                'newsnotifications': newsnotifications, 'emails': emails, 'vote': vote})
 
 
 @login_required
