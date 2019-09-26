@@ -275,7 +275,7 @@
                             <p>{{ review.reviewid }} | {{ review.reviewDate }}</p>
                             <div class="modReviewComment">
                                 {% if review.reviewApproved == True %}
-                                    <p>{{ review.reviewComment }}</p>
+                                    <p>{{ review.reviewComment|linebreaks }}</p>
                                 {% elif review.reviewApproved == False %}
                                     <p>This review is awaiting verification from moderators.</p>
                                     <p>If you have written the review and it has not been approved within 7 days, please <a href="{% url 'contactUs' %}">contact us.</a></p>

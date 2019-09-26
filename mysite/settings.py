@@ -165,10 +165,12 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 #EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 #DEFAULT_FROM_EMAIL = "yaes@example.com"
 
-EMAIL_HOST = 'smtp.mailgun.org'
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'postmaster@sandboxb694214ee67f403b9af2446b29a7eb00.mailgun.org'
-EMAIL_HOST_PASSWORD = email_host_password
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_USE_TLS = True
 EMAIL_TIMEOUT = 10
 
