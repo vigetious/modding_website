@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/modSubmitEdit.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="{% static 'js/selectize.js' %}"></script>
-    {% if post.modAuthor == user %}
+    {% if post.modAuthor == user and not post.modApproved %}
         {% if form.errors %}
             <div class="editErrorList">
             {% for field in form %}
@@ -208,6 +208,8 @@
                 <a onclick="return confirm('Are you sure? Once you delete the mod, it is gone forever without any way of getting it back.')" href="{% url 'mod:modDelete' pk=post.pk %}"><p>Delete mod</p></a>
             </div>
         </form>
+    {% elif not post.modApproved %}
+        <p>Please wait for moderators to finish checking your mod before you edit it.</p>
     {% else %}
         <p>You must be the mod creator to edit this mod.</p>
     {% endif %}
