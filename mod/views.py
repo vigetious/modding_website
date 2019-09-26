@@ -319,7 +319,7 @@ def modEdit(request, pk):
             if post.modAvatar:
                 pass
             else:
-                post.modAvatar = 'files/avatar/icon.png'
+                post.modAvatar = static('img/icon.png')
             post.modApproved = False
             post.modIP = visitor_ip_address(request)
             post.save()
