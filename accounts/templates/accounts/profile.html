@@ -99,7 +99,7 @@
                 {% for x in played %}
                     <tr id="rating{{ x.ratingID }}">
                         <td>
-                            {% if x.modAvatar %}
+                            {% if x.ratingAvatar %}
                                 <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src={{ x.ratingAvatar.url }} alt="Avatar Image"></a>
                             {% else %}
                                 <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>

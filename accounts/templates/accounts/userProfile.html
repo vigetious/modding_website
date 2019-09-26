@@ -41,12 +41,12 @@
                             <tr>
                                 <td>
                                     {% if mods.modAvatar %}
-                                        <img src={{ mods.modAvatar.url }} alt="Avatar Image">
+                                        <a href="../../mod/{{ mods.modID|stringformat:'i' }}"><img src={{ mods.modAvatar.url }} alt="Avatar Image"></a>
                                     {% else %}
-                                        <img src="{% static 'img/icon.png' %}" alt="Avatar Image">
+                                        <a href="../../mod/{{ mods.modID|stringformat:'i' }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
                                     {% endif %}
                                 </td>
-                                <td><p>{{ mods.modName }}</p></td>
+                                <td><p><a href="../../mod/{{ mods.modID|stringformat:'i' }}">{{ mods.modName }}</a></p></td>
                                 <td><p>{{ mods.modRating }}</p></td>
                                 <td><p>{{ mods.modStatus }}</p></td>
                                 <td><p>{{ mods.modDate }}</p></td>
@@ -68,7 +68,13 @@
                 </tr>
                 {% for x in played %}
                     <tr id="rating{{ x.ratingID }}">
-                        <td><a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src="{{ x.ratingAvatar }}"></a></td>
+                        <td>
+                            {% if x.ratingAvatar %}
+                                <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src={{ x.ratingAvatar.url }} alt="Avatar Image"></a>
+                            {% else %}
+                                <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
+                            {% endif %}
+                        </td>
                         <td><p><a href="../../mod/{{ x.ratingModID|stringformat:'i' }}">{{ x.ratingModID }}</a></p></td>
                         <td><p>{{ x.ratingValue }}</p></td>
                         <td><p>{{ x.ratingChoice }}</p></td>
