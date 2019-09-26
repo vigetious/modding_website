@@ -54,9 +54,9 @@
                             <tr>
                                 <td>
                                     {% if mods.modAvatar %}
-                                        <a href="../../mod/{{ mods.ratingModID|stringformat:'i' }}"><img src={{ mods.modAvatar.url }} alt="Avatar Image"></a>
+                                        <a href="../../mod/{{ mods.modID|stringformat:'i' }}"><img src={{ mods.modAvatar.url }} alt="Avatar Image"></a>
                                     {% else %}
-                                        <a href="../../mod/{{ mods.ratingModID|stringformat:'i' }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
+                                        <a href="../../mod/{{ mods.modID|stringformat:'i' }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
                                     {% endif %}
                                 </td>
                                 <td><p>{{ mods.modName }}</p></td>
@@ -100,7 +100,7 @@
                     <tr id="rating{{ x.ratingID }}">
                         <td>
                             {% if x.ratingAvatar %}
-                                <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src={{ x.ratingAvatar.url }} alt="Avatar Image"></a>
+                                <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src={{ x.ratingAvatar }} alt="Avatar Image"></a>
                             {% else %}
                                 <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
                             {% endif %}</td>
