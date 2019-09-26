@@ -296,6 +296,8 @@ if not DEBUG:
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
     DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
+
+    DEFENDER_REDIS_URL = os.getenv('REDIS_URL')
 else:
     STATIC_URL = '/static/'
 
