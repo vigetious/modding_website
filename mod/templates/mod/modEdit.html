@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/modSubmitEdit.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="{% static 'js/selectize.js' %}"></script>
-    {% if post.modAuthor == user and not post.modApproved %}
+    {% if post.modAuthor == user and post.modApproved %}
         {% if form.errors %}
             <div class="editErrorList">
             {% for field in form %}
