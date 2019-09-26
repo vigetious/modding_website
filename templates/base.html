@@ -72,6 +72,9 @@
         <form action="{% url 'mod:modSearch' %}" method="get">
             <input class="searchButton" type="submit" value="Search">
             <input class="search" name="q" type="text" placeholder="Search">
+            <input type="hidden" name="sortBy" value="newest">
+            <input type="hidden" name="tags" value="All">
+            <input type="hidden" name="dateBy" value="0">
         </form>
     </ul>
 
