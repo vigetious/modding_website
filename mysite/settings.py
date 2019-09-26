@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-from .secret import access_key_id, secret_access_key, bucket_name, django_secret_key, captcha_site_key, captcha_secret_key
+from .secret import access_key_id, secret_access_key, bucket_name, django_secret_key, captcha_site_key, captcha_secret_key, email_host_password
 SECRET_KEY = django_secret_key
 
 
@@ -29,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['modding-website.herokuapp.com',
                  'https://www.dokidokimodclub.com/',
@@ -159,9 +159,20 @@ MEDIA_URL = '/files/'
 
 LOGOUT_REDIRECT_URL = '/'
 
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
-DEFAULT_FROM_EMAIL = "yaes@example.com"
+#######################################
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+#EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+#DEFAULT_FROM_EMAIL = "yaes@example.com"
+
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'postmaster@sandboxb694214ee67f403b9af2446b29a7eb00.mailgun.org'
+EMAIL_HOST_PASSWORD = email_host_password
+EMAIL_USE_TLS = True
+EMAIL_TIMEOUT = 10
+
+#######################################
 
 AUTH_USER_MODEL = 'accounts.User'
 
