@@ -144,6 +144,31 @@ class Mod(models.Model):
         except ValueError:
             pass
         try:
+            if self.modPreviewImage1.size > settings.MAX_BACKGROUND_UPLOAD_SIZE:
+                raise ValidationError('The first preview image cannot be larger than 20MB.')
+        except:
+            pass
+        try:
+            if self.modPreviewImage2.size > settings.MAX_BACKGROUND_UPLOAD_SIZE:
+                raise ValidationError('The second preview image cannot be larger than 20MB.')
+        except:
+            pass
+        try:
+            if self.modPreviewImage3.size > settings.MAX_BACKGROUND_UPLOAD_SIZE:
+                raise ValidationError('The third preview image cannot be larger than 20MB.')
+        except:
+            pass
+        try:
+            if self.modPreviewImage4.size > settings.MAX_BACKGROUND_UPLOAD_SIZE:
+                raise ValidationError('The fourth preview image cannot be larger than 20MB.')
+        except:
+            pass
+        try:
+            if self.modPreviewImage5.size > settings.MAX_BACKGROUND_UPLOAD_SIZE:
+                raise ValidationError('The fifth preview image cannot be larger than 20MB.')
+        except:
+            pass
+        try:
             if self.modAvatar.size > settings.MAX_AVATAR_UPLOAD_SIZE:
                 raise ValidationError('The avatar image cannot be larger than 10MB.')
         except:
