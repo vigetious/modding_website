@@ -26,11 +26,16 @@
 
     <div class="screenshotVideo">
         <div class="screenshotVideoContent">
-            {% if post.modPreviewVideo is not 0 %}
+            {% if not post.modPreviewVideo %}
                 <div class="mySlides">{% video post.modPreviewVideo '620x350' %}</div>
-            {% endif %}
-            {% if post.modPreviewImage1.url.length is not 0 %}
-                <img class="mySlides" src={{ post.modPreviewImage1.url }} alt="Preview Image 1" style="display:none">
+                {% if post.modPreviewImage1.url.length is not 0 %}
+                    <img class="mySlides" src={{ post.modPreviewImage1.url }} alt="Preview Image 1">
+                {% endif %}
+            {% else %}
+                <div class="mySlides">{% video post.modPreviewVideo '620x350' %}</div>
+                {% if post.modPreviewImage1.url.length is not 0 %}
+                    <img class="mySlides" src={{ post.modPreviewImage1.url }} alt="Preview Image 1" style="display:none">
+                {% endif %}
             {% endif %}
             {% if post.modPreviewImage2.url.length is not 0 %}
                 <img class="mySlides" src={{ post.modPreviewImage2.url }} alt="Preview Image 2" style="display:none">
