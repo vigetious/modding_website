@@ -146,7 +146,7 @@ class Mod(models.Model):
         try:
             if self.modAvatar.size > settings.MAX_AVATAR_UPLOAD_SIZE:
                 raise ValidationError('The avatar image cannot be larger than 10MB.')
-        except ValueError:
+        except:
             pass
         try:
             if len(self.modShortDescription) > 250:
