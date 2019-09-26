@@ -49,6 +49,9 @@
             {% if post.modPreviewImage5.url.length is not 0 %}
                 <img class="mySlides" src={{ post.modPreviewImage5.url }} alt="Preview Image 5" style="display:none">
             {% endif %}
+            {% if not post.modPreviewVideo and not post.modPreviewImage1 and not post.modPreviewImage3 and not post.modPreviewImage4 and not post.modPreviewImage5 %}
+                <p style="text-align: center; line-height: 400px; margin-right: 200px">No images/videos found!</p>
+            {% endif %}
         </div>
         <div class="screenshotVideoBar">
             <ul>
