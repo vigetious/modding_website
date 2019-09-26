@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'verified_email_field',
     'storages',
     'captcha',
+    'defender',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'secretballot.middleware.SecretBallotIpUseragentMiddleware',
     'likes.middleware.SecretBallotIpUseragentMiddleware',
+    'defender.middleware.FailedLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'

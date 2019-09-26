@@ -18,6 +18,7 @@ urlpatterns = [
     path('support/copyright', views.copyright, name='copyright'),
     path('taggit/', include('taggit_selectize.urls')),
     path('verified-email-field/', include('verified_email_field.urls')),
+    path('admin/defender/', include('defender.urls')),
 ]
 
 
