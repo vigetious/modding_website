@@ -9,6 +9,7 @@ from django.contrib.postgres.aggregates import StringAgg
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 #from taggit.managers import TaggableManager
 from taggit_selectize.managers import TaggableManager
@@ -249,10 +250,10 @@ class Rating(models.Model):
     ratingNote = models.CharField('rating note', max_length=1000, default="")
 
     def getAvatar(self):
-        if Mod.objects.get(modID=self.ratingModID).modAvatar.url != None:
+        if Mod.objects.get(modID=self.ratingModID).modAvatar:
             return Mod.objects.get(modID=self.ratingModID).modAvatar.url
         else:
-            return 'files/'
+            return static('img/icon.png')
 
     def getStatus(self):
         return Mod.objects.get(modID=self.ratingModID).modStatus
