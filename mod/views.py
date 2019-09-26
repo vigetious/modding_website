@@ -54,10 +54,6 @@ def submit(request):
             post.modAuthor = request.user
             post.modDate = timezone.now()
             post.modUpdate = timezone.now()
-            if post.modAvatar:
-                pass
-            else:
-                post.modAvatar = static('img/icon.png')
             post.modApproved = False
             post.modIP = visitor_ip_address(request)
             post.save()
