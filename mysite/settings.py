@@ -29,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['modding-website.herokuapp.com',
                  'https://www.dokidokimodclub.com/',
@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'embed_video',
     'taggit_selectize',
-    'verified_email_field',
     'storages',
     'captcha',
     'defender',
@@ -162,20 +161,23 @@ MEDIA_URL = '/files/'
 LOGOUT_REDIRECT_URL = '/'
 
 #######################################
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+    EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+    DEFAULT_FROM_EMAIL = "yaes@example.com"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-#EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
-#DEFAULT_FROM_EMAIL = "yaes@example.com"
 
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
-SENDGRID_USER = os.getenv('SENDGRID_USERNAME')
+    SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+    SENDGRID_USER = os.getenv('SENDGRID_USERNAME')
 
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-EMAIL_USE_TLS = True
-EMAIL_TIMEOUT = 10
+    EMAIL_HOST = 'smtp.sendgrid.net'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = 'apikey'
+    EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+    EMAIL_USE_TLS = True
+    EMAIL_TIMEOUT = 10
 
 #######################################
 

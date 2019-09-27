@@ -1,0 +1,17 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Active your dokidokimodclub.com account
+From: yaes@example.com
+To: paddyward@yahoo.co.uk
+Date: Fri, 27 Sep 2019 12:39:34 -0000
+Message-ID: <156958797423.25490.14062077250681150106@new-host-4>
+
+
+    Hi naother-test,
+
+    Please click on the link below to confirm your account on dokidokimodclub.com:
+
+    http://127.0.0.1:8000/accounts/%5Eactivate/(%3FPMTA%5B0-9A-Za-z_%5C-%5D+)/(%3FP5a3-083cef1547ac810f86ee%5B0-9A-Za-z%5D%7B1,13%7D-%5B0-9A-Za-z%5D%7B1,20%7D)/$
+
+-------------------------------------------------------------------------------

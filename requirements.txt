@@ -30,7 +30,6 @@ django-storages==1.7.2
 django-taggit==1.1.0
 django-taggit-templatetags2==1.6.1
 django-user-media==1.2.5
-django-verified-email-field==1.5.1
 django-vote==2.1.7
 docutils==0.15.2
 easy-thumbnails==2.6

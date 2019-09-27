@@ -7,7 +7,6 @@ from django.db.models.signals import post_save
 from django.core.exceptions import ValidationError
 
 from easy_thumbnails.fields import ThumbnailerImageField
-from verified_email_field.forms import VerifiedEmailField
 from captcha.fields import ReCaptchaField
 
 import string, random
@@ -28,7 +27,8 @@ def avatar_path(instance, filename):
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     #email = VerifiedEmailField('email', fieldsetup_id='email')
-    captcha = ReCaptchaField()
+    #captcha = ReCaptchaField()
+    email_confirmed = models.BooleanField(default=False)
     description = models.CharField(max_length=1000, null=True)
     totalComments = models.IntegerField('total comments', default=0)
     totalMods = models.IntegerField('total mods', default=0)
@@ -43,6 +43,12 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+#@receiver(post_save, sender=User)
+#def update_user_profile(sender, instance, created, **kwargs):
+#    if created:
+#        User.objects.create(email=instance.email, )
 
 
 class Avatar(models.Model):

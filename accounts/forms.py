@@ -6,18 +6,18 @@ from django.contrib.auth import get_user_model
 
 from .models import User, Avatar
 from easy_thumbnails.fields import ThumbnailerImageField
-from verified_email_field.forms import VerifiedEmailField
 from captcha.widgets import ReCaptchaV3
 from captcha.fields import ReCaptchaField
 
 
 class CustomUserCreationForm(UserCreationForm):
-    email = VerifiedEmailField(label='email', required=True)
-    captcha = ReCaptchaField(widget=ReCaptchaV3)
+    #email = VerifiedEmailField(label='email', required=True)
+    email = forms.EmailField(max_length=254, help_text='Required. Enter a valid email address.')
+    #captcha = ReCaptchaField(widget=ReCaptchaV3)
 
     class Meta(UserCreationForm):
         model = User
-        fields = ('username', 'email', 'captcha')
+        fields = ('username', 'email')#, 'captcha')
 
 
 class CustomUserChangeForm(UserChangeForm):

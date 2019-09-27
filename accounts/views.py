@@ -10,6 +10,12 @@ from django.views.generic.edit import CreateView
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text
+from .tokens import AccountActivationTokenGenerator, account_activation_token
+from django.contrib.auth import login
 
 from .forms import CustomUserCreationForm, EditForm, AvatarForm#, SignUp
 from .models import Avatar, User
@@ -54,11 +60,48 @@ def profile(request):
                                                      'reviews': reviews})
 
 
-class SignUpView(CreateView):
-    form_class = CustomUserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'registration/signup.html'
+#class SignUpView(CreateView):
+#    form_class = CustomUserCreationForm
+#    success_url = reverse_lazy('login')
+#    template_name = 'registration/signup.html'
 
+def SignUpView(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            current_site = get_current_site(request)
+            subject = "Active your dokidokimodclub.com account"
+            message = render_to_string('registration/account_activation_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user),
+            })
+            user.email_user(subject, message)
+            return redirect('accounts:account_activation_sent')
+    else:
+        form = CustomUserCreationForm
+    return render(request, 'registration/signup.html', {'form': form})
+
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.email_confirmed = True
+        user.save()
+        login(request, user)
+        return redirect('home')
+    else:
+        return render(request, 'registration/account_activation_invalid.html')
 
 class PasswordResetView(PasswordResetView):
     form_class = PasswordResetForm
@@ -178,9 +221,5 @@ def note(request):
             content_type="application/json"
         )
 
-
-
-#class SignUp(generic.CreateView):
-#    form_class = SignUp
-#    success_url = reverse_lazy('login')
-#    template_name = 'registration/signup.html'
+def account_activation_sent(request):
+    return render(request, 'registration/account_activation_sent.html')
