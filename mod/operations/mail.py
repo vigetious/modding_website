@@ -10,6 +10,6 @@ def notificationsSendMail(modTitle, recipientsList, news_text, news_mod_id):
                 '{1}\n'
                 'Come check out the news at: https://dokidokimodclub.com/mod/{2}'.format(modTitle, news_text, news_mod_id),
         recipient_list=recipientsList,
-        from_email='server@example.com'
+        from_email='do-not-reply@dokidokimodclub.com'
     )
 

@@ -298,6 +298,8 @@ if not DEBUG:
     DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
 
     DEFENDER_REDIS_URL = os.getenv('REDIS_URL')
+
+    SERVER_EMAIL = 'do-not-reply@dokidokimodclub.com'
 else:
     STATIC_URL = '/static/'
 
