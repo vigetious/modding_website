@@ -80,7 +80,8 @@ def SignUpView(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
-            user.email_user(subject, message)
+            user.email_user(subject, message, from_email='do-not-reply@dokidokimodclub.com')
+            user.emai
             return redirect('accounts:account_activation_sent')
     else:
         form = CustomUserCreationForm
