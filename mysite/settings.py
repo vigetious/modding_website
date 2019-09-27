@@ -299,7 +299,7 @@ if not DEBUG:
 
     DEFENDER_REDIS_URL = os.getenv('REDIS_URL')
 
-    SERVER_EMAIL = 'do-not-reply@dokidokimodclub.com'
+    SERVER_EMAIL = 'em8799.dokidokimodclub.com'
 else:
     STATIC_URL = '/static/'
 
