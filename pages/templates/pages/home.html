@@ -51,7 +51,7 @@
                     {% endif %}
                 </div>
                 <div class="modData">
-                    <p class="modData-name" title="Name" style="margin: 0"><a href="/mod/{{ mod.modID }}">{{ mod.modName|truncatechars:17 }}</a></p>
+                    <p class="modData-name" title="Name"><a href="/mod/{{ mod.modID }}">{{ mod.modName }}</a></p><!-- tunchatechars : 17 -->
                     <p class="modData-date" title="Date and Rating">{{ mod.modDate|date:"d M Y" }} | {{ mod.modRating }}</p>
                 </div>
                 <div class="modDescription">

@@ -125,9 +125,9 @@ def change_password(request):
         'form': form
     })
 
+
 def userProfile(request, pk):
     post = get_object_or_404(User, pk=User.objects.get(username=pk).id)
-    #avatar = Avatar.objects.get(avatarUserID=pk)
     try:
         userAvatar = Avatar.objects.get(avatarUserID=User.objects.get(username=pk).id)
     except ObjectDoesNotExist:

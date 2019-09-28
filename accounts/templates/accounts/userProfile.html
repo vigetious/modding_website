@@ -17,14 +17,14 @@
                 {% endif %}
             </div>
             <div class="userLeftSideBarData">
-                <p>Username: {{ user.username }}</p>
-                <p>Total comments: {{ user.totalComments }}</p>
-                <p>Total mods: {{ user.totalMods }}</p>
+                <p>Username: {{ post.username }}</p>
+                <p>Total comments: {{ post.totalComments }}</p>
+                <p>Total mods: {{ post.totalMods }}</p>
             </div>
         </div>
         <div class="userRightSideContent">
             <div class="userRightSideContentBio">
-                <p style="text-align: left; margin: 5px 5px" id="bio">{{ user.description }}</p>
+                <p style="text-align: left; margin: 5px 5px" id="bio">{{ post.description }}</p>
             </div>
             <div class="userRightSideContentCreatedMods">
                 <div class="userTitle"><p>Created mods</p></div>
@@ -70,7 +70,7 @@
                     <tr id="rating{{ x.ratingID }}">
                         <td>
                             {% if x.ratingAvatar %}
-                                <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src={{ x.ratingAvatar.url }} alt="Avatar Image"></a>
+                                <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src={{ x.ratingAvatar }} alt="Avatar Image"></a>
                             {% else %}
                                 <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
                             {% endif %}

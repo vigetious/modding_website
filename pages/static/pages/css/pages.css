@@ -96,7 +96,6 @@
 
 .modData {
     height: 10%;
-    white-space: nowrap;
     padding: 5px 5px;
     background-color: #8acaff;
     box-shadow: 0 10px 10px 0 #8acaff;
@@ -109,6 +108,8 @@
 
 .modData a {
     color: #38434c;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .modData-name {
