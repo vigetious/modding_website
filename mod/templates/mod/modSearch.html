@@ -88,12 +88,11 @@
                         {% endif %}
                     </div>
                     <div class="modData">
-                        <p class="modData-name" title="Name" style="margin: 0"><a href="/mod/{{ x.modID }}">{{ x.modName|truncatechars:17 }}</a></p>
+                        <p class="modData-name" title="Name" style="word-wrap: break-word; white-space: normal"><a href="/mod/{{ x.modID }}">{{ x.modName }}</a></p>
                         <p class="modData-date" title="Date and Rating">{{ x.modDate|date:"d M Y" }} | {{ x.modRating }}</p>
+                        <p class="modData-description" title="Description" style="word-wrap: break-word; margin-top: 5px">{{ x.modShortDescription|truncatewords:50 }}</p>
                     </div>
-                    <div class="modDescription">
-                        <p title="Description">{{ x.modShortDescription|truncatewords:50 }}</p>
-                    </div>
+
                 </li>
             {% endif %}
         {% endfor %}

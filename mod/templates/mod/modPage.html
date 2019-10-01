@@ -91,7 +91,7 @@
         </div>
         <ul class="rightModDataText">
             <li>
-                <p>Author:</p><p><a href="{% url 'accounts:userProfile' pk=post.modAuthor.id %}">{{ post.modAuthor }}</a></p>
+                <p>Author:</p><p><a href="{% url 'accounts:userProfile' pk=post.modAuthor|stringformat:"s" %}">{{ post.modAuthor }}</a></p>
             </li>
             <li>
                 <p>Release date:</p><p>{{ post.modDate }}</p>

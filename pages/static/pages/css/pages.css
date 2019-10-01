@@ -127,11 +127,13 @@
     padding: 5px 5px;
 }
 
-.modDescription p {
+.modData-description {
     word-wrap: break-word;
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 13px;
+    height: 40%;
 }
 
 .adminNews {
