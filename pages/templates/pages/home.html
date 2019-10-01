@@ -53,7 +53,7 @@
                 <div class="modData">
                     <p class="modData-name" title="Name"><a style="word-wrap: break-word; white-space: normal" href="/mod/{{ mod.modID }}">{{ mod.modName }}</a></p><!-- tunchatechars : 17 -->
                     <p class="modData-date" title="Date and Rating">{{ mod.modDate|date:"d M Y" }} | {{ mod.modRating }}</p>
-                    <p class="modData-description" title="Description" style="word-wrap: break-word; margin-top: 5px">{{ mod.modShortDescription|truncatewords:50 }}</p>
+                    <p class="modData-description" title="Description" style="word-wrap: break-word; margin-top: 5px; white-space: normal; overflow: inherit">{{ mod.modShortDescription|truncatewords:50 }}</p>
                 </div>
                 </li>
             {% endif %}

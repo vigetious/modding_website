@@ -129,11 +129,9 @@
 
 .modData-description {
     word-wrap: break-word;
-    white-space: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
     font-size: 13px;
-    height: 40%;
+    max-height: 40%;
+    max-width: 100%;
 }
 
 .adminNews {
