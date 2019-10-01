@@ -21,7 +21,7 @@
                 <p class="newsDate">{{ news.adminNewsDate }}</p>
             </div>
             <div class="newsContent">
-                <p>{{ news.adminNewsText|safe }}</p>
+                <p>{{ news.adminNewsText|linebreaks }}</p>
             </div>
         </li>
     {% endfor %}
