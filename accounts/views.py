@@ -45,8 +45,8 @@ def profile(request):
     try:
         userAvatar = Avatar.objects.get(avatarUserID=request.user)
     except ObjectDoesNotExist:
-        #userAvatar = None
-        userAvatar = Avatar.objects.create(avatarUserID=request.user, avatarImage=static('img/icon.png'))
+        userAvatar = None
+        #userAvatar = Avatar.objects.create(avatarUserID=request.user, avatarImage=static('img/icon.png'))
 
     try:
         mods = Mod.objects.filter(modAuthor=request.user.id)
