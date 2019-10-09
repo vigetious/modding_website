@@ -35,7 +35,7 @@
         </div>
         <div class="userRightSideContent">
             <div class="userRightSideContentBio">
-                <textarea id="bio">{{ user.description }}</textarea>
+                <textarea id="bio">{{ user.description|linebreaks }}</textarea>
                 <input type="button" id="finishEditBio" value="Update bio" onclick="editBioAjax($('textarea#bio').val())">
             </div>
             <div class="userRightSideContentCreatedMods">

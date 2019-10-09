@@ -59,7 +59,7 @@
             {% for tag in tagCount %}
                 <script>
                     girls = ['natsuki', 'yuri', 'monika', 'sayori', 'all girls'];
-                    mood = ['happy', 'sad', 'love'];
+                    mood = ['happy', 'sad', 'love', 'lighthearted', 'funny'];
                     state = ['aftermath', 'extension', 'new story'];
                     if (girls.includes('{{ tag }}'.toLowerCase())) {
                         $("#girls").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
