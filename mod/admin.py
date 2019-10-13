@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.db import models
+from django.forms import Textarea
 
 from .models import Mod, ReviewRating, Rating, News, NewsNotifications, Vote
 
@@ -23,6 +25,9 @@ class ModAdmin(admin.ModelAdmin):
                     'modDescription', 'tags', 'modUpload', 'modUploadURL', 'modPlayTimeHours',
                     'modPlayTimeMinutes', 'modReviewCount', 'modApproved', 'modIP']
     actions = [mark_as_safe, mark_as_unsafe]
+    formfield_overrides = {
+        models.CharField: {'widget': Textarea()}
+    }
 
     #change_form_template = 'progressbarupload/change_form.html'
     #add_form_template = 'progressbarupload/change_form.html'
