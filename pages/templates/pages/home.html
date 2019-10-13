@@ -62,7 +62,7 @@
     </div>
     <div id="rated" class="tabcontent">
     <ul class="tabContentValue">
-    {% for mod in newMods|dictsortreversed:"modRating" %}
+    {% for mod in ratedMods|dictsortreversed:"modRating" %}
         {% if mod.modApproved %}
             <!--
             <li>
@@ -102,7 +102,7 @@
     </div>
     <div id="reviewed" class="tabcontent">
     <ul class="tabContentValue">
-    {% for mod in newMods|dictsortreversed:"modReviewCount" %}
+    {% for mod in reviewedMods|dictsortreversed:"modReviewCount" %}
         {% if mod.modApproved %}
             <!--
         <li>

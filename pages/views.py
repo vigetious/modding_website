@@ -13,8 +13,10 @@ import pdb
 def home(request):
     newMods = Mod.objects.filter(modApproved=True).order_by('-modDate')[:12]
     ratedMods = Mod.objects.filter(modApproved=True).order_by('-modRating')[:12]
+    # reviewedMods = Mod.objects.filter(modApproved=True).order_by('-modReviewCount')[:12]
+    reviewedMods = sorted(Mod.objects.filter(modApproved=True), key=lambda t: t.modReviewCount)  # order by review count using sorted
     adminNews = AdminNews.objects.all().order_by('-adminNewsDate')
-    return render(request, 'pages/home.html', {'newMods': newMods, 'ratedMods': ratedMods, 'adminNews': adminNews})
+    return render(request, 'pages/home.html', {'newMods': newMods, 'ratedMods': ratedMods, 'reviewedMods': reviewedMods, 'adminNews': adminNews})
 
 
 def supportHome(request):
