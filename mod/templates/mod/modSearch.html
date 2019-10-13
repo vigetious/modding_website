@@ -41,7 +41,7 @@
                 <input type="submit" value="Search/Update">
             </div>
             <div class="searchSideContentCategory">
-                <h3>Girls:</h3>
+                <h3>Characters:</h3>
             </div>
                 <div id="girls"></div>
             <div class="searchSideContentCategory">
@@ -58,8 +58,8 @@
             {% endfor %}
             {% for tag in tagCount %}
                 <script>
-                    girls = ['natsuki', 'yuri', 'monika', 'sayori', 'all girls'];
-                    mood = ['happy', 'sad', 'love', 'lighthearted', 'funny'];
+                    girls = ['natsuki', 'yuri', 'monika', 'sayori', 'all girls', 'tiffany', 'shiro', "natsuki's dad"];
+                    mood = ['happy', 'sad', 'love', 'lighthearted', 'funny', 'scary'];
                     state = ['aftermath', 'extension', 'new story'];
                     if (girls.includes('{{ tag }}'.toLowerCase())) {
                         $("#girls").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');

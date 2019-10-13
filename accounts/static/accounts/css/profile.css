@@ -45,6 +45,10 @@
     text-align: right;
 }
 
+.userRightSideContentBio p {
+    text-align: left;
+}
+
 .userRightSideContentBio input {
     margin-left: 5px;
     background-color: #7cb5e5;

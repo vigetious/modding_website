@@ -16,7 +16,7 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
         (None, {'fields': ('description', 'totalComments', 'totalMods')}),
     )
-    list_display = ['email', 'username', 'description', 'totalComments', 'totalMods']
+    list_display = ['email', 'username', 'date_joined', 'description', 'totalComments', 'totalMods']
 
 
 def mark_as_safe(modeladmin, request, queryset):

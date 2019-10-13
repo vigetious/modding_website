@@ -248,6 +248,7 @@
                     <div class="modReviewData">
                         <div class="modReviewCoreData">
                             <p><a href="{% url 'accounts:userProfile' review.reviewAuthorID %}">{{ review.reviewAuthorID }}</a></p><br>
+                            <img src="{{ review.reviewAuthorID }}"> <!-- REVIEW AUTHOR ID AND AVATAR USER ID THE SAME -->
                             {% if user.is_authenticated %}
                                 <form method="post" id="upvote_review" class="voteForm">
                                     {% csrf_token %}

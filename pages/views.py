@@ -11,8 +11,8 @@ import pdb
 
 
 def home(request):
-    newMods = Mod.objects.all().order_by('-modDate')[:12]
-    ratedMods = Mod.objects.all().order_by('-modRating')[:12]
+    newMods = Mod.objects.filter(modApproved=True).order_by('-modDate')[:12]
+    ratedMods = Mod.objects.filter(modApproved=True).order_by('-modRating')[:12]
     adminNews = AdminNews.objects.all().order_by('-adminNewsDate')
     return render(request, 'pages/home.html', {'newMods': newMods, 'ratedMods': ratedMods, 'adminNews': adminNews})
 
