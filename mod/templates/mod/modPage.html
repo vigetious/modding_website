@@ -18,7 +18,12 @@
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <title>{{ post.modName }}</title>
     <div class="modName">
-        <h1>{{ post.modName }}</h1>
+        {% get_tags_for_object post as "nsfw_tags_check" %}
+            {% if "nsfw" in "nsfw_tags_check" %}
+                <h1 style="color: red;">[NSFW] {{ post.modName }}</h1>
+            {% else %}
+                <h1>{{ post.modName }}</h1>
+            {% endif %}
         {% if post.modAuthor == user %}
             <p><a href="{% url 'mod:modEdit' pk=post.pk %}"><input type="button" value="Edit Mod"></a></p>
         {% endif %}
