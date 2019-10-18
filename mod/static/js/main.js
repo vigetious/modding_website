@@ -15,6 +15,15 @@ function getCookie(name) {
 }
 var csrftoken = getCookie('csrftoken');
 
+function nsfw_check(tags, modName) {
+    index = tags.indexOf("nsfw");
+    if (index !== -1) {
+        console.log("nsfw");
+        $('#modName').css("color", "red");
+        $('#modName').text("[NSFW] " + modName);
+    }
+}
+
 function upvote_post(id, modID) {
     console.log('can upvote post ' + id);
     $.ajax({

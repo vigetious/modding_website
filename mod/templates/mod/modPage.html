@@ -18,8 +18,7 @@
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <title>{{ post.modName }}</title>
     <div class="modName">
-
-        <h1>{{ post.modName }}</h1>
+        <h1 id="modName">{{ post.modName }}</h1>
         {% if post.modAuthor == user %}
             <p><a href="{% url 'mod:modEdit' pk=post.pk %}"><input type="button" value="Edit Mod"></a></p>
         {% endif %}
@@ -150,6 +149,7 @@
                     </select>
                     <input type="button" id="ratingSubmit" value="Submit">
                     <script>
+                        nsfw_check("{{ tags }}", "{{ post.modName }}");
                         if ('{{ rating.ratingModID|stringformat:"i" }}' === '{{ post.modID|stringformat:"i" }}' && '{{ rating.ratingAuthorID }}' === '{{ user }}') {
                             if (document.getElementById("rating").hasAttribute("hidden")) {
                                 document.getElementById("star{{ rating.ratingValue }}").checked = true;
