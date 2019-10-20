@@ -547,3 +547,8 @@ class SearchResultsView(ListView):
     def get_tags(self):
         tags = Tag.objects.all()
         return tags
+
+
+def latest(request):
+    post = Mod.objects.filter().order_by("-modDate")[0]
+    return render(request, 'mod/modLatest.html', {'post': post})

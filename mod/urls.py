@@ -8,6 +8,7 @@ app_name = 'mod'
 
 urlpatterns = [
     path('submit/', views.submit, name='submit'),
+    path('botlatest/', views.latest, name='latest'),
     path('<int:pk>/', views.modPage, name='modPage'),
     path('<int:pk>/edit', views.modEdit, name='modEdit'),
     path('<int:pk>/delete', views.modDelete, name='modDelete'),

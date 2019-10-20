@@ -1,0 +1,22 @@
+{% load taggit_templatetags2_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Latest mod</title>
+</head>
+<body>
+<p id="modID">{{ post.modID }}</p>
+<p id="modName">{{ post.modName }}</p>
+<p id="modAuthor">{{ post.modAuthor }}</p>
+<p id="modShortDescription">{{ post.modShortDescription }}</p>
+<p id="modStatus">{{ post.modStatus }}</p>
+<p id="modTags">
+    {% get_tags_for_object post as "tags" %}
+    {% for tag in tags %}
+        "{{ tag }}"
+    {% endfor %}
+</p>
+
+</body>
+</html>
