@@ -550,5 +550,5 @@ class SearchResultsView(ListView):
 
 
 def latest(request):
-    post = Mod.objects.filter().order_by("-modDate")[0]
+    post = Mod.objects.filter(modApproved=True).order_by("-modDate")[0]
     return render(request, 'mod/modLatest.html', {'post': post})
