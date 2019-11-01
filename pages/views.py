@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 from django.shortcuts import render, get_object_or_404
 from django.apps import apps
+from taggit.models import Tag
 
 from mod.models import Mod
 from accounts.models import User
@@ -11,10 +12,11 @@ import pdb
 
 
 def home(request):
-    newMods = Mod.objects.filter(modApproved=True).order_by('-modDate')[:12]
-    ratedMods = Mod.objects.filter(modApproved=True).order_by('-modRating')[:12]
+    newMods = Mod.objects.filter(modApproved=True).order_by('-modDate')[:8]
+    ratedMods = Mod.objects.filter(modApproved=True).order_by('-modRating')[:8]
     # reviewedMods = Mod.objects.filter(modApproved=True).order_by('-modReviewCount')[:12]
-    reviewedMods = sorted(Mod.objects.filter(modApproved=True), key=lambda t: t.modReviewCount)  # order by review count using sorted
+    tags = Tag.objects.all()
+    reviewedMods = sorted(Mod.objects.filter(modApproved=True), key=lambda t: t.modReviewCount)[:8]  # order by review count using sorted
     adminNews = AdminNews.objects.all().order_by('-adminNewsDate')
     return render(request, 'pages/home.html', {'newMods': newMods, 'ratedMods': ratedMods, 'reviewedMods': reviewedMods, 'adminNews': adminNews})
 

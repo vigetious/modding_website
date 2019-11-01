@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
     <title>Change your avatar</title>
-    {% if form.avatarApproved %}
         <h1>Change your avatar</h1>
         <form method="post" enctype="multipart/form-data" action="">
             {% csrf_token %}
@@ -10,8 +9,5 @@
             <p>If you want to return your avatar to the default image, leave the above slot free and click submit.</p>
             <input class="avatarSubmit" type="submit" value="Submit">
         </form>
-    {% else %}
-        <p>Please wait for mods to approve your avatar before you change it.</p>
-    {% endif %}
     <p><a onclick="history.back()"><input type="button" value="Back"></a></p>
 {% endblock %}

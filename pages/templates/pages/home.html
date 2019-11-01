@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load thumbnail %}
+{% load taggit_templatetags2_tags %}
 
 {% block content %}
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'pages/js/home.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'pages/css/pages.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <title>Doki Doki Mod Club!</title>
@@ -42,103 +44,360 @@
     <ul class="tabContentValue">
         {% for mod in newMods %}
             {% if mod.modApproved %}
-                <li>
-                <div class="modAvatar">
-                    {% if mod.modAvatar %}
-                        <a href="/mod/{{ mod.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
-                    {% else %}
-                        <a href="/mod/{{ mod.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
-                    {% endif %}
+                <div id="modHorizontal" class="modHorizontal">
+                    <div class="modHorizontalList" id="modHorizontalList{{ mod.modID }}">
+                    <script>
+                        {% if mod.modAvatar %}
+                            avatar{{ mod.modID }} = "{{ mod.modAvatar.url }}";
+                        {% else %}
+                            avatar{{ mod.modID }} = "{% static 'img/icon.png' %}";
+                        {% endif %}
+                        tags{{ mod.modID }} = [];
+
+                        {% if mod.modPreviewImage1.url.length is not 0 %}
+                            modPreviewImage1{{ mod.modID }} = "{{ mod.modPreviewImage1.url }}";
+                        {% else %}
+                            modPreviewImage1{{ mod.modID }} = "null";
+                        {% endif %}
+                        {% if mod.modPreviewImage2.url.length is not 0 %}
+                            modPreviewImage2{{ mod.modID }} = "{{ mod.modPreviewImage2.url }}";
+                        {% else %}
+                            modPreviewImage2{{ mod.modID }} = "null";
+                        {% endif %}
+                        {% if mod.modPreviewImage3.url.length is not 0 %}
+                            modPreviewImage3{{ mod.modID }} = "{{ mod.modPreviewImage3.url }}";
+                        {% else %}
+                            modPreviewImage3{{ mod.modID }} = "null";
+                        {% endif %}
+                        {% if mod.modPreviewImage4.url.length is not 0 %}
+                            modPreviewImage4{{ mod.modID }} = "{{ mod.modPreviewImage4.url }}";
+                        {% else %}
+                            modPreviewImage4{{ mod.modID }} = "null";
+                        {% endif %}
+                        {% if mod.modPreviewImage5.url.length is not 0 %}
+                            modPreviewImage5{{ mod.modID }} = "{{ mod.modPreviewImage5.url }}";
+                        {% else %}
+                            modPreviewImage5{{ mod.modID }} = "null";
+                        {% endif %}
+
+                        tags{{ mod.modID }}.push(
+                            {% get_tags_for_object mod as tags %}
+                            {% for tag in tags %}
+                                "{{ tag }}",
+                            {% endfor %}
+                        );
+
+                        $(document).ready(function() {
+                            $('#modHorizontalList{{ mod.modID }}').mouseover(function() {
+                                $('.modHorizontalList').css("background-color", "#a4d5ff");
+                                $('.tabcontent').css("width", "68%");
+                                $('.modHorizontalResult').css("display", "inline-block");
+                                $('#modHorizontalList' + {{ mod.modID }}).css("background-color", "#8acaff");
+
+                                changePanel(
+                                    {{ mod.modID }},
+                                    "{{ mod.modName }}",
+                                    avatar{{ mod.modID }},
+                                    "{{ mod.modShortDescription|linebreaksbr }}".replace(/<br ?\/?>/g, "\n"),
+                                    "{{ mod.modAuthor }}",
+                                    "{{ mod.modDate|date:"d M Y" }}",
+                                    "{{ mod.modPlayTimeHours }}h {{ mod.modPlayTimeMinutes }}m",
+                                    "{{ mod.modStatus }}",
+                                    "{{ mod.modRating }}",
+                                    tags{{ mod.modID }},
+                                    "{% url 'mod:modSearch' %}",
+                                    modPreviewImage1{{ mod.modID }},
+                                    modPreviewImage2{{ mod.modID }},
+                                    modPreviewImage3{{ mod.modID }},
+                                    modPreviewImage4{{ mod.modID }},
+                                    modPreviewImage5{{ mod.modID }}
+                                );
+                            });
+                        });
+                    </script>
+                        <div class="modAvatar">
+                            {% if mod.modAvatar %}
+                                <a href="/mod/{{ mod.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
+                            {% else %}
+                                <a href="/mod/{{ mod.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
+                            {% endif %}
+                        </div>
+                        <div class="modHorizontalData">
+                            <div class="modHorizontalDataName">
+                                <a href="/mod/{{ mod.modID }}"><p>{{ mod.modName }}</p></a>
+                            </div>
+                            <div class="modHorizontalDataDescription">
+                                <p>{{ mod.modShortDescription }}</p>
+                            </div>
+                            <div class="modHorizontalDataTags">
+                                {% get_tags_for_object mod as "tags" %}
+                                {% for tag in tags %}
+                                    <span><a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags={{ tag }}&dateBy=0">{{ tag }}</a></span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modData">
-                    <p class="modData-name" title="Name"><a style="word-wrap: break-word; white-space: normal" href="/mod/{{ mod.modID }}">{{ mod.modName }}</a></p><!-- tunchatechars : 17 -->
-                    <p class="modData-date" title="Date and Rating">{{ mod.modDate|date:"d M Y" }} | {{ mod.modRating }}</p>
-                    <p class="modData-description" title="Description" style="word-wrap: break-word; margin-top: 5px; white-space: normal; overflow: inherit">{{ mod.modShortDescription|truncatewords:50 }}</p>
-                </div>
-                </li>
             {% endif %}
         {% endfor %}
+    <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags=All&dateBy=0" class="loadMore">More "New Releases"</a>
     </ul>
     </div>
     <div id="rated" class="tabcontent">
     <ul class="tabContentValue">
     {% for mod in ratedMods|dictsortreversed:"modRating" %}
         {% if mod.modApproved %}
-            <!--
-            <li>
-                <div class="modAvatar">
-                    {% if mod.modAvatar %}
-                        <a href="/mod/{{ mod.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
-                    {% else %}
-                        <a href="/mod/{{ mod.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
-                    {% endif %}
+            <div id="modHorizontal" class="modHorizontal">
+                <div class="modHorizontalList" id="modHorizontalListRated{{ mod.modID }}">
+                    <script>
+                        {% if mod.modAvatar %}
+                            avatar{{ mod.modID }} = "{{ mod.modAvatar.url }}";
+                        {% else %}
+                            avatar{{ mod.modID }} = "{% static 'img/icon.png' %}";
+                        {% endif %}
+                        tags{{ mod.modID }} = [];
+
+                        {% if mod.modPreviewImage1.url.length is not 0 %}
+                            modPreviewImage1{{ mod.modID }} = "{{ mod.modPreviewImage1.url }}";
+                        {% else %}
+                            modPreviewImage1{{ mod.modID }} = "null";
+                        {% endif %}
+                        {% if mod.modPreviewImage2.url.length is not 0 %}
+                            modPreviewImage2{{ mod.modID }} = "{{ mod.modPreviewImage2.url }}";
+                        {% else %}
+                            modPreviewImage2{{ mod.modID }} = "null";
+                        {% endif %}
+                        {% if mod.modPreviewImage3.url.length is not 0 %}
+                            modPreviewImage3{{ mod.modID }} = "{{ mod.modPreviewImage3.url }}";
+                        {% else %}
+                            modPreviewImage3{{ mod.modID }} = "null";
+                        {% endif %}
+                        {% if mod.modPreviewImage4.url.length is not 0 %}
+                            modPreviewImage4{{ mod.modID }} = "{{ mod.modPreviewImage4.url }}";
+                        {% else %}
+                            modPreviewImage4{{ mod.modID }} = "null";
+                        {% endif %}
+                        {% if mod.modPreviewImage5.url.length is not 0 %}
+                            modPreviewImage5{{ mod.modID }} = "{{ mod.modPreviewImage5.url }}";
+                        {% else %}
+                            modPreviewImage5{{ mod.modID }} = "null";
+                        {% endif %}
+
+                        tags{{ mod.modID }}.push(
+                            {% get_tags_for_object mod as tags %}
+                            {% for tag in tags %}
+                                "{{ tag }}",
+                            {% endfor %}
+                        );
+
+                        $(document).ready(function() {
+                            $('#modHorizontalListRated{{ mod.modID }}').hover(function() {
+                                $('.modHorizontalList').css("background-color", "#a4d5ff");
+                                $('.tabcontent').css("width", "68%");
+                                $('.modHorizontalResult').css("display", "inline-block");
+                                $('#modHorizontalListRated' + {{ mod.modID }}).css("background-color", "#8acaff");
+                                changePanel(
+                                    {{ mod.modID }},
+                                    "{{ mod.modName }}",
+                                    avatar{{ mod.modID }},
+                                    "{{ mod.modShortDescription|linebreaksbr }}".replace(/<br ?\/?>/g, "\n"),
+                                    "{{ mod.modAuthor }}",
+                                    "{{ mod.modDate|date:"d M Y" }}",
+                                    "{{ mod.modPlayTimeHours }}h {{ mod.modPlayTimeMinutes }}m",
+                                    "{{ mod.modStatus }}",
+                                    "{{ mod.modRating }}",
+                                    tags{{ mod.modID }},
+                                    "{% url 'mod:modSearch' %}",
+                                    modPreviewImage1{{ mod.modID }},
+                                    modPreviewImage2{{ mod.modID }},
+                                    modPreviewImage3{{ mod.modID }},
+                                    modPreviewImage4{{ mod.modID }},
+                                    modPreviewImage5{{ mod.modID }}
+                                );
+                            });
+                        });
+                    </script>
+                    <div class="modAvatar">
+                        {% if mod.modAvatar %}
+                            <a href="/mod/{{ mod.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
+                        {% else %}
+                            <a href="/mod/{{ mod.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
+                        {% endif %}
+                    </div>
+                    <div class="modHorizontalData">
+                        <div class="modHorizontalDataName">
+                            <a href="/mod/{{ mod.modID }}"><p>{{ mod.modName }}</p></a>
+                        </div>
+                        <div class="modHorizontalDataDescription">
+                            <p>{{ mod.modShortDescription }}</p>
+                        </div>
+                        <div class="modHorizontalDataTags">
+                            {% get_tags_for_object mod as "tags" %}
+                            {% for tag in tags %}
+                                <span><a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags={{ tag }}&dateBy=0">{{ tag }}</a></span>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
-                <div class="modData">
-                    <p class="modData-name" title="Name" style="margin: 0"><a href="/mod/{{ mod.modID }}">{{ mod.modName|truncatechars:17 }}</a></p>
-                    <p class="modData-date" title="Date and Rating">{{ mod.modDate|date:"d M Y" }} | {{ mod.modRating }}</p>
-                </div>
-                <div class="modDescription">
-                    <p title="Description">{{ mod.modShortDescription|truncatewords:50 }}</p>
-                </div>
-            </li>
-            -->
-            <li>
-                <div class="modAvatar">
-                    {% if mod.modAvatar %}
-                        <a href="/mod/{{ mod.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
-                    {% else %}
-                        <a href="/mod/{{ mod.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
-                    {% endif %}
-                </div>
-                <div class="modData">
-                    <p class="modData-name" title="Name"><a style="word-wrap: break-word; white-space: normal" href="/mod/{{ mod.modID }}">{{ mod.modName }}</a></p><!-- tunchatechars : 17 -->
-                    <p class="modData-date" title="Date and Rating">{{ mod.modDate|date:"d M Y" }} | {{ mod.modRating }}</p>
-                    <p class="modData-description" title="Description" style="word-wrap: break-word; margin-top: 5px; white-space: normal; overflow: inherit">{{ mod.modShortDescription|truncatewords:50 }}</p>
-                </div>
-            </li>
+            </div>
         {% endif %}
     {% endfor %}
+    <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated&tags=All&dateBy=0" class="loadMore">More "Highest Rated"</a>
     </ul>
     </div>
     <div id="reviewed" class="tabcontent">
     <ul class="tabContentValue">
     {% for mod in reviewedMods|dictsortreversed:"modReviewCount" %}
         {% if mod.modApproved %}
-            <!--
-        <li>
-            <div class="modAvatar">
-                {% if mod.modAvatar %}
-                    <a href="/mod/{{ mod.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
-                {% else %}
-                    <a href="/mod/{{ mod.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
-                {% endif %}
-            </div>
-            <div class="modData">
-                <p class="modData-name" title="Name" style="margin: 0"><a href="/mod/{{ mod.modID }}">{{ mod.modName|truncatechars:17 }}</a></p>
-                <p class="modData-date" title="Date and Rating">{{ mod.modDate|date:"d M Y" }} | {{ mod.modRating }}</p>
-            </div>
-            <div class="modDescription">
-                <p title="Description">{{ mod.modShortDescription|truncatewords:50 }}</p>
-            </div>
-        </li>
-        -->
-            <li>
-                <div class="modAvatar">
-                    {% if mod.modAvatar %}
-                        <a href="/mod/{{ mod.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
-                    {% else %}
-                        <a href="/mod/{{ mod.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
-                    {% endif %}
+            <div id="modHorizontal" class="modHorizontal">
+                <div class="modHorizontalList" id="modHorizontalListReviewed{{ mod.modID }}">
+                    <script>
+                        {% if mod.modAvatar %}
+                            avatar{{ mod.modID }} = "{{ mod.modAvatar.url }}";
+                        {% else %}
+                            avatar{{ mod.modID }} = "{% static 'img/icon.png' %}";
+                        {% endif %}
+                        tags{{ mod.modID }} = [];
+
+                        {% if mod.modPreviewImage1.url.length is not 0 %}
+                            modPreviewImage1{{ mod.modID }} = "{{ mod.modPreviewImage1.url }}";
+                        {% else %}
+                            modPreviewImage1{{ mod.modID }} = "null";
+                        {% endif %}
+                        {% if mod.modPreviewImage2.url.length is not 0 %}
+                            modPreviewImage2{{ mod.modID }} = "{{ mod.modPreviewImage2.url }}";
+                        {% else %}
+                            modPreviewImage2{{ mod.modID }} = "null";
+                        {% endif %}
+                        {% if mod.modPreviewImage3.url.length is not 0 %}
+                            modPreviewImage3{{ mod.modID }} = "{{ mod.modPreviewImage3.url }}";
+                        {% else %}
+                            modPreviewImage3{{ mod.modID }} = "null";
+                        {% endif %}
+                        {% if mod.modPreviewImage4.url.length is not 0 %}
+                            modPreviewImage4{{ mod.modID }} = "{{ mod.modPreviewImage4.url }}";
+                        {% else %}
+                            modPreviewImage4{{ mod.modID }} = "null";
+                        {% endif %}
+                        {% if mod.modPreviewImage5.url.length is not 0 %}
+                            modPreviewImage5{{ mod.modID }} = "{{ mod.modPreviewImage5.url }}";
+                        {% else %}
+                            modPreviewImage5{{ mod.modID }} = "null";
+                        {% endif %}
+
+                        tags{{ mod.modID }}.push(
+                            {% get_tags_for_object mod as tags %}
+                            {% for tag in tags %}
+                                "{{ tag }}",
+                            {% endfor %}
+                        );
+
+                        $(document).ready(function() {
+                            $('#modHorizontalListReviewed{{ mod.modID }}').hover(function() {
+                                $('.modHorizontalList').css("background-color", "#a4d5ff");
+                                $('.tabcontent').css("width", "68%");
+                                $('.modHorizontalResult').css("display", "inline-block");
+                                $('#modHorizontalListReviewed' + {{ mod.modID }}).css("background-color", "#8acaff");
+                                changePanel(
+                                    {{ mod.modID }},
+                                    "{{ mod.modName }}",
+                                    avatar{{ mod.modID }},
+                                    "{{ mod.modShortDescription|linebreaksbr }}".replace(/<br ?\/?>/g, "\n"),
+                                    "{{ mod.modAuthor }}",
+                                    "{{ mod.modDate|date:"d M Y" }}",
+                                    "{{ mod.modPlayTimeHours }}h {{ mod.modPlayTimeMinutes }}m",
+                                    "{{ mod.modStatus }}",
+                                    "{{ mod.modRating }}",
+                                    tags{{ mod.modID }},
+                                    "{% url 'mod:modSearch' %}",
+                                    modPreviewImage1{{ mod.modID }},
+                                    modPreviewImage2{{ mod.modID }},
+                                    modPreviewImage3{{ mod.modID }},
+                                    modPreviewImage4{{ mod.modID }},
+                                    modPreviewImage5{{ mod.modID }}
+                                );
+                            });
+                        });
+                    </script>
+                    <div class="modAvatar">
+                        {% if mod.modAvatar %}
+                            <a href="/mod/{{ mod.modID }}"><img src={{ mod.modAvatar.url }} alt="Avatar Image"></a>
+                        {% else %}
+                            <a href="/mod/{{ mod.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
+                        {% endif %}
+                    </div>
+                    <div class="modHorizontalData">
+                        <div class="modHorizontalDataName">
+                            <a href="/mod/{{ mod.modID }}"><p>{{ mod.modName }}</p></a>
+                        </div>
+                        <div class="modHorizontalDataDescription">
+                            <p>{{ mod.modShortDescription }}</p>
+                        </div>
+                        <div class="modHorizontalDataTags">
+                            {% get_tags_for_object mod as "tags" %}
+                            {% for tag in tags %}
+                                <span><a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags={{ tag }}&dateBy=0">{{ tag }}</a></span>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
-                <div class="modData">
-                    <p class="modData-name" title="Name"><a style="word-wrap: break-word; white-space: normal" href="/mod/{{ mod.modID }}">{{ mod.modName }}</a></p><!-- tunchatechars : 17 -->
-                    <p class="modData-date" title="Date and Rating">{{ mod.modDate|date:"d M Y" }} | {{ mod.modRating }}</p>
-                    <p class="modData-description" title="Description" style="word-wrap: break-word; margin-top: 5px; white-space: normal; overflow: inherit">{{ mod.modShortDescription|truncatewords:50 }}</p>
-                </div>
-            </li>
+            </div>
         {% endif %}
     {% endfor %}
+    <a href="{% url 'mod:modSearch' %}?q=&sortBy=reviewed&tags=All&dateBy=0" class="loadMore">More "Most Reviewed"</a>
     </ul>
     </div>
+        <div class="modHorizontalResult">
+            <div class="rightModData">
+                <div class="rightModDataAvatar">
+                    <a id="modAvatarLink" href=""><img id="modAvatar" src="" alt="avatar"></a>
+                </div>
+                <div class="rightModDataDescription">
+                    <p id="modShortDescription"></p>
+                </div>
+                <ul class="rightModDataText">
+                    <li>
+                        <p>Name: </p><p><a id="modName" href=""></a></p>
+                    </li>
+                    <li>
+                        <p>Author: </p><p><a id="modAuthor" href=""></a></p>
+                    </li>
+                    <li>
+                        <p>Release date:</p><p id="modDate"></p>
+                    </li>
+                    <li>
+                        <p>Playtime:</p><p id="modPlayTimeHours"></p>
+                    </li>
+                    <li>
+                        <p>Status:</p><p id="modStatus"></p>
+                    </li>
+                    <li>
+                        <p>Average rating:</p><p id="modRating"></p>
+                    </li>
+                    <li>
+                        <p>Tags:</p><div id="tags" class="tags"></div>
+                    </li>
+                </ul>
+                <div style="overflow:auto;">
+                    <ul class="rightModDataText" style="overflow: auto">
+                        <li>
+                            <img src="" alt="preview image 1" id="modPreviewImage1">
+                        </li>
+                        <li>
+                            <img src="" alt="preview image 2" id="modPreviewImage2">
+                        </li>
+                        <li>
+                            <img src="" alt="preview image 3" id="modPreviewImage3">
+                        </li>
+                        <li>
+                            <img src="" alt="preview image 4" id="modPreviewImage4">
+                        </li>
+                        <li>
+                            <img src="" alt="preview image 5" id="modPreviewImage5">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

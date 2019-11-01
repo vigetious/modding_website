@@ -15,6 +15,17 @@ function getCookie(name) {
 }
 var csrftoken = getCookie('csrftoken');
 
+
+$(function(){
+    var x = 0;
+    var y = 0;
+    setInterval(function(){
+        x-=1;
+        y-=1;
+        $('body').css('background-position', x + 'px ' + y + 'px');
+    }, 30);
+});
+
 function nsfw_check(tags, modName) {
     index = tags.indexOf("nsfw");
     if (index !== -1) {
@@ -184,7 +195,7 @@ function deleteRating(ratingID) {
 }
 
 function submitNews(news_text, news_mod_id) {
-    console.log("Submitting news for " + news_mod_id)
+    console.log("Submitting news for " + news_mod_id);
     $.ajax({
         url: 'news/',
         type: 'POST',
@@ -297,7 +308,7 @@ function openMod(evt, mod) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
 
-        document.getElementById(mod).style.display = "block";
+        document.getElementById(mod).style.display = "inline-block";
         evt.currentTarget.className += " active";
     }
 }
