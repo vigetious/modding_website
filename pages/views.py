@@ -51,4 +51,7 @@ def copyright(request):
 def privacypolicy(request):
     return render(request, 'pages/privacypolicy.html')
 
+def claim(request):
+    return render(request, 'pages/claim.html')
+
 # Create your views here.

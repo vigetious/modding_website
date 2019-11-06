@@ -17,6 +17,7 @@ urlpatterns = [
     path('support/copyright', views.copyright, name='copyright'),
     path('support/copyright', views.copyright, name='copyright'),
     path('support/privacypolicy', views.privacypolicy, name='privacypolicy'),
+    path('support/claim/', views.claim, name='claim'),
     path('taggit/', include('taggit_selectize.urls')),
     path('admin/defender/', include('defender.urls')),
 ]

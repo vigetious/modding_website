@@ -30,14 +30,13 @@
 
     <meta name="theme-color" content="#fafafa">
 </head>
-
-<body background="{% static 'img/tilebgBlue.png' %}" style="background-repeat: repeat-x repeat-y;">
+<body background="{% static 'img/tilebgBlue.png' %}" style="background-repeat: repeat-x repeat-y; height: 100%">
 <!--[if IE]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
 
 <!-- Add your site or application content here -->
-<div class="pagewrap">
+<div class="pagewrap" style="display: inline-block">
     <div class="topMenu">
         <a class="logo" href="{% url 'home' %}" title="Title"><img src="{% static 'img/Title.png' %}" alt="Title"></a> <!-- image later on -->
         <div class="topNav">
@@ -93,15 +92,5 @@
         </ul>
     </div>
 </div>
-
-
-
-
-<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-<script>
-    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
-</script>
 </body>
-
 </html>

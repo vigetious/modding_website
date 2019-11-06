@@ -17,7 +17,7 @@
     <div class="adminNews">
     <ul class="news">
     {% for news in adminNews %}
-        <li>
+        <li class="adminNewsContent">
             <div class="newsUserBar">
                 <p class="newsUser">{{ news.adminNewsUserID}}</p>
                 <p class="newsDate">{{ news.adminNewsDate }}</p>
@@ -29,7 +29,24 @@
     {% endfor %}
     </ul>
     </div>
-        <iframe src="https://discordapp.com/widget?id=625672295435862047&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>
+    <!--<div class="homeRightMenu">
+        <ul class="navbar">
+            <li><a onclick="openMod(event, 'spotlight')"><img src="{% static 'img/Newest Mods.png' %}"></a></li>
+            <li><a onclick="openMod(event, 'streams')"><img src="{% static 'img/Highest Rated Mods.png' %}"></a></li>
+            <li><a onclick="openMod(event, 'reviewed')"><img src="{% static 'img/Most Reviewed Mods.png' %}"></a></li>
+        </ul>
+        <script>
+            openMod(event, 'spotlight');
+        </script>
+        <div id="spotlight" class="tabcontent">
+            ye
+        </div>
+        <div id="streams" class="tabcontent">
+            ya
+        </div>
+    </div>-->
+        <iframe src="https://discordapp.com/widget?id=625672295435862047&theme=dark" width="550" height="500" allowtransparency="true" frameborder="0"></iframe>
+
     </div>
     <div class="homeMods">
     <ul class="navbar">

@@ -13,7 +13,11 @@ function changePanel(modID, modName, avatarURL, modShortDescription, modAuthor, 
     $('#modAvatar').attr("src", avatarURL);
     $('#modAvatarLink').attr("href", "/mod/" + modID);
     $('#modShortDescription').text(modShortDescription);
-    $('#modAuthor').attr("href", "/accounts/" + modAuthor + "/profile").text(modAuthor);
+    if (modAuthor === "vigetious") {
+        $('#modAuthor').attr("href", "/support/claim").text("Claim this mod as your own!");
+    } else {
+        $('#modAuthor').attr("href", "/accounts/" + modAuthor + "/profile").text(modAuthor);
+    }
     $('#modName').text(modName).attr("href", "/mod/" + modID);
     $('#modDate').text(modDate);
     $('#modPlayTimeHours').text(modPlayTimeHours);
@@ -29,22 +33,22 @@ function changePanel(modID, modName, avatarURL, modShortDescription, modAuthor, 
         $('#modPreviewImage1').hide();
     }
     if (modPreviewImage2 !== "null") {
-        $('#modPreviewImage2').attr("src", modPreviewImage2).attr("style", "display: inline-block");;
+        $('#modPreviewImage2').attr("src", modPreviewImage2).attr("style", "display: inline-block");
     } else {
         $('#modPreviewImage2').hide();
     }
     if (modPreviewImage3 !== "null") {
-        $('#modPreviewImage3').attr("src", modPreviewImage3).attr("style", "display: inline-block");;
+        $('#modPreviewImage3').attr("src", modPreviewImage3).attr("style", "display: inline-block");
     } else {
         $('#modPreviewImage3').hide();
     }
     if (modPreviewImage4 !== "null") {
-        $('#modPreviewImage4').attr("src", modPreviewImage4).attr("style", "display: inline-block");;
+        $('#modPreviewImage4').attr("src", modPreviewImage4).attr("style", "display: inline-block");
     } else {
         $('#modPreviewImage4').hide();
     }
     if (modPreviewImage5 !== "null") {
-        $('#modPreviewImage5').attr("src", modPreviewImage5).attr("style", "display: inline-block");;
+        $('#modPreviewImage5').attr("src", modPreviewImage5).attr("style", "display: inline-block");
     } else {
         $('#modPreviewImage5').hide();
     }
