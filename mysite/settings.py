@@ -313,3 +313,5 @@ RECAPTCHA_REQUIRED_SCORE = 0.85
 
 if DEBUG:
     SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+DEFAULT_CONTENT_TYPE = "text/html"
