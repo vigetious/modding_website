@@ -318,7 +318,7 @@ def modEdit(request, pk):
             post.save()
             form.save_m2m()
             print("Form is valid, taking you to the updated mod page")
-            return redirect('mod:modPage', pk=post.pk)
+            return redirect('mod:modPage', pk=post.pk, )
     else:
         form = SubmitForm(instance=post)
         args['form'] = form
