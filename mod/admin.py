@@ -42,6 +42,9 @@ class ModAdmin(admin.ModelAdmin):
 class ReviewRatingAdmin(admin.ModelAdmin):
     list_display = ['reviewid', 'reviewModID', 'reviewAuthorID', 'reviewDate', 'reviewComment', 'vote_total',
                     'reviewVotes', 'reviewApproved']
+    formfield_overrides = {
+        models.CharField: {'widget': Textarea}
+    }
 
 class VoteAdmin(admin.ModelAdmin):
     list_display = ['voteID', 'voteReviewID', 'voteAuthor', 'voteValue']

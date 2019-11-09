@@ -135,6 +135,10 @@ function rating(modID) {
     document.getElementById("ratingSubmit").value = "Update";
 }
 
+function reminder() {
+    $('#reminder').text("Don't forget to hit Submit/Update!").css("color", "red");
+}
+
 function ratingSubmit(modID, radioValue, selectedChoice) {
     console.log("Rating this mod a " + radioValue + "/5.");
 

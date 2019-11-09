@@ -5,7 +5,6 @@
 <script type="text/javascript" src="{% static 'js/vendor/modernizr-3.7.1.min.js' %}"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
-<script type="text/javascript" src="{% static 'js/plugins.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 <style>
@@ -52,7 +51,7 @@
         </div>
     </div>
 
-    <ul class="navbar">
+    <ul class="navbar" style="height: 50px">
         <li><a href="{% url 'home' %}"><img src="{% static 'img/HomeSmall.png' %}" alt="Home"></a></li>
         <li><a href="http://reddit.com/r/ddlcmods"><img src="{% static 'img/Mods RedditSmall.png' %}" alt="Mod Reddit"></a></li>
         <li class="dropdown">

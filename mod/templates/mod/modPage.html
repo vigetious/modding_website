@@ -142,12 +142,13 @@
                 <p id="rate">Add to played list:</p>
                 <div>
                     <fieldset id="rating" class="rating">
-                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
-                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
-                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
-                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
-                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!" onclick="reminder()">5 stars</label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good" onclick="reminder()">4 stars</label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh" onclick="reminder()">3 stars</label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad" onclick="reminder()">2 stars</label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time" onclick="reminder()">1 star</label>
                     </fieldset>
+                    <p id="reminder"></p>
                     <select name="choice" id="choice">
                         <option id="played" value="Played" onclick="revealRating()">Played</option>
                         <option id="want-to-play" value="Want to play" onclick="hideRating()">Want to play</option>
@@ -254,7 +255,7 @@
                     <div class="modReviewData">
                         <div class="modReviewCoreData">
                             <p><a href="{% url 'accounts:userProfile' review.reviewAuthorID %}">{{ review.reviewAuthorID }}</a></p><br>
-                            <img src="{{ review.reviewAuthorID }}"> <!-- REVIEW AUTHOR ID AND AVATAR USER ID THE SAME -->
+                            <!--<img src="{{ review.reviewAuthorID }}">  REVIEW AUTHOR ID AND AVATAR USER ID THE SAME -->
                             {% if user.is_authenticated %}
                                 <form method="post" id="upvote_review" class="voteForm">
                                     {% csrf_token %}

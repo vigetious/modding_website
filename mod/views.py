@@ -20,6 +20,7 @@ import json, pdb, math, datetime
 
 from django_filters.views import FilterView
 from taggit.models import Tag
+from PIL import Image
 
 from .forms import SubmitForm, ReviewForm, NewsForm
 from .models import Mod, ReviewRating, Rating, News, NewsNotifications, Vote  # , ModFilter
