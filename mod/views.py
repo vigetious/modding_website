@@ -303,7 +303,6 @@ def ratingDelete(request):
 
 
 def modEdit(request, pk):
-    args = {}
     post = get_object_or_404(Mod, pk=pk)
     if request.method == 'POST':
         form = SubmitForm(request.POST, request.FILES, instance=post)
@@ -324,7 +323,7 @@ def modEdit(request, pk):
         args['form'] = form
         form.errors.as_data()
     print("No POST, probably loading page for first time")
-    return render(request, 'mod/modEdit.html', {'form': form, 'post': post}, args)
+    return render(request, 'mod/modEdit.html', {'form': form, 'post': post})
 
 
 def modDelete(request, pk):
