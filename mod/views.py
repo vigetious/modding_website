@@ -324,7 +324,7 @@ def modEdit(request, pk):
         args['form'] = form
         form.errors.as_data()
     print("No POST, probably loading page for first time")
-    return render(request, 'mod/modEdit.html', {'form': form, 'post': post}, args)
+    return render(request, 'mod/modEdit.html', {'form': form, 'post': post}, args, content_type="text/html")
 
 
 def modDelete(request, pk):
