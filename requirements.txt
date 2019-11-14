@@ -36,7 +36,7 @@ easy-thumbnails==2.6
 gunicorn==19.9.0
 idna==2.8
 jmespath==0.9.4
-Pillow==6.0.0
+Pillow==6.2.0
 pinax-comments==1.0.3
 pinax-ratings==3.0.3
 psycopg2==2.8.3
