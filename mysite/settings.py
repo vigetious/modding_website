@@ -271,8 +271,8 @@ DEBUG_PROPAGATE_EXCEPTIONS = True
 ###############################
 if not DEBUG:
     AWS_DEFAULT_ACL = None
-    AWS_ACCESS_KEY_ID = 'AKIARHRBXQJOSQWKKZFM'
-    AWS_SECRET_ACCESS_KEY = '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'
+    AWS_ACCESS_KEY_ID = access_key_id
+    AWS_SECRET_ACCESS_KEY = secret_access_key
     AWS_STORAGE_BUCKET_NAME = 'ddlc-modding-static'
     AWS_S3_CUSTOM_DOMAIN = '{0}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
     AWS_S3_OBJECT_PARAMETERS = {
