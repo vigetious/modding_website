@@ -29,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['modding-website.herokuapp.com',
                  'https://www.dokidokimodclub.com/',
@@ -247,30 +247,19 @@ SIMPLE_EMAIL_CONFIRMATION_PERIOD = timedelta(days=EMAIL_CONFIRMATION_PERIOD_DAYS
 
 
 
-#AWS_ACCESS_KEY_ID = access_key_id
-#AWS_SECRET_ACCESS_KEY = secret_access_key
-#AWS_STORAGE_BUCKET_NAME = bucket_name
-#AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-#AWS_S3_OBJECT_PARAMETERS = {
-#    'CacheControl': 'max-age=86400',
-#}
-#AWS_LOCATION = 'static'
-
-#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-if not DEBUG:
-    SECURE_HSTS_SECONDS = 3600
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD=True
+#if not DEBUG:
+#    SECURE_HSTS_SECONDS = 3600
+#    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+#    SECURE_HSTS_PRELOAD=True
 
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    SECURE_BROWSER_XSS_FILTER = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    X_FRAME_OPTIONS = 'DENY'
-    SECURE_SSL_REDIRECT = True  #developemnt change to False
+#    SECURE_CONTENT_TYPE_NOSNIFF = True
+#    SECURE_BROWSER_XSS_FILTER = True
+#    SESSION_COOKIE_SECURE = True
+#    CSRF_COOKIE_SECURE = True
+#    X_FRAME_OPTIONS = 'DENY'
+#    SECURE_SSL_REDIRECT = True  #developemnt change to False
 
 
 django_heroku.settings(locals())
@@ -306,11 +295,11 @@ if not DEBUG:
 else:
     STATIC_URL = '/static/'
 
-RECAPTCHA_PUBLIC_KEY = captcha_site_key
-RECAPTCHA_PRIVATE_KEY = captcha_secret_key
-RECAPTCHA_DOMAIN = 'www.recaptcha.net'
+#RECAPTCHA_PUBLIC_KEY = captcha_site_key
+#RECAPTCHA_PRIVATE_KEY = captcha_secret_key
+#RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 
-RECAPTCHA_REQUIRED_SCORE = 0.85
+#RECAPTCHA_REQUIRED_SCORE = 0.85
 
 if DEBUG:
     SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
