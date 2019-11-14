@@ -261,17 +261,16 @@ SIMPLE_EMAIL_CONFIRMATION_PERIOD = timedelta(days=EMAIL_CONFIRMATION_PERIOD_DAYS
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 if not DEBUG:
-    True
-    #SECURE_SSL_REDIRECT = True  #developemnt change to False
-SECURE_HSTS_SECONDS = 3600
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD=True
+    SECURE_HSTS_SECONDS = 3600
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD=True
 
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-X_FRAME_OPTIONS = 'DENY'
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_SSL_REDIRECT = True  #developemnt change to False
 
 
 django_heroku.settings(locals())
@@ -307,11 +306,11 @@ if not DEBUG:
 else:
     STATIC_URL = '/static/'
 
-RECAPTCHA_PUBLIC_KEY = captcha_site_key
-RECAPTCHA_PRIVATE_KEY = captcha_secret_key
-RECAPTCHA_DOMAIN = 'www.recaptcha.net'
+#RECAPTCHA_PUBLIC_KEY = captcha_site_key
+#RECAPTCHA_PRIVATE_KEY = captcha_secret_key
+#RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 
-RECAPTCHA_REQUIRED_SCORE = 0.85
+#RECAPTCHA_REQUIRED_SCORE = 0.85
 
 if DEBUG:
     SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
