@@ -255,11 +255,11 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD=True
 
 #    SECURE_CONTENT_TYPE_NOSNIFF = True
-#    SECURE_BROWSER_XSS_FILTER = True
-#    SESSION_COOKIE_SECURE = True
-#    CSRF_COOKIE_SECURE = True
-#    X_FRAME_OPTIONS = 'DENY'
-#    SECURE_SSL_REDIRECT = True  #developemnt change to False
+    SECURE_BROWSER_XSS_FILTER = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_SSL_REDIRECT = True  #developemnt change to False
 
 
 django_heroku.settings(locals())
