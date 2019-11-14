@@ -258,7 +258,7 @@ if not DEBUG:
     SECURE_BROWSER_XSS_FILTER = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    X_FRAME_OPTIONS = 'DENY'
+#    X_FRAME_OPTIONS = 'DENY'
 #    SECURE_SSL_REDIRECT = True  #developemnt change to False
 
 
