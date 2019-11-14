@@ -29,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['modding-website.herokuapp.com',
                  'https://www.dokidokimodclub.com/',
@@ -306,11 +306,11 @@ if not DEBUG:
 else:
     STATIC_URL = '/static/'
 
-#RECAPTCHA_PUBLIC_KEY = captcha_site_key
-#RECAPTCHA_PRIVATE_KEY = captcha_secret_key
-#RECAPTCHA_DOMAIN = 'www.recaptcha.net'
+RECAPTCHA_PUBLIC_KEY = captcha_site_key
+RECAPTCHA_PRIVATE_KEY = captcha_secret_key
+RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 
-#RECAPTCHA_REQUIRED_SCORE = 0.85
+RECAPTCHA_REQUIRED_SCORE = 0.85
 
 if DEBUG:
     SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
