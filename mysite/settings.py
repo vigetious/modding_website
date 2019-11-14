@@ -295,11 +295,11 @@ if not DEBUG:
 else:
     STATIC_URL = '/static/'
 
-#RECAPTCHA_PUBLIC_KEY = captcha_site_key
-#RECAPTCHA_PRIVATE_KEY = captcha_secret_key
-#RECAPTCHA_DOMAIN = 'www.recaptcha.net'
+RECAPTCHA_PUBLIC_KEY = captcha_site_key
+RECAPTCHA_PRIVATE_KEY = captcha_secret_key
+RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 
-#RECAPTCHA_REQUIRED_SCORE = 0.85
+RECAPTCHA_REQUIRED_SCORE = 0.85
 
 if DEBUG:
     SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
