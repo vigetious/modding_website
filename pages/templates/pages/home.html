@@ -60,7 +60,7 @@
     <div id="new" class="tabcontent">
     <ul class="tabContentValue">
         {% for mod in newMods %}
-            {% if mod.modApproved %}
+            {% if mod.modShow %}
                 <div id="modHorizontal" class="modHorizontal">
                     <div class="modHorizontalList" id="modHorizontalList{{ mod.modID }}">
                     <script>
@@ -163,7 +163,7 @@
     <div id="rated" class="tabcontent">
     <ul class="tabContentValue">
     {% for mod in ratedMods|dictsortreversed:"modRating" %}
-        {% if mod.modApproved %}
+        {% if mod.modShow %}
             <div id="modHorizontal" class="modHorizontal">
                 <div class="modHorizontalList" id="modHorizontalListRated{{ mod.modID }}">
                     <script>
@@ -265,7 +265,7 @@
     <div id="reviewed" class="tabcontent">
     <ul class="tabContentValue">
     {% for mod in reviewedMods|dictsortreversed:"modReviewCount" %}
-        {% if mod.modApproved %}
+        {% if mod.modShow %}
             <div id="modHorizontal" class="modHorizontal">
                 <div class="modHorizontalList" id="modHorizontalListReviewed{{ mod.modID }}">
                     <script>

@@ -15,7 +15,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_text
 from .tokens import AccountActivationTokenGenerator, account_activation_token
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login
 
 from .forms import CustomUserCreationForm, EditForm, AvatarForm#, SignUp
 from .models import Avatar, User

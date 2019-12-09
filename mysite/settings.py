@@ -10,13 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 from .secret import access_key_id, secret_access_key, bucket_name, django_secret_key, captcha_site_key, captcha_secret_key, email_host_password
-SECRET_KEY = django_secret_key
+
 
 
 
 import os
 import django_heroku
 from datetime import timedelta
+
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,7 +31,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['modding-website.herokuapp.com',
                  'https://www.dokidokimodclub.com/',
@@ -271,8 +273,8 @@ DEBUG_PROPAGATE_EXCEPTIONS = True
 ###############################
 if not DEBUG:
     AWS_DEFAULT_ACL = None
-    AWS_ACCESS_KEY_ID = access_key_id
-    AWS_SECRET_ACCESS_KEY = secret_access_key
+    AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = 'ddlc-modding-static'
     AWS_S3_CUSTOM_DOMAIN = '{0}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
     AWS_S3_OBJECT_PARAMETERS = {
@@ -295,8 +297,8 @@ if not DEBUG:
 else:
     STATIC_URL = '/static/'
 
-RECAPTCHA_PUBLIC_KEY = captcha_site_key
-RECAPTCHA_PRIVATE_KEY = captcha_secret_key
+RECAPTCHA_PUBLIC_KEY = os.getenv('CAPTCHA_SITE_KEY')
+RECAPTCHA_PRIVATE_KEY = os.getenv('CAPTCHA_SECRET_KEY')
 RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 
 RECAPTCHA_REQUIRED_SCORE = 0.85

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/modSubmitEdit.css' %}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="{% static 'js/selectize.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/submit.js' %}"></script>
     {% if post.modAuthor == user %}
     {% if form.errors %}
     <div class="editErrorList">
@@ -18,7 +19,7 @@
     </div>
     {% for error in form.non_field_errors %}
     <div class="alert alert-danger">
-        <strong>{{ error|escape }}</strong> <h1> BLOCK THIS </h1>
+        <!--<strong>{{ error|escape }}</strong> <h1> BLOCK THIS </h1>-->
     </div>
     {% endfor %}
     {% endif %}

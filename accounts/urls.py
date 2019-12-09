@@ -19,5 +19,5 @@ urlpatterns = [
     path('profile/avatar', views.avatar, name='avatar'),
     path('profile/bio', views.bio, name='bio'),
     path('profile/note', views.note, name='note'),
-    path('played/ratingdelete/', ratingDelete, name='ratingDelete')
+    path('played/ratingdelete/', ratingDelete, name='ratingDelete'),
 ]

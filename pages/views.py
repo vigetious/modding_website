@@ -12,11 +12,11 @@ import pdb
 
 
 def home(request):
-    newMods = Mod.objects.filter(modApproved=True).order_by('-modDate')[:8]
-    ratedMods = Mod.objects.filter(modApproved=True).order_by('-modRating')[:8]
-    # reviewedMods = Mod.objects.filter(modApproved=True).order_by('-modReviewCount')[:12]
+    newMods = Mod.objects.filter(modShow=True).order_by('-modDate')[:8]
+    ratedMods = Mod.objects.filter(modShow=True).order_by('-modRating')[:8]
+    # reviewedMods = Mod.objects.filter(modShow=True).order_by('-modReviewCount')[:12]
     tags = Tag.objects.all()
-    reviewedMods = sorted(Mod.objects.filter(modApproved=True), key=lambda t: t.modReviewCount, reverse=True)[:8]  # order by review count using sorted
+    reviewedMods = sorted(Mod.objects.filter(modShow=True), key=lambda t: t.modReviewCount, reverse=True)[:8]  # order by review count using sorted
     adminNews = AdminNews.objects.all().order_by('-adminNewsDate')
     return render(request, 'pages/home.html', {'newMods': newMods, 'ratedMods': ratedMods, 'reviewedMods': reviewedMods, 'adminNews': adminNews})
 

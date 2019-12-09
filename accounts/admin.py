@@ -23,14 +23,14 @@ def mark_as_safe(modeladmin, request, queryset):
     queryset.update(avatarApproved=True)
 
 
-mark_as_safe.short_description = "Mark has approved"
+mark_as_safe.short_description = "Mark as approved"
 
 
 def mark_as_unsafe(modeladmin, request, queryset):
     queryset.update(avatarApproved=False)
 
 
-mark_as_unsafe.short_description = "Mark has non-approved"
+mark_as_unsafe.short_description = "Mark as non-approved"
 
 
 class AvatarAdmin(admin.ModelAdmin):

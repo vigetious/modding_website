@@ -1,7 +1,7 @@
 from django import forms
 from django.core.validators import URLValidator, MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
-from.models import Mod, ReviewRating, Rating, News, Vote
+from.models import Mod, ReviewRating, Rating, News, Vote, ModEdit
 from embed_video.fields import EmbedVideoFormField
 
 #class SubmitForm(forms.Form):
@@ -36,6 +36,20 @@ class SubmitForm(forms.ModelForm):
                   'modBackgroundTiledStretch', 'modAvatar')
 
 
+class EditForm(forms.ModelForm):
+    modDescription = forms.CharField(widget=forms.Textarea, max_length=10000)
+    modShortDescription = forms.CharField(widget=forms.Textarea, max_length=250)
+
+    modUploadURL = forms.URLField(max_length=200, widget=forms.TextInput, help_text="Only Google Drive and MEGA are currently supported.")
+
+    #modPreviewVideo = EmbedVideoFormField(help_text="Only YouTube and Vimeo links are currently supported.")
+
+    class Meta:
+        model = ModEdit
+        fields = ('modEditID', 'modName', 'modStatus', 'modDescription', 'modShortDescription', 'tags',
+                  'modUploadURL', 'modPlayTimeHours', 'modPlayTimeMinutes', 'modPreviewVideo', 'modPreviewImage1',
+                  'modPreviewImage2', 'modPreviewImage3', 'modPreviewImage4', 'modPreviewImage5', 'modBackground',
+                  'modBackgroundTiledStretch', 'modAvatar')
 
 
 class ReviewForm(forms.ModelForm):

@@ -11,7 +11,6 @@
 
 
 {% block content %}
-    {% if post.modApproved == True %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'css/modPage.css' %}">
@@ -452,11 +451,6 @@
                 }
             </style>
         {% endif %}
-    {% endif %}
-    {% else %}
-        <title>Awaiting moderation approval</title>
-        <p>This mod has not yet been approved. Please wait for a moderator to approve the mod first.</p>
-        <p>If you have been waiting for longer than 7 days, please <a href="{% url 'contactUs' %}">contact us.</a></p>
     {% endif %}
 
 {% endblock %}
