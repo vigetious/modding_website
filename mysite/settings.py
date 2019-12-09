@@ -9,8 +9,6 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-from .secret import access_key_id, secret_access_key, bucket_name, django_secret_key, captcha_site_key, captcha_secret_key, email_host_password
-
 
 
 
@@ -31,7 +29,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['modding-website.herokuapp.com',
                  'https://www.dokidokimodclub.com/',
