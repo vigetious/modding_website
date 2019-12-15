@@ -15,6 +15,7 @@ from django.core import serializers, mail
 from django.core.mail import send_mail
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.http import Http404
 
 import json, pdb, math, datetime
 
@@ -26,6 +27,7 @@ from .forms import SubmitForm, ReviewForm, NewsForm, EditForm
 from .models import Mod, ReviewRating, Rating, News, NewsNotifications, Vote, ModEdit  # , ModFilter
 from .scripts import moveMod
 from .operations.mail import notificationsSendMail
+from .scripts import removeEdit
 
 from accounts.models import User
 
@@ -301,28 +303,35 @@ def ratingDelete(request):
 @login_required
 def modEdit(request, pk):
     mod = get_object_or_404(Mod, pk=pk) # dont need to pass entire object
+    try:
+        if (get_object_or_404(ModEdit, modID=pk)):
+            alreadyEdited = True
+    except Http404:
+        alreadyEdited = False
     if request.method == 'POST':
         form = EditForm(request.POST, request.FILES)
         if form.is_valid():
             try:
                 oldEdit = get_object_or_404(ModEdit, modID=pk)
+                removeEdit(oldEdit, mod)
                 oldEdit.delete()
+                alreadyEdited = True
             except:
                 pass
             post = form.save(commit=False)
-            if mod.modPreviewImage1 and post.modPreviewImage1 == "":
+            if mod.modPreviewImage1 and post.modPreviewImage1 == "" and request.POST.get("modPreviewImage1-clear") != "on":
                 post.modPreviewImage1 = mod.modPreviewImage1
-            if mod.modPreviewImage2 and post.modPreviewImage2 == "":
+            if mod.modPreviewImage2 and post.modPreviewImage2 == "" and request.POST.get("modPreviewImage2-clear") != "on":
                 post.modPreviewImage2 = mod.modPreviewImage2
-            if mod.modPreviewImage3 and post.modPreviewImage3 == "":
+            if mod.modPreviewImage3 and post.modPreviewImage3 == "" and request.POST.get("modPreviewImage3-clear") != "on":
                 post.modPreviewImage3 = mod.modPreviewImage3
-            if mod.modPreviewImage4 and post.modPreviewImage4 == "":
+            if mod.modPreviewImage4 and post.modPreviewImage4 == "" and request.POST.get("modPreviewImage4-clear") != "on":
                 post.modPreviewImage4 = mod.modPreviewImage4
-            if mod.modPreviewImage5 and post.modPreviewImage5 == "":
+            if mod.modPreviewImage5 and post.modPreviewImage5 == "" and request.POST.get("modPreviewImage5-clear") != "on":
                 post.modPreviewImage5 = mod.modPreviewImage5
-            if mod.modBackground and post.modBackground == "":
+            if mod.modBackground and post.modBackground == "" and request.POST.get("modBackground-clear") != "on":
                 post.modBackground = mod.modBackground
-            if mod.modAvatar and post.modAvatar == "":
+            if mod.modAvatar and post.modAvatar == "" and request.POST.get("modAvatar-clear") != "on":
                 post.modAvatar = mod.modAvatar
             post.modAuthor = request.user
             post.modDate = timezone.now()
@@ -339,7 +348,7 @@ def modEdit(request, pk):
         form = EditForm(instance=mod)
         form.errors.as_data()
     print("No POST, probably loading page for first time")
-    return render(request, 'mod/modEdit.html', {'form': form, 'post': mod}, content_type="text/html")
+    return render(request, 'mod/modEdit.html', {'form': form, 'post': mod, 'alreadyEdited': alreadyEdited}, content_type="text/html")
 
 
 def modDelete(request, pk):

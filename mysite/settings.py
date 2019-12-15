@@ -16,7 +16,6 @@ import os
 import django_heroku
 from datetime import timedelta
 
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -30,6 +29,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+
+if DEBUG:
+    SECRET_KEY = 1234567890
+else:
+    SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 ALLOWED_HOSTS = ['modding-website.herokuapp.com',
                  'https://www.dokidokimodclub.com/',
@@ -295,8 +299,13 @@ if not DEBUG:
 else:
     STATIC_URL = '/static/'
 
-RECAPTCHA_PUBLIC_KEY = os.getenv('CAPTCHA_SITE_KEY')
-RECAPTCHA_PRIVATE_KEY = os.getenv('CAPTCHA_SECRET_KEY')
+if DEBUG:
+    RECAPTCHA_PUBLIC_KEY = "1"
+    RECAPTCHA_PRIVATE_KEY = "1"
+else:
+    RECAPTCHA_PUBLIC_KEY = os.getenv('CAPTCHA_SITE_KEY')
+    RECAPTCHA_PRIVATE_KEY = os.getenv('CAPTCHA_SECRET_KEY')
+
 RECAPTCHA_DOMAIN = 'www.recaptcha.net'
 
 RECAPTCHA_REQUIRED_SCORE = 0.85

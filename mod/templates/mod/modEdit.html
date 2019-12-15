@@ -9,6 +9,11 @@
     <script type="text/javascript" src="{% static 'js/selectize.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/submit.js' %}"></script>
     {% if post.modAuthor == user %}
+    {% if alreadyEdited %}
+    <div class="editErrorList">
+        <p>You have already submitted an edit for this mod. If you submit another edit, all of the changes that you made in your previous edit will be lost! Make sure you apply the changes again below, or wait until a moderator has approved the edit.</p>
+    </div>
+    {% endif %}
     {% if form.errors %}
     <div class="editErrorList">
         {% for field in form %}
@@ -203,7 +208,11 @@
         </div>
         <div class="uploadBottom">
             <p>Don't forget to tell your followers that you have updated your mod by adding news!</p><br>
-            <p><input onclick="return confirm('Are you sure you want to edit your mod? It will need to be verified by the moderators again, meaning your mod will be unavailable for an uncertain amount of time.')" type="submit" value="Submit"></p>
+            {% if alreadyEdited %}
+                <p><input onclick="return confirm('You have already submitted an edit for this mod. If you submit another edit, all of the changes that you made in your previous edit will be lost! Make sure you have applied the changes on this page, or wait until a moderator has approved the edit.')" type="submit", value="Submit"></p>
+            {% else %}
+                <p><input onclick="return confirm('Are you sure you want to edit your mod? It will need to be verified by the moderators again, meaning your mod will show the old version of the mod until the edit has been approved by a moderator.')" type="submit" value="Submit"></p>
+            {% endif %}
             <a href="{% url 'mod:modPage' pk=post.pk %}"><p>Cancel edit</p></a>
             <a onclick="return confirm('Are you sure? Once you delete the mod, it is gone forever without any way of getting it back.')" href="{% url 'mod:modDelete' pk=post.pk %}"><p>Delete mod</p></a>
         </div>

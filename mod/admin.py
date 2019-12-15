@@ -4,6 +4,7 @@ from django.forms import Textarea
 from django.shortcuts import get_object_or_404
 
 from .models import Mod, ReviewRating, Rating, News, NewsNotifications, Vote, ModEdit
+from .scripts import removeEdit
 
 import time
 
@@ -48,6 +49,16 @@ class ModEditAdmin(admin.ModelAdmin):
         models.CharField: {'widget': Textarea()}
     }
 
+    def get_actions(self, request):
+        #Disable delete
+        actions = super(ModEditAdmin, self).get_actions(request)
+        #del actions['delete_selected']
+        return actions
+
+    def has_delete_permission(self, request, obj=None):
+        #Disable delete
+        return False
+
     def approve_edit(self, request, queryset):
         for x in queryset:
             originalMod = get_object_or_404(Mod, pk=x.modID)
@@ -82,7 +93,14 @@ class ModEditAdmin(admin.ModelAdmin):
 
         queryset.delete()
 
-    actions = [approve_edit]
+    def unapprove_edit(self, request, queryset):
+        for x in queryset:
+            removeEdit(x, get_object_or_404(Mod, pk=x.modID))
+        queryset.delete()
+        self.message_user(request, "Edit successfully removed. User can now make edits again.")
+
+
+    actions = [approve_edit, unapprove_edit]
 
     #change_form_template = 'progressbarupload/change_form.html'
     #add_form_template = 'progressbarupload/change_form.html'
