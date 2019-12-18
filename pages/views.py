@@ -8,17 +8,18 @@ from mod.models import Mod
 from accounts.models import User
 from .models import AdminNews
 
-import pdb
+import pdb, random
 
 
 def home(request):
+    randomMod = Mod.objects.get(modID=24)#random.choice(Mod.objects.all().filter(modShow=True))
     newMods = Mod.objects.filter(modShow=True).order_by('-modDate')[:8]
     ratedMods = Mod.objects.filter(modShow=True).order_by('-modRating')[:8]
     # reviewedMods = Mod.objects.filter(modShow=True).order_by('-modReviewCount')[:12]
     tags = Tag.objects.all()
     reviewedMods = sorted(Mod.objects.filter(modShow=True), key=lambda t: t.modReviewCount, reverse=True)[:8]  # order by review count using sorted
     adminNews = AdminNews.objects.all().order_by('-adminNewsDate')
-    return render(request, 'pages/home.html', {'newMods': newMods, 'ratedMods': ratedMods, 'reviewedMods': reviewedMods, 'adminNews': adminNews})
+    return render(request, 'pages/home.html', {'newMods': newMods, 'ratedMods': ratedMods, 'reviewedMods': reviewedMods, 'adminNews': adminNews, 'randomMod': randomMod})
 
 
 def supportHome(request):

@@ -79,7 +79,6 @@
     <div class="tabcontent" style="width: 79%; padding-top: 0;">
     <ul class="tabContentValue">
         {% for x in object_list %}
-            {% if x.modShow %}
                 <!--<li>
                     <div class="modAvatar">
                         {% if x.modAvatar %}
@@ -188,7 +187,6 @@
                         </div>
                     </div>
                 </div>
-            {% endif %}
         {% endfor %}
     </ul>
         <div class="modHorizontalResult" style="position: -webkit-sticky; position: sticky; top: 10px">

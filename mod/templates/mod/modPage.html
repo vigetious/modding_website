@@ -17,6 +17,7 @@
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/mod.js' %}"></script>
     <title>{{ post.modName }}</title>
+    {% if post.modShow %}
     <div class="modName">
         <h1 id="modName">{{ post.modName }}</h1>
         {% if post.modAuthor == user %}
@@ -124,7 +125,7 @@
         <img src="{% static 'img/Download.png' %}" alt="Download">
         <div class="modDownloadRight">
             <a onclick="alert('That feature will be coming soon')"><img src="{% static 'img/Mod Manager.png' %}" alt="Mod Manager"></a>
-            <a href="{{ post.modUploadURL }}"><img src="{% static 'img/Manual.png' %}" alt="Manual"></a>
+            <a id="modUploadURL" href="{{ post.modUploadURL }}"><img src="{% static 'img/Manual.png' %}" alt="Manual"></a>
         </div>
     </div>
 
@@ -451,6 +452,10 @@
                 }
             </style>
         {% endif %}
+    {% endif %}
+    {% else %}
+        <p>Your mod is still being approved. Please check back later.</p>
+        <p>If you have been waiting for longer than a week, please contact the moderators on the discord server.</p>
     {% endif %}
 
 {% endblock %}

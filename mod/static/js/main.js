@@ -32,6 +32,7 @@ function nsfw_check(tags, modName) {
         console.log("nsfw");
         $('#modName').css("color", "red");
         $('#modName').text("[NSFW] " + modName);
+        $('#modUploadURL').click(function(){return confirm("You must be over 18 to download this mod. Please confirm that you are over the age of 18, and are allowed to download this mod.")});
     }
 }
 

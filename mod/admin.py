@@ -24,9 +24,9 @@ mark_as_unsafe.short_description = "Mark has non-approved"
 
 
 class ModAdmin(admin.ModelAdmin):
-    list_display = ['modID', 'modAuthor', 'modDate', 'modUpdate', 'modStatus', 'modName',
+    list_display = ['modID', 'modEdited', 'modShow', 'modAuthor', 'modDate', 'modUpdate', 'modStatus', 'modName',
                     'modDescription', 'tags', 'modUpload', 'modUploadURL', 'modPlayTimeHours',
-                    'modPlayTimeMinutes', 'modReviewCount', 'modIP', 'modEdited']
+                    'modPlayTimeMinutes', 'modReviewCount', 'modIP']
     formfield_overrides = {
         models.CharField: {'widget': Textarea()}
     }

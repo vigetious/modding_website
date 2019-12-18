@@ -9,6 +9,7 @@
     <script type="text/javascript" src="{% static 'js/selectize.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/submit.js' %}"></script>
     {% if post.modAuthor == user %}
+    {% if post.modShow %}
     {% if alreadyEdited %}
     <div class="editErrorList">
         <p>You have already submitted an edit for this mod. If you submit another edit, all of the changes that you made in your previous edit will be lost! Make sure you apply the changes again below, or wait until a moderator has approved the edit.</p>
@@ -217,6 +218,10 @@
             <a onclick="return confirm('Are you sure? Once you delete the mod, it is gone forever without any way of getting it back.')" href="{% url 'mod:modDelete' pk=post.pk %}"><p>Delete mod</p></a>
         </div>
     </form>
+    {% else %}
+    <p>Your mod is still being approved. Please check back later.</p>
+    <p>If you have been waiting for longer than a week, please contact the moderators on the discord server.</p>
+    {% endif %}
     {% else %}
     <p>You must be the mod creator to edit this mod.</p>
     {% endif %}
