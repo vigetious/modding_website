@@ -115,8 +115,8 @@ function changeFeatured(modID, avatarURL, modShortDescription, tags, searchURL, 
         } else if (modPreviewImage5 !== "null") {
             $('#randomModPreviewImage5').attr("style", "display: inline-block").attr("class", "mySlides thumb selected");
         }
-
-        $('#featuredMod' + modID).css("background-color", "");
+        $("[id^=featuredMod]").css("background-color", "#3ea7ff");
+        $('#featuredMod' + modID).css("background-color", "#259bff");
     }
 }
 

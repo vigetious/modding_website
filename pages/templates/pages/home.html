@@ -130,6 +130,7 @@
 
                         $(document).ready(function() {
                             $('#featuredMod{{ featuredMod.modID }}').click(function() {
+
                                 changeFeatured(
                                     {{ featuredMod.modID }},
                                     featuredAvatar{{ featuredMod.modID }},
@@ -148,7 +149,7 @@
                 {% endfor %}
             </ul>
         </div>
-
+        <script>$('#featuredMod' + {{ randomMod.first.modID }}).css("background-color", "#259bff");</script>
         <div class="homeModFeatureRight">
             <a class="homeModFeatureRightAvatar" id="featuredAvatarLink" href="/mod/{{ randomMod.first.modID }}">
                 <img id="featuredAvatar" src="{{ randomMod.first.modAvatar.url }}">
