@@ -63,7 +63,12 @@ def submit(request):
             post.save()
             form.save_m2m()
             post.tags.add("All")
+            for x in post.tags.names():
+                print(x)
+                if str(x) == "nsfw":
+                    post.modNSFW = True
             post.modShow = False
+            post.save()
             user = User.objects.get(id=request.user.id)
             user.totalMods = user.totalMods + 1
             group = Group.objects.get(name="Mod Creators")
@@ -345,9 +350,14 @@ def modEdit(request, pk):
             post.modIP = visitor_ip_address(request)
             post.save()
             post.save()
-            form.save_m2m()
             mod.modEdited = True
+            for x in post.tags.names():
+                if x == "nsfw":
+                    print(x)
+                    post.modNSFW = True
+            post.save()
             mod.save()
+            form.save_m2m()
             return redirect('mod:modPage', pk=mod.pk)
     else:
         form = EditForm(instance=mod)

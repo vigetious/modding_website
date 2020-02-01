@@ -30,6 +30,7 @@ class ModAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.CharField: {'widget': Textarea()}
     }
+    ordering = ('modShow',)
 
     #change_form_template = 'progressbarupload/change_form.html'
     #add_form_template = 'progressbarupload/change_form.html'
@@ -87,6 +88,7 @@ class ModEditAdmin(admin.ModelAdmin):
             originalMod.modBackgroundTiledStretch = x.modBackgroundTiledStretch
             originalMod.modAvatar = x.modAvatar
             originalMod.modIP = x.modIP
+            originalMod.modNSFW = x.modNSFW
             originalMod.modEdited = False
             originalMod.save()
         self.message_user(request, "Edit successfully approved. Edits have gone live.")
@@ -118,6 +120,7 @@ class ReviewRatingAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.CharField: {'widget': Textarea}
     }
+    ordering = ('reviewApproved',)
 
 class VoteAdmin(admin.ModelAdmin):
     list_display = ['voteID', 'voteReviewID', 'voteAuthor', 'voteValue']

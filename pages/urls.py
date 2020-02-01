@@ -20,6 +20,7 @@ urlpatterns = [
     path('support/claim/', views.claim, name='claim'),
     path('taggit/', include('taggit_selectize.urls')),
     path('admin/defender/', include('defender.urls')),
+    path('news/', views.news, name='news'),
 ]
 
 

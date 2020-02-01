@@ -8,90 +8,175 @@
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <script type="text/javascript" src="{% static 'pages/js/home.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'pages/css/pages.css' %}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <title>Doki Doki Mod Club!</title>
     <div class="top">
     <p>Welcome to Doki Doki Mod Club!</p>
     <p>You can find all sorts of mods here for the popular game Doki Doki Literature Club, and you can even submit your own!</p>
     <p>Get started by checking out the newest, most popular or most reviewed mods below, or by searching for a mod.</p>
-    <!--<div class="topNewsBar">
-        <p>News:</p>
-        <p>Not sure what to play?</p>
-    </div>-->
-    <div class="adminNews">
-    <ul class="news">
-    {% for news in adminNews %}
-        <li class="adminNewsContent">
-            <div class="newsUserBar">
-                <p class="newsUser">{{ news.adminNewsUserID}}</p>
-                <p class="newsDate">{{ news.adminNewsDate }}</p>
-            </div>
-            <div class="newsContent">
-                <p>{{ news.adminNewsText|linebreaks }}</p>
-            </div>
-        </li>
-    {% endfor %}
-    </ul>
-    </div><!--
     <div class="homeRightMenu">
         <div class="screenshotVideo">
             <div class="screenshotVideoContent">
-                {% if not randomMod.modPreviewVideo %}
-                    <div class="mySlides">{% video randomMod.modPreviewVideo '620x350' %}</div>
-                    {% if randomMod.modPreviewImage1.url.length is not 0 %}
-                        <img class="mySlides" src={{ randomMod.modPreviewImage1.url }} alt="Preview Image 1">
-                    {% endif %}
+                {% if randomMod.first.modPreviewImage1.url.length is not 0 %}
+                <img class="mySlides thumb" id="randomModPreviewImage1" src="{{ randomMod.first.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
                 {% else %}
-                    <div class="mySlides">{% video randomMod.modPreviewVideo '620x350' %}</div>
-                    {% if randomMod.modPreviewImage1.url.length is not 0 %}
-                        <img class="mySlides" src={{ randomMod.modPreviewImage1.url }} alt="Preview Image 1" style="display:none">
-                    {% endif %}
+                <img class="mySlides thumb" id="randomModPreviewImage1" src="" alt="Preview Image 1" style="display:none">
                 {% endif %}
-                {% if randomMod.modPreviewImage2.url.length is not 0 %}
-                    <img class="mySlides" src={{ randomMod.modPreviewImage2.url }} alt="Preview Image 2" style="display:none">
+                {% if randomMod.first.modPreviewImage2.url.length is not 0 %}
+                <img class="mySlides thumb" id="randomModPreviewImage2" src="{{ randomMod.first.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                {% else %}
+                <img class="mySlides thumb" id="randomModPreviewImage2" src="" alt="Preview Image 2" style="display:none">
                 {% endif %}
-                {% if randomMod.modPreviewImage3.url.length is not 0 %}
-                    <img class="mySlides" src={{ randomMod.modPreviewImage3.url }} alt="Preview Image 3" style="display:none">
+                {% if randomMod.first.modPreviewImage3.url.length is not 0 %}
+                <img class="mySlides thumb" id="randomModPreviewImage3" src="{{ randomMod.first.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                {% else %}
+                <img class="mySlides thumb" id="randomModPreviewImage3" src="" alt="Preview Image 3" style="display:none">
                 {% endif %}
-                {% if randomMod.modPreviewImage4.url.length is not 0 %}
-                    <img class="mySlides" src={{ randomMod.modPreviewImage4.url }} alt="Preview Image 4" style="display:none">
+                {% if randomMod.first.modPreviewImage4.url.length is not 0 %}
+                <img class="mySlides thumb" id="randomModPreviewImage4" src="{{ randomMod.first.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                {% else %}
+                <img class="mySlides thumb" id="randomModPreviewImage4" src="" alt="Preview Image 4" style="display:none">
                 {% endif %}
-                {% if randomMod.modPreviewImage5.url.length is not 0 %}
-                    <img class="mySlides" src={{ randomMod.modPreviewImage5.url }} alt="Preview Image 5" style="display:none">
+                {% if randomMod.first.modPreviewImage5.url.length is not 0 %}
+                <img class="mySlides thumb" id="randomModPreviewImage5" src="{{ randomMod.first.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                {% else %}
+                <img class="mySlides thumb" id="randomModPreviewImage5" src="" alt="Preview Image 5" style="display:none">
                 {% endif %}
-                {% if not randomMod.modPreviewVideo and not randomMod.modPreviewImage1 and not randomMod.modPreviewImage3 and not randomMod.modPreviewImage4 and not randomMod.modPreviewImage5 %}
-                    <p style="text-align: center; line-height: 400px; margin-right: 200px">No images/videos found!</p>
-                {% endif %}
+            <script>
+
+            </script>
+            <img id="leftButton1" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
+            <img id="leftButton" class="leftButton hiddenB" src="{% static 'pages/images/left.png' %}">
+            <img id="rightButton1" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
+            <img id="rightButton" class="rightButton hiddenB" src="{% static 'pages/images/left.png' %}">
+
             </div>
-            <div class="screenshotVideoBar">
-                <ul>
-                    {% if randomMod.modPreviewVideo is not 0 %}
-                    {% video randomMod.modPreviewVideo as modPreviewVideo %}
-                    <li><img src={{ modPreviewVideo.thumbnail }} onclick="currentDiv(1)"></li>
-                    {% endvideo %}
+            <!--<div class="screenshotVideoBar">
+                <ul id="featuredModBar">
+                    {% if randomMod.first.modPreviewImage1.url.length is not 0 %}
+                    <li><img id="featuredModBarPreviewImage1" src="{{ randomMod.first.modPreviewImage1.url }}" onclick="currentDiv(2)" style="display: none"></li>
+                    <script>calculateFirstFeatured(false, 1);</script>
+                    {% else %}
+                    <li><img id="featuredModBarPreviewImage1" src="" onclick="currentDiv(2)" style="display: none"></li>
                     {% endif %}
-                    {% if randomMod.modPreviewImage1.url.length is not 0 %}
-                    <li><img src={{ randomMod.modPreviewImage1.url }} onclick="currentDiv(2)"></li>
+                    {% if randomMod.first.modPreviewImage2.url.length is not 0 %}
+                    <li><img id="featuredModBarPreviewImage2" src="{{ randomMod.first.modPreviewImage2.url }}" onclick="currentDiv(3)" style="display: none"></li>
+                    <script>calculateFirstFeatured(false, 2);</script>
+                    {% else %}
+                    <li><img id="featuredModBarPreviewImage2" src="" onclick="currentDiv(3)" style="display: none"></li>
                     {% endif %}
-                    {% if randomMod.modPreviewImage2.url.length is not 0 %}
-                    <li><img src={{ randomMod.modPreviewImage2.url }} onclick="currentDiv(3)"></li>
+                    {% if randomMod.first.modPreviewImage3.url.length is not 0 %}
+                    <li><img id="featuredModBarPreviewImage3" src="{{ randomMod.first.modPreviewImage3.url }}" onclick="currentDiv(4)" style="display: none"></li>
+                    <script>calculateFirstFeatured(false, 3);</script>
+                    {% else %}
+                    <li><img id="featuredModBarPreviewImage3" src="" onclick="currentDiv(4)" style="display: none"></li>
                     {% endif %}
-                    {% if randomMod.modPreviewImage3.url.length is not 0 %}
-                    <li><img src={{ randomMod.modPreviewImage3.url }} onclick="currentDiv(4)"></li>
+                    {% if randomMod.first.modPreviewImage4.url.length is not 0 %}
+                    <li><img id="featuredModBarPreviewImage4" src="{{ randomMod.first.modPreviewImage4.url }}" onclick="currentDiv(5)" style="display: none"></li>
+                    <script>calculateFirstFeatured(false, 4);</script>
+                    {% else %}
+                    <li><img id="featuredModBarPreviewImage4" src="" onclick="currentDiv(5)" style="display: none"></li>
                     {% endif %}
-                    {% if randomMod.modPreviewImage4.url.length is not 0 %}
-                    <li><img src={{ randomMod.modPreviewImage4.url }} onclick="currentDiv(5)"></li>
-                    {% endif %}
-                    {% if randomMod.modPreviewImage5.url.length is not 0 %}
-                    <li><img src={{ randomMod.modPreviewImage5.url }} onclick="currentDiv(6)"></li>
+                    {% if randomMod.first.modPreviewImage5.url.length is not 0 %}
+                    <li><img id="featuredModBarPreviewImage5" src="{{ randomMod.first.modPreviewImage5.url }}" onclick="currentDiv(6)" style="display: none"></li>
+                    <script>calculateFirstFeatured(false, 5);</script>
+                    {% else %}
+                    <li><img id="featuredModBarPreviewImage5" src="" onclick="currentDiv(6)" style="display: none"></li>
                     {% endif %}
                 </ul>
-            </div>
-        </div>
-        <p>{{ randomMod.modID }}</p>
-    </div>-->
-    <iframe src="https://discordapp.com/widget?id=625672295435862047&theme=dark" width="550" height="500" allowtransparency="true" frameborder="0"></iframe>
+            </div>-->
+            <ul>
+                {% for featuredMod in randomMod %}
+                    <li id="featuredMod{{ featuredMod.modID }}"></li>
+                    <script>
+                        {% if featuredMod.modAvatar %}
+                            featuredAvatar{{ featuredMod.modID }} = "{{ featuredMod.modAvatar.url }}";
+                        {% else %}
+                            featuredAvatar{{ featuredMod.modID }} = "{% static 'img/icon.png' %}";
+                        {% endif %}
+                        featuredTags{{ featuredMod.modID }} = [];
 
+                        {% if featuredMod.modPreviewImage1.url.length is not 0 %}
+                            featuredModPreviewImage1{{ featuredMod.modID }} = "{{ featuredMod.modPreviewImage1.url }}";
+                        {% else %}
+                            featuredModPreviewImage1{{ featuredMod.modID }} = "null";
+                        {% endif %}
+                        {% if featuredMod.modPreviewImage2.url.length is not 0 %}
+                            featuredModPreviewImage2{{ featuredMod.modID }} = "{{ featuredMod.modPreviewImage2.url }}";
+                        {% else %}
+                            featuredModPreviewImage2{{ featuredMod.modID }} = "null";
+                        {% endif %}
+                        {% if featuredMod.modPreviewImage3.url.length is not 0 %}
+                            featuredModPreviewImage3{{ featuredMod.modID }} = "{{ featuredMod.modPreviewImage3.url }}";
+                        {% else %}
+                            featuredModPreviewImage3{{ featuredMod.modID }} = "null";
+                        {% endif %}
+                        {% if featuredMod.modPreviewImage4.url.length is not 0 %}
+                            featuredModPreviewImage4{{ featuredMod.modID }} = "{{ featuredMod.modPreviewImage4.url }}";
+                        {% else %}
+                            featuredModPreviewImage4{{ featuredMod.modID }} = "null";
+                        {% endif %}
+                        {% if featuredMod.modPreviewImage5.url.length is not 0 %}
+                            featuredModPreviewImage5{{ featuredMod.modID }} = "{{ featuredMod.modPreviewImage5.url }}";
+                        {% else %}
+                            featuredModPreviewImage5{{ featuredMod.modID }} = "null";
+                        {% endif %}
+
+                        featuredTags{{ featuredMod.modID }}.push(
+                            {% get_tags_for_object featuredMod as tags %}
+                            {% for tag in tags %}
+                                "{{ tag }}",
+                            {% endfor %}
+                        );
+
+                        $(document).ready(function() {
+                            $('#featuredMod{{ featuredMod.modID }}').click(function() {
+                                $('#featuredMod{{ featuredMod.modID }}').css("background-color", "#8acaff");
+
+                                changeFeatured(
+                                    {{ featuredMod.modID }},
+                                    featuredAvatar{{ featuredMod.modID }},
+                                    "{{ featuredMod.modShortDescription|linebreaksbr }}".replace(/<br ?\/?>/g, "\n"),
+                                    featuredTags{{ featuredMod.modID }},
+                                    "{% url 'mod:modSearch' %}",
+                                    featuredModPreviewImage1{{ featuredMod.modID }},
+                                    featuredModPreviewImage2{{ featuredMod.modID }},
+                                    featuredModPreviewImage3{{ featuredMod.modID }},
+                                    featuredModPreviewImage4{{ featuredMod.modID }},
+                                    featuredModPreviewImage5{{ featuredMod.modID }}
+                                );
+                            });
+                        });
+                    </script>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="homeModFeatureRight">
+            <a class="homeModFeatureRightAvatar" id="featuredAvatarLink" href="/mod/{{ randomMod.first.modID }}">
+                <img id="featuredAvatar" src="{{ randomMod.first.modAvatar.url }}">
+            </a>
+            <div class="rightFeatureModDataDescription">
+                <p id="randomModShortDescription">{{ randomMod.first.modShortDescription }}</p>
+            </div>
+            <ul class="rightModDataText">
+                <li>
+                    <p>Tags:</p>
+                    <div class="tags" id="featuredTags">
+                        {% get_tags_for_object randomMod.first as tags %}
+                        {% for tag in tags %}
+                            <a class='tag' href='{% url 'mod:modSearch' %}?q=&sortBy=newest&tags={{ tag }}&dateBy=0'>{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="homeModScroller">
+
+        </div>
+    </div>
+    <!--<iframe src="https://discordapp.com/widget?id=625672295435862047&theme=dark" width="550" height="500" allowtransparency="true" frameborder="0"></iframe>
+    -->
     </div>
     <div class="homeMods">
     <ul class="navbar" style="height: 50px;">
