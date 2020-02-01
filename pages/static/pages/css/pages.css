@@ -10,31 +10,86 @@
 .adminNews {
     overflow-y: scroll;
     height: 500px;
-    width: 40%;
-    float: left;
     border-radius: 2px;
 }
 
+.homeModScroller {
+    height: 10%;
+    width: 75%;
+    text-align: center;
+    display: inline-block;
+}
+
+.screenshotVideo ul {
+    background-color: #8acaff;
+    height: 62px;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.screenshotVideo ul li {
+    display: inline-block;
+    width: 50px;
+    height: 45px;
+    background-color: #3ea7ff;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 8px;
+}
+
+.screenshotVideo ul li a {
+    width: 100%;
+    height: 100%;
+}
+
 .homeRightMenu {
-    width: 59%;
-    background-color: red;
-    height: 500px;
+    width: 100%;
+    height: 450px;
     display: inline-block;
     margin-left: 1%;
 }
 
 .screenshotVideo {
-    width: 100%;
-    height: 100px;
-    background-color: #8acaff;
-    float: left;
+    width: 75%;
+    height: 388px;
+    background-color: #a4d5ff;
+    display: inline-block;
 }
 
 .screenshotVideoContent {
-    height: 100px;
-    padding: 10px 10px;
+    height: 100%;
     display: flex;
     justify-content: center;
+    position: relative;
+}
+
+.leftButton {
+    position: absolute;
+    left: 0;
+    transform: scaleX(-1);
+    height: 100%;
+    width: 50px;
+    opacity: 0;
+    transition:opacity 0.2s linear;
+}
+
+.rightButton {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 50px;
+    opacity: 0;
+    transition:opacity 0.2s linear;
+}
+
+.hiddenA {
+    opacity: 1;
+}
+
+.hiddenB {
+    opacity: 0;
 }
 
 .mySlides {
@@ -43,8 +98,79 @@
 }
 
 .screenshotVideoBar {
-    height: 74px;
+    height: 50px;
     padding: 3px 3px;
+}
+
+.screenshotVideoBar img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.screenshotVideoBar ul {
+    height: 50px;
+    text-align: center;
+    overflow: auto;
+    list-style: none;
+    margin: auto;
+    white-space: nowrap;
+}
+
+.screenshotVideoBar li {
+    width: 15%;
+    height: 100%;
+    display: inline;
+    padding: 10px 10px;
+    list-style-type: none;
+}
+
+.screenshotVideoContent img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.homeModFeatureRight {
+    width: 24%;
+    height: 100%;
+    vertical-align: top;
+    display: inline-block;
+    background-color: #8acaff;
+    border-radius: 5px;
+}
+
+.homeModFeatureRightAvatar {
+    width: 220px;
+    margin: auto;
+}
+
+.modHorizontalDataTags {
+    height: 60px;
+    width: 100%;
+}
+
+.modHorizontalDataTags p {
+    margin: 0;
+    font-size: 12px;
+    display: inline;
+}
+
+.homeModFeatureRight img {
+    max-width: 100%;
+    width: 90%;
+    max-height: 100%;
+    margin: auto;
+    display: inline-block;
+    padding: 10px 10px;
+}
+
+.homeModFeatureRightDescription {
+    height: 45%;
+    margin: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 8;
+    font-size: 12px;
 }
 
 .homeMods {
@@ -206,6 +332,12 @@
     overflow: auto;
 }
 
+.rightFeatureModDataDescription {
+    height: 200px;
+    margin: 0;
+    overflow: auto;
+}
+
 .rightModDataDescription p {
     margin: 0;
     font-size: 12px;
@@ -217,8 +349,21 @@
     overflow: hidden;
 }
 
+.rightFeatureModDataDescription p {
+    margin: 0;
+    font-size: 12px;
+    padding-right: 5px;
+    padding-left: 5px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 10;
+    overflow: hidden;
+}
+
+
 .rightModDataText {
     max-height: 336px;
+    bottom: 0;
 }
 
 .rightModDataText li {
@@ -249,6 +394,11 @@
     text-overflow: ellipsis;
     font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.tags a {
+    text-decoration: none;
+    text-align: right;
 }
 
 .modHorizontal p {
