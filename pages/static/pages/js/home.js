@@ -68,8 +68,6 @@ function changeFeatured(modID, avatarURL, modShortDescription, tags, searchURL, 
         $('#randomModShortDescription').text(modShortDescription);
         $('#featuredAvatarLink').attr("href", "/mod/" + modID);
         $('#featuredTags').empty();
-        $("[id^=featuredMod]").css("background-color", "#3ea7ff");
-        $('#featuredMod' + modID).css("background-color", "#259bff");
 
         hidePreviewImages();
 
@@ -117,7 +115,8 @@ function changeFeatured(modID, avatarURL, modShortDescription, tags, searchURL, 
         } else if (modPreviewImage5 !== "null") {
             $('#randomModPreviewImage5').attr("style", "display: inline-block").attr("class", "mySlides thumb selected");
         }
-        detectImages();
+
+        $('#featuredMod' + modID).css("background-color", "");
     }
 }
 
@@ -147,27 +146,17 @@ function afterLoaded() {
         $(document).off('keydown');
     });
 
-    if ($('.selected').next().attr('src') == undefined) {
-        $('.rightButton').hide();
-    } else {
-        console.log($('.selected').next().attr('src'));
-        $('.rightButton').hover(function () {
-            $('.rightButton').toggleClass("hiddenB").toggleClass("hiddenA");
-        });
-    }
-
-    if ($('.selected').prev().attr('src') == undefined) {
-        $('.leftButton').hide()
-    } else {
-        $('.leftButton').hover(function () {
-            $('.leftButton').toggleClass("hiddenB").toggleClass("hiddenA");
-        });
-    }
     $('.screenshotVideoContent').hover(function() {
         $('#leftButton1').toggleClass("hiddenA");
         $('#rightButton1').toggleClass("hiddenA");
     });
 
+    $('.leftButton').hover(function () {
+        $('.leftButton').toggleClass("hiddenB").toggleClass("hiddenA");
+    });
+    $('.rightButton').hover(function () {
+        $('.rightButton').toggleClass("hiddenB").toggleClass("hiddenA");
+    });
 
     for (var x in $(".mySlides")) {
         if ($(".mySlides")[x].src) {
@@ -178,12 +167,10 @@ function afterLoaded() {
     }
 
     $('.leftButton').click(function () {
-        leftButton();
-        detectImages();
+        leftButton()
     });
     $('.rightButton').click(function () {
         rightButton();
-        detectImages();
     }); //idk why this isnt working
 
     function leftButton() {
@@ -199,7 +186,6 @@ function afterLoaded() {
     function rightButton() {
         var next = $(".selected").next();
         var img = next.attr('src');
-        console.log(img);
         if (img) {
             $(".mySlides").removeClass('selected').hide();
             next.attr("style", "display: inline-block");
@@ -246,28 +232,5 @@ function calculateFirstFeatured(BarOrVideo, modNumber) {
         } else if (BarOrVideo === false) {
             $('#featuredModBarPreviewImage' + modNumber).attr("style", "display: inline-block");
         }
-    }
-}
-
-function detectImages() {
-    var next = $('.selected').next().attr('src');
-    if (next === '<empty string>' || next === undefined || next === "") {
-        $('.rightButton').hide();
-    } else {
-        console.log(next);
-        $('.rightButton').show();
-        $('.rightButton').hover(function () {
-            $('.rightButton').toggleClass("hiddenB").toggleClass("hiddenA");
-        });
-    }
-
-    var prev = $('.selected').prev().attr('src');
-    if(prev === '<empty string>' || prev === undefined || prev === "") {
-        $('.leftButton').hide()
-    } else {
-        $('.leftButton').show();
-        $('.leftButton').hover(function () {
-            $('.leftButton').toggleClass("hiddenB").toggleClass("hiddenA");
-        });
     }
 }
