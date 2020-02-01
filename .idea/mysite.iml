@@ -13,6 +13,7 @@
     <orderEntry type="library" name="Python 3.6 (django_tutorial) interpreter library" level="application" />
   </component>
   <component name="TemplatesService">
+    <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/mod/templates" />

@@ -4,8 +4,61 @@
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
-          <list size="1">
+          <list size="54">
             <item index="0" class="java.lang.String" itemvalue="Django" />
+            <item index="1" class="java.lang.String" itemvalue="django-embed-video" />
+            <item index="2" class="java.lang.String" itemvalue="django-recaptcha" />
+            <item index="3" class="java.lang.String" itemvalue="python-dateutil" />
+            <item index="4" class="java.lang.String" itemvalue="psycopg2" />
+            <item index="5" class="java.lang.String" itemvalue="psycopg2-binary" />
+            <item index="6" class="java.lang.String" itemvalue="taggit-selectize" />
+            <item index="7" class="java.lang.String" itemvalue="redis" />
+            <item index="8" class="java.lang.String" itemvalue="django-defender" />
+            <item index="9" class="java.lang.String" itemvalue="certifi" />
+            <item index="10" class="java.lang.String" itemvalue="django-braces" />
+            <item index="11" class="java.lang.String" itemvalue="docutils" />
+            <item index="12" class="java.lang.String" itemvalue="django-model-utils" />
+            <item index="13" class="java.lang.String" itemvalue="django-taggit-templatetags2" />
+            <item index="14" class="java.lang.String" itemvalue="django-polymorphic" />
+            <item index="15" class="java.lang.String" itemvalue="swapper" />
+            <item index="16" class="java.lang.String" itemvalue="dj-database-url" />
+            <item index="17" class="java.lang.String" itemvalue="pinax-ratings" />
+            <item index="18" class="java.lang.String" itemvalue="django-generic-positions" />
+            <item index="19" class="java.lang.String" itemvalue="django-appconf" />
+            <item index="20" class="java.lang.String" itemvalue="whitenoise" />
+            <item index="21" class="java.lang.String" itemvalue="gunicorn" />
+            <item index="22" class="java.lang.String" itemvalue="easy-thumbnails" />
+            <item index="23" class="java.lang.String" itemvalue="simplejson" />
+            <item index="24" class="java.lang.String" itemvalue="boto3" />
+            <item index="25" class="java.lang.String" itemvalue="django-mptt" />
+            <item index="26" class="java.lang.String" itemvalue="django-filter" />
+            <item index="27" class="java.lang.String" itemvalue="django-vote" />
+            <item index="28" class="java.lang.String" itemvalue="django-taggit" />
+            <item index="29" class="java.lang.String" itemvalue="idna" />
+            <item index="30" class="java.lang.String" itemvalue="django-avatar" />
+            <item index="31" class="java.lang.String" itemvalue="django-heroku" />
+            <item index="32" class="java.lang.String" itemvalue="django-star-ratings" />
+            <item index="33" class="java.lang.String" itemvalue="django-hvad" />
+            <item index="34" class="java.lang.String" itemvalue="django-storages" />
+            <item index="35" class="java.lang.String" itemvalue="requests" />
+            <item index="36" class="java.lang.String" itemvalue="django-classy-tags" />
+            <item index="37" class="java.lang.String" itemvalue="django-user-media" />
+            <item index="38" class="java.lang.String" itemvalue="django-secretballot" />
+            <item index="39" class="java.lang.String" itemvalue="django-simple-email-confirmation" />
+            <item index="40" class="java.lang.String" itemvalue="pinax-comments" />
+            <item index="41" class="java.lang.String" itemvalue="urllib3" />
+            <item index="42" class="java.lang.String" itemvalue="six" />
+            <item index="43" class="java.lang.String" itemvalue="botocore" />
+            <item index="44" class="java.lang.String" itemvalue="django-cleanup" />
+            <item index="45" class="java.lang.String" itemvalue="django-libs" />
+            <item index="46" class="java.lang.String" itemvalue="django-likes" />
+            <item index="47" class="java.lang.String" itemvalue="django-review" />
+            <item index="48" class="java.lang.String" itemvalue="chardet" />
+            <item index="49" class="java.lang.String" itemvalue="jmespath" />
+            <item index="50" class="java.lang.String" itemvalue="s3transfer" />
+            <item index="51" class="java.lang.String" itemvalue="Unidecode" />
+            <item index="52" class="java.lang.String" itemvalue="django-js-asset" />
+            <item index="53" class="java.lang.String" itemvalue="Pillow" />
           </list>
         </value>
       </option>

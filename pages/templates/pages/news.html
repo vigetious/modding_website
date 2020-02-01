@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'pages/css/pages.css' %}">
+    <title>News</title>
+    <h1>News</h1>
+    <p>Every major update to the website is announced here, on the news page. Minor updates are only announced on the <a href="{% url 'contactUs' %}">discord server</a>.</p>
+    <div class="adminNews">
+        <ul class="news">
+            {% for news in adminNews %}
+                <li class="adminNewsContent">
+                    <div class="newsUserBar">
+                        <p class="newsUser">{{ news.adminNewsUserID }}</p>
+                        <p class="newsDate">{{ news.adminNewsDate }}</p>
+                    </div>
+                    <div class="newsContent">
+                        <p>{{ news.adminNewsText|linebreaks }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

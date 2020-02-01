@@ -36,6 +36,7 @@ mark_as_unsafe.short_description = "Mark as non-approved"
 class AvatarAdmin(admin.ModelAdmin):
     list_display = ['avatarID', 'avatarUserID', 'avatarTime', 'avatarImage', 'avatarApproved', 'avatarIP']
     actions = [mark_as_safe, mark_as_unsafe]
+    ordering = ('avatarApproved',)
 
 
 admin.site.register(User, CustomUserAdmin)
