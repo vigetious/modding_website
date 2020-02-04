@@ -117,6 +117,8 @@ function changeFeatured(modID, avatarURL, modShortDescription, tags, searchURL, 
         }
         $("[id^=featuredMod]").css("background-color", "#3ea7ff");
         $('#featuredMod' + modID).css("background-color", "#259bff");
+
+        //calculateNextImage();
     }
 }
 
@@ -147,15 +149,39 @@ function afterLoaded() {
     });
 
     $('.screenshotVideoContent').hover(function() {
-        $('#leftButton1').toggleClass("hiddenA");
-        $('#rightButton1').toggleClass("hiddenA");
+        calculateNextImage();
+    }, function () {
+        $('.rightButton').addClass("tempHidden").removeClass("shown");
+        $('.rightButton1').addClass("tempHidden").removeClass("shown");
+        $('.leftButton').addClass("tempHidden").removeClass("shown");
+        $('.leftButton1').addClass("tempHidden").removeClass("shown");
     });
 
     $('.leftButton').hover(function () {
-        $('.leftButton').toggleClass("hiddenB").toggleClass("hiddenA");
+        var prev = $(".selected").prev().attr("src");
+        switch (prev) {
+            case undefined:
+            case "":
+                console.log("nothing previous");
+                $('.leftButton').addClass("tempHidden").removeClass("shown");
+                break;
+            default:
+                console.log("found previous");
+                $('.leftButton1').addClass("shown").removeClass("tempHidden");
+        }
     });
     $('.rightButton').hover(function () {
-        $('.rightButton').toggleClass("hiddenB").toggleClass("hiddenA");
+        var next = $(".selected").next().attr("src");
+        switch (next) {
+            case undefined:
+            case "":
+                console.log("nothing next");
+                $('.leftButton').addClass("tempHidden").removeClass("shown");
+                break;
+            default:
+                console.log("found next");
+                $('.leftButton1').addClass("shown").removeClass("tempHidden");
+        }
     });
 
     for (var x in $(".mySlides")) {
@@ -181,6 +207,7 @@ function afterLoaded() {
             prev.attr("style", "display: inline-block");
             prev.addClass('selected');
         }
+        calculateNextImage();
     }
 
     function rightButton() {
@@ -191,6 +218,7 @@ function afterLoaded() {
             next.attr("style", "display: inline-block");
             next.addClass('selected');
         }
+        calculateNextImage();
     }
 }
 
@@ -232,5 +260,30 @@ function calculateFirstFeatured(BarOrVideo, modNumber) {
         } else if (BarOrVideo === false) {
             $('#featuredModBarPreviewImage' + modNumber).attr("style", "display: inline-block");
         }
+    }
+}
+
+function calculateNextImage() {
+    var prev = $(".selected").prev().attr("src");
+    var next = $(".selected").next().attr("src");
+    switch (next) {
+        case undefined:
+        case "":
+            console.log("nothing next");
+            $('.rightButton').addClass("tempHidden").removeClass("shown");
+            break;
+        default:
+            console.log("can see next");
+            $('.rightButton').removeClass("tempHidden").addClass("shown");
+    }
+    switch (prev) {
+        case undefined:
+        case "":
+            console.log("nothing previous");
+            $('.leftButton').addClass("tempHidden").removeClass("shown");
+            break;
+        default:
+            console.log("can see prev");
+            $('.leftButton').removeClass("tempHidden").addClass("shown");
     }
 }

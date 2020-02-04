@@ -84,11 +84,11 @@
     transition:opacity 0.2s linear;
 }
 
-.hiddenA {
+.shown {
     opacity: 1;
 }
 
-.hiddenB {
+.tempHidden{
     opacity: 0;
 }
 

@@ -14,7 +14,7 @@ import pdb, random
 
 def home(request):
     randomMods = Mod.objects.all()#make sure only mods with images show#.get(modID=24)
-    featuredMods = randomMods.filter(modShow=True).filter(modNSFW=False).filter(~Q(modAvatar="") & (~Q(modPreviewImage1="") | ~Q(modPreviewImage2="") | ~Q(modPreviewImage3="") | ~Q(modPreviewImage4="") | ~Q(modPreviewImage5="")))
+    featuredMods = randomMods.filter(modShow=True).filter(modNSFW=False).filter(~Q(modAvatar="") & (~Q(modPreviewImage1="") | ~Q(modPreviewImage2="") | ~Q(modPreviewImage3="") | ~Q(modPreviewImage4="") | ~Q(modPreviewImage5=""))).order_by('-modDate')[:10]
     newMods = Mod.objects.filter(modShow=True).order_by('-modDate')[:8]
     ratedMods = Mod.objects.filter(modShow=True).order_by('-modRating')[:8]
     # reviewedMods = Mod.objects.filter(modShow=True).order_by('-modReviewCount')[:12]
