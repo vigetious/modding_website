@@ -162,11 +162,9 @@ function afterLoaded() {
         switch (prev) {
             case undefined:
             case "":
-                console.log("nothing previous");
                 $('.leftButton').addClass("tempHidden").removeClass("shown");
                 break;
             default:
-                console.log("found previous");
                 $('.leftButton1').addClass("shown").removeClass("tempHidden");
         }
     });
@@ -175,11 +173,9 @@ function afterLoaded() {
         switch (next) {
             case undefined:
             case "":
-                console.log("nothing next");
                 $('.leftButton').addClass("tempHidden").removeClass("shown");
                 break;
             default:
-                console.log("found next");
                 $('.leftButton1').addClass("shown").removeClass("tempHidden");
         }
     });
@@ -269,21 +265,17 @@ function calculateNextImage() {
     switch (next) {
         case undefined:
         case "":
-            console.log("nothing next");
             $('.rightButton').addClass("tempHidden").removeClass("shown");
             break;
         default:
-            console.log("can see next");
             $('.rightButton').removeClass("tempHidden").addClass("shown");
     }
     switch (prev) {
         case undefined:
         case "":
-            console.log("nothing previous");
             $('.leftButton').addClass("tempHidden").removeClass("shown");
             break;
         default:
-            console.log("can see prev");
             $('.leftButton').removeClass("tempHidden").addClass("shown");
     }
 }
