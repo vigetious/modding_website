@@ -168,7 +168,7 @@ LOGOUT_REDIRECT_URL = '/'
 if DEBUG:
     EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
     EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
-    DEFAULT_FROM_EMAIL = "yaes@example.com"
+    DEFAULT_FROM_EMAIL = "dokidokimodclub@protonmail.com"
 else:
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
@@ -277,11 +277,11 @@ if not DEBUG:
     AWS_DEFAULT_ACL = None
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-    #AWS_STORAGE_BUCKET_NAME = 'ddlc-modding-static'
-    AWS_STORAGE_BUCKET_NAME = 'digcsosdoiw9v'
+    AWS_STORAGE_BUCKET_NAME = 'ddlc-modding-static'
+    #AWS_STORAGE_BUCKET_NAME = 'digcsosdoiw9v'
     #AWS_S3_CUSTOM_DOMAIN = '{0}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
-    #AWS_S3_CUSTOM_DOMAIN = '{0}.cloudfront.net'.format(AWS_STORAGE_BUCKET_NAME)
-    AWS_CLOUDFRONT_DOMAIN = '{0}.cloudfront.net'.format(AWS_STORAGE_BUCKET_NAME)
+    AWS_S3_CUSTOM_DOMAIN = 'digcsosdoiw9v.cloudfront.net'
+    AWS_S3_SECURE_URLS = True
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=86400',
     }
@@ -291,8 +291,7 @@ if not DEBUG:
         os.path.join(BASE_DIR, 'static'),
     ]
 
-    #STATIC_URL = 'https://{0}/{1}/'.format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
-    STATIC_URL = 'https://{0}/{1}/'.format(AWS_CLOUDFRONT_DOMAIN, AWS_LOCATION)
+    STATIC_URL = 'https://{0}/{1}/'.format(AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
     DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
