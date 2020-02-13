@@ -154,14 +154,33 @@ p:hover .helptext {
 
 .uploadBottom {
     width: 100%;
+    text-align: center;
 }
 
 .uploadBottom p {
     text-align: center;
+    background-color: #8acaff;
+    border: none;
+    border-radius: 3px;
+    width: 100px;
+    display: inline-block;
+    padding: 15px 15px;
+}
+
+span {
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.uploadBottom img {
+    width: 30%;
+    height: 30%;
+    display: none;
 }
 
 .uploadBottom p input {
-    font-size: 20px;
+    width: 70%;
+    height: 100%;
 }
 
 #hiddenNextImage {

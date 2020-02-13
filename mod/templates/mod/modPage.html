@@ -22,9 +22,15 @@
         <h1 id="modName">{{ post.modName }}</h1>
         {% if post.modAuthor == user %}
             <p><a href="{% url 'mod:modEdit' pk=post.pk %}"><input type="button" value="Edit Mod"></a></p>
+            {% if post.modEdited %}
+                <p style="color: red; margin-right: 10px">Psst! Your mod edit is being approved! (Only you can see this message)</p>
+            {% endif %}
         {% endif %}
     </div>
 
+        <script>
+        var isAuth = {{ user.is_authenticated|lower }};
+        </script>
     <div class="screenshotVideo">
         <div class="screenshotVideoContent">
             {% if not post.modPreviewVideo %}
@@ -139,7 +145,7 @@
             {% endfor %}
     </div>
     <div class="modSideContent">
-        <div class="modRating">
+        <div class="modRating" id="rate">
             {% if user.is_authenticated %}
                 <p id="rate">Add to played list:</p>
                 <div>
@@ -163,21 +169,17 @@
                                 document.getElementById("star{{ rating.ratingValue }}").checked = true;
                             }
                             if ('{{ rating.ratingValue }}' != 'None') {
-                                console.log('Already rated this mod with ' + '{{ rating.ratingValue }}');
                                 document.getElementById("star{{ rating.ratingValue }}").checked = true;
                             }
                             document.getElementById("choice").value = "{{ rating.ratingChoice }}";
                             document.getElementById("ratingSubmit").value = "Update";
-                            console.log("Already rated.")
                         }
 
                         if (document.getElementById("played").selected === true) {
-                            console.log("PLAYED");
                             $('#rating').removeAttr('hidden')
                         }
 
                         if (document.getElementById("want-to-play").selected === true) {
-                            console.log("WANT TO PLAY");
                             $('#rating').attr('hidden', true)
                         }
 
@@ -193,12 +195,30 @@
                     </script>
                 </div>
             {% endif %}
+            {% if user.is_authenticated == False %}
+                <div id="modRating">
+                    <fieldset id="rating" class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!" onclick="registerReminder()">5 stars</label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good" onclick="registerReminder()">4 stars</label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh" onclick="registerReminder()">3 stars</label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad" onclick="registerReminder()">2 stars</label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time" onclick="registerReminder()">1 star</label>
+                    </fieldset>
+                    <p id="reminder"></p>
+                    <select name="choice" id="choice" onclick="registerReminder()">
+                        <option id="played" value="Played" onclick="revealRating()">Played</option>
+                        <option id="want-to-play" value="Want to play" onclick="hideRating()">Want to play</option>
+                    </select>
+                    <input type="button" id="ratingSubmit" value="Submit" onclick="registerReminder()">
+                </div>
+            {% endif %}
         </div>
     <div>
     <div class="modNotifications">
         <p>Receive e-mail updates about this mod?</p>
         {% if user.is_authenticated == False %}
-            <input type="button" value="Follow" onclick="notLoggedIn()" class="notifications-no"><br>
+            <p id="followReminder"></p>
+            <input style="margin: 4px 0px 10px 5px;" type="button" value="Follow" onclick="followReminder()" class="notifications-no"><br>
         {% endif %}
         {% if user.is_authenticated %}
             <input style="margin: 4px 0px 10px 5px;" type="button" id="notifications-no" value="Follow" onclick="followYes({{ post.modID }})" class="notifications-no"><br>
@@ -258,7 +278,7 @@
                         <div class="modReviewCoreData">
                             <p><a href="{% url 'accounts:userProfile' review.reviewAuthorID %}">{{ review.reviewAuthorID }}</a></p><br>
                             <!--<img src="{{ review.reviewAuthorID }}">  REVIEW AUTHOR ID AND AVATAR USER ID THE SAME -->
-                            {% if user.is_authenticated %}
+                            {% if user.is_authenticated and review.reviewApproved == True %}
                                 <form method="post" id="upvote_review" class="voteForm">
                                     {% csrf_token %}
                                     <input type="button" id="upvote_review_{{ review.reviewid }}" class="upvoteReview" value="+"><br>
@@ -268,36 +288,36 @@
                             {% endif %}
                             {% if user.is_authenticated == False %}
                                 <form class="voteForm">
-                                    <input type="button" onclick="notLoggedIn()" class="upvoteReview" value="+"><br>
+                                    <input type="button" onclick="window.location = '{% url 'login' %}?next={{ request.path }}'" class="upvoteReview" value="+"><br>
                                     <p id="reviewVotes{{ review.reviewid }}">{{ review.reviewVotes }}</p><br>
-                                    <input type="button" onclick="notLoggedIn()" class="downvoteReview" value="-"><br>
+                                    <input type="button" onclick="window.location = '{% url 'login' %}?next={{ request.path }}'" class="downvoteReview" value="-"><br>
                                 </form>
                             {% endif %}
                             {% if user == review.reviewAuthorID %}
+                                {% if review.reviewApproved == True %}
+                                    <div class="editCommentBox">
+                                        <form method="POST" id="editReview">
+                                            <input type="button" id="editReview{{ review.reviewid }}" class="editComment" value="Edit" onclick="editComment({{ review.reviewid }})">
+                                            <p class="savedNotification" id="savedNotification{{ review.reviewid }}">Saved!</p>
+                                        </form>
+                                    </div>
+                                {% endif %}
                                 <div class="deleteCommentBox">
                                     <form method="POST" id="deleteReview">
-                                        <input type="button" style="background-color: #7cb5e5;" id="deleteReview{{ review.reviewid }}" class="deleteComment" value="Delete">
+                                        <input type="button"  id="deleteReview{{ review.reviewid }}" class="deleteComment" value="Delete" onclick="deleteComment({{ review.reviewid }})">
                                     </form>
                                 </div>
-                                <script>
-                                    $('#deleteReview{{ review.reviewid }}').on('click', deleteComment);
-
-                                    function deleteComment() {
-                                        event.preventDefault();
-                                        if (confirm('Are you sure you want to delete the review?')) {
-                                            console.log("Deleting comment " + {{ review.reviewid }});
-                                            deleteCommentAjax({{ review.reviewid }});
-                                            $("#review{{ review.reviewid }}").remove();
-                                        }
-                                    }
-                                </script>
                             {% endif %}
                         </div>
                         <div class="modReviewHeader">
                             <p>{{ review.reviewid }} | {{ review.reviewDate }}</p>
                             <div class="modReviewComment">
                                 {% if review.reviewApproved == True %}
-                                    <p>{{ review.reviewComment|linebreaks }}</p>
+                                    {% if user == review.reviewAuthorID %}
+                                        <textarea id="reviewComment">{{ review.reviewComment }}</textarea>
+                                    {% else %}
+                                        <p id="reviewComment">{{ review.reviewComment|linebreaks }}</p>
+                                    {% endif %}
                                 {% elif review.reviewApproved == False %}
                                     <p>This review is awaiting verification from moderators.</p>
                                     <p>If you have written the review and it has not been approved within 7 days, please <a href="{% url 'contactUs' %}">contact us.</a></p>
@@ -421,15 +441,13 @@
                 </div>
             {% endfor %}
             <div class="submitReview">
-                {% if user.is_authenticated %}
                     <form method="post" enctype="multipart/form-data" name="comment">
                         {% csrf_token %}
                         <p>Would you like to review this mod?</p>
                         <span class="rulesSpan">Click <a href="{% url 'rules' %}">here</a> to view the rules</span>
-                        <div class="submitReviewCommentForm">{{ commentForm.reviewComment }}</div>
-                        <div class="reviewSubmit"><p>Don't forget to also <a href="#rate">rate</a> the mod!</p><input class="reviewSubmitButton" type="submit" value="submit"></div>
+                        <div id="reviewCommentForm" class="submitReviewCommentForm">{{ commentForm.reviewComment }}</div>
+                        <div class="reviewSubmit"><p>Don't forget to also <a href="#rate">rate</a> the mod!</p><input id="reviewSubmitButton" class="reviewSubmitButton" type="submit" value="submit"></div>
                     </form>
-                {% endif %}
             </div>
         </div>
 

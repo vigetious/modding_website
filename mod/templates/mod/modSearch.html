@@ -50,6 +50,10 @@
             </div>
                 <div id="mood"></div>
             <div class="searchSideContentCategory">
+                <h3>Event:</h3>
+            </div>
+            <div id="event"></div>
+            <div class="searchSideContentCategory">
                 <h3>Others:</h3>
             </div>
                 <div id="others"></div>
@@ -59,15 +63,18 @@
             {% endfor %}
             {% for tag in tagCount %}
                 <script>
-                    girls = ['natsuki', 'yuri', 'monika', 'sayori', 'all girls', 'tiffany', 'shiro', "natsuki's dad", 'mc'];
-                    mood = ['happy', 'sad', 'love', 'lighthearted', 'funny', 'scary'];
-                    state = ['aftermath', 'extension', 'new story'];
+                    var girls = ['natsuki', 'yuri', 'monika', 'sayori', 'all girls', 'tiffany', 'shiro', "natsuki's dad", 'mc'];
+                    var mood = ['happy', 'sad', 'love', 'lighthearted', 'funny', 'scary'];
+                    var state = ['aftermath', 'extension', 'new story'];
+                    var event = ['christmas', 'easter'];
                     if (girls.includes('{{ tag }}'.toLowerCase())) {
                         $("#girls").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
                     } else if (mood.includes('{{ tag }}'.toLowerCase())) {
                         $("#mood").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
-                    } else if (mood.includes('{{ tag }}'.toLowerCase())) {
+                    } else if (state.includes('{{ tag }}'.toLowerCase())) {
                         $("#state").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
+                    } else if (event.includes('{{ tag }}'.toLocaleLowerCase())) {
+                        $("#event").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
                     } else {
                         $("#others").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
                     }

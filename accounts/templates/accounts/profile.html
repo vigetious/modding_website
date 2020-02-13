@@ -37,7 +37,10 @@
         <div class="userRightSideContent">
             <div class="userRightSideContentBio">
                 <textarea id="bio">{{ user.description }}</textarea>
-                <input type="button" id="finishEditBio" value="Update bio" onclick="editBioAjax($('textarea#bio').val())">
+                <div class="userRightSideContentBioSubmit">
+                    <p id="bioUpdated">Bio updated!</p>
+                    <input type="button" id="finishEditBio" value="Update bio" onclick="editBioAjax($('textarea#bio').val())">
+                </div>
             </div>
             <div class="userRightSideContentCreatedMods">
                 <div class="userTitle"><p>Created mods</p></div>
@@ -70,21 +73,6 @@
                     </table>
                 </div>
             </div>
-            <!--<div class="userRightSideContentReviews">
-                <div class="userTitle"><p>Reviews</p></div>
-                <table>
-                    <tr>
-                        <th><p>Date</p></th>
-                        <th><p>Comment</p></th>
-                    </tr>
-                    {% for review in reviews %}
-                        <tr>
-                            <td><p>{{ review.reviewDate }}</p></td>
-                            <td><p>{{ review.reviewComment }}</p></td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>-->
         </div>
         <div class="userPlayed">
             <table>
@@ -93,7 +81,6 @@
                     <th><p>Mod name</p></th>
                     <th><p>Your rating</p></th>
                     <th><p>Played status</p></th>
-                    <th><p>Mod status</p></th>
                     <th><p>Mod note</p></th>
                     <th><p>Delete rating</p></th>
                 </tr>
@@ -106,13 +93,26 @@
                                 <a href="../../mod/{{ x.ratingModID|stringformat:'i' }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
                             {% endif %}</td>
                         <td><p><a href="../../mod/{{ x.ratingModID|stringformat:'i' }}">{{ x.ratingModID }}</a></p></td>
-                        <td><p>{{ x.ratingValue }}</p></td>
+                        <td width="200px"><fieldset id="rating{{ x.ratingID }}" class="rating">
+                            <input type="radio" id="{{ x.ratingID }}star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+                            <input type="radio" id="{{ x.ratingID }}star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+                            <input type="radio" id="{{ x.ratingID }}star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+                            <input type="radio" id="{{ x.ratingID }}star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+                            <input type="radio" id="{{ x.ratingID }}star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+                        </fieldset>
+                        <script>
+                            if (document.getElementById("rating{{ x.ratingID }}").hasAttribute("hidden")) {
+                                document.getElementById("star{{ x.ratingValue }}").checked = true;
+                            }
+                            if ('{{ x.ratingValue }}' != 'None') {
+                                document.getElementById("{{ x.ratingID }}star{{ x.ratingValue }}").checked = true;
+                            }
+                        </script></td>
                         <td><p>{{ x.ratingChoice }}</p></td>
-                        <td><p>{{ x.ratingStatus }}</p></td>
                         <td><textarea placeholder="Click out of the box to update this" id="editNote{{ x.ratingID }}" onfocusout="editNoteAjax($('#editNote{{ x.ratingID }}').val(), {{ x.ratingID }})">{{ x.ratingNote }}</textarea></td>
                         {% if user == x.ratingAuthorID %}
-                            <td><p><input type="button" id="rating{{ x.ratingID }}Delete" value="Delete" onclick="deleteRatingButton({{ x.ratingID }})"></p></td>
-                        {% endif %} <!-- you dont really need this do you since its going to be unique anyway -->
+                            <td id="rating{{ x.ratingID }}Delete"><p></p><input type="button" id="rating{{ x.ratingID }}DeleteButton" value="Delete" onclick="confirmDeleteRating({{ x.ratingID }})"><input type="button" id="rating{{ x.ratingID }}DeleteYes" class="hidden" value="Yes" onclick="deleteRatingButton({{ x.ratingID }})"><input type="button" id="rating{{ x.ratingID }}DeleteNo" class="hidden" value="No" onclick="revertDeleteRating({{ x.ratingID }})"></td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </table>

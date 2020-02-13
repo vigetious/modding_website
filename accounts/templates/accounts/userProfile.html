@@ -63,7 +63,6 @@
                     <th><p>Mod name</p></th>
                     <th><p>Your rating</p></th>
                     <th><p>Played status</p></th>
-                    <th><p>Mod status</p></th>
                     <th><p>Mod note</p></th>
                 </tr>
                 {% for x in played %}
@@ -76,10 +75,23 @@
                             {% endif %}
                         </td>
                         <td><p><a href="../../mod/{{ x.ratingModID|stringformat:'i' }}">{{ x.ratingModID }}</a></p></td>
-                        <td><p>{{ x.ratingValue }}</p></td>
+                        <td width="200px"><fieldset id="rating{{ x.ratingID }}" class="rating">
+                            <input type="radio" id="{{ x.ratingID }}star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+                            <input type="radio" id="{{ x.ratingID }}star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+                            <input type="radio" id="{{ x.ratingID }}star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+                            <input type="radio" id="{{ x.ratingID }}star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+                            <input type="radio" id="{{ x.ratingID }}star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+                        </fieldset>
+                            <script>
+                                if (document.getElementById("rating{{ x.ratingID }}").hasAttribute("hidden")) {
+                                    document.getElementById("star{{ x.ratingValue }}").checked = true;
+                                }
+                                if ('{{ x.ratingValue }}' != 'None') {
+                                    document.getElementById("{{ x.ratingID }}star{{ x.ratingValue }}").checked = true;
+                                }
+                            </script></td>
                         <td><p>{{ x.ratingChoice }}</p></td>
-                        <td><p>{{ x.ratingStatus }}</p></td>
-                        <td><p>{{ x.ratingNote }}</p></td>
+                        <td width="150px"><p>{{ x.ratingNote }}</p></td>
                     </tr>
                 {% endfor %}
             </table>

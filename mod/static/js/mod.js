@@ -1,41 +1,53 @@
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', afterLoaded);
+} else {
+    afterLoaded();
+}
+
+function afterLoaded() {
+    var reviewCommentForm = $('#reviewCommentForm > textarea, #reviewSubmitButton');
+    reviewCommentForm.click(function () {
+        if (!isAuth) {
+            reviewCommentForm.attr("disabled", "disabled");
+            $('#reviewCommentForm > textarea').text("You must be logged in to review mods!");
+        }
+    })
+}
+
 function upvote_post(id, modID) {
-    console.log('can upvote post ' + id);
     $.ajax({
         url: 'reviewupvote/',
         type: 'POST',
         data: {id : id, modID : modID, csrfmiddlewaretoken : csrftoken},
 
         success : function (json) {
-            console.log(json);
-            console.log("success");
+
         },
 
         error : function (xhr, errmsg, err) {
-            console.log(xhr.status + ": " + xhr.responseText);
+
         }
     })
 }
 
 function remove_vote(reviewid, modID) {
-    console.log('can remove vote from post ' + reviewid);
+
     $.ajax({
         url: 'reviewremovevote/',
         type: 'POST',
         data: {id: reviewid, modID: modID, csrfmiddlewaretoken: csrftoken},
 
         success: function (json) {
-            console.log(json);
-            console.log('success');
+
         },
 
         error: function (xhr, errmsg, err) {
-            console.log(xhr.status + ": " + xhr.responseText);
+
         }
     })
 }
 // could optimise all of this code
 function downvote_post(reviewid, modID) {
-    console.log('can downvote post ' + reviewid);
     $.ajax({
         url: 'reviewdownvote/',
         type: 'POST',
@@ -46,18 +58,16 @@ function downvote_post(reviewid, modID) {
         },
 
         success: function (json) {
-            console.log(json);
-            console.log('success');
+
         },
 
         error: function (xhr, errmsg, err) {
-            console.log(xhr.status + ": " + xhr.responseText)
+
         }
     })
 }
 
 function deleteCommentAjax(reviewid) {
-    console.log("Deleteing review " + reviewid);
     $.ajax({
         url: 'reviewdelete/',
         type: 'POST',
@@ -67,12 +77,11 @@ function deleteCommentAjax(reviewid) {
         },
 
         success: function (json){
-            console.log(json);
-            console.log('success');
+
         },
 
         error: function (xhr, errmsg, err) {
-            console.log(xhr.status + ": " + xhr.responseText)
+
         }
     })
 }
@@ -102,8 +111,17 @@ function reminder() {
     $('#reminder').text("Don't forget to hit Submit/Update!").css("color", "red");
 }
 
+function registerReminder() {
+    $('#reminder').text("You must be logged in to rate mods!").css("color", "red");
+    $('#ratingSubmit, #choice, #rating').attr("disabled", "disabled");
+}
+
+function followReminder() {
+    $('#followReminder').text("You must be logged in to follow mods!").css("color", "red");
+    $('.modNotifications > input').attr("disabled", "disabled");
+}
+
 function ratingSubmit(modID, radioValue, selectedChoice) {
-    console.log("Rating this mod a " + radioValue + "/5.");
 
     $.ajax({
         url: 'rating/',
@@ -116,18 +134,15 @@ function ratingSubmit(modID, radioValue, selectedChoice) {
         },
 
         success: function (json) {
-            console.log(json['result']);
             var obj = JSON.parse(json['data'].slice(1, -1));
             window.ratingID = obj['pk'];
             window.ratingModID = obj['fields']['ratingModID'];
             window.ratingAuthorID = obj['fields']['ratingAuthorID'];
             window.ratingValue = obj['fields']['ratingValue'];
-            console.log('Created rating ' + ratingID);
-            console.log('success')
         },
 
         error: function (xhr, errmsg, err) {
-            console.log(xhr.status + ': ' + xhr.responseText)
+
         }
     })
 }
@@ -141,7 +156,6 @@ function deleteRatingButton(ratingID) {
 
 
 function deleteRating(ratingID) {
-    console.log('Deleting rating ' + ratingID);
     $.ajax({
         url: 'ratingdelete/',
         type: 'POST',
@@ -151,18 +165,16 @@ function deleteRating(ratingID) {
         },
 
         success: function (json) {
-            console.log(json);
-            console.log('success');
+
         },
 
         error: function (xhr, errmsg, err) {
-            console.log(xhr + ': ' + xhr.responseText)
+
         }
     })
 }
 
 function submitNews(news_text, news_mod_id) {
-    console.log("Submitting news for " + news_mod_id);
     $.ajax({
         url: 'news/',
         type: 'POST',
@@ -173,12 +185,11 @@ function submitNews(news_text, news_mod_id) {
         },
 
         success: function (json) {
-            console.log(json);
-            console.log('success');
+
         },
 
         error: function (xhr, errmsg, err) {
-            console.log(xhr + ': ' + xhr.responseText)
+
         }
     })
 }
@@ -194,8 +205,7 @@ function followYes(modID) {
         },
 
         success: function (json) {
-            console.log(json);
-            console.log('success');
+
             $('#notifications-no').attr({
                 "id": "notifications-yes",
                 "class": "notifications-yes",
@@ -205,7 +215,7 @@ function followYes(modID) {
         },
 
         error: function (xhr, errmsg, err) {
-            console.log(xhr + ': ' + xhr.responseText)
+
         }
     })
 }
@@ -221,8 +231,7 @@ function followNo(modID) {
         },
 
         success: function (json) {
-            console.log(json);
-            console.log('success');
+
             $('#notifications-yes').attr({
                 "id": "notifications-no",
                 "class": "notifications-no",
@@ -232,7 +241,7 @@ function followNo(modID) {
         },
 
         error: function (xhr, errmsg, err) {
-            console.log(xhr + ': ' + xhr.responseText)
+
         }
     })
 }
@@ -240,4 +249,36 @@ function followNo(modID) {
 function showNews() {
     $('#newsForm').show(500);
     $('#showNews').remove();
+}
+
+function deleteComment(reviewID) {
+    //event.preventDefault();
+    if (confirm('Are you sure you want to delete the review?')) {
+        console.log("Deleting comment " + reviewID);
+        deleteCommentAjax(reviewID);
+        $(`#review${reviewID}`).remove();
+    }
+}
+
+function editComment(reviewID) {
+    editCommentAjax(reviewID, $('#reviewComment').val())
+}
+
+function editCommentAjax(reviewid, comment) {
+    $.ajax({
+        url: 'reviewedit/',
+        type: 'POST',
+        data: {
+            id: reviewid,
+            comment: comment,
+            csrfmiddlewaretoken: csrftoken
+        },
+
+        success: function (json){
+            $('#savedNotification' + reviewid).show(1000).css("display", "inline-block").delay(2000).hide(1000);
+        },
+
+        error: function (xhr, errmsg, err) {
+        }
+    })
 }

@@ -1,3 +1,15 @@
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', afterLoaded);
+} else {
+    afterLoaded();
+}
+
+function afterLoaded() {
+    $('input:submit').click(function () {
+
+    })
+}
+
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -75,8 +87,4 @@ function showDivs(n) {
         x[i].style.display = "none";
     }
     x[slideIndex-1].style.display = "block";
-}
-
-function notLoggedIn() {
-    window.alert("You must be logged in to do this!")
 }

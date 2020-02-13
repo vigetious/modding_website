@@ -1,5 +1,14 @@
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', afterLoaded);
+} else {
+    afterLoaded();
+}
+
+function afterLoaded() {
+
+}
+
 function finishEditBio() {
-    console.log('Finished editing, saving...');
     newBio = document.getElementById('bio').innerText;
     $('#bio').attr('contentEditable', 'false');
     $('#editBio').off('click', finishEditBio).on('click', editBio).attr('value', 'Edit Bio');
@@ -8,7 +17,6 @@ function finishEditBio() {
 }
 
 function cancelEdit() {
-    console.log('Canceled editing.');
     document.getElementById('bio').innerHTML = originalContent;
     $('#bio').attr('contentEditable', 'false');
     $('#editBio').off('click', finishEditBio).on('click', editBio).attr('value', 'Edit Bio');
@@ -22,7 +30,6 @@ function showEdit() {
 }
 
 function editBio() {
-    console.log('Editing bio.');
     originalContent = document.getElementById('bio').innerHTML;
     document.getElementById('bio').contentEditable = "true";
     $('#editBio').off('click', editBio).on('click', finishEditBio).attr('value', 'Finish editing');
@@ -30,7 +37,6 @@ function editBio() {
 }
 
 function editBioAjax(message) {
-    console.log(message);
     $.ajax({
         url: 'bio',
         type: 'POST',
@@ -40,14 +46,17 @@ function editBioAjax(message) {
         },
 
         success: function (json) {
-            console.log(json);
-            console.log('success');
+            showBioUpdated();
         },
 
         error: function (xhr, errmsg, err) {
             console.log(xhr + ': ' + xhr.responseText)
         }
     })
+}
+
+function showBioUpdated() {
+    $('#bioUpdated').show(1000).css("display", "inline-block").delay(2000).hide(1000);
 }
 
 function editNoteAjax(note, ratingID) {
@@ -61,8 +70,46 @@ function editNoteAjax(note, ratingID) {
         },
 
         success: function (json) {
-            console.log(json);
-            console.log('success');
+
+        },
+
+        error: function (xhr, errmsg, err) {
+            console.log(xhr + ': ' + xhr.responseText)
+        }
+    })
+}
+
+function confirmDeleteRating(ratingID) {
+    $('#rating' + ratingID + 'DeleteButton').hide();
+    $('#rating' + ratingID + 'Delete > p').text("Are you sure?");
+    $('#rating' + ratingID + 'DeleteYes').removeClass("hidden");
+    $('#rating' + ratingID + 'DeleteNo').removeClass("hidden");
+}
+
+function revertDeleteRating(ratingID) {
+    $('#rating' + ratingID + 'DeleteButton').show();
+    $('#rating' + ratingID + 'Delete > p').text("");
+    $('#rating' + ratingID + 'DeleteYes').addClass("hidden");
+    $('#rating' + ratingID + 'DeleteNo').addClass("hidden");
+}
+
+function deleteRatingButton(ratingID) {
+    $('#rating' + ratingID + 'DeleteButton').off('click');
+    deleteRating(ratingID);
+    $('#rating' + ratingID).remove()
+}
+
+function deleteRating(ratingID) {
+    $.ajax({
+        url: 'ratingdelete/',
+        type: 'POST',
+        data: {
+            ratingID: ratingID,
+            csrfmiddlewaretoken: csrftoken
+        },
+
+        success: function (json) {
+
         },
 
         error: function (xhr, errmsg, err) {

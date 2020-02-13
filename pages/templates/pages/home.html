@@ -50,40 +50,6 @@
             <img id="rightButton" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}">
 
             </div>
-            <!--<div class="screenshotVideoBar">
-                <ul id="featuredModBar">
-                    {% if randomMod.first.modPreviewImage1.url.length is not 0 %}
-                    <li><img id="featuredModBarPreviewImage1" src="{{ randomMod.first.modPreviewImage1.url }}" onclick="currentDiv(2)" style="display: none"></li>
-                    <script>calculateFirstFeatured(false, 1);</script>
-                    {% else %}
-                    <li><img id="featuredModBarPreviewImage1" src="" onclick="currentDiv(2)" style="display: none"></li>
-                    {% endif %}
-                    {% if randomMod.first.modPreviewImage2.url.length is not 0 %}
-                    <li><img id="featuredModBarPreviewImage2" src="{{ randomMod.first.modPreviewImage2.url }}" onclick="currentDiv(3)" style="display: none"></li>
-                    <script>calculateFirstFeatured(false, 2);</script>
-                    {% else %}
-                    <li><img id="featuredModBarPreviewImage2" src="" onclick="currentDiv(3)" style="display: none"></li>
-                    {% endif %}
-                    {% if randomMod.first.modPreviewImage3.url.length is not 0 %}
-                    <li><img id="featuredModBarPreviewImage3" src="{{ randomMod.first.modPreviewImage3.url }}" onclick="currentDiv(4)" style="display: none"></li>
-                    <script>calculateFirstFeatured(false, 3);</script>
-                    {% else %}
-                    <li><img id="featuredModBarPreviewImage3" src="" onclick="currentDiv(4)" style="display: none"></li>
-                    {% endif %}
-                    {% if randomMod.first.modPreviewImage4.url.length is not 0 %}
-                    <li><img id="featuredModBarPreviewImage4" src="{{ randomMod.first.modPreviewImage4.url }}" onclick="currentDiv(5)" style="display: none"></li>
-                    <script>calculateFirstFeatured(false, 4);</script>
-                    {% else %}
-                    <li><img id="featuredModBarPreviewImage4" src="" onclick="currentDiv(5)" style="display: none"></li>
-                    {% endif %}
-                    {% if randomMod.first.modPreviewImage5.url.length is not 0 %}
-                    <li><img id="featuredModBarPreviewImage5" src="{{ randomMod.first.modPreviewImage5.url }}" onclick="currentDiv(6)" style="display: none"></li>
-                    <script>calculateFirstFeatured(false, 5);</script>
-                    {% else %}
-                    <li><img id="featuredModBarPreviewImage5" src="" onclick="currentDiv(6)" style="display: none"></li>
-                    {% endif %}
-                </ul>
-            </div>-->
             <ul>
                 {% for featuredMod in randomMod %}
                     <li id="featuredMod{{ featuredMod.modID }}"></li>
@@ -170,12 +136,27 @@
             </ul>
         </div>
 
+        <script>
+            $(document).ready(function() {
+                    changeFeatured(
+                        {{ randomMod.first.modID }},
+                        featuredAvatar{{ randomMod.first.modID }},
+                        "{{ randomMod.first.modShortDescription|linebreaksbr }}".replace(/<br ?\/?>/g, "\n"),
+                        featuredTags{{ randomMod.first.modID }},
+                        "{% url 'mod:modSearch' %}",
+                        featuredModPreviewImage1{{ randomMod.first.modID }},
+                        featuredModPreviewImage2{{ randomMod.first.modID }},
+                        featuredModPreviewImage3{{ randomMod.first.modID }},
+                        featuredModPreviewImage4{{ randomMod.first.modID }},
+                        featuredModPreviewImage5{{ randomMod.first.modID }}
+                    );
+            });
+        </script>
+
         <div class="homeModScroller">
 
         </div>
     </div>
-    <!--<iframe src="https://discordapp.com/widget?id=625672295435862047&theme=dark" width="550" height="500" allowtransparency="true" frameborder="0"></iframe>
-    -->
     </div>
     <div class="homeMods">
     <ul class="navbar" style="height: 50px;">

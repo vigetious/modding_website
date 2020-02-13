@@ -13,13 +13,13 @@ function showPanel(modID) {
 function changePanel(modID, modName, avatarURL, modShortDescription, modAuthor, modDate, modPlayTimeHours, modStatus, modRating, tags, searchURL, modPreviewImage1, modPreviewImage2, modPreviewImage3, modPreviewImage4, modPreviewImage5) {
     $('#modAvatar').attr("src", avatarURL);
     $('#modAvatarLink').attr("href", "/mod/" + modID);
-    $('#modShortDescription').text(modShortDescription);
+    $('#modShortDescription').html(modShortDescription).text();
     if (modAuthor === "vigetious") {
         $('#modAuthor').attr("href", "/support/claim").text("Claim this mod as your own!");
     } else {
-        $('#modAuthor').attr("href", "/accounts/" + modAuthor + "/profile").text(modAuthor);
+        $('#modAuthor').attr("href", "/accounts/" + modAuthor + "/profile").html(modAuthor).text();
     }
-    $('#modName').text(modName).attr("href", "/mod/" + modID);
+    $('#modName').html(modName).attr("href", "/mod/" + modID).text();
     $('#modDate').text(modDate);
     $('#modPlayTimeHours').text(modPlayTimeHours);
     $('#modStatus').text(modStatus);
@@ -65,7 +65,7 @@ function changeFeatured(modID, avatarURL, modShortDescription, tags, searchURL, 
 
     function afterLoaded() {
         $('#featuredAvatar').attr("src", avatarURL);
-        $('#randomModShortDescription').text(modShortDescription);
+        $('#randomModShortDescription').html(modShortDescription).text();
         $('#featuredAvatarLink').attr("href", "/mod/" + modID);
         $('#featuredTags').empty();
 

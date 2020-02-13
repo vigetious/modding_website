@@ -24,6 +24,11 @@ $(document).ready(function () {
             modPlayTimeMinutes: {
                 range: [0, 59]
             }
-        }
-    })
+        },
+        submitHandler: function(form) {
+            $('#loading').attr("style", "display: inline-block");
+            form.submit();
+        },
+        onfocusout: false
+    });
 });

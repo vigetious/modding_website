@@ -251,6 +251,29 @@ def reviewDelete(request, pk):
         )
 
 
+@login_required
+def reviewEdit(request, pk):
+    if request.method == 'POST':
+        reviewID = request.POST.get('id')
+        reviewComment = request.POST.get('comment')
+        review = ReviewRating.objects.get(reviewid__exact=reviewID)
+        review.reviewComment = reviewComment
+        review.save()
+
+        response_data = {}
+        response_data['result'] = "Successfully edited review " + reviewID
+
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type="application/json"
+        )
+
+
 def rating(request, pk):
     if request.method == "POST":
         request_modID = request.POST.get('modID')

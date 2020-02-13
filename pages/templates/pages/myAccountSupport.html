@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1>Deleting account</h1>
-    <p>If you would like to delete your account, <a href="{% url 'contactUs' %}">contact us</a> and we will being removing all data that we have on you from our system. We will not store any data left over if you request an account deletion.</p>
+    <p>If you would like to delete your account, <a href="{% url 'contactUs' %}">contact us</a> and we will remove all data that is associated with your account from our system. This includes mods, comments and any other submitted data.</p>
     <h1><a name="edit"></a>Editing account</h1>
     <p>You can personalize your account by adding an avatar and a description. You can edit these by navigating to your <a href="{% url 'accounts:profile' %}">profile</a>. Please note that there is a <b>1000 character limit</b> to your description, and your avatar will be scaled to 200x200.</p>
     <p>You can also change your password on your profile page. Any other data cannot be changed unfortunately, and you will have to <a href="{% url 'contactUs' %}">contact us</a> to change any other data.</p>

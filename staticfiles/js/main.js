@@ -145,35 +145,6 @@ function ratingSubmit(modID, radioValue, selectedChoice) {
     })
 }
 
-function deleteRatingButton(ratingID) {
-    $('#rating' + ratingID + 'Delete').off('click');
-    deleteRating(ratingID);
-    $('#rating' + ratingID).remove()
-}
-
-
-
-function deleteRating(ratingID) {
-    console.log('Deleting rating ' + ratingID);
-    $.ajax({
-        url: 'ratingdelete/',
-        type: 'POST',
-        data: {
-            ratingID: ratingID,
-            csrfmiddlewaretoken: csrftoken
-        },
-
-        success: function (json) {
-            console.log(json);
-            console.log('success');
-        },
-
-        error: function (xhr, errmsg, err) {
-            console.log(xhr + ': ' + xhr.responseText)
-        }
-    })
-}
-
 function submitNews(news_text, news_mod_id) {
     console.log("Submitting news for " + news_mod_id)
     $.ajax({

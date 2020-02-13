@@ -42,22 +42,31 @@
     background-color: #8acaff;
     margin: 1%;
     display: inline-block;
+    texta-align: right;
+}
+
+.userRightSideContentBioSubmit {
+    width: 100%;
+    display: inline-block;
     text-align: right;
 }
 
-.userRightSideContentBio p {
+.userRightSideContentBioSubmit p {
+    display: none;
+    margin: 0;
     text-align: left;
+    width: 83%;
 }
 
-.userRightSideContentBio input {
+.userRightSideContentBioSubmit input {
     margin-left: 5px;
+    width: 15%;
     background-color: #7cb5e5;
 }
 
 .userRightSideContentBio textarea {
     width: 98%;
     height: 90%;
-    display: block;
     margin: auto;
     resize: none;
 }
@@ -110,7 +119,7 @@
 
 .userRightSideContentCreatedMods table {
     width: 100%;
-    height: 100px;
+    height: 20px;
     table-layout: fixed;
     border-collapse: collapse;
 }
@@ -177,4 +186,41 @@
 
 .userPlayed img {
     width: 100px;
+}
+
+/* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
+   follow these rules. Every browser that supports :checked also supports :not(), so
+   it doesn’t make the test unnecessarily selective */
+.rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+    clip:rect(0,0,0,0);
+}
+
+.rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    padding:0 .1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:200%;
+    line-height:1.2;
+    color:#ddd;
+    text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating:not(:checked) > label:before {
+    content: '★ ';
+}
+
+.rating > input:checked ~ label {
+    color: #00b3ff;
+    text-shadow:1px 1px #00b3ff, 2px 2px #006b99, .1em .1em .2em rgba(0,0,0,.5);
+}
+
+.rating > label:active {
+    position:relative;
+    top:2px;
+    left:2px;
 }

@@ -71,6 +71,7 @@
     height: 450px;
     display: inline-block;
     background-color: #8acaff;
+    position: relative;
 }
 
 .rightModDataAvatar {
@@ -282,13 +283,35 @@
     overflow: auto;
 }
 
+.modReviewComment textarea {
+    width: 93%;
+    height: 88%;
+    outline: none;
+    background-color: #e6f4ff;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 2px solid #bde1ff;
+    padding: 8px 15px;
+    display: block;
+    resize: none;
+}
+
+.modReviewComment textarea:focus {
+    background-color: #eef8ff;
+}
+
+.savedNotification {
+    display: none;
+    margin-right: 5px;
+    margin-top: 3px;
+}
+
 .modReviewHeader p {
     margin: 0;
 }
 
 .voteForm {
     width: 35px;
-    height: 120px;
+    height: 100px;
     display: inline-block;
     float: right;
 }
@@ -326,10 +349,29 @@
     display: inline-block;
 }
 
+.editCommentBox {
+    width: 100%;
+    display: inline-block;
+}
+
+.deleteCommentBox input {
+    background-color: #7cb5e5;
+    right: 0;
+}
+
+.editCommentBox input {
+    background-color: #7cb5e5;
+    right: 0;
+}
+
 .deleteComment {
     background-color: #7cb5e5;
     border: none;
-    float: right;
+}
+
+.editComment {
+    background-color: #7cb5e5;
+    border: none;
 }
 
 .submitReview {

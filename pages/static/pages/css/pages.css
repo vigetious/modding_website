@@ -140,7 +140,18 @@
 
 .homeModFeatureRightAvatar {
     width: 220px;
+    height: 220px;
     margin: auto;
+    display: inline-block;
+    position: relative;
+}
+
+.homeModFeatureRightAvatar img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .modHorizontalDataTags {
