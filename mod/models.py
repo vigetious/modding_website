@@ -356,23 +356,6 @@ class ReviewRating(models.Model):
     reviewComment = models.CharField("review comment", max_length=10000, blank=True)
     reviewVotes = models.IntegerField("total votes for comment", default=0)
     reviewApproved = models.BooleanField('review moderation approval', default=False)
-    reviewHasEdit = models.BooleanField("review has got edit", default=False)
-
-    def __int__(self):
-        return self.reviewid
-
-    def __unicode__(self):
-        return self.reviewid
-
-    def __str__(self):
-        return str(self.reviewid)
-
-class EditReviewRating(models.Model):
-    reviewEditId = models.AutoField("review edit id", primary_key=True)
-    reviewid = models.IntegerField("review id")
-    reviewDate = models.DateTimeField("review date", auto_now_add=True)
-    reviewComment = models.CharField("review comment", max_length=10000, blank=True)
-    reviewApproved = models.BooleanField('review moderation approval', default=False)
 
     def __int__(self):
         return self.reviewid

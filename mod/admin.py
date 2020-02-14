@@ -3,12 +3,17 @@ from django.db import models
 from django.forms import Textarea
 from django.shortcuts import get_object_or_404
 
-from .models import Mod, ReviewRating, Rating, News, NewsNotifications, Vote, ModEdit, EditReviewRating
+from .models import Mod, ReviewRating, Rating, News, NewsNotifications, Vote, ModEdit
 from .scripts import removeEdit
 
 import time
 
 # Register your models here.
+
+
+
+
+
 
 
 def mark_as_unsafe(modeladmin, request, queryset):
@@ -117,67 +122,14 @@ class ReviewRatingAdmin(admin.ModelAdmin):
     }
     ordering = ('reviewApproved',)
 
-    def mark_as_safe(modeladmin, request, queryset):
-        queryset.update(reviewApproved=True)
-
-    mark_as_safe.short_description = "Mark as approved"
-
-
-    def mark_as_unsafe(modeladmin, request, queryset):
-        queryset.update(reviewApproved=False)
-
-    mark_as_unsafe.short_description = "Mark as non-approved"
-
-    actions = [mark_as_safe, mark_as_unsafe]
-
-
-class EditReviewRatingAdmin(admin.ModelAdmin):
-    list_display = ['reviewEditId', 'reviewid', 'reviewDate', 'reviewComment']
-    formfield_overrides = {
-        models.CharField: {'widget': Textarea}
-    }
-    ordering = ('reviewApproved',)
-
-    def get_actions(self, request):
-        #Disable delete
-        actions = super(EditReviewRatingAdmin, self).get_actions(request)
-        del actions['delete_selected']
-        return actions
-
-    def approve_edit(self, request, queryset):
-        for x in queryset:
-            originalReview = ReviewRating.objects.get(reviewid__exact=x.reviewid)
-            originalReview.reviewDate = x.reviewDate
-            originalReview.reviewComment = x.reviewComment
-            originalReview.reviewApproved = True
-            originalReview.reviewHasEdit = False
-            originalReview.save()
-        queryset.delete()
-        self.message_user(request, "Edit successfully approved. Edits have gone live.")
-
-    def unapprove_edit(self, request, queryset):
-        for x in queryset:
-            originalReview = ReviewRating.objects.get(reviewid__exact=x.reviewid)
-            originalReview.reviewApproved = True
-            originalReview.reviewHasEdit = False
-            originalReview.save()
-        queryset.delete()
-        self.message_user(request, "Edit successfully removed. User can now make edits again.")
-
-    actions = [approve_edit, unapprove_edit]
-
-
 class VoteAdmin(admin.ModelAdmin):
     list_display = ['voteID', 'voteReviewID', 'voteAuthor', 'voteValue']
-
 
 class RatingAdmin(admin.ModelAdmin):
     list_display = ['ratingID', 'ratingModID', 'ratingAuthorID', 'ratingChoice', 'ratingValue']
 
-
 class NewsAdmin(admin.ModelAdmin):
     list_display = ['newsID', 'newsModID', 'newsDate', 'newsText']
-
 
 class NewsNotificationsAdmin(admin.ModelAdmin):
     list_display = ['newsNotificationsID', 'newsNotificationsModID', 'newsNotificationsUserID']
@@ -186,7 +138,6 @@ class NewsNotificationsAdmin(admin.ModelAdmin):
 admin.site.register(Mod, ModAdmin)
 admin.site.register(ModEdit, ModEditAdmin)
 admin.site.register(ReviewRating, ReviewRatingAdmin)
-admin.site.register(EditReviewRating, EditReviewRatingAdmin)
 admin.site.register(Vote, VoteAdmin)
 admin.site.register(Rating, RatingAdmin)
 admin.site.register(News, NewsAdmin)

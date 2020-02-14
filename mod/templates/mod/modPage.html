@@ -277,6 +277,7 @@
                     <div class="modReviewData">
                         <div class="modReviewCoreData">
                             <p><a href="{% url 'accounts:userProfile' review.reviewAuthorID %}">{{ review.reviewAuthorID }}</a></p><br>
+                            <!--<img src="{{ review.reviewAuthorID }}">  REVIEW AUTHOR ID AND AVATAR USER ID THE SAME -->
                             {% if user.is_authenticated and review.reviewApproved == True %}
                                 <form method="post" id="upvote_review" class="voteForm">
                                     {% csrf_token %}
@@ -296,11 +297,7 @@
                                 {% if review.reviewApproved == True %}
                                     <div class="editCommentBox">
                                         <form method="POST" id="editReview">
-                                            {% if review.reviewHasEdit %}
-                                                <input type="button" id="editReview{{ review.reviewid }}" class="editComment" value="Edit" onclick="editCommentAjaxEdit({{ review.reviewid }})">
-                                            {% else %}
-                                                <input type="button" id="editReview{{ review.reviewid }}" class="editComment" value="Edit" onclick="editCommentAjax({{ review.reviewid }})">
-                                            {% endif %}
+                                            <input type="button" id="editReview{{ review.reviewid }}" class="editComment" value="Edit" onclick="editComment({{ review.reviewid }})">
                                             <p class="savedNotification" id="savedNotification{{ review.reviewid }}">Saved!</p>
                                         </form>
                                     </div>
@@ -313,17 +310,13 @@
                             {% endif %}
                         </div>
                         <div class="modReviewHeader">
-                        {% if user == review.reviewAuthorID and review.reviewHasEdit %}
-                            <p>{{ review.reviewid }} | {{ review.reviewDate }}<span style="color: red"> Your edit is being approved!</span></p>
-                        {% else %}
                             <p>{{ review.reviewid }} | {{ review.reviewDate }}</p>
-                        {% endif %}
                             <div class="modReviewComment">
                                 {% if review.reviewApproved == True %}
                                     {% if user == review.reviewAuthorID %}
-                                        <textarea autocomplete="off" id="reviewComment{{ review.reviewid }}">{{ review.reviewComment }}</textarea>
+                                        <textarea id="reviewComment">{{ review.reviewComment }}</textarea>
                                     {% else %}
-                                        <p id="reviewComment{{ review.reviewid }}">{{ review.reviewComment|linebreaks }}</p>
+                                        <p id="reviewComment">{{ review.reviewComment|linebreaks }}</p>
                                     {% endif %}
                                 {% elif review.reviewApproved == False %}
                                     <p>This review is awaiting verification from moderators.</p>
