@@ -260,25 +260,46 @@ function deleteComment(reviewID) {
     }
 }
 
-function editComment(reviewID) {
-    editCommentAjax(reviewID, $('#reviewComment').val())
-}
-
-function editCommentAjax(reviewid, comment) {
+function editCommentAjax(reviewid) {
     $.ajax({
         url: 'reviewedit/',
         type: 'POST',
         data: {
             id: reviewid,
-            comment: comment,
+            comment: $(`#reviewComment${reviewid}`).val(),
             csrfmiddlewaretoken: csrftoken
         },
 
         success: function (json){
             $('#savedNotification' + reviewid).show(1000).css("display", "inline-block").delay(2000).hide(1000);
+            $(`#reviewComment${reviewid}`).val("This review is awaiting verification from moderators. If you have written the review and it has not been approved within 7 days, please contact us.").attr("disabled", "disabled");
+            $(`#editReview${reviewid}`).remove();
         },
 
         error: function (xhr, errmsg, err) {
         }
     })
+}
+
+function editCommentAjaxEdit(reviewid) {
+    if (confirm("You already have an edit being approved for this comment! You will overwrite your old edit if you submit this edit. Do you want to continue?")) {
+        $.ajax({
+            url: 'reviewedit/',
+            type: 'POST',
+            data: {
+                id: reviewid,
+                comment: $(`#reviewComment${reviewid}`).val(),
+                csrfmiddlewaretoken: csrftoken
+            },
+
+            success: function (json){
+                $('#savedNotification' + reviewid).show(1000).css("display", "inline-block").delay(2000).hide(1000);
+                $(`#reviewComment${reviewid}`).val("This review is awaiting verification from moderators. If you have written the review and it has not been approved within 7 days, please contact us.").attr("disabled", "disabled");
+                $(`#editReview${reviewid}`).remove();
+            },
+
+            error: function (xhr, errmsg, err) {
+            }
+        })
+    }
 }
