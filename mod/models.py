@@ -348,6 +348,7 @@ class ModEdit(models.Model):
     def get_latest_by(self):
         return self.modDate
 
+
 class ReviewRating(models.Model):
     reviewid = models.AutoField("review id", primary_key=True)
     reviewModID = models.ForeignKey(Mod, on_delete=models.CASCADE, related_name="reviewModID", to_field="modID")
@@ -366,6 +367,7 @@ class ReviewRating(models.Model):
 
     def __str__(self):
         return str(self.reviewid)
+
 
 class EditReviewRating(models.Model):
     reviewEditId = models.AutoField("review edit id", primary_key=True)

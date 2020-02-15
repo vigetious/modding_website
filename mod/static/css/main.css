@@ -195,6 +195,11 @@ body {
 
 .topMenu {
   overflow: hidden;
+  height: 200px;
+}
+
+.topMenu img {
+  display: inline-block;
 }
 
 .navbar a {
@@ -226,6 +231,7 @@ body {
 
 .search {
   padding: 16px 30px;
+  width: 100px;
 }
 
 .searchButton {
@@ -290,19 +296,22 @@ li a, .dropbtn {
   display: block;
   text-align: right;
   background-color: #e6f4ff;
-  float: right;
   border: 0px solid #bde1ff;
   border-left-width: 1px;
   border-radius: 3px;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 }
 
 .topNav {
   background-color: #bde1ff;
   padding: 5px 5px;
   font-family: Arial, Helvetica, sans-serif;
-  width: 25%;
-  height: 5%;
-  float: right;
+  width: 100%;
+  height: 200px;
+  background-image: url("../img/DDLCMOD960x200.png");
+  position: relative;
 }
 
 .topNav p {
@@ -337,6 +346,9 @@ li a, .dropbtn {
   border: 0px solid #bde1ff;
   border-right-width: 1px;
   border-radius: 3px;
+  position: absolute;
+  bottom: 15px;
+  right: 75px;
 }
 
 .dropdown-content a:hover {
