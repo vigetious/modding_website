@@ -108,7 +108,7 @@ class Mod(models.Model):
     modShow = models.BooleanField('Mod Show', default=True)
     modEdited = models.BooleanField('Has mod got an edit', default=False)
     modIP = models.CharField('mod user ip address', max_length=100)
-    modNSFW = models.BooleanField('NSFW?', default=False)
+    #modNSFW = models.BooleanField('NSFW?', default=False)
 
 
     objects = ModManager()
@@ -253,7 +253,7 @@ class ModEdit(models.Model):
                                       help_text="Recommended size is 200x200. Make sure the background is transparent,"
                                                 " as well.")
     modIP = models.CharField('mod user ip address', max_length=100)
-    modNSFW = models.BooleanField('NSFW?', default=False)
+    #modNSFW = models.BooleanField('NSFW?', default=False)
 
     objects = ModManager()
 
