@@ -304,6 +304,21 @@ li a, .dropbtn {
   right: 15px;
 }
 
+.welcome {
+  color: black;
+  padding: 6px 5px;
+  text-decoration: none;
+  display: block;
+  text-align: right;
+  background-color: #e6f4ff;
+  border: 0px solid #bde1ff;
+  border-left-width: 1px;
+  border-radius: 3px;
+  position: absolute;
+  bottom: 15px;
+  right: 90px;
+}
+
 .topNav {
   background-color: #bde1ff;
   padding: 5px 5px;
