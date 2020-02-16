@@ -30,7 +30,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
     path('avatar/', include('avatar.urls')),
-
+    path('api/', include('api.urls')),
 ]
 
 handler404 = views.handler404

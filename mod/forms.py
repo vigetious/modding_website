@@ -4,6 +4,8 @@ from django.core.exceptions import ValidationError
 from.models import Mod, ReviewRating, Rating, News, Vote, ModEdit
 from embed_video.fields import EmbedVideoFormField
 
+from tempus_dominus.widgets import DatePicker
+
 #class SubmitForm(forms.Form):
 #    modName = forms.CharField(label='Mod name', max_length=100)
 #    modDescription = forms.CharField(label='Mod description', max_length=10000)
@@ -23,6 +25,7 @@ from embed_video.fields import EmbedVideoFormField
 class SubmitForm(forms.ModelForm):
     modDescription = forms.CharField(widget=forms.Textarea, max_length=10000)
     modShortDescription = forms.CharField(widget=forms.Textarea, max_length=250)
+    modDate = forms.DateTimeField(widget=DatePicker(), initial='2020-01-01')
 
     modUploadURL = forms.URLField(max_length=200, widget=forms.TextInput, help_text="Only Google Drive and MEGA are currently supported.")
 
@@ -33,12 +36,13 @@ class SubmitForm(forms.ModelForm):
         fields = ('modID', 'modName', 'modStatus', 'modDescription', 'modShortDescription', 'tags',
                   'modUploadURL', 'modPlayTimeHours', 'modPlayTimeMinutes', 'modPreviewVideo', 'modPreviewImage1',
                   'modPreviewImage2', 'modPreviewImage3', 'modPreviewImage4', 'modPreviewImage5', 'modBackground',
-                  'modBackgroundTiledStretch', 'modAvatar')
+                  'modBackgroundTiledStretch', 'modAvatar', 'modDate')
 
 
 class EditForm(forms.ModelForm):
     modDescription = forms.CharField(widget=forms.Textarea, max_length=10000)
     modShortDescription = forms.CharField(widget=forms.Textarea, max_length=250)
+    modDate = forms.DateTimeField(widget=DatePicker(), initial='2020-01-01')
 
     modUploadURL = forms.URLField(max_length=200, widget=forms.TextInput, help_text="Only Google Drive and MEGA are currently supported.")
 
@@ -49,7 +53,7 @@ class EditForm(forms.ModelForm):
         fields = ('modEditID', 'modName', 'modStatus', 'modDescription', 'modShortDescription', 'tags',
                   'modUploadURL', 'modPlayTimeHours', 'modPlayTimeMinutes', 'modPreviewVideo', 'modPreviewImage1',
                   'modPreviewImage2', 'modPreviewImage3', 'modPreviewImage4', 'modPreviewImage5', 'modBackground',
-                  'modBackgroundTiledStretch', 'modAvatar')
+                  'modBackgroundTiledStretch', 'modAvatar', 'modDate')
 
 
 class ReviewForm(forms.ModelForm):

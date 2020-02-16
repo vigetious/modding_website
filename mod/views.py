@@ -55,7 +55,7 @@ def submit(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.modAuthor = request.user
-            post.modDate = timezone.now()
+            #post.modDate = timezone.now()
             post.modUpdate = timezone.now()
             post.modShow = False
             post.modIP = visitor_ip_address(request)

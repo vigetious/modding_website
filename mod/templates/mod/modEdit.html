@@ -5,9 +5,11 @@
     <title>Edit {{ post.modName }}</title>
     <link rel="stylesheet" href="{% static 'css/selectize.django.css' %}">
     <link rel="stylesheet" href="{% static 'css/modSubmitEdit.css' %}">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="{% static 'js/selectize.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/submit.js' %}"></script>
+    {{ form.media }}
     {% if post.modAuthor == user %}
     {% if post.modShow %}
     {% if alreadyEdited %}
@@ -79,6 +81,14 @@
             </div>
             <div class="rowRight">
                 {{ form.modUploadURL }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="rowLeft">
+                <p>Mod Date: </p>
+            </div>
+            <div class="rowRight" style="position: relative">
+                {{ form.modDate }}
             </div>
         </div>
         <div class="row">

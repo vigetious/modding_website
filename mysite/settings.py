@@ -65,6 +65,8 @@ INSTALLED_APPS = [
     'storages',
     'captcha',
     'defender',
+    'rest_framework',
+    'tempus_dominus',
 ]
 
 MIDDLEWARE = [
@@ -315,3 +317,17 @@ RECAPTCHA_REQUIRED_SCORE = 0.85
 
 if DEBUG:
     SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+### REST FRAMEWORK ###
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
+
+### TEMPUS DATE PICKER ###
+TEMPUS_DOMINUS_LOCALIZE = True
+TEMPUS_DOMINUS_INCLUDE_ASSETS = True
