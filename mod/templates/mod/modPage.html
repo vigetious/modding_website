@@ -106,7 +106,7 @@
                 {% endif %}
             </li>
             <li>
-                <p>Release date:</p><p>{{ post.modDate }}</p>
+                <p>Release date:</p><p>{{ post.modDate|date:"d M Y" }}</p>
             </li>
             <li>
                 <p>Playtime:</p><p>{{ post.modPlayTimeHours }}h {{ post.modPlayTimeMinutes }}m</p>
