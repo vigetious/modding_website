@@ -57,3 +57,4 @@ whitenoise==4.1.3
 djangorestframework==3.11.0
 markdown==3.2.1
 django-tempus-dominus==5.1.2.13
+djangorestframework-api-key==1.4.1
