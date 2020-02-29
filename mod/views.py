@@ -104,7 +104,7 @@ def modPage(request, pk):
 
     if request.user.is_authenticated:
         try:
-            newsnotifications = NewsNotifications.objects.get(newsNotificationsModID=pk)
+            newsnotifications = NewsNotifications.objects.get(newsNotificationsUserID=request.user.id, newsNotificationsModID=pk)
         except ObjectDoesNotExist:
             newsnotifications = None
     else:
@@ -669,3 +669,8 @@ class SearchResultsView(ListView):
 def latest(request):
     post = Mod.objects.filter(modShow=True).order_by("-modDate")[0]
     return render(request, 'mod/modLatest.html', {'post': post})
+
+#def awards2018(request):
+#    MotYFirstPlace = Mod.objects.get(modID=2)
+#    MotYRunnerUp = Mod.objects.get(modID=3)
+#    return render(request, 'mod/awards2018.html', {'MotYFirstPlace': MotYFirstPlace, 'MotYRunnerUp': MotYRunnerUp})
