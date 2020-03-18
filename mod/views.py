@@ -673,7 +673,7 @@ def latest(request):
 def awards2018(request):
     if settings.DEBUG == False:
         MotYFirstPlace = Mod.objects.get(modID=55)
-        MotYRunnerUp = Mod.objects.get(modID=69)
+        #MotYRunnerUp = Mod.objects.get(modID=69)
         SayoriFirstPlace = Mod.objects.get(modID=55)
         SayoriRunnerUp = Mod.objects.get(modID=4)
         YuriFirstPlace = Mod.objects.get(modID=87)
@@ -709,7 +709,8 @@ def awards2018(request):
         LightheartedRunnerUp = Mod.objects.get(modID=19)
         InnovativeFirstPlace = Mod.objects.get(modID=21)
         InnovativeRunnerUp = Mod.objects.get(modID=22)
-    return render(request, 'mod/awards2018.html', {'MotYFirstPlace': MotYFirstPlace, 'MotYRunnerUp': MotYRunnerUp,
+    return render(request, 'mod/awards2018.html', {'MotYFirstPlace': MotYFirstPlace,
+                                                   #'MotYRunnerUp': MotYRunnerUp,
                                                    'SayoriFirstPlace': SayoriFirstPlace,
                                                    'SayoriRunnerUp': SayoriRunnerUp,
                                                    'YuriFirstPlace': YuriFirstPlace,
@@ -720,11 +721,11 @@ def awards2018(request):
                                                    #'NatsukiRunnerUp': NatsukiRunnerUp,
                                                    #'AllRounderFirstPlace': AllRounderFirstPlace,
                                                    'AllRounderRunnerUp': AllRounderRunnerUp,
-                                                   'EmotionalFirstPlace': EmotionalFirstPlace,
+                                                   #'EmotionalFirstPlace': EmotionalFirstPlace,
                                                    'EmotionalRunnerUp': EmotionalRunnerUp,
                                                    'LightheartedFirstPlace': LightheartedFirstPlace,
                                                    'LightheartedRunnerUp': LightheartedRunnerUp,
-                                                   'InnovativeFirstPlace': InnovativeFirstPlace,
+                                                   #'InnovativeFirstPlace': InnovativeFirstPlace,
                                                    'InnovativeRunnerUp': InnovativeRunnerUp})
 
 def awards2019(request):
