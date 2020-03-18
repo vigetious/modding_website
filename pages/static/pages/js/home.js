@@ -279,3 +279,13 @@ function calculateNextImage() {
             $('.leftButton').removeClass("tempHidden").addClass("shown");
     }
 }
+
+function showHideBestOf(year) {
+    if (year == 2019) {
+        $('#bestOf2019Arrow').toggleClass("down").toggleClass("up");
+        $('#best-of-2019').toggle(1000);
+    } else {
+        $('#bestOf2018Arrow').toggleClass("down").toggleClass("up");
+        $('#best-of-2018').toggle(1000);
+    }
+}

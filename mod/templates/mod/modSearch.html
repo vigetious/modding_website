@@ -49,6 +49,14 @@
                 <h3>Mood:</h3>
             </div>
                 <div id="mood"></div>
+            <div class="searchSideContentCategory bestOf">
+                <h3>Best Of 2018:</h3><span class="down" id="bestOf2018Arrow" style="text-align: right" onclick="showHideBestOf(2018)"></span>
+            </div>
+                <div id="best-of-2018"></div>
+            <div class="searchSideContentCategory bestOf">
+                <h3>Best Of 2019:</h3><span class="down" id="bestOf2019Arrow" style="text-align: right" onclick="showHideBestOf(2019)"></span>
+            </div>
+                <div id="best-of-2019"></div>
             <div class="searchSideContentCategory">
                 <h3>Event:</h3>
             </div>
@@ -67,6 +75,24 @@
                     var mood = ['happy', 'sad', 'love', 'lighthearted', 'funny', 'scary'];
                     var state = ['aftermath', 'extension', 'new story'];
                     var event = ['christmas', 'easter'];
+                    var bestOf2018 = ['best sayori mod 2018', 'best sayori mod 2018 runner-up',
+                        'best yuri mod 2018', 'best yuri mod 2018 runner-up',
+                        'best monika mod 2018', 'best monika mod 2018 runner-up',
+                        'best natsuki mod 2018', 'best natsuki mod 2018 runner-up',
+                        'best all-rounder mod 2018', 'best all-rounder mod 2018 runner-up',
+                        'best emotional mod 2018', 'best emotional mod 2018 runner-up',
+                        'best lighthearted mod 2018', 'best lighthearted mod 2018 runner-up',
+                        'most innovative mod 2018', 'most innovative mod 2018 runner-up',
+                        'mod of the year 2018', 'mod of the year 2018 runner-up'];
+                    var bestof2019 = ['best sayori mod 2019', 'best sayori mod 2019 runner-up',
+                        'best yuri mod 2019', 'best yuri mod 2019 runner-up',
+                        'best monika mod 2019', 'best monika mod 2019 runner-up',
+                        'best natsuki mod 2019', 'best natsuki mod 2019 runner-up',
+                        'best all-rounder mod 2019', 'best all-rounder mod 2019 runner-up',
+                        'best emotional mod 2019', 'best emotional mod 2019 runner-up',
+                        'best lighthearted mod 2019', 'best lighthearted mod 2019 runner-up',
+                        'most innovative mod 2019', 'most innovative mod 2019 runner-up',
+                        'mod of the year 2019', 'mod of the year 2019 runner-up'];
                     if (girls.includes('{{ tag }}'.toLowerCase())) {
                         $("#girls").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
                     } else if (mood.includes('{{ tag }}'.toLowerCase())) {
@@ -75,6 +101,10 @@
                         $("#state").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
                     } else if (event.includes('{{ tag }}'.toLocaleLowerCase())) {
                         $("#event").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
+                    } else if (bestOf2018.includes('{{ tag }}'.toLocaleLowerCase())) {
+                        $("#best-of-2018").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }}</p>');
+                    } else if (bestof2019.includes('{{ tag }}'.toLocaleLowerCase())) {
+                        $("#best-of-2019").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }}</p>');
                     } else {
                         $("#others").append('<p><input name="tags" type="checkbox" value="{{ tag }}"> {{ tag|capfirst }} ({{ tag.num_times }})</p>');
                     }
@@ -86,21 +116,6 @@
     <div class="tabcontent" style="width: 79%; padding-top: 0;">
     <ul class="tabContentValue">
         {% for x in object_list %}
-                <!--<li>
-                    <div class="modAvatar">
-                        {% if x.modAvatar %}
-                            <a href="/mod/{{ x.modID }}"><img src={{ x.modAvatar.url }} alt="Avatar Image"></a>
-                        {% else %}
-                            <a href="/mod/{{ x.modID }}"><img src="{% static 'img/icon.png' %}" alt="Avatar Image"></a>
-                        {% endif %}
-                    </div>
-                    <div class="modData">
-                        <p class="modData-name" title="Name" style="word-wrap: break-word; white-space: normal"><a href="/mod/{{ x.modID }}">{{ x.modName }}</a></p>
-                        <p class="modData-date" title="Date and Rating">{{ x.modDate|date:"d M Y" }} | {{ x.modRating }}</p>
-                        <p class="modData-description" title="Description" style="word-wrap: break-word; margin-top: 5px; white-space: normal; overflow: inherit">{{ x.modShortDescription|truncatewords:50 }}</p>
-                    </div>
-
-                </li>-->
                 <div id="modHorizontal" class="modHorizontal">
                     <div class="modHorizontalList" id="modHorizontalListReviewed{{ x.modID }}">
                         <script>
@@ -180,7 +195,14 @@
                         </div>
                         <div class="modHorizontalData">
                             <div class="modHorizontalDataName">
-                                <a href="/mod/{{ x.modID }}"><p>{{ x.modName }}</p></a>
+                                <a href="/mod/{{ x.modID }}"><p id="mod{{ x.modID }}">{{ x.modName }}</p></a>
+                            {% for tag in tags %}
+                                {% if tag|stringformat:"s" == "best sayori mod 2018" or tag|stringformat:"s" == "best yuri mod 2018" or tag|stringformat:"s" == "best monika mod 2018" or tag|stringformat:"s" == "best natsuki mod 2018" or tag|stringformat:"s" == "best all-rounder mod 2018" or tag|stringformat:"s" == "best emotional mod 2018" or tag|stringformat:"s" == "best lighthearted mod 2018" or tag|stringformat:"s" == "most innovative mod 2018" or tag|stringformat:"s" == "mod of the year 2018" or tag|stringformat:"s" == "best sayori mod 2019" or tag|stringformat:"s" == "best yuri mod 2019" or tag|stringformat:"s" == "best monika mod 2019" or tag|stringformat:"s" == "best natsuki mod 2019" or tag|stringformat:"s" == "best all-rounder mod 2019" or tag|stringformat:"s" == "best emotional mod 2019" or tag|stringformat:"s" == "best lighthearted mod 2019" or tag|stringformat:"s" == "most innovative mod 2019" or tag|stringformat:"s" == "mod of the year 2019" %}
+                                    <script>$('#mod{{ x.modID }}').css("font-weight", "bold")</script>
+                                {% elif tag|stringformat:"s" == "best sayori mod 2019 runner-up" or tag|stringformat:"s" == "best yuri mod 2019 runner-up" or tag|stringformat:"s" == "best monika mod 2019 runner-up" or tag|stringformat:"s" == "best natsuki mod 2019 runner-up" or tag|stringformat:"s" == "best all-rounder mod 2019 runner-up" or tag|stringformat:"s" == "best emotional mod 2019 runner-up" or tag|stringformat:"s" == "best lighthearted mod 2019 runner-up" or tag|stringformat:"s" == "most innovative mod 2019 runner-up" or tag|stringformat:"s" == "mod of the year 2019 runner-up" or tag|stringformat:"s" == "best sayori mod 2019 runner-up" or tag|stringformat:"s" == "best yrui mod 2019 runner-up" or tag|stringformat:"s" == "best monika mod 2019 runner-up" or tag|stringformat:"s" == "best natsuki mod 2019 runner-up" or tag|stringformat:"s" == "best all-rounder mod 2019 runner-up" or tag|stringformat:"s" == "best emotional mod 2019 runner-up" or tag|stringformat:"s" == "best lighthearted mod 2019 runner-up" or tag|stringformat:"s" == "most innovative mod 2019 runner-up" or tag|stringformat:"s" == "mod of the year 2019 runner-up" %}
+                                    <script>$('#mod{{ x.modID }}').css("font-weight", "bold")</script>
+                                {% endif %}
+                            {% endfor %}
                             </div>
                             <div class="modHorizontalDataDescription">
                                 <p>{{ x.modShortDescription }}</p>

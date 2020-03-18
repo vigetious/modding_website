@@ -24,4 +24,6 @@ urlpatterns = [
     path('<int:pk>/ratingdelete/', views.ratingDelete, name='ratingDelete'),
     path('<int:pk>/news/', views.news, name='news'),
     path('<int:pk>/notifications/', views.notification, name='notification'),
+    path('awards2018/', views.awards2018, name='awards2018'),
+    path('awards2019/', views.awards2019, name='awards2019'),
 ]

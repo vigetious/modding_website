@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <title>Developers</title>
+    <p>We currently support an API for developers that want to access the websites database of mods. You can see the documentation for it <a href="https://app.swaggerhub.com/apis-docs/doki-doki-mod-club/doki-doki-mod-club/1.0.0">here</a>.</p>
+    <p>You will need to <a href="{% url 'contactUs' %}">contact</a> the head admin to get an API key to access the database. This is to stop abuse of the feature.</p>
+    <p>If you would like access to more data that is available on the website, please ask for it to be implemented.</p>
+{% endblock %}

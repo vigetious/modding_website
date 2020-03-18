@@ -28,6 +28,9 @@ def news(request):
     adminNews = AdminNews.objects.all().order_by('-adminNewsDate')
     return render(request, 'pages/news.html', {'adminNews': adminNews})
 
+def developer(request):
+    return render(request, 'pages/developer.html')
+
 
 def supportHome(request):
     return render(request, 'pages/supportHome.html')

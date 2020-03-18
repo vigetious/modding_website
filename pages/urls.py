@@ -21,6 +21,7 @@ urlpatterns = [
     path('taggit/', include('taggit_selectize.urls')),
     path('admin/defender/', include('defender.urls')),
     path('news/', views.news, name='news'),
+    path('developer/', views.developer, name='developer'),
 ]
 
 

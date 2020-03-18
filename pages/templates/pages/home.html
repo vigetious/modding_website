@@ -52,7 +52,7 @@
             </div>
             <ul>
                 {% for featuredMod in randomMod %}
-                    <li id="featuredMod{{ featuredMod.modID }}"></li>
+                    <li id="featuredMod{{ featuredMod.modID }}" style="background-image: url('{{ featuredMod.modAvatar.url }}')"></li>
                     <script>
                         {% if featuredMod.modAvatar %}
                             featuredAvatar{{ featuredMod.modID }} = "{{ featuredMod.modAvatar.url }}";

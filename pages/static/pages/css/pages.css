@@ -31,12 +31,16 @@
 .screenshotVideo ul li {
     display: inline-block;
     width: 50px;
-    height: 45px;
+    height: 50px;
     background-color: #3ea7ff;
     border-radius: 5px;
+    border-radius: 50%;
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 8px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .screenshotVideo ul li a {

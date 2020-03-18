@@ -29,13 +29,17 @@ function getCookie(name) {
 var csrftoken = getCookie('csrftoken');
 
 $(function(){
-    var x = 0;
-    var y = 0;
-    setInterval(function(){
-        x-=1;
-        y-=1;
-        $('body').css('background-position', x + 'px ' + y + 'px');
-    }, 30);
+    if (typeof freezeBg === 'undefined') {
+        var x = 0;
+        var y = 0;
+        setInterval(function(){
+            x-=1;
+            y-=1;
+            $('body').css('background-position', x + 'px ' + y + 'px');
+        }, 30);
+    } else {
+        // stop moving the background
+    }
 });
 
 function nsfw_check(tags, modName) {

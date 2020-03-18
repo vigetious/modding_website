@@ -18,6 +18,26 @@
     <script type="text/javascript" src="{% static 'js/mod.js' %}"></script>
     <title>{{ post.modName }}</title>
     {% if post.modShow %}
+        {% if post.modBackground.url.length is not 0 %}
+            {% if post.modBackgroundTiledStretch == 'Tiled' %}
+                <script>var freezeBg = true</script>
+                <style>
+                    body {
+                        background-image: url("{{ post.modBackground.url }}");
+                        background-repeat: repeat;
+                    }
+                </style>
+            {% elif post.modBackgroundTiledStretch == 'Stretched' %}
+                <script>var freezeBg = true</script>
+                <style>
+                    body {
+                        background-image: url("{{ post.modBackground.url }}");
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                    }
+                </style>
+            {% endif %}
+        {% endif %}
     <div class="modName">
         <h1 id="modName">{{ post.modName }}</h1>
         {% if post.modAuthor == user %}
@@ -458,27 +478,6 @@
             </div>
         </div>
 
-
-
-
-    {% if post.modBackground.url.length is not 0 %}
-        {% if post.modBackgroundTiledStretch == 'Tiled' %}
-            <style>
-                body {
-                    background-image: url("{{ post.modBackground.url }}");
-                    background-repeat: repeat;
-                }
-            </style>
-        {% elif post.modBackgroundTiledStretch == 'Stretched' %}
-            <style>
-                body {
-                    background-image: url("{{ post.modBackground.url }}");
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                }
-            </style>
-        {% endif %}
-    {% endif %}
     {% else %}
         <p>Your mod is still being approved. Please check back later.</p>
         <p>If you have been waiting for longer than a week, please contact the moderators on the discord server.</p>

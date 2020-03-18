@@ -670,7 +670,62 @@ def latest(request):
     post = Mod.objects.filter(modShow=True).order_by("-modDate")[0]
     return render(request, 'mod/modLatest.html', {'post': post})
 
-#def awards2018(request):
-#    MotYFirstPlace = Mod.objects.get(modID=2)
-#    MotYRunnerUp = Mod.objects.get(modID=3)
-#    return render(request, 'mod/awards2018.html', {'MotYFirstPlace': MotYFirstPlace, 'MotYRunnerUp': MotYRunnerUp})
+def awards2018(request):
+    if settings.DEBUG == False:
+        MotYFirstPlace = Mod.objects.get(modID=55)
+        MotYRunnerUp = Mod.objects.get(modID=69)
+        SayoriFirstPlace = Mod.objects.get(modID=55)
+        SayoriRunnerUp = Mod.objects.get(modID=4)
+        YuriFirstPlace = Mod.objects.get(modID=87)
+        YuriRunnerUp = Mod.objects.get(modID=59)
+        MonikaFirstPlace = Mod.objects.get(modID=7)
+        MonikaRunnerUp = Mod.objects.get(modID=8)
+        #NatsukiFirstPlace = Mod.objects.get(modID=11)
+        #NatsukiRunnerUp = Mod.objects.get(modID=12)
+        #AllRounderFirstPlace = Mod.objects.get(modID=13)
+        AllRounderRunnerUp = Mod.objects.get(modID=86)
+        #EmotionalFirstPlace = Mod.objects.get(modID=15)
+        EmotionalRunnerUp = Mod.objects.get(modID=4)
+        LightheartedFirstPlace = Mod.objects.get(modID=1)
+        LightheartedRunnerUp = Mod.objects.get(modID=34)
+        #InnovativeFirstPlace = Mod.objects.get(modID=21)
+        InnovativeRunnerUp = Mod.objects.get(modID=55)
+    else:
+        MotYFirstPlace = Mod.objects.get(modID=22)
+        MotYRunnerUp = Mod.objects.get(modID=22)
+        SayoriFirstPlace = Mod.objects.get(modID=22)
+        SayoriRunnerUp = Mod.objects.get(modID=22)
+        YuriFirstPlace = Mod.objects.get(modID=22)
+        YuriRunnerUp = Mod.objects.get(modID=22)
+        MonikaFirstPlace = Mod.objects.get(modID=22)
+        MonikaRunnerUp = Mod.objects.get(modID=8)
+        #NatsukiFirstPlace = Mod.objects.get(modID=11)
+        #NatsukiRunnerUp = Mod.objects.get(modID=12)
+        #AllRounderFirstPlace = Mod.objects.get(modID=13)
+        AllRounderRunnerUp = Mod.objects.get(modID=14)
+        EmotionalFirstPlace = Mod.objects.get(modID=15)
+        EmotionalRunnerUp = Mod.objects.get(modID=25)
+        LightheartedFirstPlace = Mod.objects.get(modID=17)
+        LightheartedRunnerUp = Mod.objects.get(modID=19)
+        InnovativeFirstPlace = Mod.objects.get(modID=21)
+        InnovativeRunnerUp = Mod.objects.get(modID=22)
+    return render(request, 'mod/awards2018.html', {'MotYFirstPlace': MotYFirstPlace, 'MotYRunnerUp': MotYRunnerUp,
+                                                   'SayoriFirstPlace': SayoriFirstPlace,
+                                                   'SayoriRunnerUp': SayoriRunnerUp,
+                                                   'YuriFirstPlace': YuriFirstPlace,
+                                                   'YuriRunnerUp': YuriRunnerUp,
+                                                   'MonikaFirstPlace': MonikaFirstPlace,
+                                                   'MonikaRunnerUp': MonikaRunnerUp,
+                                                   #'NatsukiFirstPlace': NatsukiFirstPlace,
+                                                   #'NatsukiRunnerUp': NatsukiRunnerUp,
+                                                   #'AllRounderFirstPlace': AllRounderFirstPlace,
+                                                   'AllRounderRunnerUp': AllRounderRunnerUp,
+                                                   'EmotionalFirstPlace': EmotionalFirstPlace,
+                                                   'EmotionalRunnerUp': EmotionalRunnerUp,
+                                                   'LightheartedFirstPlace': LightheartedFirstPlace,
+                                                   'LightheartedRunnerUp': LightheartedRunnerUp,
+                                                   'InnovativeFirstPlace': InnovativeFirstPlace,
+                                                   'InnovativeRunnerUp': InnovativeRunnerUp})
+
+def awards2019(request):
+    return render(request, 'mod/awards2019.html')

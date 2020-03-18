@@ -59,3 +59,36 @@ h3 {
     width: 79%;
     min-height: 200px;
 }
+
+#best-of-2018 {
+    display: none;
+}
+
+#best-of-2019 {
+    display: none;
+}
+
+.down {
+    border: solid #6ea1cc;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    margin-bottom: 3px;
+    margin-right: 3px;
+}
+
+.bestOf h3{
+    width: 170px;
+    display: inline-block;
+}
+
+.up {
+    border: solid #6ea1cc;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
