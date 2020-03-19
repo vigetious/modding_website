@@ -163,7 +163,7 @@
                                 $('#modHorizontalListReviewed{{ x.modID }}').hover(function() {
                                     $('.modHorizontalList').css("background-color", "#a4d5ff");
                                     $('.tabContentValue').css("width", "68%");
-                                    $('.modHorizontalResult').css("display", "inline-block").css("margin-top", "0");
+                                    $('.modHorizontalResult').css("display", "inline-block").css("margin-top", "0").css("max-width", "530px");
                                     $('#modHorizontalListReviewed' + {{ x.modID }}).css("background-color", "#8acaff");
                                     changePanel(
                                         {{ x.modID }},
