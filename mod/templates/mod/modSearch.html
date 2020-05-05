@@ -181,7 +181,8 @@
                                         modPreviewImage2{{ x.modID }},
                                         modPreviewImage3{{ x.modID }},
                                         modPreviewImage4{{ x.modID }},
-                                        modPreviewImage5{{ x.modID }}
+                                        modPreviewImage5{{ x.modID }},
+                                        {% if x.modRedditAccount %}"{{ x.modRedditAccount }}"{% else %}null{% endif %},
                                     );
                                 });
                             });

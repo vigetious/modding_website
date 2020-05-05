@@ -71,6 +71,7 @@ class Mod(models.Model):
     )
     modID = models.AutoField("mod id", primary_key=True, unique=True)
     modAuthor = models.ForeignKey('accounts.User', on_delete=models.CASCADE, to_field='id')
+    modRedditAccount = models.CharField("mod reddit account", max_length=100, blank=True)
     modDate = models.DateTimeField("mod publish date", null=True)
     modUpdate = models.DateTimeField("mod most recent update date")
     modStatus = models.CharField(choices=statusChoices, default=statusChoices[0], max_length=100)

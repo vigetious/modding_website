@@ -237,7 +237,8 @@
                                     modPreviewImage2{{ mod.modID }},
                                     modPreviewImage3{{ mod.modID }},
                                     modPreviewImage4{{ mod.modID }},
-                                    modPreviewImage5{{ mod.modID }}
+                                    modPreviewImage5{{ mod.modID }},
+                                {% if mod.modRedditAccount %}"{{ mod.modRedditAccount }}"{% else %}null{% endif %},
                                 );
                             });
                         });
@@ -339,7 +340,8 @@
                                     modPreviewImage2{{ mod.modID }},
                                     modPreviewImage3{{ mod.modID }},
                                     modPreviewImage4{{ mod.modID }},
-                                    modPreviewImage5{{ mod.modID }}
+                                    modPreviewImage5{{ mod.modID }},
+                                    {% if mod.modRedditAccount %}"{{ mod.modRedditAccount }}"{% else %}null{% endif %},
                                 );
                             });
                         });
@@ -441,7 +443,8 @@
                                     modPreviewImage2{{ mod.modID }},
                                     modPreviewImage3{{ mod.modID }},
                                     modPreviewImage4{{ mod.modID }},
-                                    modPreviewImage5{{ mod.modID }}
+                                    modPreviewImage5{{ mod.modID }},
+                                    {% if mod.modRedditAccount %}"{{ mod.modRedditAccount }}"{% else %}null{% endif %},
                                 );
                             });
                         });

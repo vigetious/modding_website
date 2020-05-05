@@ -10,14 +10,16 @@ function showPanel(modID) {
     $('#mod' + modID).css("display", "inline-block");
 }
 
-function changePanel(modID, modName, avatarURL, modShortDescription, modAuthor, modDate, modPlayTimeHours, modStatus, modRating, tags, searchURL, modPreviewImage1, modPreviewImage2, modPreviewImage3, modPreviewImage4, modPreviewImage5) {
+function changePanel(modID, modName, avatarURL, modShortDescription, modAuthor, modDate, modPlayTimeHours, modStatus, modRating, tags, searchURL, modPreviewImage1, modPreviewImage2, modPreviewImage3, modPreviewImage4, modPreviewImage5, modRedditAccount) {
     $('#modAvatar').attr("src", avatarURL);
     $('#modAvatarLink').attr("href", "/mod/" + modID);
     $('#modShortDescription').html(modShortDescription).text();
-    if (modAuthor === "vigetious") {
-        $('#modAuthor').attr("href", "/support/claim").text("Claim this mod as your own!");
-    } else {
+    if (modAuthor !== "vigetious") {
         $('#modAuthor').attr("href", "/accounts/" + modAuthor + "/profile").html(modAuthor).text();
+    } else if (modRedditAccount !== null) {
+        $('#modAuthor').attr("href", "https://www.reddit.com/user/" + modRedditAccount + "/").text("u/" + modRedditAccount);
+    } else {
+        $('#modAuthor').attr("href", "/support/claim").text("Claim this mod as your own!");
     }
     $('#modName').html(modName).attr("href", "/mod/" + modID).text();
     $('#modDate').text(modDate);

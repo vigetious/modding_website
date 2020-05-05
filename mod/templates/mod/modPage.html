@@ -119,10 +119,12 @@
         <ul class="rightModDataText">
             <li>
                 <p>Author:</p>
-                {% if post.modAuthor|stringformat:"s" == "vigetious" %}
-                <p><a href="{% url 'claim' %}">Claim this mod as your own!</a></p>
+            {% if post.modAuthor|stringformat:"s" != "vigetious" %}
+                <p><a href="{% url 'accounts:userProfile' pk=post.modAuthor|stringformat:"s" %}">{{ post.modAuthor }}</a></p>
+                {% elif post.modRedditAccount %}
+                <p><a href="https://www.reddit.com/user/{{ post.modRedditAccount }}">u/{{ post.modRedditAccount }}</a></p>
                 {% else %}
-                    <p><a href="{% url 'accounts:userProfile' pk=post.modAuthor|stringformat:"s" %}">{{ post.modAuthor }}</a></p>
+                <p><a href="{% url 'claim' %}">Claim this mod as your own!</a></p>
                 {% endif %}
             </li>
             <li>
