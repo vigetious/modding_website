@@ -32,6 +32,11 @@ def randomStringDigits():
 def mod_directory_path(instance, filename):
     return 'files/user_{0}/mods/{1}/{2}'.format(instance.modAuthor.id, instance.modID, randomStringDigits())
 
+def mod_directory_path_keep_filename(instance, filename):
+    ext = filename.split('.')[-1]
+    newFileName = "%s.%s" % (randomStringDigits(), ext)
+    return 'files/user_{0}/mods/{1}/{2}'.format(instance.modAuthor.id, instance.modID, newFileName)
+
 
 def mod_image_directory_path(instance, filename):
     return 'files/user_{0}/mods/{1}/images/{2}'.format(instance.modAuthor.id, instance.modID, randomStringDigits())
@@ -83,7 +88,7 @@ class Mod(models.Model):
                                                      " a few short sentences.", blank=True)
     modWebsite = models.CharField("Mod Website", max_length=100, blank=True)
     tags = TaggableManager()
-    modUpload = models.FileField(upload_to=mod_directory_path, blank=True, null=True,
+    modUpload = models.FileField(upload_to=mod_directory_path_keep_filename, blank=True, null=True,
                                  validators=[FileExtensionValidator(allowed_extensions=['zip', 'rar'])])
     modUploadURL = models.URLField("Mod Upload Destination", max_length=1000, help_text="Only Google Drive and MEGA are currently supported.")
     modPlayTimeHours = models.IntegerField('Average Play Time Hours', blank=True, null=True, default=0,
@@ -230,7 +235,7 @@ class ModEdit(models.Model):
                                                      " a few short sentences.", blank=True)
     modWebsite = models.CharField("Mod Website", max_length=100, blank=True)
     tags = TaggableManager()
-    modUpload = models.FileField(upload_to=mod_directory_path, blank=True, null=True,
+    modUpload = models.FileField(upload_to=mod_directory_path_keep_filename, blank=True, null=True,
                                  validators=[FileExtensionValidator(allowed_extensions=['zip', 'rar'])])
     modUploadURL = models.URLField("Mod Upload Destination", max_length=1000, help_text="Only Google Drive and MEGA are currently supported.")
     modPlayTimeHours = models.IntegerField('Average Play Time Hours', blank=True, null=True, default=0,

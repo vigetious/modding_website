@@ -4,7 +4,7 @@ from rest_framework import viewsets, serializers
 from django_filters.rest_framework import DjangoFilterBackend, OrderingFilter
 
 from mod.models import Mod
-from .serializers import ModSerializer
+from .serializers import ModSerializer, ModDownloadSerializer
 
 # Create your views here.
 
@@ -23,3 +23,11 @@ class modSearch(viewsets.ReadOnlyModelViewSet):
     serializer_class = ModSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['modID', 'modAuthor', 'modDate', 'modUpdate', 'modStatus', 'modName', 'modRating', 'modNSFW']
+
+
+class modDownload(viewsets.ReadOnlyModelViewSet):
+    queryset = Mod.objects.all()
+    serializer_class = ModDownloadSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['modID']
+

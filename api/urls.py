@@ -2,11 +2,12 @@ from django.urls import path, include
 from rest_framework import routers, serializers, viewsets
 
 from mod.models import Mod
-from .views import latest, modSearch
+from .views import latest, modSearch, modDownload
 
 
 router = routers.DefaultRouter()
 
+router.register(r'mod/modDownload', modDownload)
 router.register(r'mod/latest', latest)
 router.register(r'mod', modSearch)
 
