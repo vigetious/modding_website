@@ -7,7 +7,7 @@ from mod.models import Mod
 
 class ModSerializer(serializers.ModelSerializer):
     modUpload = serializers.SerializerMethodField('get_url')
-    modReviewCount = serializers.ReadOnlyField()
+    modRatingCount = serializers.ReadOnlyField()
 
     def get_url(self, obj):
         if obj.modUpload:
@@ -19,7 +19,7 @@ class ModSerializer(serializers.ModelSerializer):
         model = Mod
         fields = ['modID', 'modAuthor', 'modDate', 'modUpdate', 'modStatus', 'modName', 'modDescription',
                   'modShortDescription', 'modWebsite', 'modUploadURL', 'modPlayTimeHours', 'modPlayTimeMinutes',
-                  'modRating', 'modAvatar', 'modShow', 'modEdited', 'modNSFW', 'modUpload', 'modReviewCount']
+                  'modRating', 'modAvatar', 'modShow', 'modEdited', 'modNSFW', 'modUpload', 'modRatingCount']
 
 
 class ModDownloadSerializer(serializers.ModelSerializer):

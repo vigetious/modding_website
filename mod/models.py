@@ -131,6 +131,11 @@ class Mod(models.Model):
 
     modReviewCount = property(getReviewCount)
 
+    def getRatingCount(self):
+        return Rating.objects.filter(ratingModID=self.modID).count()
+
+    modRatingCount = property(getRatingCount)
+
     class Meta:
         indexes = [
             GinIndex(fields=['modSearch'])
