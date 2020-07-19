@@ -19,7 +19,7 @@ class ModSerializer(serializers.ModelSerializer):
         model = Mod
         fields = ['modID', 'modAuthor', 'modDate', 'modUpdate', 'modStatus', 'modName', 'modDescription',
                   'modShortDescription', 'modWebsite', 'modUploadURL', 'modPlayTimeHours', 'modPlayTimeMinutes',
-                  'modRating', 'modAvatar', 'modShow', 'modEdited', 'modNSFW', 'modUpload', 'modRatingCount',
+                  'modRating', 'modAvatar', 'modShow', 'modEdited', 'modNSFW', 'modUpload', 'modPreviewVideo', 'modRatingCount',
                   'modPreviewImage1', 'modPreviewImage2', 'modPreviewImage3', 'modPreviewImage4', 'modPreviewImage5']
 
 
