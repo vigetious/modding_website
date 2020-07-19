@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_api_key',
     'tempus_dominus',
+    'django_admin_logs',
 ]
 
 MIDDLEWARE = [
@@ -332,3 +333,6 @@ REST_FRAMEWORK = {
 ### TEMPUS DATE PICKER ###
 TEMPUS_DOMINUS_LOCALIZE = True
 TEMPUS_DOMINUS_INCLUDE_ASSETS = True
+
+## ADMIN LOGS
+DJANGO_ADMIN_LOGS_DELETABLE = False
