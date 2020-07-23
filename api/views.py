@@ -19,7 +19,7 @@ class latest(viewsets.ReadOnlyModelViewSet):
 
 
 class modSearch(viewsets.ReadOnlyModelViewSet):
-    queryset = Mod.objects.all()
+    queryset = Mod.objects.filter(modShow=True)
     serializer_class = ModSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['modID', 'modAuthor', 'modDate', 'modUpdate', 'modStatus', 'modName', 'modRating', 'modNSFW']
