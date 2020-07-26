@@ -29,42 +29,41 @@
             </defs>
             <div class="homeRightMenu" id="homeRightMenu1">
                 <div class="screenshotVideo">
-                    <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ MotYFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ MotYFirstPlace.modID }})">
+                    <div class="screenshotVideoContent" onmouseover="calculateNextImage(1{{ MotYFirstPlace.modID }})" onmouseleave="hideArrowButtons(1{{ MotYFirstPlace.modID }})">
                         {% if MotYFirstPlace.modPreviewImage1.url.length is not 0 %}
-                            <img class="mySlides{{ MotYFirstPlace.modID }} thumb selected{{ MotYFirstPlace.modID }}" id="randomModPreviewImage1{{ MotYFirstPlace.modID }}" src="{{ MotYFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                            <img class="mySlides1{{ MotYFirstPlace.modID }} thumb selected1{{ MotYFirstPlace.modID }}" id="randomModPreviewImage1{{ MotYFirstPlace.modID }}" src="{{ MotYFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1">
                         {% else %}
-                            <img class="mySlides{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ MotYFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
+                            <img class="mySlides1{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ MotYFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
                         {% endif %}
                         {% if MotYFirstPlace.modPreviewImage2.url.length is not 0 %}
-                            <img class="mySlides{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ MotYFirstPlace.modID }}" src="{{ MotYFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                            <img class="mySlides1{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ MotYFirstPlace.modID }}" src="{{ MotYFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                         {% else %}
-                            <img class="mySlides{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ MotYFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
+                            <img class="mySlides1{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ MotYFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
                         {% endif %}
                         {% if MotYFirstPlace.modPreviewImage3.url.length is not 0 %}
-                            <img class="mySlides{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ MotYFirstPlace.modID }}" src="{{ MotYFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                            <img class="mySlides1{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ MotYFirstPlace.modID }}" src="{{ MotYFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                         {% else %}
-                            <img class="mySlides{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ MotYFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
+                            <img class="mySlides1{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ MotYFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
                         {% endif %}
                         {% if MotYFirstPlace.modPreviewImage4.url.length is not 0 %}
-                            <img class="mySlides{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ MotYFirstPlace.modID }}" src="{{ MotYFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                            <img class="mySlides1{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ MotYFirstPlace.modID }}" src="{{ MotYFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                         {% else %}
-                            <img class="mySlides{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ MotYFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
+                            <img class="mySlides1{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ MotYFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
                         {% endif %}
                         {% if MotYFirstPlace.modPreviewImage5.url.length is not 0 %}
-                            <img class="mySlides{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ MotYFirstPlace.modID }}" src="{{ MotYFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                            <img class="mySlides1{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ MotYFirstPlace.modID }}" src="{{ MotYFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                         {% else %}
-                            <img class="mySlides{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ MotYFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
+                            <img class="mySlides1{{ MotYFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ MotYFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
                         {% endif %}
                         <script>
-                            loadFirst({{ MotYFirstPlace.modID }});
+                            loadFirst(1{{ MotYFirstPlace.modID }});
                         </script>
 
                         <img id="leftButton1{{ MotYFirstPlace.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                        <img id="leftButton{{ MotYFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ MotYFirstPlace.modID }})">
+                        <img id="leftButton{{ MotYFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(1{{ MotYFirstPlace.modID }})">
                         <img id="rightButton1{{ MotYFirstPlace.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                        <img id="rightButton{{ MotYFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ MotYFirstPlace.modID }})">
-                    </div>
-                </div>
+                        <img id="rightButton{{ MotYFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(1{{ MotYFirstPlace.modID }})">
+                    </div>                </div>
                 <div class="homeModFeatureRight">
                     <a class="homeModFeatureRightAvatar" id="featuredAvatarLink" href="/mod/{{ MotYFirstPlace.modID }}">
                         <img id="featuredAvatar" src="{{ MotYFirstPlace.modAvatar.url }}">
@@ -94,40 +93,40 @@
         <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
             <div class="homeRightMenu" id="homeRightMenu2">
                 <div class="screenshotVideo">
-                    <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ MotYRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ MotYRunnerUp.modID }})">
+                    <div class="screenshotVideoContent" onmouseover="calculateNextImage(12{{ MotYRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ MotYRunnerUp.modID }})">
                         {% if MotYRunnerUp.modPreviewImage1.url.length is not 0 %}
-                            <img class="mySlides{{ MotYRunnerUp.modID }} thumb selected{{ MotYRunnerUp.modID }}" id="randomModPreviewImage1{{ MotYRunnerUp.modID }}" src="{{ MotYRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                            <img class="mySlides12{{ MotYRunnerUp.modID }} thumb selected12{{ MotYRunnerUp.modID }}" id="randomModPreviewImage1{{ MotYRunnerUp.modID }}" src="{{ MotYRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1">
                         {% else %}
-                            <img class="mySlides{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ MotYRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
+                            <img class="mySlides12{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ MotYRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
                         {% endif %}
                         {% if MotYRunnerUp.modPreviewImage2.url.length is not 0 %}
-                            <img class="mySlides{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ MotYRunnerUp.modID }}" src="{{ MotYRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                            <img class="mySlides12{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ MotYRunnerUp.modID }}" src="{{ MotYRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                         {% else %}
-                            <img class="mySlides{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ MotYRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
+                            <img class="mySlides12{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ MotYRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
                         {% endif %}
                         {% if MotYRunnerUp.modPreviewImage3.url.length is not 0 %}
-                            <img class="mySlides{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ MotYRunnerUp.modID }}" src="{{ MotYRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                            <img class="mySlides12{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ MotYRunnerUp.modID }}" src="{{ MotYRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                         {% else %}
-                            <img class="mySlides{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ MotYRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
+                            <img class="mySlides12{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ MotYRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
                         {% endif %}
                         {% if MotYRunnerUp.modPreviewImage4.url.length is not 0 %}
-                            <img class="mySlides{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ MotYRunnerUp.modID }}" src="{{ MotYRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                            <img class="mySlides12{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ MotYRunnerUp.modID }}" src="{{ MotYRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                         {% else %}
-                            <img class="mySlides{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ MotYRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
+                            <img class="mySlides12{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ MotYRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
                         {% endif %}
                         {% if MotYRunnerUp.modPreviewImage5.url.length is not 0 %}
-                            <img class="mySlides{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ MotYRunnerUp.modID }}" src="{{ MotYRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                            <img class="mySlides12{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ MotYRunnerUp.modID }}" src="{{ MotYRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                         {% else %}
-                            <img class="mySlides{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ MotYRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
+                            <img class="mySlides12{{ MotYRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ MotYRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
                         {% endif %}
                         <script>
-                            loadFirst({{ MotYRunnerUp.modID }});
+                            loadFirst(12{{ MotYRunnerUp.modID }});
                         </script>
 
                         <img id="leftButton1{{ MotYRunnerUp.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                        <img id="leftButton{{ MotYRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ MotYRunnerUp.modID }})">
+                        <img id="leftButton{{ MotYRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(12{{ MotYRunnerUp.modID }})">
                         <img id="rightButton1{{ MotYRunnerUp.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                        <img id="rightButton{{ MotYRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ MotYRunnerUp.modID }})">
+                        <img id="rightButton{{ MotYRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(12{{ MotYRunnerUp.modID }})">
                     </div>
                 </div>
                 <div class="homeModFeatureRight">
@@ -173,7 +172,7 @@
                     </div>
                 </th>
                 <th>
-                    <img class="categoryAvatar" src="{{ MonikaFirstPlace.modAvatar.url }}">
+                    <img class="categoryAvatar" src="{{ MonikaRunnerUp.modAvatar.url }}">
                     <div class="otherCategoriesInside">
                         <a href="#monika">
                             <img src="{% static 'pages/images/best-monika-mod.png' %}">
@@ -245,42 +244,41 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu3">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ SayoriFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ SayoriFirstPlace.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(2{{ SayoriFirstPlace.modID }})" onmouseleave="hideArrowButtons(2{{ SayoriFirstPlace.modID }})">
                             {% if SayoriFirstPlace.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ SayoriFirstPlace.modID }} thumb selected{{ SayoriFirstPlace.modID }}" id="randomModPreviewImage1{{ SayoriFirstPlace.modID }}" src="{{ SayoriFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides2{{ SayoriFirstPlace.modID }} thumb selected2{{ SayoriFirstPlace.modID }}" id="randomModPreviewImage1{{ SayoriFirstPlace.modID }}" src="{{ SayoriFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ SayoriFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides2{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ SayoriFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if SayoriFirstPlace.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ SayoriFirstPlace.modID }}" src="{{ SayoriFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides2{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ SayoriFirstPlace.modID }}" src="{{ SayoriFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ SayoriFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides2{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ SayoriFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if SayoriFirstPlace.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ SayoriFirstPlace.modID }}" src="{{ SayoriFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides2{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ SayoriFirstPlace.modID }}" src="{{ SayoriFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ SayoriFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides2{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ SayoriFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if SayoriFirstPlace.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ SayoriFirstPlace.modID }}" src="{{ SayoriFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides2{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ SayoriFirstPlace.modID }}" src="{{ SayoriFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ SayoriFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides2{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ SayoriFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if SayoriFirstPlace.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ SayoriFirstPlace.modID }}" src="{{ SayoriFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides2{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ SayoriFirstPlace.modID }}" src="{{ SayoriFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ SayoriFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides2{{ SayoriFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ SayoriFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ SayoriFirstPlace.modID }});
+                                loadFirst(2{{ SayoriFirstPlace.modID }});
                             </script>
 
                             <img id="leftButton1{{ SayoriFirstPlace.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ SayoriFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ SayoriFirstPlace.modID }})">
+                            <img id="leftButton{{ SayoriFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(2{{ SayoriFirstPlace.modID }})">
                             <img id="rightButton1{{ SayoriFirstPlace.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ SayoriFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ SayoriFirstPlace.modID }})">
-                        </div>
-                    </div>
+                            <img id="rightButton{{ SayoriFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(2{{ SayoriFirstPlace.modID }})">
+                        </div>                    </div>
                     <div class="homeModFeatureRight">
                         <a class="homeModFeatureRightAvatar" id="featuredAvatarLink" href="/mod/{{ SayoriFirstPlace.modID }}">
                             <img id="featuredAvatar" src="{{ SayoriFirstPlace.modAvatar.url }}">
@@ -310,42 +308,41 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu4">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ SayoriRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ SayoriRunnerUp.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(3{{ SayoriRunnerUp.modID }})" onmouseleave="hideArrowButtons(3{{ SayoriRunnerUp.modID }})">
                             {% if SayoriRunnerUp.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ SayoriRunnerUp.modID }} thumb selected{{ SayoriRunnerUp.modID }}" id="randomModPreviewImage1{{ SayoriRunnerUp.modID }}" src="{{ SayoriRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides3{{ SayoriRunnerUp.modID }} thumb selected3{{ SayoriRunnerUp.modID }}" id="randomModPreviewImage1{{ SayoriRunnerUp.modID }}" src="{{ SayoriRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ SayoriRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides3{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ SayoriRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if SayoriRunnerUp.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ SayoriRunnerUp.modID }}" src="{{ SayoriRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides3{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ SayoriRunnerUp.modID }}" src="{{ SayoriRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ SayoriRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides3{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ SayoriRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if SayoriRunnerUp.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ SayoriRunnerUp.modID }}" src="{{ SayoriRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides3{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ SayoriRunnerUp.modID }}" src="{{ SayoriRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ SayoriRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides3{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ SayoriRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if SayoriRunnerUp.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ SayoriRunnerUp.modID }}" src="{{ SayoriRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides3{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ SayoriRunnerUp.modID }}" src="{{ SayoriRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ SayoriRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides3{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ SayoriRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if SayoriRunnerUp.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ SayoriRunnerUp.modID }}" src="{{ SayoriRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides3{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ SayoriRunnerUp.modID }}" src="{{ SayoriRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ SayoriRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides3{{ SayoriRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ SayoriRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ SayoriRunnerUp.modID }});
+                                loadFirst(3{{ SayoriRunnerUp.modID }});
                             </script>
 
                             <img id="leftButton1{{ SayoriRunnerUp.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ SayoriRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ SayoriRunnerUp.modID }})">
+                            <img id="leftButton{{ SayoriRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(3{{ SayoriRunnerUp.modID }})">
                             <img id="rightButton1{{ SayoriRunnerUp.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ SayoriRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ SayoriRunnerUp.modID }})">
-                        </div>
-                    </div>
+                            <img id="rightButton{{ SayoriRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(3{{ SayoriRunnerUp.modID }})">
+                        </div>                    </div>
                     <div class="homeModFeatureRight">
                         <a class="homeModFeatureRightAvatar" id="featuredAvatarLink" href="/mod/{{ SayoriRunnerUp.modID }}">
                             <img id="featuredAvatar" src="{{ SayoriRunnerUp.modAvatar.url }}">
@@ -378,42 +375,41 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu69">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ YuriFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ YuriFirstPlace.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(4{{ YuriFirstPlace.modID }})" onmouseleave="hideArrowButtons(4{{ YuriFirstPlace.modID }})">
                             {% if YuriFirstPlace.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ YuriFirstPlace.modID }} thumb selected{{ YuriFirstPlace.modID }}" id="randomModPreviewImage1{{ YuriFirstPlace.modID }}" src="{{ YuriFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides4{{ YuriFirstPlace.modID }} thumb selected4{{ YuriFirstPlace.modID }}" id="randomModPreviewImage1{{ YuriFirstPlace.modID }}" src="{{ YuriFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ YuriFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides4{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ YuriFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if YuriFirstPlace.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ YuriFirstPlace.modID }}" src="{{ YuriFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides4{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ YuriFirstPlace.modID }}" src="{{ YuriFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ YuriFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides4{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ YuriFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if YuriFirstPlace.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ YuriFirstPlace.modID }}" src="{{ YuriFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides4{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ YuriFirstPlace.modID }}" src="{{ YuriFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ YuriFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides4{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ YuriFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if YuriFirstPlace.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ YuriFirstPlace.modID }}" src="{{ YuriFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides4{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ YuriFirstPlace.modID }}" src="{{ YuriFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ YuriFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides4{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ YuriFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if YuriFirstPlace.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ YuriFirstPlace.modID }}" src="{{ YuriFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides4{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ YuriFirstPlace.modID }}" src="{{ YuriFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ YuriFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides4{{ YuriFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ YuriFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ YuriFirstPlace.modID }});
+                                loadFirst(4{{ YuriFirstPlace.modID }});
                             </script>
 
                             <img id="leftButton1{{ YuriFirstPlace.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ YuriFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ YuriFirstPlace.modID }})">
+                            <img id="leftButton{{ YuriFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(4{{ YuriFirstPlace.modID }})">
                             <img id="rightButton1{{ YuriFirstPlace.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ YuriFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ YuriFirstPlace.modID }})">
-                        </div>
-                    </div>
+                            <img id="rightButton{{ YuriFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(4{{ YuriFirstPlace.modID }})">
+                        </div>                    </div>
                     <div class="homeModFeatureRight">
                         <a class="homeModFeatureRightAvatar" id="featuredAvatarLink" href="/mod/{{ YuriFirstPlace.modID }}">
                             <img id="featuredAvatar" src="{{ YuriFirstPlace.modAvatar.url }}">
@@ -443,40 +439,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu5">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ YuriRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ YuriRunnerUp.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(5{{ YuriRunnerUp.modID }})" onmouseleave="hideArrowButtons(5{{ YuriRunnerUp.modID }})">
                             {% if YuriRunnerUp.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ YuriRunnerUp.modID }} thumb selected{{ YuriRunnerUp.modID }}" id="randomModPreviewImage1{{ YuriRunnerUp.modID }}" src="{{ YuriRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides5{{ YuriRunnerUp.modID }} thumb selected5{{ YuriRunnerUp.modID }}" id="randomModPreviewImage1{{ YuriRunnerUp.modID }}" src="{{ YuriRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ YuriRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides5{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ YuriRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if YuriRunnerUp.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ YuriRunnerUp.modID }}" src="{{ YuriRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides5{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ YuriRunnerUp.modID }}" src="{{ YuriRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ YuriRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides5{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ YuriRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if YuriRunnerUp.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ YuriRunnerUp.modID }}" src="{{ YuriRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides5{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ YuriRunnerUp.modID }}" src="{{ YuriRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ YuriRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides5{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ YuriRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if YuriRunnerUp.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ YuriRunnerUp.modID }}" src="{{ YuriRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides5{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ YuriRunnerUp.modID }}" src="{{ YuriRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ YuriRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides5{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ YuriRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if YuriRunnerUp.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ YuriRunnerUp.modID }}" src="{{ YuriRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides5{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ YuriRunnerUp.modID }}" src="{{ YuriRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ YuriRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides5{{ YuriRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ YuriRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ YuriRunnerUp.modID }});
+                                loadFirst(5{{ YuriRunnerUp.modID }});
                             </script>
 
                             <img id="leftButton1{{ YuriRunnerUp.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ YuriRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ YuriRunnerUp.modID }})">
+                            <img id="leftButton{{ YuriRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(5{{ YuriRunnerUp.modID }})">
                             <img id="rightButton1{{ YuriRunnerUp.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ YuriRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ YuriRunnerUp.modID }})">
+                            <img id="rightButton{{ YuriRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(5{{ YuriRunnerUp.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -511,40 +507,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu7">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ MonikaRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ MonikaRunnerUp.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(6{{ MonikaRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ MonikaRunnerUp.modID }})">
                             {% if MonikaRunnerUp.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ MonikaRunnerUp.modID }} thumb selected{{ MonikaRunnerUp.modID }}" id="randomModPreviewImage1{{ MonikaRunnerUp.modID }}" src="{{ MonikaRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides6{{ MonikaRunnerUp.modID }} thumb selected6{{ MonikaRunnerUp.modID }}" id="randomModPreviewImage1{{ MonikaRunnerUp.modID }}" src="{{ MonikaRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ MonikaRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides6{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ MonikaRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if MonikaRunnerUp.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ MonikaRunnerUp.modID }}" src="{{ MonikaRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides6{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ MonikaRunnerUp.modID }}" src="{{ MonikaRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ MonikaRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides6{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ MonikaRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if MonikaRunnerUp.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ MonikaRunnerUp.modID }}" src="{{ MonikaRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides6{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ MonikaRunnerUp.modID }}" src="{{ MonikaRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ MonikaRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides6{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ MonikaRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if MonikaRunnerUp.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ MonikaRunnerUp.modID }}" src="{{ MonikaRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides6{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ MonikaRunnerUp.modID }}" src="{{ MonikaRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ MonikaRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides6{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ MonikaRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if MonikaRunnerUp.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ MonikaRunnerUp.modID }}" src="{{ MonikaRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides6{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ MonikaRunnerUp.modID }}" src="{{ MonikaRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ MonikaRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides6{{ MonikaRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ MonikaRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ MonikaRunnerUp.modID }});
+                                loadFirst(6{{ MonikaRunnerUp.modID }});
                             </script>
 
                             <img id="leftButton1{{ MonikaRunnerUp.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ MonikaRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ MonikaRunnerUp.modID }})">
+                            <img id="leftButton{{ MonikaRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(6{{ MonikaRunnerUp.modID }})">
                             <img id="rightButton1{{ MonikaRunnerUp.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ MonikaRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ MonikaRunnerUp.modID }})">
+                            <img id="rightButton{{ MonikaRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(6{{ MonikaRunnerUp.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -579,40 +575,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu8">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ NatsukiFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ NatsukiFirstPlace.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(13{{ NatsukiFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ NatsukiFirstPlace.modID }})">
                             {% if NatsukiFirstPlace.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ NatsukiFirstPlace.modID }} thumb selected{{ NatsukiFirstPlace.modID }}" id="randomModPreviewImage1{{ NatsukiFirstPlace.modID }}" src="{{ NatsukiFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides13{{ NatsukiFirstPlace.modID }} thumb selected13{{ NatsukiFirstPlace.modID }}" id="randomModPreviewImage1{{ NatsukiFirstPlace.modID }}" src="{{ NatsukiFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ NatsukiFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides13{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ NatsukiFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if NatsukiFirstPlace.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ NatsukiFirstPlace.modID }}" src="{{ NatsukiFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides13{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ NatsukiFirstPlace.modID }}" src="{{ NatsukiFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ NatsukiFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides13{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ NatsukiFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if NatsukiFirstPlace.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ NatsukiFirstPlace.modID }}" src="{{ NatsukiFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides13{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ NatsukiFirstPlace.modID }}" src="{{ NatsukiFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ NatsukiFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides13{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ NatsukiFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if NatsukiFirstPlace.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ NatsukiFirstPlace.modID }}" src="{{ NatsukiFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides13{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ NatsukiFirstPlace.modID }}" src="{{ NatsukiFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ NatsukiFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides13{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ NatsukiFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if NatsukiFirstPlace.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ NatsukiFirstPlace.modID }}" src="{{ NatsukiFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides13{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ NatsukiFirstPlace.modID }}" src="{{ NatsukiFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ NatsukiFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides13{{ NatsukiFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ NatsukiFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ NatsukiFirstPlace.modID }});
+                                loadFirst(13{{ NatsukiFirstPlace.modID }});
                             </script>
 
                             <img id="leftButton1{{ NatsukiFirstPlace.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ NatsukiFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ NatsukiFirstPlace.modID }})">
+                            <img id="leftButton{{ NatsukiFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(13{{ NatsukiFirstPlace.modID }})">
                             <img id="rightButton1{{ NatsukiFirstPlace.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ NatsukiFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ NatsukiFirstPlace.modID }})">
+                            <img id="rightButton{{ NatsukiFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(13{{ NatsukiFirstPlace.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -644,40 +640,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu9">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ NatsukiRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ NatsukiRunnerUp.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(14{{ NatsukiRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ NatsukiRunnerUp.modID }})">
                             {% if NatsukiRunnerUp.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ NatsukiRunnerUp.modID }} thumb selected{{ NatsukiRunnerUp.modID }}" id="randomModPreviewImage1{{ NatsukiRunnerUp.modID }}" src="{{ NatsukiRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides14{{ NatsukiRunnerUp.modID }} thumb selected14{{ NatsukiRunnerUp.modID }}" id="randomModPreviewImage1{{ NatsukiRunnerUp.modID }}" src="{{ NatsukiRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ NatsukiRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides14{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ NatsukiRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if NatsukiRunnerUp.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ NatsukiRunnerUp.modID }}" src="{{ NatsukiRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides14{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ NatsukiRunnerUp.modID }}" src="{{ NatsukiRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ NatsukiRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides14{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ NatsukiRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if NatsukiRunnerUp.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ NatsukiRunnerUp.modID }}" src="{{ NatsukiRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides14{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ NatsukiRunnerUp.modID }}" src="{{ NatsukiRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ NatsukiRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides14{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ NatsukiRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if NatsukiRunnerUp.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ NatsukiRunnerUp.modID }}" src="{{ NatsukiRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides14{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ NatsukiRunnerUp.modID }}" src="{{ NatsukiRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ NatsukiRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides14{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ NatsukiRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if NatsukiRunnerUp.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ NatsukiRunnerUp.modID }}" src="{{ NatsukiRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides14{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ NatsukiRunnerUp.modID }}" src="{{ NatsukiRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ NatsukiRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides14{{ NatsukiRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ NatsukiRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ NatsukiRunnerUp.modID }});
+                                loadFirst(14{{ NatsukiRunnerUp.modID }});
                             </script>
 
                             <img id="leftButton1{{ NatsukiRunnerUp.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ NatsukiRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ NatsukiRunnerUp.modID }})">
+                            <img id="leftButton{{ NatsukiRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(14{{ NatsukiRunnerUp.modID }})">
                             <img id="rightButton1{{ NatsukiRunnerUp.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ NatsukiRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ NatsukiRunnerUp.modID }})">
+                            <img id="rightButton{{ NatsukiRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(14{{ NatsukiRunnerUp.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -714,40 +710,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu10">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ AllRounderFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ AllRounderFirstPlace.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(15{{ AllRounderFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ AllRounderFirstPlace.modID }})">
                             {% if AllRounderFirstPlace.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ AllRounderFirstPlace.modID }} thumb selected{{ AllRounderFirstPlace.modID }}" id="randomModPreviewImage1{{ AllRounderFirstPlace.modID }}" src="{{ AllRounderFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides15{{ AllRounderFirstPlace.modID }} thumb selected15{{ AllRounderFirstPlace.modID }}" id="randomModPreviewImage1{{ AllRounderFirstPlace.modID }}" src="{{ AllRounderFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ AllRounderFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides15{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ AllRounderFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if AllRounderFirstPlace.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ AllRounderFirstPlace.modID }}" src="{{ AllRounderFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides15{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ AllRounderFirstPlace.modID }}" src="{{ AllRounderFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ AllRounderFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides15{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ AllRounderFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if AllRounderFirstPlace.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ AllRounderFirstPlace.modID }}" src="{{ AllRounderFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides15{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ AllRounderFirstPlace.modID }}" src="{{ AllRounderFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ AllRounderFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides15{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ AllRounderFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if AllRounderFirstPlace.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ AllRounderFirstPlace.modID }}" src="{{ AllRounderFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides15{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ AllRounderFirstPlace.modID }}" src="{{ AllRounderFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ AllRounderFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides15{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ AllRounderFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if AllRounderFirstPlace.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ AllRounderFirstPlace.modID }}" src="{{ AllRounderFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides15{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ AllRounderFirstPlace.modID }}" src="{{ AllRounderFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ AllRounderFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides15{{ AllRounderFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ AllRounderFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ AllRounderFirstPlace.modID }});
+                                loadFirst(15{{ AllRounderFirstPlace.modID }});
                             </script>
 
                             <img id="leftButton1{{ AllRounderFirstPlace.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ AllRounderFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ AllRounderFirstPlace.modID }})">
+                            <img id="leftButton{{ AllRounderFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(15{{ AllRounderFirstPlace.modID }})">
                             <img id="rightButton1{{ AllRounderFirstPlace.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ AllRounderFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ AllRounderFirstPlace.modID }})">
+                            <img id="rightButton{{ AllRounderFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(15{{ AllRounderFirstPlace.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -779,40 +775,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu11">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ AllRounderRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ AllRounderRunnerUp.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(8{{ AllRounderRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ AllRounderRunnerUp.modID }})">
                             {% if AllRounderRunnerUp.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ AllRounderRunnerUp.modID }} thumb selected{{ AllRounderRunnerUp.modID }}" id="randomModPreviewImage1{{ AllRounderRunnerUp.modID }}" src="{{ AllRounderRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides8{{ AllRounderRunnerUp.modID }} thumb selected8{{ AllRounderRunnerUp.modID }}" id="randomModPreviewImage1{{ AllRounderRunnerUp.modID }}" src="{{ AllRounderRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ AllRounderRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides8{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ AllRounderRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if AllRounderRunnerUp.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ AllRounderRunnerUp.modID }}" src="{{ AllRounderRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides8{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ AllRounderRunnerUp.modID }}" src="{{ AllRounderRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ AllRounderRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides8{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ AllRounderRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if AllRounderRunnerUp.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ AllRounderRunnerUp.modID }}" src="{{ AllRounderRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides8{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ AllRounderRunnerUp.modID }}" src="{{ AllRounderRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ AllRounderRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides8{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ AllRounderRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if AllRounderRunnerUp.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ AllRounderRunnerUp.modID }}" src="{{ AllRounderRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides8{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ AllRounderRunnerUp.modID }}" src="{{ AllRounderRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ AllRounderRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides8{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ AllRounderRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if AllRounderRunnerUp.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ AllRounderRunnerUp.modID }}" src="{{ AllRounderRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides8{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ AllRounderRunnerUp.modID }}" src="{{ AllRounderRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ AllRounderRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides8{{ AllRounderRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ AllRounderRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ AllRounderRunnerUp.modID }});
+                                loadFirst(8{{ AllRounderRunnerUp.modID }});
                             </script>
 
                             <img id="leftButton1{{ AllRounderRunnerUp.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ AllRounderRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ AllRounderRunnerUp.modID }})">
+                            <img id="leftButton{{ AllRounderRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(8{{ AllRounderRunnerUp.modID }})">
                             <img id="rightButton1{{ AllRounderRunnerUp.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ AllRounderRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ AllRounderRunnerUp.modID }})">
+                            <img id="rightButton{{ AllRounderRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(8{{ AllRounderRunnerUp.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -847,40 +843,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu12">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ EmotionalFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ EmotionalFirstPlace.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(16{{ EmotionalFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ EmotionalFirstPlace.modID }})">
                             {% if EmotionalFirstPlace.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ EmotionalFirstPlace.modID }} thumb selected{{ EmotionalFirstPlace.modID }}" id="randomModPreviewImage1{{ EmotionalFirstPlace.modID }}" src="{{ EmotionalFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides16{{ EmotionalFirstPlace.modID }} thumb selected16{{ EmotionalFirstPlace.modID }}" id="randomModPreviewImage1{{ EmotionalFirstPlace.modID }}" src="{{ EmotionalFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ EmotionalFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides16{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ EmotionalFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if EmotionalFirstPlace.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ EmotionalFirstPlace.modID }}" src="{{ EmotionalFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides16{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ EmotionalFirstPlace.modID }}" src="{{ EmotionalFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ EmotionalFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides16{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ EmotionalFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if EmotionalFirstPlace.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ EmotionalFirstPlace.modID }}" src="{{ EmotionalFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides16{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ EmotionalFirstPlace.modID }}" src="{{ EmotionalFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ EmotionalFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides16{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ EmotionalFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if EmotionalFirstPlace.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ EmotionalFirstPlace.modID }}" src="{{ EmotionalFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides16{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ EmotionalFirstPlace.modID }}" src="{{ EmotionalFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ EmotionalFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides16{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ EmotionalFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if EmotionalFirstPlace.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ EmotionalFirstPlace.modID }}" src="{{ EmotionalFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides16{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ EmotionalFirstPlace.modID }}" src="{{ EmotionalFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ EmotionalFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides16{{ EmotionalFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ EmotionalFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ EmotionalFirstPlace.modID }});
+                                loadFirst(16{{ EmotionalFirstPlace.modID }});
                             </script>
 
                             <img id="leftButton1{{ EmotionalFirstPlace.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ EmotionalFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ EmotionalFirstPlace.modID }})">
+                            <img id="leftButton{{ EmotionalFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(16{{ EmotionalFirstPlace.modID }})">
                             <img id="rightButton1{{ EmotionalFirstPlace.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ EmotionalFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ EmotionalFirstPlace.modID }})">
+                            <img id="rightButton{{ EmotionalFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(16{{ EmotionalFirstPlace.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -912,40 +908,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu13">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ EmotionalRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ EmotionalRunnerUp.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(9{{ EmotionalRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ EmotionalRunnerUp.modID }})">
                             {% if EmotionalRunnerUp.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ EmotionalRunnerUp.modID }} thumb selected{{ EmotionalRunnerUp.modID }}" id="randomModPreviewImage1{{ EmotionalRunnerUp.modID }}" src="{{ EmotionalRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides9{{ EmotionalRunnerUp.modID }} thumb selected9{{ EmotionalRunnerUp.modID }}" id="randomModPreviewImage1{{ EmotionalRunnerUp.modID }}" src="{{ EmotionalRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ EmotionalRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides9{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ EmotionalRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if EmotionalRunnerUp.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ EmotionalRunnerUp.modID }}" src="{{ EmotionalRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides9{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ EmotionalRunnerUp.modID }}" src="{{ EmotionalRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ EmotionalRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides9{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ EmotionalRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if EmotionalRunnerUp.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ EmotionalRunnerUp.modID }}" src="{{ EmotionalRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides9{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ EmotionalRunnerUp.modID }}" src="{{ EmotionalRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ EmotionalRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides9{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ EmotionalRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if EmotionalRunnerUp.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ EmotionalRunnerUp.modID }}" src="{{ EmotionalRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides9{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ EmotionalRunnerUp.modID }}" src="{{ EmotionalRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ EmotionalRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides9{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ EmotionalRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if EmotionalRunnerUp.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ EmotionalRunnerUp.modID }}" src="{{ EmotionalRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides9{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ EmotionalRunnerUp.modID }}" src="{{ EmotionalRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ EmotionalRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides9{{ EmotionalRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ EmotionalRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ EmotionalRunnerUp.modID }});
+                                loadFirst(9{{ EmotionalRunnerUp.modID }});
                             </script>
 
                             <img id="leftButton1{{ EmotionalRunnerUp.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ EmotionalRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ EmotionalRunnerUp.modID }})">
+                            <img id="leftButton{{ EmotionalRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(9{{ EmotionalRunnerUp.modID }})">
                             <img id="rightButton1{{ EmotionalRunnerUp.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ EmotionalRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ EmotionalRunnerUp.modID }})">
+                            <img id="rightButton{{ EmotionalRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(9{{ EmotionalRunnerUp.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -985,40 +981,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu14">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ LightheartedFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ LightheartedFirstPlace.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(10{{ LightheartedFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ LightheartedFirstPlace.modID }})">
                             {% if LightheartedFirstPlace.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ LightheartedFirstPlace.modID }} thumb selected{{ LightheartedFirstPlace.modID }}" id="randomModPreviewImage1{{ LightheartedFirstPlace.modID }}" src="{{ LightheartedFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides10{{ LightheartedFirstPlace.modID }} thumb selected10{{ LightheartedFirstPlace.modID }}" id="randomModPreviewImage1{{ LightheartedFirstPlace.modID }}" src="{{ LightheartedFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ LightheartedFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides10{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ LightheartedFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if LightheartedFirstPlace.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ LightheartedFirstPlace.modID }}" src="{{ LightheartedFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides10{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ LightheartedFirstPlace.modID }}" src="{{ LightheartedFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ LightheartedFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides10{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ LightheartedFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if LightheartedFirstPlace.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ LightheartedFirstPlace.modID }}" src="{{ LightheartedFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides10{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ LightheartedFirstPlace.modID }}" src="{{ LightheartedFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ LightheartedFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides10{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ LightheartedFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if LightheartedFirstPlace.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ LightheartedFirstPlace.modID }}" src="{{ LightheartedFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides10{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ LightheartedFirstPlace.modID }}" src="{{ LightheartedFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ LightheartedFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides10{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ LightheartedFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if LightheartedFirstPlace.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ LightheartedFirstPlace.modID }}" src="{{ LightheartedFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides10{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ LightheartedFirstPlace.modID }}" src="{{ LightheartedFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ LightheartedFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides10{{ LightheartedFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ LightheartedFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ LightheartedFirstPlace.modID }});
+                                loadFirst(10{{ LightheartedFirstPlace.modID }});
                             </script>
 
                             <img id="leftButton1{{ LightheartedFirstPlace.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ LightheartedFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ LightheartedFirstPlace.modID }})">
+                            <img id="leftButton{{ LightheartedFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(10{{ LightheartedFirstPlace.modID }})">
                             <img id="rightButton1{{ LightheartedFirstPlace.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ LightheartedFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ LightheartedFirstPlace.modID }})">
+                            <img id="rightButton{{ LightheartedFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(10{{ LightheartedFirstPlace.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -1050,40 +1046,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu15">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ LightheartedRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ LightheartedRunnerUp.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(17{{ LightheartedRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ LightheartedRunnerUp.modID }})">
                             {% if LightheartedRunnerUp.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ LightheartedRunnerUp.modID }} thumb selected{{ LightheartedRunnerUp.modID }}" id="randomModPreviewImage1{{ LightheartedRunnerUp.modID }}" src="{{ LightheartedRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides17{{ LightheartedRunnerUp.modID }} thumb selected17{{ LightheartedRunnerUp.modID }}" id="randomModPreviewImage1{{ LightheartedRunnerUp.modID }}" src="{{ LightheartedRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ LightheartedRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides17{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ LightheartedRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if LightheartedRunnerUp.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ LightheartedRunnerUp.modID }}" src="{{ LightheartedRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides17{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ LightheartedRunnerUp.modID }}" src="{{ LightheartedRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ LightheartedRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides17{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ LightheartedRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if LightheartedRunnerUp.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ LightheartedRunnerUp.modID }}" src="{{ LightheartedRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides17{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ LightheartedRunnerUp.modID }}" src="{{ LightheartedRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ LightheartedRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides17{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ LightheartedRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if LightheartedRunnerUp.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ LightheartedRunnerUp.modID }}" src="{{ LightheartedRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides17{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ LightheartedRunnerUp.modID }}" src="{{ LightheartedRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ LightheartedRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides17{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ LightheartedRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if LightheartedRunnerUp.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ LightheartedRunnerUp.modID }}" src="{{ LightheartedRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides17{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ LightheartedRunnerUp.modID }}" src="{{ LightheartedRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ LightheartedRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides17{{ LightheartedRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ LightheartedRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ LightheartedRunnerUp.modID }});
+                                loadFirst(17{{ LightheartedRunnerUp.modID }});
                             </script>
 
                             <img id="leftButton1{{ LightheartedRunnerUp.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ LightheartedRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ LightheartedRunnerUp.modID }})">
+                            <img id="leftButton{{ LightheartedRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(17{{ LightheartedRunnerUp.modID }})">
                             <img id="rightButton1{{ LightheartedRunnerUp.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ LightheartedRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ LightheartedRunnerUp.modID }})">
+                            <img id="rightButton{{ LightheartedRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(17{{ LightheartedRunnerUp.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -1118,40 +1114,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu16">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ InnovativeFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ InnovativeFirstPlace.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(18{{ InnovativeFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ InnovativeFirstPlace.modID }})">
                             {% if InnovativeFirstPlace.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ InnovativeFirstPlace.modID }} thumb selected{{ InnovativeFirstPlace.modID }}" id="randomModPreviewImage1{{ InnovativeFirstPlace.modID }}" src="{{ InnovativeFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides18{{ InnovativeFirstPlace.modID }} thumb selected18{{ InnovativeFirstPlace.modID }}" id="randomModPreviewImage1{{ InnovativeFirstPlace.modID }}" src="{{ InnovativeFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ InnovativeFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides18{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ InnovativeFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if InnovativeFirstPlace.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ InnovativeFirstPlace.modID }}" src="{{ InnovativeFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides18{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ InnovativeFirstPlace.modID }}" src="{{ InnovativeFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ InnovativeFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides18{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ InnovativeFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if InnovativeFirstPlace.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ InnovativeFirstPlace.modID }}" src="{{ InnovativeFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides18{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ InnovativeFirstPlace.modID }}" src="{{ InnovativeFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ InnovativeFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides18{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ InnovativeFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if InnovativeFirstPlace.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ InnovativeFirstPlace.modID }}" src="{{ InnovativeFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides18{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ InnovativeFirstPlace.modID }}" src="{{ InnovativeFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ InnovativeFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides18{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ InnovativeFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if InnovativeFirstPlace.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ InnovativeFirstPlace.modID }}" src="{{ InnovativeFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides18{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ InnovativeFirstPlace.modID }}" src="{{ InnovativeFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ InnovativeFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides18{{ InnovativeFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ InnovativeFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ InnovativeFirstPlace.modID }});
+                                loadFirst(18{{ InnovativeFirstPlace.modID }});
                             </script>
 
                             <img id="leftButton1{{ InnovativeFirstPlace.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ InnovativeFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ InnovativeFirstPlace.modID }})">
+                            <img id="leftButton{{ InnovativeFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(18{{ InnovativeFirstPlace.modID }})">
                             <img id="rightButton1{{ InnovativeFirstPlace.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ InnovativeFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ InnovativeFirstPlace.modID }})">
+                            <img id="rightButton{{ InnovativeFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(18{{ InnovativeFirstPlace.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -1183,40 +1179,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu17">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ InnovativeRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ InnovativeRunnerUp.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(11{{ InnovativeRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ InnovativeRunnerUp.modID }})">
                             {% if InnovativeRunnerUp.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ InnovativeRunnerUp.modID }} thumb selected{{ InnovativeRunnerUp.modID }}" id="randomModPreviewImage1{{ InnovativeRunnerUp.modID }}" src="{{ InnovativeRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides11{{ InnovativeRunnerUp.modID }} thumb selected11{{ InnovativeRunnerUp.modID }}" id="randomModPreviewImage1{{ InnovativeRunnerUp.modID }}" src="{{ InnovativeRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ InnovativeRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides11{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ InnovativeRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if InnovativeRunnerUp.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ InnovativeRunnerUp.modID }}" src="{{ InnovativeRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides11{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ InnovativeRunnerUp.modID }}" src="{{ InnovativeRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ InnovativeRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides11{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ InnovativeRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if InnovativeRunnerUp.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ InnovativeRunnerUp.modID }}" src="{{ InnovativeRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides11{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ InnovativeRunnerUp.modID }}" src="{{ InnovativeRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
                                 <img class="mySlides{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ InnovativeRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if InnovativeRunnerUp.modPreviewImage4.url.length is not 0 %}
                                 <img class="mySlides{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ InnovativeRunnerUp.modID }}" src="{{ InnovativeRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ InnovativeRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides11{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ InnovativeRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if InnovativeRunnerUp.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ InnovativeRunnerUp.modID }}" src="{{ InnovativeRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides11{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ InnovativeRunnerUp.modID }}" src="{{ InnovativeRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ InnovativeRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides11{{ InnovativeRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ InnovativeRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ InnovativeRunnerUp.modID }});
+                                loadFirst(11{{ InnovativeRunnerUp.modID }});
                             </script>
 
                             <img id="leftButton1{{ InnovativeRunnerUp.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ InnovativeRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ InnovativeRunnerUp.modID }})">
+                            <img id="leftButton{{ InnovativeRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(11{{ InnovativeRunnerUp.modID }})">
                             <img id="rightButton1{{ InnovativeRunnerUp.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ InnovativeRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ InnovativeRunnerUp.modID }})">
+                            <img id="rightButton{{ InnovativeRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(11{{ InnovativeRunnerUp.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -1251,40 +1247,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu18">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ OriginalArtworkFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ OriginalArtworkFirstPlace.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(19{{ OriginalArtworkFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ OriginalArtworkFirstPlace.modID }})">
                             {% if OriginalArtworkFirstPlace.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb selected{{ OriginalArtworkFirstPlace.modID }}" id="randomModPreviewImage1{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides19{{ OriginalArtworkFirstPlace.modID }} thumb selected19{{ OriginalArtworkFirstPlace.modID }}" id="randomModPreviewImage1{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides19{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if OriginalArtworkFirstPlace.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides19{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides19{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if OriginalArtworkFirstPlace.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides19{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides19{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if OriginalArtworkFirstPlace.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides19{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides19{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if OriginalArtworkFirstPlace.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides19{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides19{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ OriginalArtworkFirstPlace.modID }});
+                                loadFirst(19{{ OriginalArtworkFirstPlace.modID }});
                             </script>
 
                             <img id="leftButton1{{ OriginalArtworkFirstPlace.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ OriginalArtworkFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ OriginalArtworkFirstPlace.modID }})">
+                            <img id="leftButton{{ OriginalArtworkFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(19{{ OriginalArtworkFirstPlace.modID }})">
                             <img id="rightButton1{{ OriginalArtworkFirstPlace.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ OriginalArtworkFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ OriginalArtworkFirstPlace.modID }})">
+                            <img id="rightButton{{ OriginalArtworkFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(19{{ OriginalArtworkFirstPlace.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
@@ -1316,40 +1312,40 @@
             <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
                 <div class="homeRightMenu" id="homeRightMenu19">
                     <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ OriginalArtworkRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ OriginalArtworkRunnerUp.modID }})">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage(20{{ OriginalArtworkRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ OriginalArtworkRunnerUp.modID }})">
                             {% if OriginalArtworkRunnerUp.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb selected{{ OriginalArtworkRunnerUp.modID }}" id="randomModPreviewImage1{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides20{{ OriginalArtworkRunnerUp.modID }} thumb selected20{{ OriginalArtworkRunnerUp.modID }}" id="randomModPreviewImage1{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1">
                             {% else %}
-                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
+                                <img class="mySlides20{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
                             {% endif %}
                             {% if OriginalArtworkRunnerUp.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides20{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
+                                <img class="mySlides20{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
                             {% endif %}
                             {% if OriginalArtworkRunnerUp.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides20{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
+                                <img class="mySlides20{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
                             {% endif %}
                             {% if OriginalArtworkRunnerUp.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides20{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
+                                <img class="mySlides20{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
                             {% endif %}
                             {% if OriginalArtworkRunnerUp.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides20{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
                             {% else %}
-                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
+                                <img class="mySlides20{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
                             {% endif %}
                             <script>
-                                loadFirst({{ OriginalArtworkRunnerUp.modID }});
+                                loadFirst(20{{ OriginalArtworkRunnerUp.modID }});
                             </script>
 
                             <img id="leftButton1{{ OriginalArtworkRunnerUp.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ OriginalArtworkRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ OriginalArtworkRunnerUp.modID }})">
+                            <img id="leftButton{{ OriginalArtworkRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton(20{{ OriginalArtworkRunnerUp.modID }})">
                             <img id="rightButton1{{ OriginalArtworkRunnerUp.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ OriginalArtworkRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ OriginalArtworkRunnerUp.modID }})">
+                            <img id="rightButton{{ OriginalArtworkRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton(20{{ OriginalArtworkRunnerUp.modID }})">
                         </div>
                     </div>
                     <div class="homeModFeatureRight">
