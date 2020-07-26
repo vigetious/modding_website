@@ -950,7 +950,12 @@
                     </div>
                     <div class="homeModFeatureRight">
                         <a class="homeModFeatureRightAvatar" id="featuredAvatarLink" href="/mod/{{ EmotionalRunnerUp.modID }}">
-                            <img id="featuredAvatar" src="{{ EmotionalRunnerUp.modAvatar.url }}">
+
+                            {% if EmotionalRunnerUp.modAvatar %}
+                                <img id="featuredAvatar" src="{{ EmotionalRunnerUp.modAvatar.url }}">
+                            {% else %}
+                                <img id="featuredAvatar" src="{% static 'img/icon.png' %}" alt="Avatar Image">
+                            {% endif %}
                         </a>
                         <div class="rightFeatureModDataDescription">
                             <p id="randomModShortDescription">{{ EmotionalRunnerUp.modShortDescription }}</p>

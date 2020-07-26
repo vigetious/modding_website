@@ -744,7 +744,7 @@ def awards2019(request):
         AllRounderFirstPlace = Mod.objects.get(modID=86)
         AllRounderRunnerUp = Mod.objects.get(modID=15)
         EmotionalFirstPlace = Mod.objects.get(modID=92)
-        EmotionalRunnerUp = Mod.objects.get(modID=22)
+        EmotionalRunnerUp = Mod.objects.get(modID=87)
         LightheartedFirstPlace = Mod.objects.get(modID=89)
         LightheartedRunnerUp = Mod.objects.get(modID=61)
         InnovativeFirstPlace = Mod.objects.get(modID=63)
