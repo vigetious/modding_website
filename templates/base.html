@@ -60,7 +60,7 @@
             <div class="dropdown-content">
                 <a href="{% url 'mod:modSearch' %}?q=&sortBy=newest&tags=All&dateBy=0">Search for mods</a>
                 <a href="{% url 'mod:awards2018' %}">2018 Awards</a>
-                <a href="https://www.reddit.com/r/DDLCMods/comments/fbpoja/rddlcmods_best_mods_of_2019_voting_thread/">2019 Awards</a>
+                <a href="{% url 'mod:awards2019' %}">2019 Awards</a>
                 <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated&dateBy=0">Highest rated mods</a>
                 <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated&dateBy=31">Highest rated mods this month</a>
                 <a href="{% url 'mod:modSearch' %}?q=&sortBy=rated&dateBy=7">Highest rated mods this week</a>

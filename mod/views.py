@@ -687,7 +687,7 @@ def awards2018(request):
         #EmotionalFirstPlace = Mod.objects.get(modID=15)
         EmotionalRunnerUp = Mod.objects.get(modID=4)
         LightheartedFirstPlace = Mod.objects.get(modID=1)
-        LightheartedRunnerUp = Mod.objects.get(modID=34)
+        #LightheartedRunnerUp = Mod.objects.get(modID=34)
         #InnovativeFirstPlace = Mod.objects.get(modID=21)
         InnovativeRunnerUp = Mod.objects.get(modID=55)
     else:
@@ -706,7 +706,7 @@ def awards2018(request):
         EmotionalFirstPlace = Mod.objects.get(modID=15)
         EmotionalRunnerUp = Mod.objects.get(modID=25)
         LightheartedFirstPlace = Mod.objects.get(modID=17)
-        LightheartedRunnerUp = Mod.objects.get(modID=19)
+        #LightheartedRunnerUp = Mod.objects.get(modID=19)
         InnovativeFirstPlace = Mod.objects.get(modID=21)
         InnovativeRunnerUp = Mod.objects.get(modID=22)
     return render(request, 'mod/awards2018.html', {'MotYFirstPlace': MotYFirstPlace,
@@ -724,9 +724,71 @@ def awards2018(request):
                                                    #'EmotionalFirstPlace': EmotionalFirstPlace,
                                                    'EmotionalRunnerUp': EmotionalRunnerUp,
                                                    'LightheartedFirstPlace': LightheartedFirstPlace,
-                                                   'LightheartedRunnerUp': LightheartedRunnerUp,
+                                                   #'LightheartedRunnerUp': LightheartedRunnerUp,
                                                    #'InnovativeFirstPlace': InnovativeFirstPlace,
                                                    'InnovativeRunnerUp': InnovativeRunnerUp})
 
+
 def awards2019(request):
-    return render(request, 'mod/awards2019.html')
+    if settings.DEBUG == False:
+        MotYFirstPlace = Mod.objects.get(modID=89)
+        MotYRunnerUp = Mod.objects.get(modID=63)
+        SayoriFirstPlace = Mod.objects.get(modID=15)
+        SayoriRunnerUp = Mod.objects.get(modID=61)
+        YuriFirstPlace = Mod.objects.get(modID=92)
+        YuriRunnerUp = Mod.objects.get(modID=79)
+        #MonikaFirstPlace = Mod.objects.get(modID=22)
+        MonikaRunnerUp = Mod.objects.get(modID=75)
+        NatsukiFirstPlace = Mod.objects.get(modID=63)
+        NatsukiRunnerUp = Mod.objects.get(modID=87)
+        AllRounderFirstPlace = Mod.objects.get(modID=86)
+        AllRounderRunnerUp = Mod.objects.get(modID=15)
+        EmotionalFirstPlace = Mod.objects.get(modID=92)
+        EmotionalRunnerUp = Mod.objects.get(modID=22)
+        LightheartedFirstPlace = Mod.objects.get(modID=89)
+        LightheartedRunnerUp = Mod.objects.get(modID=61)
+        InnovativeFirstPlace = Mod.objects.get(modID=63)
+        InnovativeRunnerUp = Mod.objects.get(modID=61)
+        OriginalArtworkFirstPlace = Mod.objects.get(modID=86)
+        OriginalArtworkRunnerUp = Mod.objects.get(modID=149)
+    else:
+        MotYFirstPlace = Mod.objects.get(modID=22)
+        MotYRunnerUp = Mod.objects.get(modID=22)
+        SayoriFirstPlace = Mod.objects.get(modID=22)
+        SayoriRunnerUp = Mod.objects.get(modID=22)
+        YuriFirstPlace = Mod.objects.get(modID=22)
+        YuriRunnerUp = Mod.objects.get(modID=22)
+        #MonikaFirstPlace = Mod.objects.get(modID=22)
+        MonikaRunnerUp = Mod.objects.get(modID=22)
+        NatsukiFirstPlace = Mod.objects.get(modID=22)
+        NatsukiRunnerUp = Mod.objects.get(modID=22)
+        AllRounderFirstPlace = Mod.objects.get(modID=22)
+        AllRounderRunnerUp = Mod.objects.get(modID=22)
+        EmotionalFirstPlace = Mod.objects.get(modID=22)
+        EmotionalRunnerUp = Mod.objects.get(modID=22)
+        LightheartedFirstPlace = Mod.objects.get(modID=22)
+        LightheartedRunnerUp = Mod.objects.get(modID=22)
+        InnovativeFirstPlace = Mod.objects.get(modID=22)
+        InnovativeRunnerUp = Mod.objects.get(modID=22)
+        OriginalArtworkFirstPlace = Mod.objects.get(modID=22)
+        OriginalArtworkRunnerUp = Mod.objects.get(modID=22)
+    return render(request, 'mod/awards2019.html', {'MotYFirstPlace': MotYFirstPlace,
+                                                   'MotYRunnerUp': MotYRunnerUp,
+                                                   'SayoriFirstPlace': SayoriFirstPlace,
+                                                   'SayoriRunnerUp': SayoriRunnerUp,
+                                                   'YuriFirstPlace': YuriFirstPlace,
+                                                   'YuriRunnerUp': YuriRunnerUp,
+                                                   #'MonikaFirstPlace': MonikaFirstPlace,
+                                                   'MonikaRunnerUp': MonikaRunnerUp,
+                                                   'NatsukiFirstPlace': NatsukiFirstPlace,
+                                                   'NatsukiRunnerUp': NatsukiRunnerUp,
+                                                   'AllRounderFirstPlace': AllRounderFirstPlace,
+                                                   'AllRounderRunnerUp': AllRounderRunnerUp,
+                                                   'EmotionalFirstPlace': EmotionalFirstPlace,
+                                                   'EmotionalRunnerUp': EmotionalRunnerUp,
+                                                   'LightheartedFirstPlace': LightheartedFirstPlace,
+                                                   'LightheartedRunnerUp': LightheartedRunnerUp,
+                                                   'InnovativeFirstPlace': InnovativeFirstPlace,
+                                                   'InnovativeRunnerUp': InnovativeRunnerUp,
+                                                   'OriginalArtworkFirstPlace': OriginalArtworkFirstPlace,
+                                                   'OriginalArtworkRunnerUp': OriginalArtworkRunnerUp})

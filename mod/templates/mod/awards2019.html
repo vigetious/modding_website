@@ -10,9 +10,9 @@
     <script type="text/javascript" src="{% static 'js/awards.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'pages/css/pages.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/awards.css' %}">
-    <title>2018 Awards</title>
+    <title>2019 Awards</title>
     <h1>Okay, everyone!</h1>
-    <p>You voted, we tallied, and the results for the best mods of 2018 are in! Thanks to the 200+ people who voted, and thanks to everyone for playing these excellent mods!</p>
+    <p>You voted, we tallied, and the results for the best mods of 2019 are in! Thanks to the 200+ people who voted, and thanks to everyone for playing these excellent mods!</p>
     <p>First up, the <b>mod of the year!</b></p>
     <div class="motyFirstTransparentBox">
         <div class="overlay1 overlay" onclick="hideBlur(1)">
@@ -219,6 +219,16 @@
                     <div class="otherCategoriesInside">
                         <a href="#innovative">
                             <img src="{% static 'pages/images/most-innovative-unique-mod.png' %}">
+                        </a>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <img class="categoryAvatar" src="{{ OriginalArtworkFirstPlace.modAvatar.url }}">
+                    <div class="otherCategoriesInside">
+                        <a href="#originalartwork">
+                            <img src="{% static 'pages/images/original-artwork-mod.png' %}">
                         </a>
                     </div>
                 </th>
@@ -495,71 +505,6 @@
     <div class="category" style="background-image: url('{% static 'img/green.png' %}')">
         <h1 id="monika">Best Monika Mod</h1>
         <div class="motyFirstTransparentBox">
-            <div class="overlay6 overlay" onclick="hideBlur(6)">
-                <img src="{% static 'pages/images/best-monika-mod-first-place.png' %}">
-            </div>
-            <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
-                <div class="homeRightMenu" id="homeRightMenu6">
-                    <div class="screenshotVideo">
-                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ MonikaFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ MonikaFirstPlace.modID }})">
-                            {% if MonikaFirstPlace.modPreviewImage1.url.length is not 0 %}
-                                <img class="mySlides{{ MonikaFirstPlace.modID }} thumb selected{{ MonikaFirstPlace.modID }}" id="randomModPreviewImage1{{ MonikaFirstPlace.modID }}" src="{{ MonikaFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
-                            {% else %}
-                                <img class="mySlides{{ MonikaFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ MonikaFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
-                            {% endif %}
-                            {% if MonikaFirstPlace.modPreviewImage2.url.length is not 0 %}
-                                <img class="mySlides{{ MonikaFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ MonikaFirstPlace.modID }}" src="{{ MonikaFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
-                            {% else %}
-                                <img class="mySlides{{ MonikaFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ MonikaFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
-                            {% endif %}
-                            {% if MonikaFirstPlace.modPreviewImage3.url.length is not 0 %}
-                                <img class="mySlides{{ MonikaFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ MonikaFirstPlace.modID }}" src="{{ MonikaFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
-                            {% else %}
-                                <img class="mySlides{{ MonikaFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ MonikaFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
-                            {% endif %}
-                            {% if MonikaFirstPlace.modPreviewImage4.url.length is not 0 %}
-                                <img class="mySlides{{ MonikaFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ MonikaFirstPlace.modID }}" src="{{ MonikaFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
-                            {% else %}
-                                <img class="mySlides{{ MonikaFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ MonikaFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
-                            {% endif %}
-                            {% if MonikaFirstPlace.modPreviewImage5.url.length is not 0 %}
-                                <img class="mySlides{{ MonikaFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ MonikaFirstPlace.modID }}" src="{{ MonikaFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
-                            {% else %}
-                                <img class="mySlides{{ MonikaFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ MonikaFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
-                            {% endif %}
-                            <script>
-                                loadFirst({{ MonikaFirstPlace.modID }});
-                            </script>
-
-                            <img id="leftButton1{{ MonikaFirstPlace.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="leftButton{{ MonikaFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ MonikaFirstPlace.modID }})">
-                            <img id="rightButton1{{ MonikaFirstPlace.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
-                            <img id="rightButton{{ MonikaFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ MonikaFirstPlace.modID }})">
-                        </div>
-                    </div>
-                    <div class="homeModFeatureRight">
-                        <a class="homeModFeatureRightAvatar" id="featuredAvatarLink" href="/mod/{{ MonikaFirstPlace.modID }}">
-                            <img id="featuredAvatar" src="{{ MonikaFirstPlace.modAvatar.url }}">
-                        </a>
-                        <div class="rightFeatureModDataDescription">
-                            <p id="randomModShortDescription">{{ MonikaFirstPlace.modShortDescription }}</p>
-                        </div>
-                        <ul class="rightModDataText">
-                            <li>
-                                <p>Tags:</p>
-                                <div class="tags" id="featuredTags">
-                                    {% get_tags_for_object MonikaFirstPlace as tags %}
-                                    {% for tag in tags %}
-                                        <a class='tag' href='{% url 'mod:modSearch' %}?q=&sortBy=newest&tags={{ tag }}&dateBy=0'>{{ tag }}</a>
-                                    {% endfor %}
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </svg>
-        </div>
-        <div class="motyFirstTransparentBox">
             <div class="overlay7 overlay" onclick="hideBlur(7)">
                 <img src="{% static 'pages/images/best-monika-mod-runner-up.png' %}">
             </div>
@@ -760,6 +705,7 @@
         <div class="categoryTransitionBefore" style="transform: scaleX(-1)"></div>
     </div>
     <div class="category">
+    <br>
         <h1 id="allrounder">Best All-Rounder</h1>
         <div class="motyFirstTransparentBox">
             <div class="overlay10 overlay" onclick="hideBlur(10)">
@@ -1290,6 +1236,139 @@
                 </div>
             </svg>
         </div>
+    </div>
+    <div class="category">
+        <h1 id="originalartwork">Original Artwork</h1>
+        <div class="motyFirstTransparentBox">
+            <div class="overlay18 overlay" onclick="hideBlur(18)">
+                <img src="{% static 'pages/images/original-artwork-first-place.png' %}">
+            </div>
+            <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
+                <div class="homeRightMenu" id="homeRightMenu18">
+                    <div class="screenshotVideo">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ OriginalArtworkFirstPlace.modID }})" onmouseleave="hideArrowButtons({{ OriginalArtworkFirstPlace.modID }})">
+                            {% if OriginalArtworkFirstPlace.modPreviewImage1.url.length is not 0 %}
+                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb selected{{ OriginalArtworkFirstPlace.modID }}" id="randomModPreviewImage1{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                            {% else %}
+                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage1{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 1" style="display:none">
+                            {% endif %}
+                            {% if OriginalArtworkFirstPlace.modPreviewImage2.url.length is not 0 %}
+                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                            {% else %}
+                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage2{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 2" style="display:none">
+                            {% endif %}
+                            {% if OriginalArtworkFirstPlace.modPreviewImage3.url.length is not 0 %}
+                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                            {% else %}
+                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage3{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 3" style="display:none">
+                            {% endif %}
+                            {% if OriginalArtworkFirstPlace.modPreviewImage4.url.length is not 0 %}
+                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                            {% else %}
+                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage4{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 4" style="display:none">
+                            {% endif %}
+                            {% if OriginalArtworkFirstPlace.modPreviewImage5.url.length is not 0 %}
+                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ OriginalArtworkFirstPlace.modID }}" src="{{ OriginalArtworkFirstPlace.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                            {% else %}
+                                <img class="mySlides{{ OriginalArtworkFirstPlace.modID }} thumb" id="randomModPreviewImage5{{ OriginalArtworkFirstPlace.modID }}" src="" alt="Preview Image 5" style="display:none">
+                            {% endif %}
+                            <script>
+                                loadFirst({{ OriginalArtworkFirstPlace.modID }});
+                            </script>
+
+                            <img id="leftButton1{{ OriginalArtworkFirstPlace.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
+                            <img id="leftButton{{ OriginalArtworkFirstPlace.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ OriginalArtworkFirstPlace.modID }})">
+                            <img id="rightButton1{{ OriginalArtworkFirstPlace.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
+                            <img id="rightButton{{ OriginalArtworkFirstPlace.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ OriginalArtworkFirstPlace.modID }})">
+                        </div>
+                    </div>
+                    <div class="homeModFeatureRight">
+                        <a class="homeModFeatureRightAvatar" id="featuredAvatarLink" href="/mod/{{ OriginalArtworkFirstPlace.modID }}">
+                            <img id="featuredAvatar" src="{{ OriginalArtworkFirstPlace.modAvatar.url }}">
+                        </a>
+                        <div class="rightFeatureModDataDescription">
+                            <p id="randomModShortDescription">{{ OriginalArtworkFirstPlace.modShortDescription }}</p>
+                        </div>
+                        <ul class="rightModDataText">
+                            <li>
+                                <p>Tags:</p>
+                                <div class="tags" id="featuredTags">
+                                    {% get_tags_for_object InnovativeFirstPlace as tags %}
+                                    {% for tag in tags %}
+                                        <a class='tag' href='{% url 'mod:modSearch' %}?q=&sortBy=newest&tags={{ tag }}&dateBy=0'>{{ tag }}</a>
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </svg>
+        </div>
+        <div class="motyFirstTransparentBox">
+            <div class="overlay19 overlay" onclick="hideBlur(19)">
+                <img src="{% static 'pages/images/original-artwork-runner-up.png' %}">
+            </div>
+            <svg width="450" height="100" viewBox="0 0 450 100" style="position: absolute; top: 0;">
+                <div class="homeRightMenu" id="homeRightMenu19">
+                    <div class="screenshotVideo">
+                        <div class="screenshotVideoContent" onmouseover="calculateNextImage({{ OriginalArtworkRunnerUp.modID }})" onmouseleave="hideArrowButtons({{ OriginalArtworkRunnerUp.modID }})">
+                            {% if OriginalArtworkRunnerUp.modPreviewImage1.url.length is not 0 %}
+                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb selected{{ OriginalArtworkRunnerUp.modID }}" id="randomModPreviewImage1{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage1.url }}" alt="Preview Image 1" style="display:none">
+                            {% else %}
+                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage1{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 1" style="display:none">
+                            {% endif %}
+                            {% if OriginalArtworkRunnerUp.modPreviewImage2.url.length is not 0 %}
+                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage2.url }}" alt="Preview Image 2" style="display:none">
+                            {% else %}
+                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage2{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 2" style="display:none">
+                            {% endif %}
+                            {% if OriginalArtworkRunnerUp.modPreviewImage3.url.length is not 0 %}
+                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage3.url }}" alt="Preview Image 3" style="display:none">
+                            {% else %}
+                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage3{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 3" style="display:none">
+                            {% endif %}
+                            {% if OriginalArtworkRunnerUp.modPreviewImage4.url.length is not 0 %}
+                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage4.url }}" alt="Preview Image 4" style="display:none">
+                            {% else %}
+                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage4{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 4" style="display:none">
+                            {% endif %}
+                            {% if OriginalArtworkRunnerUp.modPreviewImage5.url.length is not 0 %}
+                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ OriginalArtworkRunnerUp.modID }}" src="{{ OriginalArtworkRunnerUp.modPreviewImage5.url }}" alt="Preview Image 5" style="display:none">
+                            {% else %}
+                                <img class="mySlides{{ OriginalArtworkRunnerUp.modID }} thumb" id="randomModPreviewImage5{{ OriginalArtworkRunnerUp.modID }}" src="" alt="Preview Image 5" style="display:none">
+                            {% endif %}
+                            <script>
+                                loadFirst({{ OriginalArtworkRunnerUp.modID }});
+                            </script>
+
+                            <img id="leftButton1{{ OriginalArtworkRunnerUp.modID }}" class="leftButton" src="{% static 'pages/images/leftArrow.png' %}">
+                            <img id="leftButton{{ OriginalArtworkRunnerUp.modID }}" class="leftButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="leftButton({{ OriginalArtworkRunnerUp.modID }})">
+                            <img id="rightButton1{{ OriginalArtworkRunnerUp.modID }}" class="rightButton" src="{% static 'pages/images/leftArrow.png' %}">
+                            <img id="rightButton{{ OriginalArtworkRunnerUp.modID }}" class="rightButton tempHidden" src="{% static 'pages/images/left.png' %}" onclick="rightButton({{ OriginalArtworkRunnerUp.modID }})">
+                        </div>
+                    </div>
+                    <div class="homeModFeatureRight">
+                        <a class="homeModFeatureRightAvatar" id="featuredAvatarLink" href="/mod/{{ OriginalArtworkRunnerUp.modID }}">
+                            <img id="featuredAvatar" src="{{ OriginalArtworkRunnerUp.modAvatar.url }}">
+                        </a>
+                        <div class="rightFeatureModDataDescription">
+                            <p id="randomModShortDescription">{{ OriginalArtworkRunnerUp.modShortDescription }}</p>
+                        </div>
+                        <ul class="rightModDataText">
+                            <li>
+                                <p>Tags:</p>
+                                <div class="tags" id="featuredTags">
+                                    {% get_tags_for_object OriginalArtworkRunnerUp as tags %}
+                                    {% for tag in tags %}
+                                        <a class='tag' href='{% url 'mod:modSearch' %}?q=&sortBy=newest&tags={{ tag }}&dateBy=0'>{{ tag }}</a>
+                                    {% endfor %}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </svg>
+        </div>
     </div><br>
-    <h1 style="text-align: right">Now check out the <a href="{% url 'mod:awards2019' %}">2019 awards!</a></h1>
+    <h1 style="text-align: right">Now check out the <a href="{% url 'mod:awards2018' %}">2018 awards!</a></h1>
 {% endblock %}
