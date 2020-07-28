@@ -7,6 +7,16 @@ if (document.readyState === 'loading') {
 function afterLoaded() {
     $('input:submit').click(function () {
 
+    });
+
+    $('#baseSearch').focusin(function () {
+        $('#baseSearch').animate({
+            width: "30%"
+        });
+    }).focusout(function () {
+        $('#baseSearch').animate({
+            width: "100px"
+        });
     })
 }
 
