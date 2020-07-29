@@ -217,6 +217,14 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="rowLeft">
+                <p>Contact Info: </p>
+            </div>
+            <div class="rowRight">
+                {{ form.modContact }}
+            </div>
+        </div>
         <div class="uploadBottom">
             <span>Don't forget to tell your followers that you have updated your mod by adding news!</span><br>
             <a href="{% url 'mod:modPage' pk=post.pk %}" style="padding-right: 50px"><p>Cancel edit</p></a>

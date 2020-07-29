@@ -52,16 +52,24 @@
         var isAuth = {{ user.is_authenticated|lower }};
         </script>
     <div class="screenshotVideo">
-        <div class="screenshotVideoContent">
+        <div id="screenshotVideoContent" class="screenshotVideoContent">
             {% if not post.modPreviewVideo %}
-                <div class="mySlides">{% video post.modPreviewVideo '620x350' %}</div>
+                {% if post.modPreviewVideo %}
+                    <div class="mySlides">{% video post.modPreviewVideo '620x350' %}</div>
+                {% else %}
+                    <div style="display: none" class="mySlides">{% video post.modPreviewVideo '620x350' %}</div>
+                {% endif %}
                 {% if post.modPreviewImage1.url.length is not 0 %}
-                    <img class="mySlides" src={{ post.modPreviewImage1.url }} alt="Preview Image 1">
+                    <img id="img1" class="mySlides" src={{ post.modPreviewImage1.url }} alt="Preview Image 1">
                 {% endif %}
             {% else %}
-                <div class="mySlides">{% video post.modPreviewVideo '620x350' %}</div>
+                {% if post.modPreviewVideo %}
+                    <div class="mySlides">{% video post.modPreviewVideo '620x350' %}</div>
+                {% endif %}
                 {% if post.modPreviewImage1.url.length is not 0 %}
                     <img class="mySlides" src={{ post.modPreviewImage1.url }} alt="Preview Image 1" style="display:none">
+                {% else %}
+                    <div style="display: none" class="mySlides">{% video post.modPreviewVideo '620x350' %}</div>
                 {% endif %}
             {% endif %}
             {% if post.modPreviewImage2.url.length is not 0 %}
@@ -152,8 +160,8 @@
     <div class="modDownload">
         <!--<img src="{% static 'img/Download.png' %}" alt="Download">-->
         <div class="modDownloadRight">
-            <!--<a onclick="alert('That feature will be coming soon')"><img src="{% static 'img/Mod Manager.png' %}" alt="Mod Manager"></a>
-            <a id="modUploadURL" href="{{ post.modUploadURL }}"><img src="{% static 'img/Manual.png' %}" alt="Manual"></a>-->
+            <!--<a href="irc:123"><img src="{% static 'img/Mod Manager.png' %}" alt="Mod Manager"></a>-->
+            <!--<a id="modUploadURL" href="{{ post.modUploadURL }}"><img src="{% static 'img/Manual.png' %}" alt="Manual"></a>-->
             <a id="modUploadURL" href="{{ post.modUploadURL }}"><img src="{% static 'img/Download.png' %}" alt="Download"></a>
         </div>
     </div>

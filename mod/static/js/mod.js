@@ -11,7 +11,19 @@ function afterLoaded() {
             reviewCommentForm.attr("disabled", "disabled");
             $('#reviewCommentForm > textarea').text("You must be logged in to review mods!");
         }
-    })
+    });
+
+    $("#screenshotVideoContent").on("click", function () {
+        if ($(this).hasClass("fullscreen-mode")) {
+            $(this).removeClass("fullscreen-mode");
+            $(".screenshotVideoContent").css("height", "");
+            $(".screenshotVideoContentFullscreen").remove()
+        } else {
+            $(this).addClass("fullscreen-mode");
+            $(".screenshotVideo").prepend("<div class='screenshotVideoContentFullscreen'><p>Fullscreen mode</p></div>");
+            $(".screenshotVideoContent").css("height", "100%");
+        }
+    });
 }
 
 function upvote_post(id, modID) {

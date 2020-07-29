@@ -115,6 +115,8 @@ class Mod(models.Model):
     modEdited = models.BooleanField('Has mod got an edit', default=False)
     modIP = models.CharField('mod user ip address', max_length=100)
     modNSFW = models.BooleanField('NSFW?', default=False)
+    modContact = models.CharField('Owner Contact Info', max_length=1000, blank=True)
+    modInternalNote = models.CharField('Moderator Internal Notes', max_length=1000, blank=True)
 
 
     objects = ModManager()
@@ -265,6 +267,8 @@ class ModEdit(models.Model):
                                                 " as well.")
     modIP = models.CharField('mod user ip address', max_length=100)
     modNSFW = models.BooleanField('NSFW?', default=False)
+    modContact = models.CharField('Owner Contact Info', max_length=1000, blank=True)
+    modInternalNote = models.CharField('Moderator Internal Notes', max_length=1000, blank=True)
 
     objects = ModManager()
 

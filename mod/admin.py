@@ -21,14 +21,11 @@ mark_as_unsafe.short_description = "Mark has non-approved"
 class ModAdmin(admin.ModelAdmin):
     list_display = ['modID', 'modEdited', 'modShow', 'modAuthor', 'modDate', 'modUpdate', 'modStatus', 'modName',
                     'modDescription', 'tags', 'modUpload', 'modUploadURL', 'modPlayTimeHours',
-                    'modPlayTimeMinutes', 'modReviewCount', 'modIP']
+                    'modPlayTimeMinutes', 'modReviewCount', 'modIP', 'modContact', 'modInternalNote']
     formfield_overrides = {
         models.CharField: {'widget': Textarea()}
     }
     ordering = ('modShow',)
-
-    #change_form_template = 'progressbarupload/change_form.html'
-    #add_form_template = 'progressbarupload/change_form.html'
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related('tags')
@@ -39,7 +36,7 @@ class ModAdmin(admin.ModelAdmin):
 class ModEditAdmin(admin.ModelAdmin):
     list_display = ['modEditID', 'modID', 'modAuthor', 'modDate', 'modUpdate', 'modStatus', 'modName',
                     'modDescription', 'tags', 'modUpload', 'modUploadURL', 'modPlayTimeHours',
-                    'modPlayTimeMinutes', 'modReviewCount', 'modIP']
+                    'modPlayTimeMinutes', 'modReviewCount', 'modIP', 'modContact', 'modInternalNote']
     #actions = [mark_as_safe, mark_as_unsafe]
     formfield_overrides = {
         models.CharField: {'widget': Textarea()}
@@ -85,6 +82,8 @@ class ModEditAdmin(admin.ModelAdmin):
             originalMod.modIP = x.modIP
             originalMod.modNSFW = x.modNSFW
             originalMod.modEdited = False
+            originalMod.modContact = x.modContact
+            originalMod.modInternalNote = x.modInternalNote
             originalMod.save()
         self.message_user(request, "Edit successfully approved. Edits have gone live.")
 
