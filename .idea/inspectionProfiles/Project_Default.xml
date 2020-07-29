@@ -1,10 +1,20 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="PyCompatibilityInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ourVersions">
+        <value>
+          <list size="2">
+            <item index="0" class="java.lang.String" itemvalue="2.7" />
+            <item index="1" class="java.lang.String" itemvalue="3.8" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
     <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoredPackages">
         <value>
-          <list size="54">
+          <list size="58">
             <item index="0" class="java.lang.String" itemvalue="Django" />
             <item index="1" class="java.lang.String" itemvalue="django-embed-video" />
             <item index="2" class="java.lang.String" itemvalue="django-recaptcha" />
@@ -59,6 +69,10 @@
             <item index="51" class="java.lang.String" itemvalue="Unidecode" />
             <item index="52" class="java.lang.String" itemvalue="django-js-asset" />
             <item index="53" class="java.lang.String" itemvalue="Pillow" />
+            <item index="54" class="java.lang.String" itemvalue="markdown" />
+            <item index="55" class="java.lang.String" itemvalue="djangorestframework" />
+            <item index="56" class="java.lang.String" itemvalue="django-tempus-dominus" />
+            <item index="57" class="java.lang.String" itemvalue="pytz" />
           </list>
         </value>
       </option>
