@@ -4,13 +4,13 @@
     {% load taggit_templatetags2_tags %}
     {% load static %}
     {% get_taglist as tagCount for 'mod.Mod' %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <script type="text/javascript" src="{% static 'pages/js/home.js' %}"></script>
     <script type="text/javascript" src="{% static 'pages/js/panel.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'pages/css/pages.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/modSearch.css' %}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 
     <title>Mod search</title>
     <div class="homeMods" style="display: flex">
