@@ -10,6 +10,7 @@ from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django_resized import ResizedImageField
 
 #from taggit.managers import TaggableManager
 from taggit_selectize.managers import TaggableManager
@@ -39,19 +40,23 @@ def mod_directory_path_keep_filename(instance, filename):
 
 
 def mod_image_directory_path(instance, filename):
-    return 'files/user_{0}/mods/{1}/images/{2}'.format(instance.modAuthor.id, instance.modID, randomStringDigits())
+    ext = filename.split('.')[-1]
+    return 'files/user_{0}/mods/{1}/images/{2}.{3}'.format(instance.modAuthor.id, instance.modID, randomStringDigits(), ext)
 
 
 def mod_preview_image_directory_path(instance, filename):
-    return 'files/user_{0}/mods/{1}/images/previews/{2}'.format(instance.modAuthor.id, instance.modID, randomStringDigits())
+    ext = filename.split('.')[-1]
+    return 'files/user_{0}/mods/{1}/images/previews/{2}.{3}'.format(instance.modAuthor.id, instance.modID, randomStringDigits(), ext)
 
 
 def mod_preview_image_directory_path_edit(instance, filename):
-    return 'files/user_{0}/mods/{1}/images/previews/{2}'.format(instance.modAuthor.id, instance.modID, filename)
+    ext = filename.split('.')[-1]
+    return 'files/user_{0}/mods/{1}/images/previews/{2}.{3}'.format(instance.modAuthor.id, instance.modID, filename, ext)
 
 
 def mod_image_directory_path_edit(instance, filename):
-    return 'files/user_{0}/mods/{1}/images/previews/{2}'.format(instance.modAuthor.id, instance.modID, filename)
+    ext = filename.split('.')[-1]
+    return 'files/user_{0}/mods/{1}/images/previews/{2}.{3}'.format(instance.modAuthor.id, instance.modID, filename, ext)
 
 class ModManager(models.Manager):
     def with_documents(self):
@@ -98,12 +103,12 @@ class Mod(models.Model):
     modSearch = SearchVectorField(null=True)
     modRating = models.FloatField('mod average rating', blank=True, null=True, default=0)
     modPreviewVideo = EmbedVideoField('Trailer Video', help_text="Only YouTube and Vimeo links are currently supported.", blank=True)
-    modPreviewImage1 = models.ImageField('1st Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
-    modPreviewImage2 = models.ImageField('2nd Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
-    modPreviewImage3 = models.ImageField('3rd Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
-    modPreviewImage4 = models.ImageField('4th Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
-    modPreviewImage5 = models.ImageField('5th Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
-    modBackground = models.ImageField('Background Image', upload_to=mod_image_directory_path, blank=True)
+    modPreviewImage1 = ResizedImageField('1st Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage2 = ResizedImageField('2nd Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage3 = ResizedImageField('3rd Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage4 = ResizedImageField('4th Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage5 = ResizedImageField('5th Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modBackground = ResizedImageField('Background Image', upload_to=mod_image_directory_path, blank=True)
     modBackgroundTiledStretch = models.CharField('mod background tiled or stretch', choices=tiledStretchedChoices,
                                                      default=tiledStretchedChoices[0], max_length=100,
                                                  help_text="What is tiled and/or stretched?")
@@ -252,12 +257,12 @@ class ModEdit(models.Model):
     modSearch = SearchVectorField(null=True)
     modRating = models.FloatField('mod average rating', blank=True, null=True, default=0)
     modPreviewVideo = EmbedVideoField('Trailer Video', help_text="Only YouTube and Vimeo links are currently supported.", blank=True)
-    modPreviewImage1 = models.ImageField('1st Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
-    modPreviewImage2 = models.ImageField('2nd Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
-    modPreviewImage3 = models.ImageField('3rd Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
-    modPreviewImage4 = models.ImageField('4th Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
-    modPreviewImage5 = models.ImageField('5th Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
-    modBackground = models.ImageField('Background Image', upload_to=mod_image_directory_path, blank=True)
+    modPreviewImage1 = ResizedImageField('1st Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage2 = ResizedImageField('2nd Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage3 = ResizedImageField('3rd Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage4 = ResizedImageField('4th Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modPreviewImage5 = ResizedImageField('5th Preview Image', upload_to=mod_preview_image_directory_path, blank=True)
+    modBackground = ResizedImageField('Background Image', upload_to=mod_image_directory_path, blank=True)
     modBackgroundTiledStretch = models.CharField('mod background tiled or stretch', choices=tiledStretchedChoices,
                                                  default=tiledStretchedChoices[0], max_length=100,
                                                  help_text="What is tiled and/or stretched?")
