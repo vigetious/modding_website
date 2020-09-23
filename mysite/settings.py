@@ -281,10 +281,10 @@ if not DEBUG:
     AWS_DEFAULT_ACL = None
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = 'ddlc-modding-static'
+    AWS_STORAGE_BUCKET_NAME = os.getenv('S3_BUCKET_NAME')
     #AWS_STORAGE_BUCKET_NAME = 'digcsosdoiw9v'
     #AWS_S3_CUSTOM_DOMAIN = '{0}.s3.amazonaws.com'.format(AWS_STORAGE_BUCKET_NAME)
-    AWS_S3_CUSTOM_DOMAIN = 'digcsosdoiw9v.cloudfront.net'
+    AWS_S3_CUSTOM_DOMAIN = os.getenv('AWS_S3_CUSTOM_DOMAIN')
     AWS_S3_SECURE_URLS = True
     AWS_S3_OBJECT_PARAMETERS = {
         'CacheControl': 'max-age=86400',
