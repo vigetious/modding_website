@@ -524,19 +524,19 @@ class SearchResultsView(ListView):
             print(1)
             if sortBy == 'newest':
                 object_list = Mod.objects.all().order_by('-modDate').filter(
-                    modDate__gte=today - datetime.timedelta(days=dateBy))
+                    modDate__gte=today - datetime.timedelta(days=dateBy)).filter(modShow=True)
             if sortBy == 'rated':
                 object_list = Mod.objects.all().order_by('-modRating').filter(
-                    modDate__gte=today - datetime.timedelta(days=dateBy))
+                    modDate__gte=today - datetime.timedelta(days=dateBy)).filter(modShow=True)
             if sortBy == 'reviewed':
-                object_list = sorted(Mod.objects.all().filter(modDate__gte=today - datetime.timedelta(days=dateBy)),
+                object_list = sorted(Mod.objects.all().filter(modDate__gte=today - datetime.timedelta(days=dateBy)).filter(modShow=True),
                                      key=lambda x: x.modReviewCount, reverse=True)
             if sortBy == 'oldest':
                 object_list = Mod.objects.all().order_by('modDate').filter(
-                    modDate__gte=today - datetime.timedelta(days=dateBy))
+                    modDate__gte=today - datetime.timedelta(days=dateBy)).filter(modShow=True)
             if sortBy == 'updated':
                 object_list = Mod.objects.all().order_by('-modUpdate').filter(
-                    modDate__gte=today - datetime.timedelta(days=dateBy))
+                    modDate__gte=today - datetime.timedelta(days=dateBy)).filter(modShow=True)
 
         elif (tagFilter is "" or len(tagFilter) == 0) and (searchQuery is not "" or None):
             print(2)
