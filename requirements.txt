@@ -55,7 +55,7 @@ taggit-selectize==2.7.1
 Unidecode==1.0.23
 urllib3==1.25.3
 whitenoise==4.1.3
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 markdown==3.2.1
 django-tempus-dominus==5.1.2.13
 djangorestframework-api-key==1.4.1
