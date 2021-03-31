@@ -25,11 +25,11 @@ from . import views
 urlpatterns = [
     #path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('', include('pages.urls')),
-    path('mod/', include('mod.urls')),
+    #path('mod/', include('mod.urls')),
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/', include('accounts.urls')),
-    path('avatar/', include('avatar.urls')),
+    #path('accounts/', include('django.contrib.auth.urls')),
+    #path('accounts/', include('accounts.urls')),
+    #path('avatar/', include('avatar.urls')),
     path('api/', include('api.urls')),
 ]
 
